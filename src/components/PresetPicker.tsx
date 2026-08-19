@@ -47,7 +47,8 @@ export default function PresetPicker({ collections, busy, onStart }: PresetPicke
               type="button"
               disabled={busy !== null}
               onClick={() => onStart(collection)}
-              className="group flex flex-col overflow-hidden rounded-panel border border-line bg-panel text-left transition-[transform,border-color] duration-150 ease-out hover:border-line-strong active:scale-[0.98] disabled:opacity-60"
+              aria-label={`Play ${collection.name}`}
+              className="pack group flex flex-col overflow-hidden rounded-panel border border-line bg-panel text-left disabled:opacity-60"
             >
               <div className="aspect-square w-full overflow-hidden bg-raised">
                 {collection.image ? (
@@ -58,19 +59,14 @@ export default function PresetPicker({ collections, busy, onStart }: PresetPicke
                     height={320}
                     unoptimized
                     priority={i < 4}
-                    className="h-full w-full object-cover transition-transform duration-150 ease-out group-hover:scale-[1.04]"
+                    className="pack-art h-full w-full object-cover"
                   />
                 ) : null}
               </div>
-              <div className="flex items-center justify-between gap-2 px-3 py-2.5">
-                <div className="flex min-w-0 flex-col">
-                  <span className="truncate text-sm leading-tight">{collection.name}</span>
-                  <span className="font-mono text-[10px] text-faint">
-                    {collection.tracks.length} songs
-                  </span>
-                </div>
-                <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] text-faint transition-colors duration-150 ease-out group-hover:text-accent">
-                  {busy === collection.id ? "..." : "Play"}
+              <div className="flex flex-col px-3 py-2.5">
+                <span className="truncate text-sm leading-tight">{collection.name}</span>
+                <span className="font-mono text-[10px] text-faint">
+                  {busy === collection.id ? "Loading" : `${collection.tracks.length} songs`}
                 </span>
               </div>
             </button>

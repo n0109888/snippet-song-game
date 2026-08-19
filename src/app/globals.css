@@ -161,6 +161,49 @@ input[type="range"]::-moz-range-thumb {
   animation: press-in 180ms ease-out both;
 }
 
+/*
+ * Preset cards. The whole card is the button, so the hover has to carry the
+ * affordance on its own: it lifts, scales, and settles on an overshooting
+ * curve. Transform and shadow only, both cheap to composite.
+ */
+.pack {
+  transition:
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 160ms ease-out;
+  will-change: transform;
+}
+
+.pack-art {
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pack:hover,
+.pack:focus-visible {
+  transform: translateY(-7px) scale(1.035);
+  border-color: var(--color-line-strong);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.18),
+    0 14px 34px -10px rgba(0, 0, 0, 0.5);
+}
+
+.pack:hover .pack-art,
+.pack:focus-visible .pack-art {
+  transform: scale(1.07);
+}
+
+.pack:active {
+  transform: translateY(-2px) scale(1.005);
+  transition-duration: 90ms;
+}
+
+:root[data-theme="light"] .pack:hover,
+:root[data-theme="light"] .pack:focus-visible {
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.06),
+    0 14px 30px -12px rgba(0, 0, 0, 0.26);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

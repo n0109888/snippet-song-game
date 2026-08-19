@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Archivo, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -26,10 +27,23 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+/** Applies the stored theme before first paint so it never flashes. */
+const THEME_SCRIPT = `try{var p=JSON.parse(localStorage.getItem('snippet.prefs.v2')||'{}');document.documentElement.dataset.theme=p.theme==='light'?'light':'dark';}catch(e){document.documentElement.dataset.theme='dark';}`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${archivo.variable} ${plexMono.variable}`}>
-      <body>{children}</body>
+    <html
+      lang="en"
+      className={`${archivo.variable} ${plexMono.variable}`}
+      // The theme script below rewrites data-theme before hydration.
+      suppressHydrationWarning
+    >
+      <body>
+        <Script id="theme" strategy="beforeInteractive">
+          {THEME_SCRIPT}
+        </Script>
+        {children}
+      </body>
     </html>
   );
 }

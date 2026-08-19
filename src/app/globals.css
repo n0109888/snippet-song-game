@@ -1,17 +1,18 @@
 @import "tailwindcss";
 
+/* Dark is the default palette. Light overrides the same tokens below. */
 @theme {
   --color-bg: #0b0b0b;
   --color-panel: #111111;
+  --color-raised: #171717;
   --color-line: rgba(255, 255, 255, 0.09);
-  --color-line-strong: rgba(255, 255, 255, 0.18);
+  --color-line-strong: rgba(255, 255, 255, 0.2);
   --color-ink: #ededed;
   --color-muted: #8a8a8a;
   --color-faint: #5c5c5c;
   --color-accent: #e9a13b;
-  --color-accent-dim: #7a5520;
-  --color-good: #7fb069;
-  --color-bad: #c4453c;
+  --color-good: #6fbf73;
+  --color-bad: #d1504a;
 
   --radius-panel: 10px;
   --radius-control: 8px;
@@ -19,6 +20,20 @@
 
   --font-ui: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+:root[data-theme="light"] {
+  --color-bg: #f6f5f3;
+  --color-panel: #ffffff;
+  --color-raised: #f0eeea;
+  --color-line: rgba(0, 0, 0, 0.1);
+  --color-line-strong: rgba(0, 0, 0, 0.28);
+  --color-ink: #171619;
+  --color-muted: #5e5c64;
+  --color-faint: #8b8892;
+  --color-accent: #b8730f;
+  --color-good: #2f7d40;
+  --color-bad: #b3332c;
 }
 
 * {
@@ -89,6 +104,61 @@ input[type="range"]::-moz-range-thumb {
 
 .reveal {
   animation: reveal-in 160ms ease-out both;
+}
+
+/* Wrong answer: a short, tight shake. Transform only. */
+@keyframes miss-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  15% {
+    transform: translateX(-9px);
+  }
+  30% {
+    transform: translateX(8px);
+  }
+  45% {
+    transform: translateX(-6px);
+  }
+  60% {
+    transform: translateX(4px);
+  }
+  80% {
+    transform: translateX(-2px);
+  }
+}
+
+.miss-shake {
+  animation: miss-shake 420ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes flash-out {
+  from {
+    opacity: 0.75;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.flash-out {
+  animation: flash-out 620ms ease-out both;
+}
+
+@keyframes press-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.press-in {
+  animation: press-in 180ms ease-out both;
 }
 
 @media (prefers-reduced-motion: reduce) {

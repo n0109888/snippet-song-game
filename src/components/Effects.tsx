@@ -217,10 +217,9 @@ export function MissWash() {
 }
 
 /**
- * The max win: the card takes a hit of gold light. A flash on the frame it
- * lands, a bloom that stays for the rest of the reveal, and two rings thrown
- * out from the middle. Each plays once, so nothing is left turning behind the
- * text.
+ * The max win backdrop: a gold bloom that fades in and holds for the reveal,
+ * with a single flash on the frame it lands. No shapes, so nothing competes
+ * with the paper falling in front of it.
  */
 export function GoldWash() {
   return (
@@ -233,8 +232,124 @@ export function GoldWash() {
         }}
       />
       <div className="gold-flash absolute inset-0 bg-[var(--color-gold)]" />
-      <div className="shock-ring absolute left-1/2 top-[42%] h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-[var(--color-gold)]" />
-      <div className="shock-ring shock-ring-late absolute left-1/2 top-[42%] h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[var(--color-gold)]" />
     </div>
+  );
+}
+
+/** How many pieces of gold arrive from the top each second, per card. */
+const RAIN_PER_SECOND = 26;
+
+/**
+ * After the burst, gold keeps falling. Mounted only for a max win reveal and
+ * looping until it unmounts, so the card is still raining when you press next.
+ * Same canvas approach as the burst, but pieces are spawned above the top edge
+ * for as long as it lives rather than thrown from the middle once.
+ */
+export function GoldRain() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    if (prefersReducedMotion()) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const rect = canvas.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const pieces: Particle[] = [];
+
+    const spawn = (): Particle => ({
+      x: Math.random() * width,
+      // Staggered above the edge, so a piece does not appear the instant it is
+      // made and the top of the card never looks like a spawn line.
+      y: -30 - Math.random() * 60,
+      vx: (Math.random() - 0.5) * 1.4,
+      vy: 2.4 + Math.random() * 3.4,
+      rot: Math.random() * Math.PI,
+      vrot: (Math.random() - 0.5) * 0.3,
+      w: 5 + Math.random() * 6,
+      h: 8 + Math.random() * 8,
+      color: GOLD_COLORS[(Math.random() * GOLD_COLORS.length) | 0] ?? "#ffd23f",
+      life: 1,
+      delay: 0,
+      star: Math.random() < 0.16,
+    });
+
+    // A screen's worth already on the way down, so the fall is underway by the
+    // time the burst thins out instead of starting from an empty card.
+    for (let i = 0; i < 26; i += 1) {
+      const p = spawn();
+      p.y = Math.random() * height;
+      pieces.push(p);
+    }
+
+    let frame = 0;
+    let last = performance.now();
+    let owed = 0;
+
+    const tick = (now: number) => {
+      const dt = Math.min((now - last) / 16.67, 3);
+      last = now;
+      ctx.clearRect(0, 0, width, height);
+
+      owed += (RAIN_PER_SECOND / 60) * dt;
+      while (owed >= 1) {
+        pieces.push(spawn());
+        owed -= 1;
+      }
+
+      for (let i = pieces.length - 1; i >= 0; i -= 1) {
+        const p = pieces[i];
+        if (!p) continue;
+        // A flutter rather than a straight drop, which is what sells it as
+        // paper. Sideways only, so nothing hangs in the air.
+        p.x += (p.vx + Math.sin((now / 700) + p.rot) * 0.6) * dt;
+        p.y += p.vy * dt;
+        p.rot += p.vrot * dt;
+
+        if (p.y > height + 40) {
+          pieces.splice(i, 1);
+          continue;
+        }
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle = p.color;
+        if (p.star) {
+          ctx.shadowBlur = 12;
+          ctx.shadowColor = p.color;
+          fillStar(ctx, p.w * 0.75);
+        } else {
+          ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.rot)));
+        }
+        ctx.restore();
+      }
+
+      frame = requestAnimationFrame(tick);
+    };
+
+    frame = requestAnimationFrame(tick);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      ctx.clearRect(0, 0, width, height);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      aria-hidden
+      className="pointer-events-none absolute inset-0 z-20 h-full w-full"
+    />
   );
 }

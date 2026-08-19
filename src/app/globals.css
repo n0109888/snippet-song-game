@@ -312,9 +312,9 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /*
- * The max win. Light rather than scenery: one flash, two rings thrown out from
- * the middle, and the word landing hard with a highlight running across it.
- * Every one of these plays once, so nothing is left turning behind the text.
+ * The max win. One flash as it lands, then the word slamming down to size with
+ * a highlight running across it. The gold that keeps falling in front of all
+ * this is canvas, not CSS.
  */
 @keyframes gold-flash {
   from {
@@ -327,27 +327,6 @@ input[type="range"]::-moz-range-thumb {
 
 .gold-flash {
   animation: gold-flash 420ms ease-out both;
-}
-
-@keyframes shock-ring {
-  from {
-    opacity: 0.9;
-    transform: translate(-50%, -50%) scale(0.25);
-  }
-  to {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(3.4);
-  }
-}
-
-.shock-ring {
-  animation: shock-ring 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* The second ring chases the first, which is what makes it read as a hit. */
-.shock-ring-late {
-  animation-duration: 1100ms;
-  animation-delay: 140ms;
 }
 
 @keyframes gold-sheen {

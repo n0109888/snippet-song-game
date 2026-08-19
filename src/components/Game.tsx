@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import { Confetti, GoldWash, MissWash } from "./Effects";
+import { Confetti, GoldRain, GoldWash, MissWash } from "./Effects";
 import GuessInput from "./GuessInput";
 import PresetPicker from "./PresetPicker";
 import Reveal from "./Reveal";
@@ -567,6 +567,7 @@ export default function Game() {
               {reveal && !reveal.solved ? <MissWash /> : null}
               {maxWin ? <GoldWash /> : null}
               <Confetti fireKey={confettiKey} gold={maxWin} />
+              {maxWin ? <GoldRain /> : null}
             </>
           ) : null}
           {!ready ? null : phase === "done" ? (

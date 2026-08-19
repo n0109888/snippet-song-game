@@ -72,7 +72,7 @@ Edit `data/preset-playlist.json`. Nothing else needs to change.
 - `collections`: array of packs, each shown as a card on the Preset screen.
 - A pack has `id`, `name`, `note`, `image`, and `tracks`.
 - A track has `id`, `title`, `artist`, and optionally `art` and `rank`.
-- `rank` is popularity from 0 to 1000000 and is what difficulty sorts on.
+- `rank` is popularity from 0 to 1000000, and `date` is the release date. Both feed the sorts.
 
 Previews are not stored, because the services sign them with an expiry. They are
 looked up at play time, a few songs ahead of you, so a 180 song pack starts
@@ -88,40 +88,28 @@ and the ohnepixel playlist. Click a card to start.
 list. No difficulty setting here, because a playlist you chose is already the
 difficulty you wanted.
 
-## Difficulty, preset only
+## Sorting
 
-Difficulty picks **which songs** you get, not how long the snippet is. Songs are
-ordered by how well known they are and each level draws from a band of that
-order. Easy gives you the hits, Impossible gives you the deep cuts.
+There is no difficulty setting. Once you are in a pack you choose the order:
 
-| Difficulty | Draws from | Score weight |
-| --- | --- | --- |
-| Easy | Best known 20 percent | 1 |
-| Medium | 20 to 45 percent | 1.3 |
-| Hard | 45 to 70 percent | 1.7 |
-| Expert | 70 to 88 percent | 2.2 |
-| Impossible | Most obscure 12 percent | 3 |
+| Sort | Order |
+| --- | --- |
+| Most played | Highest play count first, so a pack opens on its hits |
+| Random | Shuffled |
+| Newest first | Most recent release date first |
 
-Bands are relative to the pack, so a pack of obscure songs still has an Easy end.
-Changing difficulty redraws the round. Popularity comes from Deezer's `rank`,
-because Spotify removed its `popularity` field in February 2026.
+Play counts come from Deezer's `rank` and dates from each track's release date,
+both stored in the pack file. Changing the sort restarts the round.
 
 ## Stages
 
-The stage ladder is the skip progression, separate from difficulty. Pick one in
-the settings menu:
+Stages are the skip progression and you pick them yourself. Six lengths are
+available: 0.01, 0.1, 0.5, 2, 8 and 15 seconds. All are on by default except
+0.01s, which is opt in because it is shorter than most people can hear. Switch
+any of them on or off in the settings; the last one cannot be switched off.
 
-| Ladder | Lengths |
-| --- | --- |
-| Standard | 0.01, 0.1, 0.5, 2, 5, 10 |
-| Brutal | 0.01, 0.05, 0.2, 1 |
-| Quick | 0.1, 0.3, 1, 3, 8 |
-| Steady | 0.5, 1, 2, 5, 10 |
-| Generous | 1, 2, 4, 8, 16 |
-| Relaxed | 2, 4, 7, 12, 20 |
-
-You start on the shortest length. Every wrong guess or skip moves you one step
-along. Guess count and hints are under Advanced.
+You start on the shortest selected length and every wrong guess or skip moves you
+one step along.
 
 ## A round has no fixed length
 

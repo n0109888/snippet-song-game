@@ -7,7 +7,6 @@ import GuessInput from "./GuessInput";
 import PresetPicker from "./PresetPicker";
 import Reveal from "./Reveal";
 import Settings from "./Settings";
-import SourcePicker from "./SourcePicker";
 import Stage from "./Stage";
 import Summary, { ResultsList, type RoundResult } from "./Summary";
 import { AudioEngine, DecodeError, dropInOffset } from "@/lib/audio";
@@ -21,14 +20,7 @@ import {
   type Rules,
   type SortKey,
 } from "@/lib/round";
-import { parsePlaylistLink } from "@/lib/links";
-import {
-  SourceError,
-  loadDeezerPlaylist,
-  loadSpotifyEmbed,
-  resolvePreviews,
-  spotifyReader,
-} from "@/lib/sources";
+import { resolvePreviews } from "@/lib/sources";
 import { titleMatches } from "@/lib/normalize";
 import { DEFAULT_PREFS, readPrefs, writePrefs, type Prefs } from "@/lib/storage";
 import {
@@ -40,7 +32,6 @@ import {
 } from "@/lib/types";
 import presetData from "../../data/preset-playlist.json";
 
-type Mode = "preset" | "custom";
 type Phase = "setup" | "loading" | "playing" | "done";
 
 interface RevealState {
@@ -62,7 +53,6 @@ export default function Game() {
 
   const [ready, setReady] = useState(false);
   const [prefs, setPrefs] = useState<Prefs>(DEFAULT_PREFS);
-  const [mode, setMode] = useState<Mode>("preset");
 
   const [phase, setPhase] = useState<Phase>("setup");
   const [playlist, setPlaylist] = useState<LoadedPlaylist | null>(null);
@@ -282,48 +272,6 @@ export default function Game() {
       return loaded;
     },
     [update],
-  );
-
-  const loadLink = useCallback(
-    async (value: string) => {
-      setError(null);
-
-      if (typeof navigator !== "undefined" && !navigator.onLine) {
-        setError("Offline.");
-        return;
-      }
-
-      const parsed = parsePlaylistLink(value);
-      if (!parsed) {
-        setError("That link is not a playlist.");
-        return;
-      }
-
-      if (parsed.kind === "spotify" && spotifyReader() === "") {
-        setError("Spotify links are not set up on this site. Use a Deezer link instead.");
-        return;
-      }
-
-      void engine().resume();
-      setPhase("loading");
-
-      let payload: { name: string; tracks: RawTrack[] };
-      try {
-        payload =
-          parsed.kind === "deezer"
-            ? await loadDeezerPlaylist(parsed.id)
-            : await loadSpotifyEmbed(parsed.id);
-      } catch (err) {
-        setError(err instanceof SourceError ? err.message : "Could not load that playlist.");
-        setPhase("setup");
-        return;
-      }
-
-      const loaded = loadTracks(payload.tracks, payload.name, parsed.kind, parsed.id);
-      // Custom playlists are the player's own, so no popularity banding.
-      if (loaded) startRound(loaded, prefs.sort);
-    },
-    [loadTracks, startRound, prefs.sort],
   );
 
   const startPreset = useCallback(
@@ -570,7 +518,6 @@ export default function Game() {
     setError(null);
     setHints(NO_HINTS);
     setConfettiKey(0);
-    setMode("preset");
     setSheetOpen(false);
     setShowTracks(false);
     setPhase("setup");
@@ -589,7 +536,7 @@ export default function Game() {
 
   return (
     <div className="flex h-dvh flex-col">
-      <header className="flex shrink-0 items-center justify-between border-b border-line px-5 py-3">
+      <header className="flex shrink-0 items-center border-b border-line px-5 py-3">
         <button
           type="button"
           onClick={goHome}
@@ -598,32 +545,6 @@ export default function Game() {
         >
           Snippet
         </button>
-
-        <div className="flex items-center gap-2">
-          {(["preset", "custom"] as const).map((m) => (
-            <button
-              key={m}
-              type="button"
-              onClick={() => {
-                setMode(m);
-                setPhase("setup");
-                setPlaylist(null);
-                setError(null);
-                          setResults([]);
-                engineRef.current?.stop();
-                setPlaying(false);
-              }}
-              aria-pressed={mode === m}
-              className={`home h-11 rounded-full border px-7 text-[15px] ${
-                mode === m
-                  ? "border-transparent bg-accent text-bg"
-                  : "border-line text-muted hover:border-line-strong hover:text-ink"
-              }`}
-            >
-              {m === "preset" ? "Preset" : "Custom"}
-            </button>
-          ))}
-        </div>
       </header>
 
       <div className="flex min-h-0 flex-1 flex-col lg:flex-row">
@@ -762,14 +683,8 @@ export default function Game() {
             </div>
           ) : phase === "loading" ? (
             <span className="font-mono text-xs text-faint">Loading</span>
-          ) : mode === "preset" ? (
-            <PresetPicker collections={COLLECTIONS} busy={presetBusy} onStart={startPreset} />
           ) : (
-            <SourcePicker
-              busy={false}
-              error={error}
-              onLoadLink={(v) => void loadLink(v)}
-            />
+            <PresetPicker collections={COLLECTIONS} busy={presetBusy} onStart={startPreset} />
           )}
           </div>
         </main>

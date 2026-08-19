@@ -4,19 +4,14 @@ import { isSameRecording } from "./normalize";
 import type { RawTrack, Track } from "./types";
 
 /**
- * Browser side data access, so the game can be served as static files.
+ * Preview lookup, in the browser, so the game can be served as static files.
+ * Packs ship with titles and artists only; the audio is found at play time.
  *
  * Verified against each service: iTunes search and both preview CDNs send
- * `Access-Control-Allow-Origin: *`, and Spotify sends CORS for the calling
- * origin. Deezer's API sends no CORS header at all, so it is read through its
- * JSONP output instead.
+ * `Access-Control-Allow-Origin: *`. Deezer's API sends no CORS header at all,
+ * so its search is read through the JSONP output instead.
  */
 
-/**
- * Upper bound on a round, not a page size. Deezer pages until it runs out, so
- * this only exists to stop a pathological playlist from loading forever.
- */
-const MAX_TRACKS = 1000;
 const CONCURRENCY = 6;
 
 /** Deezer preview links are signed for 15 minutes, so they are held for less. */
@@ -219,118 +214,4 @@ export async function resolvePreviews(
     });
   });
   return out;
-}
-
-export class SourceError extends Error {
-  constructor(
-    message: string,
-    readonly code: "not_found" | "empty" | "upstream",
-  ) {
-    super(message);
-    this.name = "SourceError";
-  }
-}
-
-/**
- * Base URL of the playlist reader worker. Empty when it has not been deployed,
- * in which case the Spotify link falls back to signing in.
- */
-export function spotifyReader(): string {
-  return process.env.NEXT_PUBLIC_SPOTIFY_PROXY ?? "";
-}
-
-/**
- * Read a public Spotify playlist through the reader worker. No sign in, and no
- * ownership limit, because it goes through the public embed rather than the
- * Web API. Previews come back with it, so these tracks need no lookup at all.
- */
-export async function loadSpotifyEmbed(
-  id: string,
-): Promise<{ name: string; tracks: RawTrack[] }> {
-  const base = spotifyReader();
-  if (!base) throw new SourceError("Spotify links are not set up on this site.", "upstream");
-
-  let res: Response;
-  try {
-    res = await fetch(`${base}?id=${encodeURIComponent(id)}`);
-  } catch {
-    throw new SourceError("Could not reach Spotify.", "upstream");
-  }
-
-  const data = (await res.json().catch(() => ({}))) as {
-    name?: string;
-    error?: string;
-    tracks?: { id?: string; title?: string; artist?: string; preview?: string | null }[];
-  };
-
-  if (!res.ok) {
-    throw new SourceError(
-      data.error ?? "Could not load that playlist.",
-      res.status === 404 ? "not_found" : "upstream",
-    );
-  }
-
-  const tracks: RawTrack[] = [];
-  for (const t of data.tracks ?? []) {
-    if (!t.title || !t.artist) continue;
-    tracks.push({
-      id: t.id ?? `spotify:embed:${tracks.length}`,
-      title: t.title,
-      artist: t.artist,
-      // The embed carries no per track cover, so the art hint fills it in from
-      // the same lookup that already backs the pasted and Deezer sources.
-      art: null,
-      link: null,
-      preview: t.preview ?? null,
-    });
-    if (tracks.length >= MAX_TRACKS) break;
-  }
-
-  if (tracks.length === 0) throw new SourceError("That playlist has no playable tracks.", "empty");
-  return { name: data.name ?? "Playlist", tracks };
-}
-
-export async function loadDeezerPlaylist(id: string): Promise<{ name: string; tracks: RawTrack[] }> {
-  const meta = await jsonp<{ title?: string; error?: unknown }>(
-    `https://api.deezer.com/playlist/${encodeURIComponent(id)}`,
-  ).catch(() => null);
-  if (!meta || meta.error) {
-    throw new SourceError("That playlist is private or does not exist.", "not_found");
-  }
-
-  const tracks: RawTrack[] = [];
-  const seen = new Set<string>();
-  let index = 0;
-
-  while (tracks.length < MAX_TRACKS) {
-    const page = await jsonp<{ data?: DeezerTrack[]; next?: string }>(
-      `https://api.deezer.com/playlist/${encodeURIComponent(id)}/tracks?limit=50&index=${index}`,
-    ).catch(() => null);
-    const data = page?.data ?? [];
-    if (data.length === 0) break;
-
-    for (const t of data) {
-      if (!t.id || !t.title || !t.artist?.name || !t.preview) continue;
-      if (t.readable === false) continue;
-      const key = `deezer:${t.id}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      tracks.push({
-        id: key,
-        title: t.title_short ?? t.title,
-        artist: t.artist.name,
-        art: t.album?.cover_medium ?? t.album?.cover_big ?? null,
-        link: t.link ?? null,
-        preview: t.preview,
-        rank: typeof t.rank === "number" ? t.rank : null,
-      });
-      if (tracks.length >= MAX_TRACKS) break;
-    }
-
-    if (!page?.next) break;
-    index += 50;
-  }
-
-  if (tracks.length === 0) throw new SourceError("That playlist has no playable tracks.", "empty");
-  return { name: meta.title ?? "Playlist", tracks };
 }

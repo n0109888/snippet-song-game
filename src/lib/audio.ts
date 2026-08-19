@@ -50,6 +50,21 @@ export class AudioEngine {
     return this.ctx !== null;
   }
 
+  /**
+   * Await the context actually running. Browsers start it suspended and resume
+   * is asynchronous, so scheduling straight after a click can silently drop the
+   * first sound.
+   */
+  async resume(): Promise<void> {
+    const ctx = this.ensure();
+    if (ctx.state === "running") return;
+    try {
+      await ctx.resume();
+    } catch {
+      // Nothing more to do, playback will surface the failure.
+    }
+  }
+
   setVolume(value: number): void {
     this.volume = Math.min(1, Math.max(0, value));
     if (this.master && this.ctx) {

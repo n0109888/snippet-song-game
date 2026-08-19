@@ -13,6 +13,8 @@ export interface Track {
   link: string | null;
   /** Deezer popularity, 0 to 1000000, higher is better known. Null when unknown. */
   rank: number | null;
+  /** Release date, ISO yyyy-mm-dd. Used by the date sort. */
+  date?: string | null;
 }
 
 /** A track before preview resolution. */
@@ -24,6 +26,7 @@ export interface RawTrack {
   link: string | null;
   preview?: string | null;
   rank?: number | null;
+  date?: string | null;
 }
 
 export interface LoadedPlaylist {

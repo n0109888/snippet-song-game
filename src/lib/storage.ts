@@ -1,15 +1,15 @@
 "use client";
 
-import { DEFAULT_RULES, DIFFICULTIES, type DifficultyName, type Rules } from "./difficulty";
+import { DEFAULT_RULES, normalizeStages, type Rules, type SortKey } from "./round";
 import type { SourceKind, StartMode } from "./types";
 
-const KEY = "snippet.prefs.v2";
+const KEY = "snippet.prefs.v3";
 
 export type Theme = "dark" | "light";
 
 export interface Prefs {
-  difficulty: DifficultyName;
   rules: Rules;
+  sort: SortKey;
   startMode: StartMode;
   volume: number;
   theme: Theme;
@@ -18,8 +18,8 @@ export interface Prefs {
 }
 
 export const DEFAULT_PREFS: Prefs = {
-  difficulty: "Medium",
   rules: DEFAULT_RULES,
+  sort: "plays",
   startMode: "start",
   volume: 0.8,
   theme: "dark",
@@ -27,24 +27,20 @@ export const DEFAULT_PREFS: Prefs = {
   lastSourceId: null,
 };
 
-function isRules(v: unknown): v is Rules {
-  if (typeof v !== "object" || v === null) return false;
+function readRules(v: unknown): Rules {
+  if (typeof v !== "object" || v === null) return DEFAULT_RULES;
   const r = v as Partial<Rules>;
-  return (
-    Array.isArray(r.stages) &&
-    r.stages.length > 0 &&
-    r.stages.every((s) => typeof s === "number" && s > 0) &&
-    typeof r.guesses === "number" &&
-    r.guesses > 0 &&
-    typeof r.artHint === "boolean" &&
-    (r.artistAfter === null || typeof r.artistAfter === "number")
-  );
+  const stages = Array.isArray(r.stages) ? normalizeStages(r.stages) : DEFAULT_RULES.stages;
+  return {
+    stages,
+    guesses:
+      typeof r.guesses === "number" && r.guesses > 0 ? r.guesses : Math.max(stages.length, 1),
+    artHint: typeof r.artHint === "boolean" ? r.artHint : false,
+    artistAfter: typeof r.artistAfter === "number" ? r.artistAfter : null,
+  };
 }
 
-/**
- * Read synchronously so the first render already has the stored values and
- * there is no flash of defaults.
- */
+/** Read synchronously so the first render already has the stored values. */
 export function readPrefs(): Prefs {
   if (typeof window === "undefined") return DEFAULT_PREFS;
   try {
@@ -55,9 +51,9 @@ export function readPrefs(): Prefs {
     const p = parsed as Partial<Prefs>;
 
     return {
-      difficulty:
-        p.difficulty && p.difficulty in DIFFICULTIES ? p.difficulty : DEFAULT_PREFS.difficulty,
-      rules: isRules(p.rules) ? p.rules : DEFAULT_PREFS.rules,
+      rules: readRules(p.rules),
+      sort:
+        p.sort === "random" || p.sort === "date" || p.sort === "plays" ? p.sort : "plays",
       startMode: p.startMode === "dropin" || p.startMode === "start" ? p.startMode : "start",
       volume:
         typeof p.volume === "number" && p.volume >= 0 && p.volume <= 1

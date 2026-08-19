@@ -35,17 +35,27 @@ export interface Rules {
   artistAfter: number | null;
 }
 
-export const LADDERS: number[][] = [
-  [0.01, 0.1, 0.5, 2, 5, 10],
-  [0.01, 0.05, 0.2, 1],
-  [0.1, 0.3, 1, 3, 8],
-  [0.5, 1, 2, 5, 10],
-  [1, 2, 4, 8, 16],
-  [2, 4, 7, 12, 20],
+export interface Ladder {
+  name: string;
+  stages: number[];
+}
+
+/** Named so the settings menu reads as words, not a wall of numbers. */
+export const LADDERS: Ladder[] = [
+  { name: "Standard", stages: [0.01, 0.1, 0.5, 2, 5, 10] },
+  { name: "Brutal", stages: [0.01, 0.05, 0.2, 1] },
+  { name: "Quick", stages: [0.1, 0.3, 1, 3, 8] },
+  { name: "Steady", stages: [0.5, 1, 2, 5, 10] },
+  { name: "Generous", stages: [1, 2, 4, 8, 16] },
+  { name: "Relaxed", stages: [2, 4, 7, 12, 20] },
 ];
 
+export function ladderLabel(stages: number[]): string {
+  return stages.map((s) => `${Number(s.toFixed(2))}s`).join("  ");
+}
+
 export const DEFAULT_RULES: Rules = {
-  stages: LADDERS[0] ?? [0.01, 0.1, 0.5, 2, 5, 10],
+  stages: LADDERS[0]?.stages ?? [0.01, 0.1, 0.5, 2, 5, 10],
   guesses: 6,
   artHint: false,
   artistAfter: null,

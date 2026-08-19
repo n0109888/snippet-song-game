@@ -8,7 +8,8 @@ export interface Track {
   title: string;
   artist: string;
   art: string | null;
-  preview: string;
+  /** Resolved lazily, so a large playlist loads without waiting on lookups. */
+  preview: string | null;
   link: string | null;
   /** Deezer popularity, 0 to 1000000, higher is better known. Null when unknown. */
   rank: number | null;
@@ -30,7 +31,15 @@ export interface LoadedPlaylist {
   source: SourceKind;
   sourceId: string;
   tracks: Track[];
-  skipped: number;
+}
+
+/** A preset pack. Genres or artists can be added by editing the JSON. */
+export interface PresetCollection {
+  id: string;
+  name: string;
+  note: string;
+  image: string | null;
+  tracks: Track[];
 }
 
 export interface PlaylistResponse {

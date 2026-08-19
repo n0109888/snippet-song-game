@@ -5,11 +5,14 @@ import type { SourceKind, StartMode } from "./types";
 
 const KEY = "snippet.prefs.v2";
 
+export type Theme = "dark" | "light";
+
 export interface Prefs {
   difficulty: DifficultyName;
   rules: Rules;
   startMode: StartMode;
   volume: number;
+  theme: Theme;
   lastSource: SourceKind | null;
   lastSourceId: string | null;
 }
@@ -19,6 +22,7 @@ export const DEFAULT_PREFS: Prefs = {
   rules: DEFAULT_RULES,
   startMode: "start",
   volume: 0.8,
+  theme: "dark",
   lastSource: null,
   lastSourceId: null,
 };
@@ -59,6 +63,7 @@ export function readPrefs(): Prefs {
         typeof p.volume === "number" && p.volume >= 0 && p.volume <= 1
           ? p.volume
           : DEFAULT_PREFS.volume,
+      theme: p.theme === "light" ? "light" : "dark",
       lastSource: typeof p.lastSource === "string" ? (p.lastSource as SourceKind) : null,
       lastSourceId: typeof p.lastSourceId === "string" ? p.lastSourceId : null,
     };

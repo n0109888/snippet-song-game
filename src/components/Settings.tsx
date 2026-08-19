@@ -278,7 +278,7 @@ export default function Settings({
       <Row label="Controls">
         <div className="flex flex-col gap-2">
           <Shortcut keys="Space" action="Pause / play" />
-          <Shortcut keys="\u2192" action="Skip" />
+          <Shortcut keys="→" action="Skip" />
         </div>
       </Row>
     </div>

@@ -1,4 +1,1272 @@
 {
-  "name": "Preset",
-  "tracks": []
+ "collections": [
+  {
+   "id": "kanye-west",
+   "name": "Kanye West",
+   "note": "Full discography",
+   "image": "https://cdn-images.dzcdn.net/images/cover/8c6578a2099561992fb7544e6826f767/1000x1000-000000-80-0-0.jpg",
+   "tracks": [
+    {
+     "id": "kanye:630827302",
+     "title": "Flashing Lights",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8c6578a2099561992fb7544e6826f767/250x250-000000-80-0-0.jpg",
+     "rank": 891802
+    },
+    {
+     "id": "kanye:7667065",
+     "title": "Runaway",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/742aba8510ba803bea51d304cf2ca786/250x250-000000-80-0-0.jpg",
+     "rank": 870128
+    },
+    {
+     "id": "kanye:630827272",
+     "title": "Can't Tell Me Nothing",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8c6578a2099561992fb7544e6826f767/250x250-000000-80-0-0.jpg",
+     "rank": 810003
+    },
+    {
+     "id": "kanye:95965912",
+     "title": "FourFiveSeconds",
+     "artist": "Rihanna",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ebe39c7db49fedcc2c0e8b28daf6bf31/250x250-000000-80-0-0.jpg",
+     "rank": 806982
+    },
+    {
+     "id": "kanye:1184309",
+     "title": "Gold Digger",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7cbfc94084895e59b5a313a98ab1bd9a/250x250-000000-80-0-0.jpg",
+     "rank": 806171
+    },
+    {
+     "id": "kanye:7667059",
+     "title": "POWER",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/742aba8510ba803bea51d304cf2ca786/250x250-000000-80-0-0.jpg",
+     "rank": 788761
+    },
+    {
+     "id": "kanye:7667061",
+     "title": "All Of The Lights",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/742aba8510ba803bea51d304cf2ca786/250x250-000000-80-0-0.jpg",
+     "rank": 779665
+    },
+    {
+     "id": "kanye:630827252",
+     "title": "I Wonder",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8c6578a2099561992fb7544e6826f767/250x250-000000-80-0-0.jpg",
+     "rank": 763200
+    },
+    {
+     "id": "kanye:130412300",
+     "title": "Heartless",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2877c6bf4fad750c54dd212fb50a366b/250x250-000000-80-0-0.jpg",
+     "rank": 762858
+    },
+    {
+     "id": "kanye:581609142",
+     "title": "Violent Crimes",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/71d34b7f041d43ea821a9afaeab73666/250x250-000000-80-0-0.jpg",
+     "rank": 751539
+    },
+    {
+     "id": "kanye:68350113",
+     "title": "Bound 2",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5a56530f7906bd9786fa47bd0be421b3/250x250-000000-80-0-0.jpg",
+     "rank": 744649
+    },
+    {
+     "id": "kanye:4302194",
+     "title": "Forever",
+     "artist": "Drake",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e1e3e58f8f395010769d435ae3f14bb4/250x250-000000-80-0-0.jpg",
+     "rank": 743555
+    },
+    {
+     "id": "kanye:126772731",
+     "title": "Father Stretch My Hands Pt. 1",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e055ecc8d01680cda0460017087728be/250x250-000000-80-0-0.jpg",
+     "rank": 734388
+    },
+    {
+     "id": "kanye:630827332",
+     "title": "Homecoming",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8c6578a2099561992fb7544e6826f767/250x250-000000-80-0-0.jpg",
+     "rank": 732966
+    },
+    {
+     "id": "kanye:2932385561",
+     "title": "CARNIVAL",
+     "artist": "¥$",
+     "art": "https://cdn-images.dzcdn.net/images/cover/cf8eacd91f5484666db893aa01c55f6b/250x250-000000-80-0-0.jpg",
+     "rank": 729220
+    },
+    {
+     "id": "kanye:785411522",
+     "title": "God Is",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/57e636dd1b26e8edce941a8450c10477/250x250-000000-80-0-0.jpg",
+     "rank": 723267
+    },
+    {
+     "id": "kanye:528869461",
+     "title": "All Falls Down",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/069a5dba671436da9301aad36fc9a983/250x250-000000-80-0-0.jpg",
+     "rank": 722885
+    },
+    {
+     "id": "kanye:7667064",
+     "title": "Devil In A New Dress",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/742aba8510ba803bea51d304cf2ca786/250x250-000000-80-0-0.jpg",
+     "rank": 707975
+    },
+    {
+     "id": "kanye:4100961631",
+     "title": "OK (feat. Don Toliver)",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bee7027021b52bb1b7487eee1cd82244/250x250-000000-80-0-0.jpg",
+     "rank": 706288
+    },
+    {
+     "id": "kanye:1184308",
+     "title": "Touch The Sky",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7cbfc94084895e59b5a313a98ab1bd9a/250x250-000000-80-0-0.jpg",
+     "rank": 701735
+    },
+    {
+     "id": "kanye:1766880137",
+     "title": "True Love",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/dc64fd5bee2049429ac5a383ab2e6e00/250x250-000000-80-0-0.jpg",
+     "rank": 696085
+    },
+    {
+     "id": "kanye:581609132",
+     "title": "Ghost Town",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/71d34b7f041d43ea821a9afaeab73666/250x250-000000-80-0-0.jpg",
+     "rank": 694253
+    },
+    {
+     "id": "kanye:528869611",
+     "title": "Through The Wire",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/069a5dba671436da9301aad36fc9a983/250x250-000000-80-0-0.jpg",
+     "rank": 691435
+    },
+    {
+     "id": "kanye:630827222",
+     "title": "Good Morning",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8c6578a2099561992fb7544e6826f767/250x250-000000-80-0-0.jpg",
+     "rank": 682245
+    },
+    {
+     "id": "kanye:1506150372",
+     "title": "Praise God",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/330da8bf0a57b47c2078db2d3761dc5e/250x250-000000-80-0-0.jpg",
+     "rank": 675337
+    },
+    {
+     "id": "kanye:551577722",
+     "title": "I Love It",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/24d6fb5732c5203ca991f4415e732fc3/250x250-000000-80-0-0.jpg",
+     "rank": 675316
+    },
+    {
+     "id": "kanye:68350105",
+     "title": "Black Skinhead",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5a56530f7906bd9786fa47bd0be421b3/250x250-000000-80-0-0.jpg",
+     "rank": 664153
+    },
+    {
+     "id": "kanye:3926892721",
+     "title": "ALL THE LOVE (feat. Andre Troutman)",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e6c8292811aac14c1c4d25d768b863ee/250x250-000000-80-0-0.jpg",
+     "rank": 660010
+    },
+    {
+     "id": "kanye:17919329",
+     "title": "Mercy",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/be5842f0ebd1693c7bb5ffead7ddd534/250x250-000000-80-0-0.jpg",
+     "rank": 656968
+    },
+    {
+     "id": "kanye:630827242",
+     "title": "Stronger",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8c6578a2099561992fb7544e6826f767/250x250-000000-80-0-0.jpg",
+     "rank": 649848
+    },
+    {
+     "id": "kanye:126772735",
+     "title": "Famous",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e055ecc8d01680cda0460017087728be/250x250-000000-80-0-0.jpg",
+     "rank": 631943
+    },
+    {
+     "id": "kanye:1503357492",
+     "title": "Hurricane",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/330da8bf0a57b47c2078db2d3761dc5e/250x250-000000-80-0-0.jpg",
+     "rank": 631461
+    },
+    {
+     "id": "kanye:68350104",
+     "title": "On Sight",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5a56530f7906bd9786fa47bd0be421b3/250x250-000000-80-0-0.jpg",
+     "rank": 621568
+    },
+    {
+     "id": "kanye:7667062",
+     "title": "Monster",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/742aba8510ba803bea51d304cf2ca786/250x250-000000-80-0-0.jpg",
+     "rank": 617406
+    },
+    {
+     "id": "kanye:630827262",
+     "title": "Good Life",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8c6578a2099561992fb7544e6826f767/250x250-000000-80-0-0.jpg",
+     "rank": 610217
+    },
+    {
+     "id": "kanye:126772767",
+     "title": "Saint Pablo",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e055ecc8d01680cda0460017087728be/250x250-000000-80-0-0.jpg",
+     "rank": 606734
+    },
+    {
+     "id": "kanye:2932385531",
+     "title": "BURN",
+     "artist": "¥$",
+     "art": "https://cdn-images.dzcdn.net/images/cover/cf8eacd91f5484666db893aa01c55f6b/250x250-000000-80-0-0.jpg",
+     "rank": 605208
+    },
+    {
+     "id": "kanye:3926892711",
+     "title": "FATHER (feat. Travis Scott)",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e6c8292811aac14c1c4d25d768b863ee/250x250-000000-80-0-0.jpg",
+     "rank": 600079
+    },
+    {
+     "id": "kanye:7667057",
+     "title": "Dark Fantasy",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/742aba8510ba803bea51d304cf2ca786/250x250-000000-80-0-0.jpg",
+     "rank": 594502
+    },
+    {
+     "id": "kanye:785411472",
+     "title": "Follow God",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/57e636dd1b26e8edce941a8450c10477/250x250-000000-80-0-0.jpg",
+     "rank": 589095
+    },
+    {
+     "id": "kanye:126587209",
+     "title": "Champions",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9c5deee90276300083dc87d93e048ee7/250x250-000000-80-0-0.jpg",
+     "rank": 584004
+    },
+    {
+     "id": "kanye:2932385541",
+     "title": "FUK SUMN",
+     "artist": "¥$",
+     "art": "https://cdn-images.dzcdn.net/images/cover/cf8eacd91f5484666db893aa01c55f6b/250x250-000000-80-0-0.jpg",
+     "rank": 579253
+    },
+    {
+     "id": "kanye:528869491",
+     "title": "Jesus Walks",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/069a5dba671436da9301aad36fc9a983/250x250-000000-80-0-0.jpg",
+     "rank": 577934
+    },
+    {
+     "id": "kanye:528869541",
+     "title": "Slow Jamz",
+     "artist": "Twista",
+     "art": "https://cdn-images.dzcdn.net/images/cover/069a5dba671436da9301aad36fc9a983/250x250-000000-80-0-0.jpg",
+     "rank": 576178
+    },
+    {
+     "id": "kanye:630827232",
+     "title": "Champion",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8c6578a2099561992fb7544e6826f767/250x250-000000-80-0-0.jpg",
+     "rank": 575706
+    },
+    {
+     "id": "kanye:7667058",
+     "title": "Gorgeous",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/742aba8510ba803bea51d304cf2ca786/250x250-000000-80-0-0.jpg",
+     "rank": 575331
+    },
+    {
+     "id": "kanye:126772753",
+     "title": "Wolves",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e055ecc8d01680cda0460017087728be/250x250-000000-80-0-0.jpg",
+     "rank": 574886
+    },
+    {
+     "id": "kanye:1506150442",
+     "title": "Moon",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/330da8bf0a57b47c2078db2d3761dc5e/250x250-000000-80-0-0.jpg",
+     "rank": 571431
+    },
+    {
+     "id": "kanye:126772765",
+     "title": "Fade",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e055ecc8d01680cda0460017087728be/250x250-000000-80-0-0.jpg",
+     "rank": 567315
+    },
+    {
+     "id": "kanye:630827312",
+     "title": "Everything I Am",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8c6578a2099561992fb7544e6826f767/250x250-000000-80-0-0.jpg",
+     "rank": 567212
+    },
+    {
+     "id": "kanye:130412302",
+     "title": "Amazing",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2877c6bf4fad750c54dd212fb50a366b/250x250-000000-80-0-0.jpg",
+     "rank": 561195
+    },
+    {
+     "id": "kanye:130412304",
+     "title": "Love Lockdown",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2877c6bf4fad750c54dd212fb50a366b/250x250-000000-80-0-0.jpg",
+     "rank": 554880
+    },
+    {
+     "id": "kanye:126772729",
+     "title": "Ultralight Beam",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e055ecc8d01680cda0460017087728be/250x250-000000-80-0-0.jpg",
+     "rank": 553929
+    },
+    {
+     "id": "kanye:1184314",
+     "title": "Roses",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7cbfc94084895e59b5a313a98ab1bd9a/250x250-000000-80-0-0.jpg",
+     "rank": 546062
+    },
+    {
+     "id": "kanye:1506150352",
+     "title": "Off The Grid",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/330da8bf0a57b47c2078db2d3761dc5e/250x250-000000-80-0-0.jpg",
+     "rank": 540376
+    },
+    {
+     "id": "kanye:2932385511",
+     "title": "DO IT",
+     "artist": "¥$",
+     "art": "https://cdn-images.dzcdn.net/images/cover/cf8eacd91f5484666db893aa01c55f6b/250x250-000000-80-0-0.jpg",
+     "rank": 535271
+    },
+    {
+     "id": "kanye:126772761",
+     "title": "No More Parties In LA",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e055ecc8d01680cda0460017087728be/250x250-000000-80-0-0.jpg",
+     "rank": 534723
+    },
+    {
+     "id": "kanye:528869621",
+     "title": "Family Business",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/069a5dba671436da9301aad36fc9a983/250x250-000000-80-0-0.jpg",
+     "rank": 526644
+    },
+    {
+     "id": "kanye:1506150542",
+     "title": "No Child Left Behind",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/330da8bf0a57b47c2078db2d3761dc5e/250x250-000000-80-0-0.jpg",
+     "rank": 525208
+    },
+    {
+     "id": "kanye:4100961551",
+     "title": "I CAN’T WAIT (feat. Ms. Lauryn Hill)",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bee7027021b52bb1b7487eee1cd82244/250x250-000000-80-0-0.jpg",
+     "rank": 522752
+    },
+    {
+     "id": "kanye:7667066",
+     "title": "Hell Of A Life",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/742aba8510ba803bea51d304cf2ca786/250x250-000000-80-0-0.jpg",
+     "rank": 522629
+    },
+    {
+     "id": "kanye:528869501",
+     "title": "Never Let Me Down",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/069a5dba671436da9301aad36fc9a983/250x250-000000-80-0-0.jpg",
+     "rank": 522241
+    },
+    {
+     "id": "kanye:1184318",
+     "title": "Diamonds From Sierra Leone",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7cbfc94084895e59b5a313a98ab1bd9a/250x250-000000-80-0-0.jpg",
+     "rank": 521749
+    },
+    {
+     "id": "kanye:581609102",
+     "title": "All Mine",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/71d34b7f041d43ea821a9afaeab73666/250x250-000000-80-0-0.jpg",
+     "rank": 521248
+    },
+    {
+     "id": "kanye:68350108",
+     "title": "Hold My Liquor",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5a56530f7906bd9786fa47bd0be421b3/250x250-000000-80-0-0.jpg",
+     "rank": 519169
+    },
+    {
+     "id": "kanye:510731632",
+     "title": "Reborn",
+     "artist": "KIDS SEE GHOSTS",
+     "art": "https://cdn-images.dzcdn.net/images/cover/778fafd1b7e65b0b769be21ddd3f3e5a/250x250-000000-80-0-0.jpg",
+     "rank": 518660
+    },
+    {
+     "id": "kanye:7667068",
+     "title": "Lost In The World",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/742aba8510ba803bea51d304cf2ca786/250x250-000000-80-0-0.jpg",
+     "rank": 517493
+    },
+    {
+     "id": "kanye:96356636",
+     "title": "All Day",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/988af878a0d6735d2e20ebd3cdd94611/250x250-000000-80-0-0.jpg",
+     "rank": 514056
+    },
+    {
+     "id": "kanye:1184307",
+     "title": "Heard 'Em Say",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7cbfc94084895e59b5a313a98ab1bd9a/250x250-000000-80-0-0.jpg",
+     "rank": 513839
+    },
+    {
+     "id": "kanye:68350107",
+     "title": "New Slaves",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5a56530f7906bd9786fa47bd0be421b3/250x250-000000-80-0-0.jpg",
+     "rank": 511836
+    },
+    {
+     "id": "kanye:126772747",
+     "title": "Waves",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e055ecc8d01680cda0460017087728be/250x250-000000-80-0-0.jpg",
+     "rank": 511524
+    },
+    {
+     "id": "kanye:785411462",
+     "title": "Selah",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/57e636dd1b26e8edce941a8450c10477/250x250-000000-80-0-0.jpg",
+     "rank": 510946
+    },
+    {
+     "id": "kanye:3926892781",
+     "title": "HIGHS AND LOWS",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e6c8292811aac14c1c4d25d768b863ee/250x250-000000-80-0-0.jpg",
+     "rank": 510299
+    },
+    {
+     "id": "kanye:1184311",
+     "title": "Drive Slow",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7cbfc94084895e59b5a313a98ab1bd9a/250x250-000000-80-0-0.jpg",
+     "rank": 509292
+    },
+    {
+     "id": "kanye:1184319",
+     "title": "We Major",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7cbfc94084895e59b5a313a98ab1bd9a/250x250-000000-80-0-0.jpg",
+     "rank": 507954
+    },
+    {
+     "id": "kanye:68350110",
+     "title": "Blood On The Leaves",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5a56530f7906bd9786fa47bd0be421b3/250x250-000000-80-0-0.jpg",
+     "rank": 507335
+    },
+    {
+     "id": "kanye:785411482",
+     "title": "Closed On Sunday",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/57e636dd1b26e8edce941a8450c10477/250x250-000000-80-0-0.jpg",
+     "rank": 505945
+    },
+    {
+     "id": "kanye:1652438572",
+     "title": "City of Gods",
+     "artist": "Fivio Foreign",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c7bfa3858d68a6ec34b6a7050285c00d/250x250-000000-80-0-0.jpg",
+     "rank": 502507
+    },
+    {
+     "id": "kanye:1506150412",
+     "title": "Believe What I Say",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/330da8bf0a57b47c2078db2d3761dc5e/250x250-000000-80-0-0.jpg",
+     "rank": 502493
+    },
+    {
+     "id": "kanye:528869481",
+     "title": "Spaceship",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/069a5dba671436da9301aad36fc9a983/250x250-000000-80-0-0.jpg",
+     "rank": 496859
+    },
+    {
+     "id": "kanye:126772733",
+     "title": "Pt. 2",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e055ecc8d01680cda0460017087728be/250x250-000000-80-0-0.jpg",
+     "rank": 494320
+    },
+    {
+     "id": "kanye:126772751",
+     "title": "Real Friends",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e055ecc8d01680cda0460017087728be/250x250-000000-80-0-0.jpg",
+     "rank": 493798
+    },
+    {
+     "id": "kanye:1184321",
+     "title": "Hey Mama",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7cbfc94084895e59b5a313a98ab1bd9a/250x250-000000-80-0-0.jpg",
+     "rank": 487074
+    },
+    {
+     "id": "kanye:4100961451",
+     "title": "KING",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bee7027021b52bb1b7487eee1cd82244/250x250-000000-80-0-0.jpg",
+     "rank": 486446
+    },
+    {
+     "id": "kanye:2932385451",
+     "title": "STARS",
+     "artist": "¥$",
+     "art": "https://cdn-images.dzcdn.net/images/cover/cf8eacd91f5484666db893aa01c55f6b/250x250-000000-80-0-0.jpg",
+     "rank": 485898
+    },
+    {
+     "id": "kanye:581609092",
+     "title": "Yikes",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/71d34b7f041d43ea821a9afaeab73666/250x250-000000-80-0-0.jpg",
+     "rank": 485529
+    },
+    {
+     "id": "kanye:7667067",
+     "title": "Blame Game",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/742aba8510ba803bea51d304cf2ca786/250x250-000000-80-0-0.jpg",
+     "rank": 485258
+    },
+    {
+     "id": "kanye:130412298",
+     "title": "Welcome To Heartbreak",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2877c6bf4fad750c54dd212fb50a366b/250x250-000000-80-0-0.jpg",
+     "rank": 482472
+    },
+    {
+     "id": "kanye:126772749",
+     "title": "FML",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e055ecc8d01680cda0460017087728be/250x250-000000-80-0-0.jpg",
+     "rank": 482206
+    },
+    {
+     "id": "kanye:528869441",
+     "title": "We Don't Care",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/069a5dba671436da9301aad36fc9a983/250x250-000000-80-0-0.jpg",
+     "rank": 478034
+    },
+    {
+     "id": "kanye:7667063",
+     "title": "So Appalled",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/742aba8510ba803bea51d304cf2ca786/250x250-000000-80-0-0.jpg",
+     "rank": 475916
+    },
+    {
+     "id": "kanye:1553692592",
+     "title": "Life Of The Party",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/330da8bf0a57b47c2078db2d3761dc5e/250x250-000000-80-0-0.jpg",
+     "rank": 475172
+    },
+    {
+     "id": "kanye:2932385491",
+     "title": "BACK TO ME",
+     "artist": "¥$",
+     "art": "https://cdn-images.dzcdn.net/images/cover/cf8eacd91f5484666db893aa01c55f6b/250x250-000000-80-0-0.jpg",
+     "rank": 469581
+    },
+    {
+     "id": "kanye:528869601",
+     "title": "Two Words",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/069a5dba671436da9301aad36fc9a983/250x250-000000-80-0-0.jpg",
+     "rank": 468857
+    },
+    {
+     "id": "kanye:510731612",
+     "title": "4th Dimension",
+     "artist": "KIDS SEE GHOSTS",
+     "art": "https://cdn-images.dzcdn.net/images/cover/778fafd1b7e65b0b769be21ddd3f3e5a/250x250-000000-80-0-0.jpg",
+     "rank": 460248
+    },
+    {
+     "id": "kanye:4100961501",
+     "title": "WHATEVER WORKS",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bee7027021b52bb1b7487eee1cd82244/250x250-000000-80-0-0.jpg",
+     "rank": 458783
+    },
+    {
+     "id": "kanye:528869531",
+     "title": "The New Workout Plan",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/069a5dba671436da9301aad36fc9a983/250x250-000000-80-0-0.jpg",
+     "rank": 458407
+    },
+    {
+     "id": "kanye:1622774782",
+     "title": "Eazy",
+     "artist": "The Game",
+     "art": "https://cdn-images.dzcdn.net/images/cover/decdd54653ef890d52f573e4a8adc711/250x250-000000-80-0-0.jpg",
+     "rank": 458194
+    },
+    {
+     "id": "kanye:785411542",
+     "title": "Use This Gospel",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/57e636dd1b26e8edce941a8450c10477/250x250-000000-80-0-0.jpg",
+     "rank": 457484
+    },
+    {
+     "id": "kanye:630827322",
+     "title": "The Glory",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8c6578a2099561992fb7544e6826f767/250x250-000000-80-0-0.jpg",
+     "rank": 457305
+    },
+    {
+     "id": "kanye:68350111",
+     "title": "Guilt Trip",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5a56530f7906bd9786fa47bd0be421b3/250x250-000000-80-0-0.jpg",
+     "rank": 457268
+    },
+    {
+     "id": "kanye:4100961461",
+     "title": "THIS A MUST",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bee7027021b52bb1b7487eee1cd82244/250x250-000000-80-0-0.jpg",
+     "rank": 456192
+    },
+    {
+     "id": "kanye:2932385471",
+     "title": "PAID",
+     "artist": "¥$",
+     "art": "https://cdn-images.dzcdn.net/images/cover/cf8eacd91f5484666db893aa01c55f6b/250x250-000000-80-0-0.jpg",
+     "rank": 455532
+    },
+    {
+     "id": "kanye:126772759",
+     "title": "30 Hours",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e055ecc8d01680cda0460017087728be/250x250-000000-80-0-0.jpg",
+     "rank": 455050
+    },
+    {
+     "id": "kanye:130412310",
+     "title": "Street Lights",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2877c6bf4fad750c54dd212fb50a366b/250x250-000000-80-0-0.jpg",
+     "rank": 453611
+    },
+    {
+     "id": "kanye:785411452",
+     "title": "Every Hour",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/57e636dd1b26e8edce941a8450c10477/250x250-000000-80-0-0.jpg",
+     "rank": 451789
+    },
+    {
+     "id": "kanye:3926892731",
+     "title": "PUNCH DRUNK",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e6c8292811aac14c1c4d25d768b863ee/250x250-000000-80-0-0.jpg",
+     "rank": 450648
+    },
+    {
+     "id": "kanye:4100961521",
+     "title": "SISTERS AND BROTHERS",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bee7027021b52bb1b7487eee1cd82244/250x250-000000-80-0-0.jpg",
+     "rank": 446338
+    },
+    {
+     "id": "kanye:3809635602",
+     "title": "PREACHER MAN",
+     "artist": "Ye",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e6c8292811aac14c1c4d25d768b863ee/250x250-000000-80-0-0.jpg",
+     "rank": 445276
+    },
+    {
+     "id": "kanye:130412296",
+     "title": "Say You Will",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2877c6bf4fad750c54dd212fb50a366b/250x250-000000-80-0-0.jpg",
+     "rank": 445041
+    },
+    {
+     "id": "kanye:130412312",
+     "title": "Bad News",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2877c6bf4fad750c54dd212fb50a366b/250x250-000000-80-0-0.jpg",
+     "rank": 444195
+    },
+    {
+     "id": "kanye:4100961531",
+     "title": "BULLY (feat. CeeLo Green)",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bee7027021b52bb1b7487eee1cd82244/250x250-000000-80-0-0.jpg",
+     "rank": 442496
+    },
+    {
+     "id": "kanye:130412306",
+     "title": "Paranoid",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2877c6bf4fad750c54dd212fb50a366b/250x250-000000-80-0-0.jpg",
+     "rank": 442024
+    },
+    {
+     "id": "kanye:630827342",
+     "title": "Big Brother",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8c6578a2099561992fb7544e6826f767/250x250-000000-80-0-0.jpg",
+     "rank": 441681
+    },
+    {
+     "id": "kanye:4003755941",
+     "title": "530",
+     "artist": "¥$",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c0f72bbb933631e60331db2c118f5266/250x250-000000-80-0-0.jpg",
+     "rank": 438639
+    },
+    {
+     "id": "kanye:126772745",
+     "title": "I Love Kanye",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e055ecc8d01680cda0460017087728be/250x250-000000-80-0-0.jpg",
+     "rank": 438165
+    },
+    {
+     "id": "kanye:68350106",
+     "title": "I Am A God",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5a56530f7906bd9786fa47bd0be421b3/250x250-000000-80-0-0.jpg",
+     "rank": 437790
+    },
+    {
+     "id": "kanye:785411492",
+     "title": "On God",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/57e636dd1b26e8edce941a8450c10477/250x250-000000-80-0-0.jpg",
+     "rank": 437757
+    },
+    {
+     "id": "kanye:630827282",
+     "title": "Barry Bonds",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8c6578a2099561992fb7544e6826f767/250x250-000000-80-0-0.jpg",
+     "rank": 436442
+    },
+    {
+     "id": "kanye:528869631",
+     "title": "Last Call",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/069a5dba671436da9301aad36fc9a983/250x250-000000-80-0-0.jpg",
+     "rank": 434750
+    },
+    {
+     "id": "kanye:510731592",
+     "title": "Feel The Love",
+     "artist": "KIDS SEE GHOSTS",
+     "art": "https://cdn-images.dzcdn.net/images/cover/778fafd1b7e65b0b769be21ddd3f3e5a/250x250-000000-80-0-0.jpg",
+     "rank": 433826
+    },
+    {
+     "id": "kanye:68350112",
+     "title": "Send It Up",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5a56530f7906bd9786fa47bd0be421b3/250x250-000000-80-0-0.jpg",
+     "rank": 429869
+    },
+    {
+     "id": "kanye:785411502",
+     "title": "Everything We Need",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/57e636dd1b26e8edce941a8450c10477/250x250-000000-80-0-0.jpg",
+     "rank": 428155
+    },
+    {
+     "id": "kanye:4100961511",
+     "title": "MAMA’S FAVORITE (feat. Nine Vicious)",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bee7027021b52bb1b7487eee1cd82244/250x250-000000-80-0-0.jpg",
+     "rank": 427765
+    },
+    {
+     "id": "kanye:126772737",
+     "title": "Feedback",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e055ecc8d01680cda0460017087728be/250x250-000000-80-0-0.jpg",
+     "rank": 423882
+    },
+    {
+     "id": "kanye:581609122",
+     "title": "No Mistakes",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/71d34b7f041d43ea821a9afaeab73666/250x250-000000-80-0-0.jpg",
+     "rank": 423765
+    },
+    {
+     "id": "kanye:3926892851",
+     "title": "LAST BREATH (feat. Peso Pluma)",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e6c8292811aac14c1c4d25d768b863ee/250x250-000000-80-0-0.jpg",
+     "rank": 420408
+    },
+    {
+     "id": "kanye:581609082",
+     "title": "I Thought About Killing You",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/71d34b7f041d43ea821a9afaeab73666/250x250-000000-80-0-0.jpg",
+     "rank": 419703
+    },
+    {
+     "id": "kanye:528869471",
+     "title": "I'll Fly Away",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/069a5dba671436da9301aad36fc9a983/250x250-000000-80-0-0.jpg",
+     "rank": 416718
+    },
+    {
+     "id": "kanye:2932385481",
+     "title": "TALKING",
+     "artist": "¥$",
+     "art": "https://cdn-images.dzcdn.net/images/cover/cf8eacd91f5484666db893aa01c55f6b/250x250-000000-80-0-0.jpg",
+     "rank": 415889
+    },
+    {
+     "id": "kanye:1184316",
+     "title": "Addiction",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7cbfc94084895e59b5a313a98ab1bd9a/250x250-000000-80-0-0.jpg",
+     "rank": 414866
+    },
+    {
+     "id": "kanye:510731642",
+     "title": "Kids See Ghosts",
+     "artist": "KIDS SEE GHOSTS",
+     "art": "https://cdn-images.dzcdn.net/images/cover/778fafd1b7e65b0b769be21ddd3f3e5a/250x250-000000-80-0-0.jpg",
+     "rank": 412970
+    },
+    {
+     "id": "kanye:630827292",
+     "title": "Drunk and Hot Girls",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8c6578a2099561992fb7544e6826f767/250x250-000000-80-0-0.jpg",
+     "rank": 411091
+    },
+    {
+     "id": "kanye:4005560731",
+     "title": "HAPPY",
+     "artist": "Donda",
+     "art": "https://cdn-images.dzcdn.net/images/cover/362cc0c598362da9f3083b01228a0032/250x250-000000-80-0-0.jpg",
+     "rank": 410494
+    },
+    {
+     "id": "kanye:785411512",
+     "title": "Water",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/57e636dd1b26e8edce941a8450c10477/250x250-000000-80-0-0.jpg",
+     "rank": 409566
+    },
+    {
+     "id": "kanye:528869511",
+     "title": "Get Em High",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/069a5dba671436da9301aad36fc9a983/250x250-000000-80-0-0.jpg",
+     "rank": 409488
+    },
+    {
+     "id": "kanye:528869571",
+     "title": "School Spirit",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/069a5dba671436da9301aad36fc9a983/250x250-000000-80-0-0.jpg",
+     "rank": 409395
+    },
+    {
+     "id": "kanye:126772763",
+     "title": "Facts (Charlie Heat Version)",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e055ecc8d01680cda0460017087728be/250x250-000000-80-0-0.jpg",
+     "rank": 408475
+    },
+    {
+     "id": "kanye:3926892831",
+     "title": "BEAUTY AND THE BEAST",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e6c8292811aac14c1c4d25d768b863ee/250x250-000000-80-0-0.jpg",
+     "rank": 407591
+    },
+    {
+     "id": "kanye:68350109",
+     "title": "I'm In It",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5a56530f7906bd9786fa47bd0be421b3/250x250-000000-80-0-0.jpg",
+     "rank": 407064
+    },
+    {
+     "id": "kanye:510731602",
+     "title": "Fire",
+     "artist": "KIDS SEE GHOSTS",
+     "art": "https://cdn-images.dzcdn.net/images/cover/778fafd1b7e65b0b769be21ddd3f3e5a/250x250-000000-80-0-0.jpg",
+     "rank": 406808
+    },
+    {
+     "id": "kanye:510731652",
+     "title": "Cudi Montage",
+     "artist": "KIDS SEE GHOSTS",
+     "art": "https://cdn-images.dzcdn.net/images/cover/778fafd1b7e65b0b769be21ddd3f3e5a/250x250-000000-80-0-0.jpg",
+     "rank": 406801
+    },
+    {
+     "id": "kanye:4100961561",
+     "title": "WHITE LINES (feat. Andre Troutman)",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bee7027021b52bb1b7487eee1cd82244/250x250-000000-80-0-0.jpg",
+     "rank": 405059
+    },
+    {
+     "id": "kanye:130412308",
+     "title": "RoboCop",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2877c6bf4fad750c54dd212fb50a366b/250x250-000000-80-0-0.jpg",
+     "rank": 404710
+    },
+    {
+     "id": "kanye:581609112",
+     "title": "Wouldn't Leave",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/71d34b7f041d43ea821a9afaeab73666/250x250-000000-80-0-0.jpg",
+     "rank": 404705
+    },
+    {
+     "id": "kanye:1184313",
+     "title": "Crack Music",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7cbfc94084895e59b5a313a98ab1bd9a/250x250-000000-80-0-0.jpg",
+     "rank": 403119
+    },
+    {
+     "id": "kanye:1184312",
+     "title": "My Way Home",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7cbfc94084895e59b5a313a98ab1bd9a/250x250-000000-80-0-0.jpg",
+     "rank": 403084
+    },
+    {
+     "id": "kanye:93011276",
+     "title": "Only One",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b849705f601429e0f116a0008eaa5e21/250x250-000000-80-0-0.jpg",
+     "rank": 402578
+    },
+    {
+     "id": "kanye:528869451",
+     "title": "Graduation Day",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/069a5dba671436da9301aad36fc9a983/250x250-000000-80-0-0.jpg",
+     "rank": 402255
+    },
+    {
+     "id": "kanye:1184306",
+     "title": "Wake Up Mr. West",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7cbfc94084895e59b5a313a98ab1bd9a/250x250-000000-80-0-0.jpg",
+     "rank": 399835
+    },
+    {
+     "id": "kanye:130412314",
+     "title": "See You In My Nightmares",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2877c6bf4fad750c54dd212fb50a366b/250x250-000000-80-0-0.jpg",
+     "rank": 399510
+    },
+    {
+     "id": "kanye:1506150332",
+     "title": "Jail",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/330da8bf0a57b47c2078db2d3761dc5e/250x250-000000-80-0-0.jpg",
+     "rank": 399001
+    },
+    {
+     "id": "kanye:126772743",
+     "title": "Freestyle 4",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e055ecc8d01680cda0460017087728be/250x250-000000-80-0-0.jpg",
+     "rank": 398996
+    },
+    {
+     "id": "kanye:785411532",
+     "title": "Hands On",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/57e636dd1b26e8edce941a8450c10477/250x250-000000-80-0-0.jpg",
+     "rank": 397418
+    },
+    {
+     "id": "kanye:630827352",
+     "title": "Good Night",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8c6578a2099561992fb7544e6826f767/250x250-000000-80-0-0.jpg",
+     "rank": 397348
+    },
+    {
+     "id": "kanye:130412316",
+     "title": "Coldest Winter",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2877c6bf4fad750c54dd212fb50a366b/250x250-000000-80-0-0.jpg",
+     "rank": 396379
+    },
+    {
+     "id": "kanye:126772741",
+     "title": "Highlights",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e055ecc8d01680cda0460017087728be/250x250-000000-80-0-0.jpg",
+     "rank": 393862
+    },
+    {
+     "id": "kanye:1184324",
+     "title": "Gone",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7cbfc94084895e59b5a313a98ab1bd9a/250x250-000000-80-0-0.jpg",
+     "rank": 392153
+    },
+    {
+     "id": "kanye:1184315",
+     "title": "Bring Me Down",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7cbfc94084895e59b5a313a98ab1bd9a/250x250-000000-80-0-0.jpg",
+     "rank": 390177
+    },
+    {
+     "id": "kanye:4100961601",
+     "title": "DAMN",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bee7027021b52bb1b7487eee1cd82244/250x250-000000-80-0-0.jpg",
+     "rank": 389226
+    },
+    {
+     "id": "kanye:2952819481",
+     "title": "VULTURES",
+     "artist": "¥$",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bd72f880486c3055599f58e5885359f7/250x250-000000-80-0-0.jpg",
+     "rank": 388779
+    },
+    {
+     "id": "kanye:528869551",
+     "title": "Breathe In Breathe Out",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/069a5dba671436da9301aad36fc9a983/250x250-000000-80-0-0.jpg",
+     "rank": 388619
+    },
+    {
+     "id": "kanye:4100961621",
+     "title": "THIS ONE HERE",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bee7027021b52bb1b7487eee1cd82244/250x250-000000-80-0-0.jpg",
+     "rank": 388608
+    },
+    {
+     "id": "kanye:494146422",
+     "title": "Lift Yourself",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/160521ac50007d3349e0dfede7ac88d4/250x250-000000-80-0-0.jpg",
+     "rank": 388073
+    },
+    {
+     "id": "kanye:4100961641",
+     "title": "MISSION CONTROL (feat. The WRLDFMS Tony Williams)",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bee7027021b52bb1b7487eee1cd82244/250x250-000000-80-0-0.jpg",
+     "rank": 387466
+    },
+    {
+     "id": "kanye:2932385571",
+     "title": "BEG FORGIVENESS",
+     "artist": "¥$",
+     "art": "https://cdn-images.dzcdn.net/images/cover/cf8eacd91f5484666db893aa01c55f6b/250x250-000000-80-0-0.jpg",
+     "rank": 386657
+    },
+    {
+     "id": "kanye:1506150522",
+     "title": "Pure Souls",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/330da8bf0a57b47c2078db2d3761dc5e/250x250-000000-80-0-0.jpg",
+     "rank": 385071
+    },
+    {
+     "id": "kanye:4100961571",
+     "title": "CIRCLES",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bee7027021b52bb1b7487eee1cd82244/250x250-000000-80-0-0.jpg",
+     "rank": 382910
+    },
+    {
+     "id": "kanye:2932385581",
+     "title": "PROBLEMATIC",
+     "artist": "¥$",
+     "art": "https://cdn-images.dzcdn.net/images/cover/cf8eacd91f5484666db893aa01c55f6b/250x250-000000-80-0-0.jpg",
+     "rank": 382344
+    },
+    {
+     "id": "kanye:1184326",
+     "title": "Late",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7cbfc94084895e59b5a313a98ab1bd9a/250x250-000000-80-0-0.jpg",
+     "rank": 381666
+    },
+    {
+     "id": "kanye:7667069",
+     "title": "Who Will Survive In America",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/742aba8510ba803bea51d304cf2ca786/250x250-000000-80-0-0.jpg",
+     "rank": 381486
+    },
+    {
+     "id": "kanye:1506150452",
+     "title": "Heaven and Hell",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/330da8bf0a57b47c2078db2d3761dc5e/250x250-000000-80-0-0.jpg",
+     "rank": 381159
+    },
+    {
+     "id": "kanye:785411552",
+     "title": "Jesus Is Lord",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/57e636dd1b26e8edce941a8450c10477/250x250-000000-80-0-0.jpg",
+     "rank": 379023
+    },
+    {
+     "id": "kanye:510731622",
+     "title": "Freeee (Ghost Town Pt. 2)",
+     "artist": "KIDS SEE GHOSTS",
+     "art": "https://cdn-images.dzcdn.net/images/cover/778fafd1b7e65b0b769be21ddd3f3e5a/250x250-000000-80-0-0.jpg",
+     "rank": 378789
+    },
+    {
+     "id": "kanye:2932385461",
+     "title": "KEYS TO MY LIFE",
+     "artist": "¥$",
+     "art": "https://cdn-images.dzcdn.net/images/cover/cf8eacd91f5484666db893aa01c55f6b/250x250-000000-80-0-0.jpg",
+     "rank": 376689
+    },
+    {
+     "id": "kanye:4003755911",
+     "title": "FRIED",
+     "artist": "¥$",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c0f72bbb933631e60331db2c118f5266/250x250-000000-80-0-0.jpg",
+     "rank": 375758
+    },
+    {
+     "id": "kanye:2932385521",
+     "title": "PAPERWORK",
+     "artist": "¥$",
+     "art": "https://cdn-images.dzcdn.net/images/cover/cf8eacd91f5484666db893aa01c55f6b/250x250-000000-80-0-0.jpg",
+     "rank": 375671
+    },
+    {
+     "id": "kanye:1506150482",
+     "title": "Jesus Lord",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/330da8bf0a57b47c2078db2d3761dc5e/250x250-000000-80-0-0.jpg",
+     "rank": 371173
+    },
+    {
+     "id": "kanye:126772755",
+     "title": "Frank's Track",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e055ecc8d01680cda0460017087728be/250x250-000000-80-0-0.jpg",
+     "rank": 370512
+    },
+    {
+     "id": "kanye:126772739",
+     "title": "Low Lights",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e055ecc8d01680cda0460017087728be/250x250-000000-80-0-0.jpg",
+     "rank": 365578
+    }
+   ]
+  }
+ ]
 }

@@ -2861,7 +2861,8 @@
    "id": "onepixel-90",
    "name": "ONEPIXEL 90",
    "note": "onepixel 90",
-   "image": "/onepixel-90.png",
+   "image": "/ohnetuff.jpg",
+   "focus": "67% 50%",
    "tracks": [
     {
      "id": "dz:17347911",

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { LADDERS, ladderLabel, type Rules } from "@/lib/difficulty";
+import { STAGE_OPTIONS, normalizeStages, type Rules } from "@/lib/round";
 import type { StartMode } from "@/lib/types";
 
 interface SettingsProps {
@@ -15,10 +15,14 @@ interface SettingsProps {
   onTheme: (theme: "dark" | "light") => void;
 }
 
-function Row({ label, children }: { label: string; children: React.ReactNode }) {
+function label(seconds: number): string {
+  return `${Number(seconds.toFixed(2))}s`;
+}
+
+function Row({ label: text, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-2">
-      <span className="text-xs uppercase tracking-[0.08em] text-faint">{label}</span>
+      <span className="text-xs uppercase tracking-[0.08em] text-faint">{text}</span>
       {children}
     </div>
   );
@@ -36,40 +40,42 @@ export default function Settings({
 }: SettingsProps) {
   const [advanced, setAdvanced] = useState(false);
 
-  const currentIndex = LADDERS.findIndex(
-    (l) =>
-      l.stages.length === rules.stages.length && l.stages.every((s, i) => s === rules.stages[i]),
-  );
+  function toggleStage(value: number) {
+    const on = rules.stages.includes(value);
+    // Never let the last stage be switched off, there would be nothing to play.
+    if (on && rules.stages.length === 1) return;
+    const next = normalizeStages(
+      on ? rules.stages.filter((s) => s !== value) : [...rules.stages, value],
+    );
+    onRules({ ...rules, stages: next, guesses: Math.max(rules.guesses, next.length) });
+  }
 
   return (
     <div className="flex flex-col gap-7">
       <Row label="Stages">
-        <div className="flex flex-col gap-1.5">
-          <select
-            aria-label="Stage ladder"
-            value={currentIndex >= 0 ? currentIndex : 0}
-            onChange={(e) => {
-              const ladder = LADDERS[Number(e.target.value)];
-              if (!ladder) return;
-              onRules({
-                ...rules,
-                stages: ladder.stages,
-                guesses: Math.max(rules.guesses, ladder.stages.length),
-              });
-            }}
-            className="h-9 w-full rounded-control border border-line bg-panel px-2 text-sm text-ink focus:border-line-strong"
-          >
-            {LADDERS.map((ladder, i) => (
-              <option key={ladder.name} value={i}>
-                {ladder.name}
-              </option>
-            ))}
-          </select>
-          <span className="font-mono text-[11px] text-faint">{ladderLabel(rules.stages)}</span>
+        <div className="flex flex-wrap gap-1.5">
+          {STAGE_OPTIONS.map((value) => {
+            const on = rules.stages.includes(value);
+            return (
+              <button
+                key={value}
+                type="button"
+                aria-pressed={on}
+                onClick={() => toggleStage(value)}
+                className={`h-8 rounded-full border px-3 font-mono text-xs transition-[background-color,border-color,color,transform] duration-150 ease-out active:scale-95 ${
+                  on
+                    ? "border-transparent bg-accent text-bg"
+                    : "border-line text-faint hover:border-line-strong hover:text-muted"
+                }`}
+              >
+                {label(value)}
+              </button>
+            );
+          })}
         </div>
       </Row>
 
-      <Row label="Start">
+      <Row label="Song start">
         <div className="flex gap-2">
           {(["start", "dropin"] as const).map((mode) => (
             <button

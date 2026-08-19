@@ -6,6 +6,7 @@ interface StageProps {
   unlocked: number;
   playing: boolean;
   disabled: boolean;
+  loading?: boolean;
   accent: string;
   onPlay: () => void;
 }
@@ -20,6 +21,7 @@ export default function Stage({
   unlocked,
   playing,
   disabled,
+  loading = false,
   accent,
   onPlay,
 }: StageProps) {
@@ -61,7 +63,9 @@ export default function Stage({
           aria-label={playing ? "Stop" : "Play"}
           className="grid h-20 w-20 shrink-0 place-items-center rounded-full border border-line-strong bg-panel transition-[transform,opacity] duration-150 ease-out hover:border-[var(--color-ink)] active:scale-[0.97] disabled:opacity-40 disabled:hover:border-line-strong"
         >
-          {playing ? (
+          {loading ? (
+            <span className="block h-5 w-5 animate-pulse rounded-full bg-muted" />
+          ) : playing ? (
             <span className="block h-5 w-5 rounded-[2px] bg-ink" />
           ) : (
             <span

@@ -11,13 +11,7 @@ import SourcePicker from "./SourcePicker";
 import Stage from "./Stage";
 import Summary, { ResultsList, type RoundResult } from "./Summary";
 import { AudioEngine, DecodeError, dropInOffset } from "@/lib/audio";
-import {
-  DIFFICULTIES,
-  DIFFICULTY_NAMES,
-  pickRound,
-  type DifficultyName,
-  type Rules,
-} from "@/lib/difficulty";
+import { SORTS, sortTracks, type Rules, type SortKey } from "@/lib/round";
 import { parsePastedLines, parsePlaylistLink } from "@/lib/links";
 import { titleMatches } from "@/lib/normalize";
 import { DEFAULT_PREFS, readPrefs, writePrefs, type Prefs } from "@/lib/storage";
@@ -80,6 +74,7 @@ export default function Game() {
   const [confettiKey, setConfettiKey] = useState(0);
   const [missKey, setMissKey] = useState(0);
   const [showResults, setShowResults] = useState(false);
+  const [loadingAudio, setLoadingAudio] = useState(false);
 
   const rules = prefs.rules;
   const stages = rules.stages;
@@ -166,6 +161,29 @@ export default function Game() {
     void topUp(cursor);
   }, [phase, cursor, topUp]);
 
+  /** Resolve one track right now, so pressing play never waits on the lookahead. */
+  const resolveNow = useCallback(async (target: Track): Promise<string | null> => {
+    try {
+      const res = await fetch("/api/preview", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ tracks: [target] }),
+      });
+      if (!res.ok) return null;
+      const data = (await res.json()) as { tracks?: Track[] };
+      const hit = data.tracks?.[0]?.preview ?? null;
+      if (hit) {
+        queueRef.current = queueRef.current.map((t) =>
+          t.id === target.id ? { ...t, preview: hit } : t,
+        );
+        setQueue(queueRef.current);
+      }
+      return hit;
+    } catch {
+      return null;
+    }
+  }, []);
+
   // Warm the bytes for the current and next track once they have a preview.
   useEffect(() => {
     if (phase !== "playing") return;
@@ -175,12 +193,10 @@ export default function Game() {
   }, [phase, queue, cursor]);
 
   const startRound = useCallback(
-    (loaded: LoadedPlaylist, difficulty: DifficultyName, useBands: boolean) => {
+    (loaded: LoadedPlaylist, sort: SortKey) => {
       if (revealTimer.current !== null) window.clearTimeout(revealTimer.current);
       engineRef.current?.stop();
-      const drawn = useBands
-        ? pickRound(loaded.tracks, difficulty, loaded.tracks.length)
-        : [...loaded.tracks].sort(() => Math.random() - 0.5);
+      const drawn = sortTracks(loaded.tracks, sort);
       queueRef.current = drawn;
       setQueue(drawn);
       setCursor(0);
@@ -204,6 +220,7 @@ export default function Game() {
         preview: t.preview ?? null,
         link: t.link ?? null,
         rank: t.rank ?? null,
+        date: t.date ?? null,
       }));
 
       if (tracks.length === 0) {
@@ -275,9 +292,9 @@ export default function Game() {
         parsed.id,
       );
       // Custom playlists are the player's own, so no popularity banding.
-      if (loaded) startRound(loaded, prefs.difficulty, false);
+      if (loaded) startRound(loaded, prefs.sort);
     },
-    [loadTracks, startRound, prefs.difficulty],
+    [loadTracks, startRound, prefs.sort],
   );
 
   const loadPasted = useCallback(
@@ -297,9 +314,9 @@ export default function Game() {
         link: null,
       }));
       const loaded = loadTracks(raw, "Pasted", "paste", "pasted");
-      if (loaded) startRound(loaded, prefs.difficulty, false);
+      if (loaded) startRound(loaded, prefs.sort);
     },
-    [loadTracks, startRound, prefs.difficulty],
+    [loadTracks, startRound, prefs.sort],
   );
 
   const startPreset = useCallback(
@@ -313,10 +330,10 @@ export default function Game() {
         "preset",
         collection.id,
       );
-      if (loaded) startRound(loaded, prefs.difficulty, true);
+      if (loaded) startRound(loaded, prefs.sort);
       setPresetBusy(null);
     },
-    [loadTracks, startRound, prefs.difficulty],
+    [loadTracks, startRound, prefs.sort],
   );
 
   useEffect(() => {
@@ -396,8 +413,7 @@ export default function Game() {
   );
 
   const play = useCallback(() => {
-    if (!track?.preview || reveal) return;
-    const preview = track.preview;
+    if (!track || reveal) return;
 
     const audio = engine();
     if (playing) {
@@ -406,11 +422,25 @@ export default function Game() {
       return;
     }
 
+    // Create the context inside the gesture, before any await.
     audio.ensure();
     const length = stages[stageIndex] ?? 1;
+    setLoadingAudio(true);
 
     void (async () => {
       try {
+        // Browsers start the context suspended and resume is async, so waiting
+        // here is what stops the first press from doing nothing.
+        await audio.resume();
+
+        const preview = track.preview ?? (await resolveNow(track));
+        if (!preview) {
+          setError("No audio for this one.");
+          setLoadingAudio(false);
+          advance();
+          return;
+        }
+
         await audio.load(track.id, preview);
         const longest = Math.max(...stages);
         const offset =
@@ -419,6 +449,7 @@ export default function Game() {
             : audio.onset(track.id);
         audio.play(track.id, offset, length, () => setPlaying(false));
         setPlaying(true);
+        setError(null);
       } catch (err) {
         setPlaying(false);
         if (err instanceof DecodeError) {
@@ -427,9 +458,11 @@ export default function Game() {
         } else {
           setError("Playback failed.");
         }
+      } finally {
+        setLoadingAudio(false);
       }
     })();
-  }, [track, reveal, playing, stages, stageIndex, prefs.startMode, advance]);
+  }, [track, reveal, playing, stages, stageIndex, prefs.startMode, advance, resolveNow]);
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
@@ -532,10 +565,11 @@ export default function Game() {
                 engineRef.current?.stop();
                 setPlaying(false);
               }}
-              className={`h-8 rounded-chip border px-3 text-xs transition-colors duration-150 ease-out ${
+              aria-pressed={mode === m}
+              className={`home h-11 rounded-full border px-7 text-[15px] ${
                 mode === m
-                  ? "border-line-strong text-ink"
-                  : "border-transparent text-faint hover:text-muted"
+                  ? "border-transparent bg-accent text-bg"
+                  : "border-line text-muted hover:border-line-strong hover:text-ink"
               }`}
             >
               {m === "preset" ? "Preset" : "Custom"}
@@ -545,13 +579,21 @@ export default function Game() {
       </header>
 
       <div className="flex min-h-0 flex-1 flex-col lg:flex-row">
-        <main className="flex min-h-0 flex-1 items-center justify-center overflow-y-auto px-5 py-6">
+        <main className="flex min-h-0 flex-1 items-center justify-center overflow-hidden p-4">
+          <div
+            className={
+              phase === "playing" || phase === "done"
+                ? // Phone shaped, so a recording of the centre crops cleanly.
+                  "flex h-full w-auto max-w-full shrink-0 items-center justify-center overflow-y-auto rounded-panel border border-line px-5 py-6 aspect-[9/16]"
+                : "flex h-full w-full items-center justify-center overflow-y-auto"
+            }
+          >
           {!ready ? null : phase === "done" ? (
             <Summary
               results={results}
               stageCount={stages.length}
               onAgain={() => {
-                if (playlist) startRound(playlist, prefs.difficulty, mode === "preset");
+                if (playlist) startRound(playlist, prefs.sort);
                 else setPhase("setup");
               }}
               onExit={() => setPhase("setup")}
@@ -567,31 +609,25 @@ export default function Game() {
           ) : phase === "playing" && track ? (
             <div className="flex w-full max-w-lg flex-col gap-8">
               <div className="flex items-end justify-between gap-4">
-                {mode === "preset" ? (
-                  <div className="flex flex-wrap items-center gap-1">
-                    {DIFFICULTY_NAMES.map((name) => {
-                      const selected = prefs.difficulty === name;
-                      return (
-                        <button
-                          key={name}
-                          type="button"
-                          onClick={() => {
-                            update({ difficulty: name });
-                            if (playlist) startRound(playlist, name, true);
-                          }}
-                          style={selected ? { borderColor: DIFFICULTIES[name].accent } : undefined}
-                          className={`h-7 rounded-chip border px-2 text-xs transition-colors duration-150 ease-out ${
-                            selected ? "text-ink" : "border-transparent text-faint hover:text-muted"
-                          }`}
-                        >
-                          {name}
-                        </button>
-                      );
-                    })}
-                  </div>
-                ) : (
+                <div className="flex min-w-0 items-center gap-2">
                   <span className="truncate text-sm text-muted">{playlist?.name}</span>
-                )}
+                  <select
+                    aria-label="Sort"
+                    value={prefs.sort}
+                    onChange={(e) => {
+                      const next = e.target.value as SortKey;
+                      update({ sort: next });
+                      if (playlist) startRound(playlist, next);
+                    }}
+                    className="h-7 shrink-0 rounded-chip border border-line bg-panel px-1.5 text-xs text-muted focus:border-line-strong"
+                  >
+                    {SORTS.map((o) => (
+                      <option key={o.key} value={o.key}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
                 <div className="flex shrink-0 items-end gap-5">
                   <div className="flex flex-col items-end">
@@ -633,8 +669,9 @@ export default function Game() {
                 stages={stages}
                 unlocked={stageIndex}
                 playing={playing}
-                disabled={!track.preview}
-                accent={DIFFICULTIES[prefs.difficulty].accent}
+                disabled={false}
+                loading={loadingAudio}
+                accent="var(--color-accent)"
                 onPlay={play}
               />
 
@@ -697,6 +734,7 @@ export default function Game() {
               }}
             />
           )}
+          </div>
         </main>
 
         <aside className="hidden w-64 shrink-0 overflow-y-auto border-l border-line px-5 py-6 lg:block">

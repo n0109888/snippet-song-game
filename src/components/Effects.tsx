@@ -13,6 +13,8 @@ interface Particle {
   h: number;
   color: string;
   life: number;
+  /** Frames to wait before launching, so the cannon streams instead of clumping. */
+  delay: number;
 }
 
 const CONFETTI_COLORS = ["#e9a13b", "#6fbf73", "#4f9d6b", "#d9822b", "#c8d4dc", "#e2686f"];
@@ -60,9 +62,9 @@ export function Confetti({ fireKey }: { fireKey: number }) {
 
     for (const cannon of cannons) {
       for (let i = 0; i < 90; i += 1) {
-        const spread = (Math.random() - 0.5) * 0.5;
+        const spread = (Math.random() - 0.5) * 0.62;
         const angle = cannon.angle + spread;
-        const speed = 15 + Math.random() * 13;
+        const speed = 17 + Math.random() * 14;
         particles.push({
           x: cannon.x + (Math.random() - 0.5) * 14,
           y: cannon.y,
@@ -74,6 +76,7 @@ export function Confetti({ fireKey }: { fireKey: number }) {
           h: 9 + Math.random() * 7,
           color: CONFETTI_COLORS[(Math.random() * CONFETTI_COLORS.length) | 0] ?? "#e9a13b",
           life: 1,
+          delay: Math.random() * 14,
         });
       }
     }
@@ -87,6 +90,11 @@ export function Confetti({ fireKey }: { fireKey: number }) {
 
       let alive = 0;
       for (const p of particles) {
+        if (p.delay > 0) {
+          p.delay -= dt;
+          alive += 1;
+          continue;
+        }
         p.vy += 0.42 * dt;
         p.vx *= 0.985;
         p.vy *= 0.992;

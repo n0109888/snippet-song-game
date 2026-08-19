@@ -97,8 +97,12 @@ export class AudioEngine {
     }
 
     const task = (async () => {
-      const res = await fetch(`/api/audio?src=${encodeURIComponent(previewUrl)}`);
-      if (!res.ok) throw new DecodeError(trackId, res.status === 410);
+      // Both preview CDNs send Access-Control-Allow-Origin, so no proxy is
+      // needed. A 403 means the signed link has expired.
+      const res = await fetch(previewUrl).catch(() => null);
+      if (!res || !res.ok) {
+        throw new DecodeError(trackId, res ? res.status === 403 || res.status === 410 : true);
+      }
       const bytes = await res.arrayBuffer();
       this.raw.set(trackId, bytes);
     })();

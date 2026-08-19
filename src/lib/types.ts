@@ -52,20 +52,3 @@ export interface PlaylistResponse {
   tracks: RawTrack[];
   truncated: boolean;
 }
-
-export interface ApiError {
-  error: string;
-  code:
-    | "not_owned"
-    | "not_found"
-    | "empty"
-    | "unauthorized"
-    | "rate_limited"
-    | "bad_link"
-    | "upstream"
-    | "no_previews";
-  retryAfter?: number;
-}
-
-export const isApiError = (v: unknown): v is ApiError =>
-  typeof v === "object" && v !== null && "code" in v && "error" in v;

@@ -98,12 +98,14 @@ interface TokenReply {
 }
 
 async function exchange(body: Record<string, string>): Promise<StoredToken | null> {
-  const res = await fetch("/api/spotify/token", {
+  // Spotify's token endpoint allows the calling origin, and PKCE needs no
+  // secret, so this runs in the browser with nothing to keep server side.
+  const res = await fetch("https://accounts.spotify.com/api/token", {
     method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify(body),
+    headers: { "content-type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ ...body, client_id: clientId() }).toString(),
   });
-  const data = (await res.json()) as TokenReply;
+  const data = (await res.json().catch(() => ({}))) as TokenReply;
   if (!res.ok || !data.access_token) return null;
 
   const token: StoredToken = {

@@ -13,6 +13,12 @@ import Summary, { ResultsList, type RoundResult } from "./Summary";
 import { AudioEngine, DecodeError, dropInOffset } from "@/lib/audio";
 import { SORTS, sortTracks, type Rules, type SortKey } from "@/lib/round";
 import { parsePastedLines, parsePlaylistLink } from "@/lib/links";
+import {
+  SourceError,
+  loadDeezerPlaylist,
+  loadSpotifyPlaylist,
+  resolvePreviews,
+} from "@/lib/sources";
 import { titleMatches } from "@/lib/normalize";
 import { DEFAULT_PREFS, readPrefs, writePrefs, type Prefs } from "@/lib/storage";
 import {
@@ -24,7 +30,6 @@ import {
   signOut,
 } from "@/lib/spotify-pkce";
 import {
-  isApiError,
   type LoadedPlaylist,
   type PresetCollection,
   type RawTrack,
@@ -131,20 +136,15 @@ export default function Game() {
 
     resolvingRef.current = true;
     try {
-      const res = await fetch("/api/preview", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ tracks: pending }),
-      });
-      if (!res.ok) return;
-      const data = (await res.json()) as { tracks?: Track[] };
-      const found = new Map((data.tracks ?? []).map((t) => [t.id, t]));
+      const resolved = await resolvePreviews(pending);
+      const found = new Map(resolved.map((t) => [t.id, t]));
 
       const next = queueRef.current.map((t) => {
         const hit = found.get(t.id);
         return hit ? { ...t, preview: hit.preview, art: t.art ?? hit.art } : t;
       });
-      // Tracks the lookup could not match are dropped rather than left silent.
+      // Tracks the lookup could not match are dropped, but never one at or
+      // before the cursor, because that would swap the song being played.
       const attempted = new Set(pending.map((t) => t.id));
       queueRef.current = next.filter(
         (t, i) => i <= from || t.preview !== null || !attempted.has(t.id),
@@ -165,47 +165,23 @@ export default function Game() {
   /** Resolve one track right now, so pressing play never waits on the lookahead. */
   const resolveNow = useCallback(
     async (target: Track, refresh = false): Promise<string | null> => {
-    try {
-      const res = await fetch("/api/preview", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ tracks: [{ ...target, preview: null }], refresh }),
-      });
-      if (!res.ok) return null;
-      const data = (await res.json()) as { tracks?: Track[] };
-      const hit = data.tracks?.[0]?.preview ?? null;
-      if (hit) {
-        queueRef.current = queueRef.current.map((t) =>
-          t.id === target.id ? { ...t, preview: hit } : t,
-        );
-        setQueue(queueRef.current);
+      try {
+        const [hit] = await resolvePreviews([{ ...target, preview: null }], refresh);
+        if (hit?.preview) {
+          const preview = hit.preview;
+          queueRef.current = queueRef.current.map((t) =>
+            t.id === target.id ? { ...t, preview } : t,
+          );
+          setQueue(queueRef.current);
+          return preview;
+        }
+        return null;
+      } catch {
+        return null;
       }
-      return hit;
-    } catch {
-      return null;
-    }
     },
     [],
   );
-
-  // Warm the artwork for the current and next track, so a hint appears at once.
-  useEffect(() => {
-    if (phase !== "playing" || !rules.artHint) return;
-    for (const t of [queue[cursor], queue[cursor + 1]]) {
-      if (t?.art) {
-        const img = new window.Image();
-        img.src = t.art;
-      }
-    }
-  }, [phase, queue, cursor, rules.artHint]);
-
-  // Warm the bytes for the current and next track once they have a preview.
-  useEffect(() => {
-    if (phase !== "playing") return;
-    for (const t of [queue[cursor], queue[cursor + 1]]) {
-      if (t?.preview) void engine().prefetch(t.id, t.preview).catch(() => undefined);
-    }
-  }, [phase, queue, cursor]);
 
   const startRound = useCallback(
     (loaded: LoadedPlaylist, sort: SortKey) => {
@@ -286,26 +262,23 @@ export default function Game() {
         headers.authorization = `Bearer ${token}`;
       }
 
-      const res = await fetch(`/api/playlist?source=${parsed.kind}&id=${parsed.id}`, { headers });
-      const data: unknown = await res.json().catch(() => null);
-
-      if (!res.ok || !data) {
-        if (isApiError(data) && data.code === "unauthorized") {
+      let payload: { name: string; tracks: RawTrack[] };
+      try {
+        payload =
+          parsed.kind === "deezer"
+            ? await loadDeezerPlaylist(parsed.id)
+            : await loadSpotifyPlaylist(parsed.id, headers.authorization?.slice(7) ?? "");
+      } catch (err) {
+        if (err instanceof SourceError && err.code === "unauthorized") {
           signOut();
           setSignedIn(false);
         }
-        setError(isApiError(data) ? data.error : "Could not load that playlist.");
+        setError(err instanceof SourceError ? err.message : "Could not load that playlist.");
         setPhase("setup");
         return;
       }
 
-      const payload = data as { name?: string; tracks?: RawTrack[] };
-      const loaded = loadTracks(
-        payload.tracks ?? [],
-        payload.name ?? "Playlist",
-        parsed.kind,
-        parsed.id,
-      );
+      const loaded = loadTracks(payload.tracks, payload.name, parsed.kind, parsed.id);
       // Custom playlists are the player's own, so no popularity banding.
       if (loaded) startRound(loaded, prefs.sort);
     },

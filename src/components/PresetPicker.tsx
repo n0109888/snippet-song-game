@@ -16,6 +16,8 @@ export default function PresetPicker({ collections, busy, onStart }: PresetPicke
   // Covers can be local files that are not in place yet, so fall back to the
   // pack's own top artwork rather than showing an empty card.
   const [broken, setBroken] = useState<Record<string, true>>({});
+  // Local covers sit under the deployment base path.
+  const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
   const shown = useMemo(() => {
     const q = normalize(query);
@@ -55,9 +57,10 @@ export default function PresetPicker({ collections, busy, onStart }: PresetPicke
             >
               <div className="aspect-square w-full shrink-0 overflow-hidden bg-raised">
                 {(() => {
-                  const src = broken[collection.id]
+                  const raw = broken[collection.id]
                     ? (collection.tracks[0]?.art ?? null)
                     : collection.image;
+                  const src = raw && raw.startsWith("/") ? `${base}${raw}` : raw;
                   if (!src) return null;
                   return (
                     <Image

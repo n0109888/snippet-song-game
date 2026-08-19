@@ -13,6 +13,15 @@ pnpm dev
 
 Open http://localhost:3000.
 
+## Live site
+
+https://n0109888.github.io/snippet-song-game/
+
+The app is a static export, deployed by GitHub Actions on every push to `main`.
+There is no server: iTunes search and both preview CDNs allow cross origin
+reads, Deezer is read through its JSONP output because it sends no CORS header,
+and Spotify allows the page origin for both sign in and the Web API.
+
 ## Where the audio comes from
 
 Spotify does not serve audio to this app, so the two jobs are split. Spotify or
@@ -47,7 +56,8 @@ a single line at load.
 1. Open https://developer.spotify.com/dashboard and create an app.
 2. Add a redirect URI. For local work use `http://127.0.0.1:3000`. Spotify
    rejects `localhost`, so use the loopback address and visit the app at the
-   same address you registered.
+   same address you registered. For the deployed site add
+   `https://n0109888.github.io/snippet-song-game/` as well.
 3. Copy the client id into `.env.local`.
 4. Sign in through the app. Authorization Code with PKCE is used, so there is
    no client secret.
@@ -168,3 +178,8 @@ never before, and the next track is fetched while the current one is in play.
 | `pnpm build` | Production build |
 | `pnpm start` | Serve the production build |
 | `pnpm typecheck` | TypeScript, strict, no emit |
+
+Set `GITHUB_PAGES=1` and `NEXT_PUBLIC_BASE_PATH=/snippet-song-game` when building
+for the deployed path. The workflow in `.github/workflows/pages.yml` does this.
+Spotify credentials come from repository variables of the same name, so the
+client id is never committed.

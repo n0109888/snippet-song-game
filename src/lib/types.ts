@@ -1,4 +1,4 @@
-export type SourceKind = "preset" | "spotify" | "deezer" | "paste";
+export type SourceKind = "preset" | "spotify" | "deezer";
 
 export type StartMode = "start" | "dropin";
 

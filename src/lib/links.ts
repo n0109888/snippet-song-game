@@ -46,17 +46,3 @@ export function parsePlaylistLink(input: string): ParsedLink | null {
 
   return null;
 }
-
-/** Parses `Artist - Title` lines, tolerating en dashes and blank lines. */
-export function parsePastedLines(text: string): { artist: string; title: string }[] {
-  const out: { artist: string; title: string }[] = [];
-  for (const line of text.split(/\r?\n/)) {
-    const trimmed = line.trim();
-    if (!trimmed) continue;
-    const split = /^(.*?)\s+[-–—]\s+(.*)$/.exec(trimmed);
-    if (split?.[1] && split[2]) {
-      out.push({ artist: split[1].trim(), title: split[2].trim() });
-    }
-  }
-  return out;
-}

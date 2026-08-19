@@ -21,25 +21,16 @@ import {
   type Rules,
   type SortKey,
 } from "@/lib/round";
-import { parsePastedLines, parsePlaylistLink } from "@/lib/links";
+import { parsePlaylistLink } from "@/lib/links";
 import {
   SourceError,
   loadDeezerPlaylist,
   loadSpotifyEmbed,
-  loadSpotifyPlaylist,
   resolvePreviews,
   spotifyReader,
 } from "@/lib/sources";
 import { titleMatches } from "@/lib/normalize";
 import { DEFAULT_PREFS, readPrefs, writePrefs, type Prefs } from "@/lib/storage";
-import {
-  accessToken,
-  beginLogin,
-  clientId,
-  completeLogin,
-  readToken,
-  signOut,
-} from "@/lib/spotify-pkce";
 import {
   type LoadedPlaylist,
   type PresetCollection,
@@ -83,8 +74,6 @@ export default function Game() {
   const [playing, setPlaying] = useState(false);
 
   const [error, setError] = useState<string | null>(null);
-  const [notice, setNotice] = useState<string | null>(null);
-  const [signedIn, setSignedIn] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
   const [presetBusy, setPresetBusy] = useState<string | null>(null);
   const [confettiKey, setConfettiKey] = useState(0);
@@ -95,6 +84,7 @@ export default function Game() {
   /** Track whose audio, and artwork when hinted, are decoded and ready. */
   const [readyId, setReadyId] = useState<string | null>(null);
   const [confirmReset, setConfirmReset] = useState(false);
+  const [showTracks, setShowTracks] = useState(false);
 
   const rules = prefs.rules;
   const stages = rules.stages;
@@ -120,7 +110,6 @@ export default function Game() {
   useEffect(() => {
     const stored = readPrefs();
     setPrefs(stored);
-    setSignedIn(readToken() !== null);
     document.documentElement.dataset.theme = stored.theme;
     setReady(true);
   }, []);
@@ -298,7 +287,6 @@ export default function Game() {
   const loadLink = useCallback(
     async (value: string) => {
       setError(null);
-      setNotice(null);
 
       if (typeof navigator !== "undefined" && !navigator.onLine) {
         setError("Offline.");
@@ -311,42 +299,21 @@ export default function Game() {
         return;
       }
 
+      if (parsed.kind === "spotify" && spotifyReader() === "") {
+        setError("Spotify links are not set up on this site. Use a Deezer link instead.");
+        return;
+      }
+
       void engine().resume();
       setPhase("loading");
-
-      // The reader handles any public playlist with no sign in, so it is tried
-      // first. Signing in is only a fallback for when it is not deployed.
-      const useReader = parsed.kind === "spotify" && spotifyReader() !== "";
-
-      let token = "";
-      if (parsed.kind === "spotify" && !useReader) {
-        if (!clientId()) {
-          setError("Spotify links are not set up on this site. Paste a Deezer link instead.");
-          setPhase("setup");
-          return;
-        }
-        const live = await accessToken();
-        if (!live) {
-          setPhase("setup");
-          await beginLogin(value);
-          return;
-        }
-        token = live;
-      }
 
       let payload: { name: string; tracks: RawTrack[] };
       try {
         payload =
           parsed.kind === "deezer"
             ? await loadDeezerPlaylist(parsed.id)
-            : useReader
-              ? await loadSpotifyEmbed(parsed.id)
-              : await loadSpotifyPlaylist(parsed.id, token);
+            : await loadSpotifyEmbed(parsed.id);
       } catch (err) {
-        if (err instanceof SourceError && err.code === "unauthorized") {
-          signOut();
-          setSignedIn(false);
-        }
         setError(err instanceof SourceError ? err.message : "Could not load that playlist.");
         setPhase("setup");
         return;
@@ -359,33 +326,9 @@ export default function Game() {
     [loadTracks, startRound, prefs.sort],
   );
 
-  const loadPasted = useCallback(
-    async (text: string) => {
-      setError(null);
-      setNotice(null);
-      const lines = parsePastedLines(text);
-      if (lines.length === 0) {
-        setError("Use one Artist - Title per line.");
-        return;
-      }
-      void engine().resume();
-      const raw: RawTrack[] = lines.map((line, i) => ({
-        id: `paste:${i}:${line.artist}:${line.title}`,
-        title: line.title,
-        artist: line.artist,
-        art: null,
-        link: null,
-      }));
-      const loaded = loadTracks(raw, "Pasted", "paste", "pasted");
-      if (loaded) startRound(loaded, prefs.sort);
-    },
-    [loadTracks, startRound, prefs.sort],
-  );
-
   const startPreset = useCallback(
     (collection: PresetCollection) => {
       setError(null);
-      setNotice(null);
       setPresetBusy(collection.id);
       // Take the gesture now rather than waiting for the first press of play.
       void engine().resume();
@@ -400,21 +343,6 @@ export default function Game() {
     },
     [loadTracks, startRound, prefs.sort],
   );
-
-  useEffect(() => {
-    if (!ready) return;
-    void (async () => {
-      const result = await completeLogin();
-      if (!result) return;
-      setSignedIn(readToken() !== null);
-      if (!result.ok) {
-        setError("Spotify sign in failed.");
-        return;
-      }
-      setMode("custom");
-      if (result.returnTo) await loadLink(result.returnTo);
-    })();
-  }, [ready, loadLink]);
 
   const advance = useCallback(() => {
     if (revealTimer.current !== null) {
@@ -552,9 +480,10 @@ export default function Game() {
           target.tagName === "SELECT" ||
           target.isContentEditable);
 
-      if (event.key === "Escape" && (sheetOpen || showResults)) {
+      if (event.key === "Escape" && (sheetOpen || showResults || showTracks)) {
         setSheetOpen(false);
         setShowResults(false);
+        setShowTracks(false);
         return;
       }
       if (typing || phase !== "playing") return;
@@ -573,7 +502,7 @@ export default function Game() {
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [phase, reveal, sheetOpen, showResults, play, miss, advance]);
+  }, [phase, reveal, sheetOpen, showResults, showTracks, play, miss, advance]);
 
   useEffect(() => {
     function offline() {
@@ -606,6 +535,8 @@ export default function Game() {
       hints={hints}
       inRound={phase === "playing"}
       showArtistHint={mixedArtist}
+      playlistName={playlist?.name ?? null}
+      trackCount={playlist?.tracks.length ?? 0}
       startMode={prefs.startMode}
       volume={prefs.volume}
       theme={prefs.theme}
@@ -620,6 +551,7 @@ export default function Game() {
       onHome={goHome}
       onHistory={() => setShowResults(true)}
       onReset={() => setConfirmReset(true)}
+      onTracks={() => setShowTracks(true)}
     />
   );
 
@@ -640,6 +572,7 @@ export default function Game() {
     setConfettiKey(0);
     setMode("preset");
     setSheetOpen(false);
+    setShowTracks(false);
     setPhase("setup");
   }
 
@@ -676,8 +609,7 @@ export default function Game() {
                 setPhase("setup");
                 setPlaylist(null);
                 setError(null);
-                setNotice(null);
-                setResults([]);
+                          setResults([]);
                 engineRef.current?.stop();
                 setPlaying(false);
               }}
@@ -835,22 +767,8 @@ export default function Game() {
           ) : (
             <SourcePicker
               busy={false}
-              signedIn={signedIn}
               error={error}
-              notice={notice}
               onLoadLink={(v) => void loadLink(v)}
-              onLoadPasted={(v) => void loadPasted(v)}
-              onSignIn={() => {
-                if (!clientId()) {
-                  setError("Spotify client id is not configured.");
-                  return;
-                }
-                void beginLogin("");
-              }}
-              onSignOut={() => {
-                signOut();
-                setSignedIn(false);
-              }}
             />
           )}
           </div>
@@ -902,6 +820,47 @@ export default function Game() {
                 Cancel
               </button>
             </div>
+          </div>
+        </div>
+      ) : null}
+
+      {showTracks && playlist ? (
+        <div className="fixed inset-0 z-30 flex items-center justify-center p-5">
+          <button
+            type="button"
+            aria-label="Close"
+            onClick={() => setShowTracks(false)}
+            className="absolute inset-0 bg-[rgba(0,0,0,0.55)]"
+          />
+          <div className="press-in relative flex max-h-[80dvh] w-full max-w-md flex-col gap-4 rounded-panel border border-line bg-panel p-5">
+            <div className="flex items-baseline justify-between gap-3">
+              <span className="min-w-0 truncate font-mono text-[10px] uppercase tracking-[0.16em] text-faint">
+                {playlist.name}
+              </span>
+              <span className="shrink-0 font-mono text-sm tabular-nums">
+                {playlist.tracks.length} songs
+              </span>
+            </div>
+            <ol className="no-bars flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto">
+              {playlist.tracks.map((t, i) => (
+                <li key={`${t.id}-${i}`} className="flex items-baseline gap-3 text-sm">
+                  <span className="w-7 shrink-0 text-right font-mono text-[11px] tabular-nums text-faint">
+                    {i + 1}
+                  </span>
+                  <span className="min-w-0 flex-1 truncate">
+                    {t.title}
+                    <span className="text-faint"> {t.artist}</span>
+                  </span>
+                </li>
+              ))}
+            </ol>
+            <button
+              type="button"
+              onClick={() => setShowTracks(false)}
+              className="h-9 shrink-0 self-start rounded-control border border-line px-4 text-sm text-muted transition-colors duration-150 ease-out hover:border-line-strong hover:text-ink"
+            >
+              Close
+            </button>
           </div>
         </div>
       ) : null}

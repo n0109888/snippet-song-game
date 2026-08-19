@@ -10,6 +10,9 @@ interface SettingsProps {
   inRound: boolean;
   /** One artist's pack already answers the artist hint, so it is left out. */
   showArtistHint: boolean;
+  /** Name and size of what is loaded, so an import can be checked at a glance. */
+  playlistName: string | null;
+  trackCount: number;
   startMode: StartMode;
   volume: number;
   theme: "dark" | "light";
@@ -21,6 +24,7 @@ interface SettingsProps {
   onHome: () => void;
   onHistory: () => void;
   onReset: () => void;
+  onTracks: () => void;
 }
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
@@ -107,6 +111,8 @@ export default function Settings({
   hints,
   inRound,
   showArtistHint,
+  playlistName,
+  trackCount,
   startMode,
   volume,
   theme,
@@ -118,6 +124,7 @@ export default function Settings({
   onHome,
   onHistory,
   onReset,
+  onTracks,
 }: SettingsProps) {
   function toggleStage(value: number) {
     const on = rules.stages.includes(value);
@@ -152,6 +159,22 @@ export default function Settings({
             </Icon>
           </IconButton>
         </div>
+      ) : null}
+
+      {inRound && playlistName ? (
+        <Row label="Playlist">
+          <button
+            type="button"
+            onClick={onTracks}
+            className="pill flex h-11 items-center justify-between gap-2 rounded-control border border-line px-3 text-left hover:border-line-strong"
+          >
+            <span className="min-w-0 flex-1 truncate text-sm">{playlistName}</span>
+            <span className="shrink-0 font-mono text-xs tabular-nums text-faint">
+              {trackCount}
+            </span>
+          </button>
+          <span className="text-xs text-faint">Tap to see every song that loaded.</span>
+        </Row>
       ) : null}
 
       <Row label="Difficulty">

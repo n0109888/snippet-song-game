@@ -220,7 +220,7 @@ export async function resolvePreviews(
 export class SourceError extends Error {
   constructor(
     message: string,
-    readonly code: "not_owned" | "not_found" | "empty" | "unauthorized" | "upstream",
+    readonly code: "not_found" | "empty" | "upstream",
   ) {
     super(message);
     this.name = "SourceError";
@@ -329,82 +329,4 @@ export async function loadDeezerPlaylist(id: string): Promise<{ name: string; tr
 
   if (tracks.length === 0) throw new SourceError("That playlist has no playable tracks.", "empty");
   return { name: meta.title ?? "Playlist", tracks };
-}
-
-interface SpotifyTrack {
-  id?: string;
-  name?: string;
-  type?: string;
-  artists?: { name?: string }[];
-  album?: { images?: { url?: string }[] };
-  external_urls?: { spotify?: string };
-}
-
-interface SpotifyPage {
-  items?: { item?: SpotifyTrack | null; track?: SpotifyTrack | null }[];
-  next?: string | null;
-}
-
-/**
- * Since the February 2026 Web API changes this endpoint answers 403 unless the
- * signed in user owns the playlist or collaborates on it.
- */
-export async function loadSpotifyPlaylist(
-  id: string,
-  token: string,
-): Promise<{ name: string; tracks: RawTrack[] }> {
-  const headers = { authorization: `Bearer ${token}` };
-
-  const metaRes = await fetch(`https://api.spotify.com/v1/playlists/${encodeURIComponent(id)}`, {
-    headers,
-  });
-  if (metaRes.status === 401) throw new SourceError("Session expired. Sign in again.", "unauthorized");
-  if (metaRes.status === 404) throw new SourceError("That playlist does not exist.", "not_found");
-  const meta = (await metaRes.json().catch(() => ({}))) as { name?: string };
-
-  const tracks: RawTrack[] = [];
-  const seen = new Set<string>();
-  let url: string | null = `https://api.spotify.com/v1/playlists/${encodeURIComponent(id)}/items?limit=50`;
-
-  while (url && tracks.length < MAX_TRACKS) {
-    const res: Response = await fetch(url, { headers });
-    if (res.status === 403) {
-      throw new SourceError(
-        "Spotify only lets apps read playlists you own or collaborate on. Copy it to your account, or use one of the options below.",
-        "not_owned",
-      );
-    }
-    if (res.status === 401) throw new SourceError("Session expired. Sign in again.", "unauthorized");
-    if (!res.ok) throw new SourceError("Spotify is not responding.", "upstream");
-
-    const page = (await res.json().catch(() => ({}))) as SpotifyPage;
-    const items = page.items ?? [];
-    if (items.length === 0) break;
-
-    for (const entry of items) {
-      // The February 2026 rename: items.items.item replaced tracks.tracks.track.
-      const t = entry.item ?? entry.track;
-      if (!t?.id || !t.name) continue;
-      if (t.type && t.type !== "track") continue;
-      const artist = (t.artists ?? []).map((a) => a.name).filter(Boolean).join(", ");
-      if (!artist) continue;
-      const key = `spotify:${t.id}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      tracks.push({
-        id: key,
-        title: t.name,
-        artist,
-        art: t.album?.images?.[0]?.url ?? null,
-        link: t.external_urls?.spotify ?? null,
-        rank: null,
-      });
-      if (tracks.length >= MAX_TRACKS) break;
-    }
-
-    url = page.next ?? null;
-  }
-
-  if (tracks.length === 0) throw new SourceError("That playlist has no playable tracks.", "empty");
-  return { name: meta.name ?? "Playlist", tracks };
 }

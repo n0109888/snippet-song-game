@@ -80,13 +80,13 @@ instantly.
 
 ## Preset and Custom
 
-**Preset** packs are the built in game. Each pack is a card you click to start.
-Right now there is one, the Kanye West discography, 180 songs. Genres or other
-artists are added by editing the JSON, nothing else changes.
+**Preset** packs are the built in game: twelve cards, searchable by name. Ten are
+artist discographies drawn from real play counts, plus the Kanye West catalogue
+and the ohnepixel playlist. Click a card to start.
 
 **Custom** is your own playlist, from a Spotify link, a Deezer link, or a pasted
-list. There is no difficulty setting here, because a playlist you chose is
-already the difficulty you wanted.
+list. No difficulty setting here, because a playlist you chose is already the
+difficulty you wanted.
 
 ## Difficulty, preset only
 
@@ -125,17 +125,29 @@ along. Guess count and hints are under Advanced.
 
 ## A round has no fixed length
 
-Play as long as you like. The round runs until you press End, which shows the
-summary of everything you played.
+Play as long as you like. After each song you press **Next song** yourself, so
+there is time to sit with the answer. There is no score, only what you got and
+what you missed. **Results** shows that list at any point, and **End** closes the
+round on the same list.
+
+## Listening after a guess
+
+The reveal keeps playing the clip with a real transport: play, pause, a seek bar
+you can scrub, and elapsed against total. Worth knowing: these are the same 30
+second previews the game uses, so it is the whole clip, not the whole song. Full
+recordings are never downloaded.
 
 ## Where a clip starts
 
-Previews are 30 second excerpts and the services cut them from the middle of the
-song, not the beginning. Measured on a Deezer preview of Runaway, the clip opens
-at full level where the real track opens on a sparse piano note. So **Clip start**
-means the start of the 30 second clip, and **Random** picks a stable point inside
-it. Getting the true opening of a song would need the full recording, which this
-app never downloads.
+Previews are 30 second excerpts cut from the middle of a song, not the opening.
+Measured on the Deezer preview of Runaway, the clip opens at full level where the
+real track opens on a sparse piano note. So **Clip start** means the start of the
+clip and **Random** picks a stable point inside it.
+
+Every preview measured also begins with 30 to 40 milliseconds of digital silence.
+Starting at sample zero therefore made a 0.01 second snippet play nothing at all.
+Clip start now seeks to the first audible moment, judged against the clip's own
+overall level, so the shortest snippets carry actual sound.
 
 ## Keyboard
 

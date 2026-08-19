@@ -25,6 +25,16 @@ interface Resolved {
 
 const previewCache = new TtlCache<Resolved>(6 * 60 * 60 * 1000);
 
+/**
+ * Deezer signs its preview URLs and they last 15 minutes, measured. Caching one
+ * for longer hands out a dead link, which is why playback used to fail after a
+ * while. iTunes URLs carry no signature and keep working, so they cache long.
+ */
+function ttlFor(preview: string | null): number {
+  if (preview && /[?&]hdnea=|exp=\d+/.test(preview)) return 10 * 60 * 1000;
+  return 6 * 60 * 60 * 1000;
+}
+
 interface ItunesResult {
   trackName?: string;
   artistName?: string;
@@ -89,14 +99,16 @@ async function fromDeezer(track: RawTrack): Promise<Resolved | null> {
   return deezerQuery(`${track.artist} ${track.title}`, track);
 }
 
-async function resolve(track: RawTrack): Promise<Resolved> {
-  if (track.preview) {
+async function resolve(track: RawTrack, refresh: boolean): Promise<Resolved> {
+  if (track.preview && !refresh) {
     return { preview: track.preview, art: track.art, rank: track.rank ?? null };
   }
 
   const key = track.id;
-  const cached = previewCache.get(key);
-  if (cached !== undefined) return cached;
+  if (!refresh) {
+    const cached = previewCache.get(key);
+    if (cached !== undefined) return cached;
+  }
 
   let found: Resolved | null = null;
   try {
@@ -108,12 +120,14 @@ async function resolve(track: RawTrack): Promise<Resolved> {
   }
 
   const result: Resolved = found ?? { preview: null, art: null, rank: null };
-  previewCache.set(key, result);
+  previewCache.set(key, result, ttlFor(result.preview));
   return result;
 }
 
 interface Body {
   tracks?: RawTrack[];
+  /** Skip the cache, used when a stored URL has expired mid round. */
+  refresh?: boolean;
 }
 
 export async function POST(request: Request): Promise<NextResponse> {
@@ -138,7 +152,7 @@ export async function POST(request: Request): Promise<NextResponse> {
   }
 
   try {
-    const previews = await mapLimit(tracks, CONCURRENCY, (t) => resolve(t));
+    const previews = await mapLimit(tracks, CONCURRENCY, (t) => resolve(t, body.refresh === true));
     const resolved = tracks
       .map((track, i) => ({ track, found: previews[i] }))
       .filter(

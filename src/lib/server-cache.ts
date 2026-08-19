@@ -27,12 +27,12 @@ export class TtlCache<T> {
     return hit.value;
   }
 
-  set(key: string, value: T): void {
+  set(key: string, value: T, ttlMs = this.ttlMs): void {
     if (this.store.size >= this.maxEntries) {
       const oldest = this.store.keys().next();
       if (!oldest.done) this.store.delete(oldest.value);
     }
-    this.store.set(key, { value, expires: Date.now() + this.ttlMs });
+    this.store.set(key, { value, expires: Date.now() + ttlMs });
   }
 }
 

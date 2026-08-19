@@ -13,7 +13,11 @@ function contextCtor(): Ctor | null {
 }
 
 export class DecodeError extends Error {
-  constructor(readonly trackId: string) {
+  constructor(
+    readonly trackId: string,
+    /** True when the preview link had expired and a fresh one may work. */
+    readonly expired = false,
+  ) {
     super("decode failed");
     this.name = "DecodeError";
   }
@@ -94,7 +98,7 @@ export class AudioEngine {
 
     const task = (async () => {
       const res = await fetch(`/api/audio?src=${encodeURIComponent(previewUrl)}`);
-      if (!res.ok) throw new DecodeError(trackId);
+      if (!res.ok) throw new DecodeError(trackId, res.status === 410);
       const bytes = await res.arrayBuffer();
       this.raw.set(trackId, bytes);
     })();
@@ -234,6 +238,13 @@ export class AudioEngine {
   position(): number {
     if (!this.full || !this.ctx) return 0;
     return this.full.from + (this.ctx.currentTime - this.full.startedAt);
+  }
+
+  /** Drop cached audio for a track so a refreshed link is fetched cleanly. */
+  forget(trackId: string): void {
+    this.buffers.delete(trackId);
+    this.raw.delete(trackId);
+    this.onsets.delete(trackId);
   }
 
   stop(): void {

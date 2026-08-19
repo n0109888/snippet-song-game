@@ -46,6 +46,11 @@ export async function GET(request: Request): Promise<Response> {
     return new Response("upstream unreachable", { status: 502 });
   }
 
+  if (upstream.status === 403 || upstream.status === 410) {
+    // Signed preview links expire; the client refreshes and retries on this.
+    return new Response("preview expired", { status: 410 });
+  }
+
   if (!upstream.ok || !upstream.body) {
     return new Response("upstream error", { status: 502 });
   }

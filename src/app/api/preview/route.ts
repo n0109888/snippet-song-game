@@ -4,10 +4,12 @@ import { RateLimited, TtlCache, fetchRetry, mapLimit } from "@/lib/server-cache"
 import type { ApiError, RawTrack } from "@/lib/types";
 
 /**
- * Resolves a 30 second preview for tracks that arrive without one, by
- * searching iTunes first and then Deezer. Every candidate is checked against
- * the requested artist and title, because an unverified search result is often
- * a different song, which makes the round unwinnable.
+ * Resolves a 30 second preview for tracks that arrive without one. Deezer is
+ * tried first because one call returns both the preview and the popularity
+ * rank that difficulty selection needs, with iTunes covering the rest. Every
+ * candidate is checked against the requested artist and title, because an
+ * unverified search result is often a different song, which makes the round
+ * unwinnable.
  *
  * Deezer's field operators are strict: artist:"X" track:"Y" misses when the
  * catalogue title carries a suffix such as (Radio Edit), so a plain query runs
@@ -18,6 +20,7 @@ const CONCURRENCY = 6;
 interface Resolved {
   preview: string | null;
   art: string | null;
+  rank: number | null;
 }
 
 const previewCache = new TtlCache<Resolved>(6 * 60 * 60 * 1000);
@@ -33,6 +36,7 @@ interface DeezerResult {
   title?: string;
   title_short?: string;
   preview?: string;
+  rank?: number;
   artist?: { name?: string };
   album?: { cover_medium?: string };
 }
@@ -50,7 +54,7 @@ async function fromItunes(track: RawTrack): Promise<Resolved | null> {
     if (isSameRecording({ title: r.trackName, artist: r.artistName }, track)) {
       // Ask for a larger square than the 100px the search returns.
       const art = r.artworkUrl100?.replace("100x100bb", "512x512bb") ?? null;
-      return { preview: r.previewUrl, art };
+      return { preview: r.previewUrl, art, rank: null };
     }
   }
   return null;
@@ -66,7 +70,11 @@ async function deezerQuery(query: string, track: RawTrack): Promise<Resolved | n
     const title = r.title_short ?? r.title;
     if (!r.preview || !title || !r.artist?.name) continue;
     if (isSameRecording({ title, artist: r.artist.name }, track)) {
-      return { preview: r.preview, art: r.album?.cover_medium ?? null };
+      return {
+        preview: r.preview,
+        art: r.album?.cover_medium ?? null,
+        rank: typeof r.rank === "number" ? r.rank : null,
+      };
     }
   }
   return null;
@@ -82,7 +90,9 @@ async function fromDeezer(track: RawTrack): Promise<Resolved | null> {
 }
 
 async function resolve(track: RawTrack): Promise<Resolved> {
-  if (track.preview) return { preview: track.preview, art: track.art };
+  if (track.preview) {
+    return { preview: track.preview, art: track.art, rank: track.rank ?? null };
+  }
 
   const key = track.id;
   const cached = previewCache.get(key);
@@ -90,14 +100,14 @@ async function resolve(track: RawTrack): Promise<Resolved> {
 
   let found: Resolved | null = null;
   try {
-    found = await fromItunes(track);
-    if (!found) found = await fromDeezer(track);
+    found = await fromDeezer(track);
+    if (!found) found = await fromItunes(track);
   } catch (err) {
     if (err instanceof RateLimited) throw err;
     found = null;
   }
 
-  const result: Resolved = found ?? { preview: null, art: null };
+  const result: Resolved = found ?? { preview: null, art: null, rank: null };
   previewCache.set(key, result);
   return result;
 }
@@ -140,6 +150,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         ...track,
         preview: found.preview,
         art: track.art ?? found.art,
+        rank: track.rank ?? found.rank,
       }));
 
     return NextResponse.json({

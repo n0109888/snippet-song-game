@@ -59,6 +59,7 @@ function toRawTrack(track: SpotifyTrack): RawTrack | null {
     artist,
     art: track.album?.images?.[0]?.url ?? null,
     link: track.external_urls?.spotify ?? null,
+    rank: null,
   };
 }
 
@@ -128,6 +129,7 @@ async function spotify(id: string, auth: string): Promise<NextResponse> {
 
 interface DeezerTrack {
   id?: number;
+  rank?: number;
   title?: string;
   title_short?: string;
   preview?: string;
@@ -181,6 +183,7 @@ async function deezer(id: string): Promise<NextResponse> {
         art: t.album?.cover_medium ?? t.album?.cover_big ?? null,
         link: t.link ?? null,
         preview: t.preview,
+        rank: typeof t.rank === "number" ? t.rank : null,
       });
       if (tracks.length >= MAX_TRACKS) break;
     }

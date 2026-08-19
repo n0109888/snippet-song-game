@@ -12,8 +12,7 @@ import { AudioEngine, DecodeError, dropInOffset } from "@/lib/audio";
 import {
   DIFFICULTIES,
   DIFFICULTY_NAMES,
-  ROUND_LENGTH,
-  labelFor,
+  pickRound,
   scoreFor,
   type DifficultyName,
   type Rules,
@@ -44,20 +43,6 @@ interface RevealState {
 
 const REVEAL_MS = 2400;
 
-function shuffle<T>(items: readonly T[]): T[] {
-  const out = [...items];
-  for (let i = out.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const a = out[i];
-    const b = out[j];
-    if (a !== undefined && b !== undefined) {
-      out[i] = b;
-      out[j] = a;
-    }
-  }
-  return out;
-}
-
 export default function Game() {
   const engineRef = useRef<AudioEngine | null>(null);
   const revealTimer = useRef<number | null>(null);
@@ -86,7 +71,6 @@ export default function Game() {
   const stages = rules.stages;
   const stageIndex = Math.min(misses, stages.length - 1);
   const track = order[index];
-  const difficultyLabel = labelFor(rules, prefs.startMode);
   const maxMisses = Math.min(rules.guesses, stages.length);
 
   function engine(): AudioEngine {
@@ -170,10 +154,10 @@ export default function Game() {
     [update],
   );
 
-  function startRound(loaded: LoadedPlaylist) {
+  function startRound(loaded: LoadedPlaylist, difficulty: DifficultyName = prefs.difficulty) {
     if (revealTimer.current !== null) window.clearTimeout(revealTimer.current);
     engineRef.current?.stop();
-    setOrder(shuffle(loaded.tracks).slice(0, ROUND_LENGTH));
+    setOrder(pickRound(loaded.tracks, difficulty));
     setIndex(0);
     setMisses(0);
     setResults([]);
@@ -351,14 +335,14 @@ export default function Game() {
     (value: string) => {
       if (!track || reveal || phase !== "playing") return;
       if (titleMatches(value, track.title)) {
-        setScore((s) => s + scoreFor(stageIndex, rules, streak));
+        setScore((s) => s + scoreFor(stageIndex, stages.length, prefs.difficulty, streak));
         setStreak((s) => s + 1);
         finishTrack(true, stageIndex);
       } else {
         miss();
       }
     },
-    [track, reveal, phase, stageIndex, rules, streak, finishTrack, miss],
+    [track, reveal, phase, stageIndex, stages.length, prefs.difficulty, streak, finishTrack, miss],
   );
 
   const play = useCallback(() => {
@@ -440,12 +424,9 @@ export default function Game() {
   }, []);
 
   function pickDifficulty(name: DifficultyName) {
-    const next = DIFFICULTIES[name];
-    update({
-      difficulty: name,
-      rules: next,
-      startMode: next.forceDropIn ? "dropin" : prefs.startMode,
-    });
+    update({ difficulty: name });
+    // Redraw the round from the new popularity band.
+    if (playlist) startRound(playlist, name);
   }
 
   function setRules(next: Rules) {
@@ -453,7 +434,6 @@ export default function Game() {
   }
 
   function setStartMode(next: StartMode) {
-    if (rules.forceDropIn && next === "start") return;
     update({ startMode: next });
   }
 
@@ -527,7 +507,7 @@ export default function Game() {
               <div className="flex items-center justify-between">
                 <div className="flex flex-wrap items-center gap-1">
                   {DIFFICULTY_NAMES.map((name) => {
-                    const selected = difficultyLabel === name;
+                    const selected = prefs.difficulty === name;
                     return (
                       <button
                         key={name}
@@ -542,9 +522,6 @@ export default function Game() {
                       </button>
                     );
                   })}
-                  {difficultyLabel === "Custom" ? (
-                    <span className="ml-1 text-xs text-faint">Custom</span>
-                  ) : null}
                 </div>
                 <span className="shrink-0 whitespace-nowrap font-mono text-xs text-faint tabular-nums">
                   {score} · {index + 1}/{order.length}
@@ -572,7 +549,7 @@ export default function Game() {
                 unlocked={stageIndex}
                 playing={playing}
                 disabled={false}
-                accent={rules.accent}
+                accent={DIFFICULTIES[prefs.difficulty].accent}
                 onPlay={play}
               />
 
@@ -616,7 +593,13 @@ export default function Game() {
               notice={notice}
               onLoadLink={(v) => void loadLink(v)}
               onLoadPasted={(v) => void loadPasted(v)}
-              onSignIn={() => void beginLogin("")}
+              onSignIn={() => {
+                if (!clientId()) {
+                  setError("Spotify client id is not configured.");
+                  return;
+                }
+                void beginLogin("");
+              }}
               onSignOut={() => {
                 signOut();
                 setSignedIn(false);

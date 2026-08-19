@@ -375,7 +375,7 @@ input[type="range"]::-moz-range-thumb {
   filter: drop-shadow(0 0 22px color-mix(in srgb, var(--color-gold) 65%, transparent));
   animation:
     max-slam 460ms cubic-bezier(0.22, 1, 0.36, 1) both,
-    gold-sheen 2.2s linear 460ms infinite;
+    gold-sheen 2.2s linear 1.5s infinite;
 }
 
 /*
@@ -395,6 +395,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .max-kicker {
+  text-shadow: 0 0 18px color-mix(in srgb, var(--color-gold) 60%, transparent);
   animation: max-kicker-in 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
@@ -402,7 +403,8 @@ input[type="range"]::-moz-range-thumb {
  * The glow breathes, so the gold never sits as still as the green does. It only
  * touches filter, which leaves the intro animations their transform to play
  * with; both classes have to name the intro again, because a second .animation
- * declaration would otherwise replace it.
+ * declaration would otherwise replace it. It starts once the burst is through,
+ * because a filter animation repaints on every frame the paper also wants.
  */
 @keyframes gold-pulse {
   0%,
@@ -417,13 +419,13 @@ input[type="range"]::-moz-range-thumb {
 .gold-art {
   animation:
     glow-in 340ms cubic-bezier(0.22, 1, 0.36, 1) both,
-    gold-pulse 1.5s ease-in-out 340ms infinite;
+    gold-pulse 1.5s ease-in-out 1.5s infinite;
 }
 
 .gold-verdict {
   animation:
     verdict-in 260ms cubic-bezier(0.22, 1, 0.36, 1) 90ms both,
-    gold-pulse 1.5s ease-in-out 350ms infinite;
+    gold-pulse 1.5s ease-in-out 1.5s infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

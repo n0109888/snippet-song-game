@@ -53,7 +53,7 @@ export default function Reveal({ track, solved, atLength, max, engine, onNext }:
           <div className="mb-1 flex flex-col items-center gap-1">
             {/* The tier that was beaten, then what beating it means, which is
                 the line the whole card is built around. */}
-            <span className="max-kicker font-mono text-[11px] uppercase tracking-[0.4em] text-[var(--color-gold)]">
+            <span className="max-kicker font-mono text-xl font-medium uppercase tracking-[0.3em] text-[var(--color-gold)]">
               Inhuman
             </span>
             <span className="gold-word text-[3.4rem] font-extrabold uppercase leading-[0.95] tracking-[0.02em]">

@@ -46,21 +46,46 @@ function prefersReducedMotion(): boolean {
   );
 }
 
-/** A four point sparkle, drawn around the origin so it can be rotated freely. */
-function fillStar(ctx: CanvasRenderingContext2D, radius: number): void {
-  ctx.beginPath();
-  for (let i = 0; i < 8; i += 1) {
-    const angle = (Math.PI / 4) * i;
-    // Deep waists between the points, which is what makes it read as a glint
-    // rather than an octagon.
-    const r = i % 2 === 0 ? radius : radius * 0.3;
-    const x = Math.cos(angle) * r;
-    const y = Math.sin(angle) * r;
-    if (i === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
+/**
+ * A four point sparkle with its glow, drawn once per colour into an offscreen
+ * canvas. Both a path of eight points and a blurred shadow are far too slow to
+ * pay for on every piece on every frame; stamping the finished sprite is not.
+ */
+const SPRITE = 48;
+const starSprites = new Map<string, HTMLCanvasElement>();
+
+function starSprite(color: string): HTMLCanvasElement {
+  const cached = starSprites.get(color);
+  if (cached) return cached;
+
+  const sprite = document.createElement("canvas");
+  sprite.width = SPRITE;
+  sprite.height = SPRITE;
+  const ctx = sprite.getContext("2d");
+  if (ctx) {
+    const mid = SPRITE / 2;
+    // Leave room inside the sprite for the blur to fall off.
+    const radius = SPRITE * 0.3;
+    ctx.translate(mid, mid);
+    ctx.fillStyle = color;
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = color;
+    ctx.beginPath();
+    for (let i = 0; i < 8; i += 1) {
+      const angle = (Math.PI / 4) * i;
+      // Deep waists between the points, which is what makes it read as a glint
+      // rather than an octagon.
+      const r = i % 2 === 0 ? radius : radius * 0.3;
+      const x = Math.cos(angle) * r;
+      const y = Math.sin(angle) * r;
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.fill();
   }
-  ctx.closePath();
-  ctx.fill();
+  starSprites.set(color, sprite);
+  return sprite;
 }
 
 /**
@@ -107,7 +132,7 @@ export function Confetti({ fireKey, gold = false }: { fireKey: number; gold?: bo
     const originX = width * 0.5;
     const originY = height * 0.42;
 
-    const count = max ? 620 : 380;
+    const count = max ? 520 : 380;
     for (let i = 0; i < count; i += 1) {
       // A full circle, squashed upward: gravity brings the top half back down
       // through the middle, which is what fills the card.
@@ -134,6 +159,8 @@ export function Confetti({ fireKey, gold = false }: { fireKey: number; gold?: bo
     const tick = (now: number) => {
       const dt = Math.min((now - last) / 16.67, 3);
       last = now;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.globalAlpha = 1;
       ctx.clearRect(0, 0, width, height);
 
       let alive = 0;
@@ -155,22 +182,20 @@ export function Confetti({ fireKey, gold = false }: { fireKey: number; gold?: bo
         if (p.life <= 0 || p.y > height + 60) continue;
         alive += 1;
 
-        ctx.save();
-        ctx.translate(p.x, p.y);
-        ctx.rotate(p.rot);
+        const cos = Math.cos(p.rot);
+        const sin = Math.sin(p.rot);
+        // The transform is written straight out rather than pushed and popped,
+        // because at six hundred pieces the stack costs more than the maths.
+        ctx.setTransform(dpr * cos, dpr * sin, -dpr * sin, dpr * cos, dpr * p.x, dpr * p.y);
         ctx.globalAlpha = Math.max(0, Math.min(1, p.life));
-        ctx.fillStyle = p.color;
         if (p.star) {
-          // Only the sparkles carry a glow; per piece shadows are the expensive
-          // part of the frame and there are a fifth as many of these.
-          ctx.shadowBlur = 12;
-          ctx.shadowColor = p.color;
-          fillStar(ctx, p.w * 0.8);
+          const size = p.w * 3.4;
+          ctx.drawImage(starSprite(p.color), -size / 2, -size / 2, size, size);
         } else {
+          ctx.fillStyle = p.color;
           // Scale across the short axis so each piece tumbles like real paper.
-          ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.rot)));
+          ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(cos));
         }
-        ctx.restore();
       }
 
       if (alive > 0) {
@@ -186,6 +211,7 @@ export function Confetti({ fireKey, gold = false }: { fireKey: number; gold?: bo
     return () => {
       if (frame.current !== null) cancelAnimationFrame(frame.current);
       frame.current = null;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, width, height);
     };
   }, [fireKey]);
@@ -298,6 +324,7 @@ export function GoldRain() {
     const tick = (now: number) => {
       const dt = Math.min((now - last) / 16.67, 3);
       last = now;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, width, height);
 
       owed += (RAIN_PER_SECOND / 60) * dt;
@@ -320,18 +347,16 @@ export function GoldRain() {
           continue;
         }
 
-        ctx.save();
-        ctx.translate(p.x, p.y);
-        ctx.rotate(p.rot);
-        ctx.fillStyle = p.color;
+        const cos = Math.cos(p.rot);
+        const sin = Math.sin(p.rot);
+        ctx.setTransform(dpr * cos, dpr * sin, -dpr * sin, dpr * cos, dpr * p.x, dpr * p.y);
         if (p.star) {
-          ctx.shadowBlur = 12;
-          ctx.shadowColor = p.color;
-          fillStar(ctx, p.w * 0.75);
+          const size = p.w * 3.2;
+          ctx.drawImage(starSprite(p.color), -size / 2, -size / 2, size, size);
         } else {
-          ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.rot)));
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(cos));
         }
-        ctx.restore();
       }
 
       frame = requestAnimationFrame(tick);
@@ -341,6 +366,7 @@ export function GoldRain() {
 
     return () => {
       cancelAnimationFrame(frame);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, width, height);
     };
   }, []);

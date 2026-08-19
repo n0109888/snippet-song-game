@@ -731,10 +731,9 @@ export default function Game() {
           />
           <div className="press-in relative flex w-full max-w-xs flex-col gap-4 rounded-panel border border-line bg-panel p-5">
             <div className="flex flex-col gap-1">
-              <span className="text-base font-semibold">Start over</span>
+              <span className="text-base font-semibold">Reset</span>
               <span className="text-sm text-muted">
-                Plays this pack again from the first song. What you have got so
-                far is cleared.
+                Fully resets all rounds.
               </span>
             </div>
             <div className="flex gap-2">
@@ -743,7 +742,7 @@ export default function Game() {
                 onClick={startOver}
                 className="pill h-9 flex-1 rounded-full border border-transparent bg-[var(--color-bad)] text-sm font-medium text-white"
               >
-                Start over
+                Reset
               </button>
               <button
                 type="button"

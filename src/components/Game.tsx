@@ -546,7 +546,7 @@ export default function Game() {
                     <span className="ml-1 text-xs text-faint">Custom</span>
                   ) : null}
                 </div>
-                <span className="font-mono text-xs text-faint tabular-nums">
+                <span className="shrink-0 whitespace-nowrap font-mono text-xs text-faint tabular-nums">
                   {score} · {index + 1}/{order.length}
                 </span>
               </div>

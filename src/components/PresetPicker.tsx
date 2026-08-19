@@ -13,6 +13,9 @@ interface PresetPickerProps {
 
 export default function PresetPicker({ collections, busy, onStart }: PresetPickerProps) {
   const [query, setQuery] = useState("");
+  // Covers can be local files that are not in place yet, so fall back to the
+  // pack's own top artwork rather than showing an empty card.
+  const [broken, setBroken] = useState<Record<string, true>>({});
 
   const shown = useMemo(() => {
     const q = normalize(query);
@@ -51,17 +54,25 @@ export default function PresetPicker({ collections, busy, onStart }: PresetPicke
               className="pack group flex flex-col overflow-hidden rounded-panel border border-line bg-panel text-left disabled:opacity-60"
             >
               <div className="aspect-square w-full overflow-hidden bg-raised">
-                {collection.image ? (
-                  <Image
-                    src={collection.image}
-                    alt=""
-                    width={320}
-                    height={320}
-                    unoptimized
-                    priority={i < 4}
-                    className="pack-art h-full w-full object-cover"
-                  />
-                ) : null}
+                {(() => {
+                  const src = broken[collection.id]
+                    ? (collection.tracks[0]?.art ?? null)
+                    : collection.image;
+                  if (!src) return null;
+                  return (
+                    <Image
+                      src={src}
+                      alt=""
+                      width={320}
+                      height={320}
+                      unoptimized
+                      priority={i < 4}
+                      onError={() => setBroken((b) => ({ ...b, [collection.id]: true }))}
+                      style={collection.focus ? { objectPosition: collection.focus } : undefined}
+                      className="pack-art h-full w-full object-cover"
+                    />
+                  );
+                })()}
               </div>
               <div className="flex flex-col px-3 py-2.5">
                 <span className="truncate text-sm leading-tight">{collection.name}</span>

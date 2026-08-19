@@ -39,6 +39,8 @@ export interface PresetCollection {
   name: string;
   note: string;
   image: string | null;
+  /** CSS object-position, for covers whose subject is not centred. */
+  focus?: string;
   tracks: Track[];
 }
 

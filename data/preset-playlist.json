@@ -2,9 +2,9 @@
  "collections": [
   {
    "id": "ohnepixel",
-   "name": "ohnepixel",
-   "note": "",
-   "image": "https://cdn-images.dzcdn.net/images/cover/a968ed3814acb2ef8f3929b1bebcb42d/500x500-000000-80-0-0.jpg",
+   "name": "ohnePixel",
+   "note": "introoutro",
+   "image": "/ohnepixel.jpg",
    "tracks": [
     {
      "id": "dz:925108",
@@ -12,6 +12,27 @@
      "artist": "Rihanna",
      "art": "https://cdn-images.dzcdn.net/images/cover/91276466fbc876d96be9e6926060af60/250x250-000000-80-0-0.jpg",
      "rank": 987446
+    },
+    {
+     "id": "dz:908604612",
+     "title": "Blinding Lights",
+     "artist": "The Weeknd",
+     "art": "https://cdn-images.dzcdn.net/images/cover/fd00ebd6d30d7253f813dba3bb1c66a9/250x250-000000-80-0-0.jpg",
+     "rank": 984833
+    },
+    {
+     "id": "dz:4603398",
+     "title": "They Don't Care About Us",
+     "artist": "Michael Jackson",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a0ad67d1beb761f2cb9f8b60e5bcf07a/250x250-000000-80-0-0.jpg",
+     "rank": 984073
+    },
+    {
+     "id": "dz:676183",
+     "title": "In the End",
+     "artist": "Linkin Park",
+     "art": "https://cdn-images.dzcdn.net/images/cover/033a271b5ec10842c287827c39244fb5/250x250-000000-80-0-0.jpg",
+     "rank": 982895
     },
     {
      "id": "dz:136334560",
@@ -26,6 +47,20 @@
      "artist": "Michael Jackson",
      "art": "https://cdn-images.dzcdn.net/images/cover/a0ad67d1beb761f2cb9f8b60e5bcf07a/250x250-000000-80-0-0.jpg",
      "rank": 970264
+    },
+    {
+     "id": "dz:3579685441",
+     "title": "Elizabeth Taylor",
+     "artist": "Taylor Swift",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d0bed55a0efb3c5c3ddb3dacda67d9b3/250x250-000000-80-0-0.jpg",
+     "rank": 966072
+    },
+    {
+     "id": "dz:3129407",
+     "title": "Feel Good Inc.",
+     "artist": "Gorillaz",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3dc29a565149240729afc08e1f251b46/250x250-000000-80-0-0.jpg",
+     "rank": 963489
     },
     {
      "id": "dz:62724015",
@@ -70,6 +105,13 @@
      "rank": 937319
     },
     {
+     "id": "dz:2166864777",
+     "title": "Tattoo",
+     "artist": "Loreen",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d84129b2da7661300fb9db545b0b7df6/250x250-000000-80-0-0.jpg",
+     "rank": 931175
+    },
+    {
      "id": "dz:3135563",
      "title": "Veridis Quo",
      "artist": "Daft Punk",
@@ -84,11 +126,158 @@
      "rank": 928383
     },
     {
+     "id": "dz:63480992",
+     "title": "The Chain",
+     "artist": "Fleetwood Mac",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9732751ce91d786dcf30069853697078/250x250-000000-80-0-0.jpg",
+     "rank": 928273
+    },
+    {
+     "id": "dz:925118",
+     "title": "Disturbia",
+     "artist": "Rihanna",
+     "art": "https://cdn-images.dzcdn.net/images/cover/91276466fbc876d96be9e6926060af60/250x250-000000-80-0-0.jpg",
+     "rank": 919863
+    },
+    {
+     "id": "dz:1644464022",
+     "title": "Calm Down",
+     "artist": "Rema",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3071378af24d789b8fc69e95162041e4/250x250-000000-80-0-0.jpg",
+     "rank": 919562
+    },
+    {
+     "id": "dz:1153182282",
+     "title": "Seven Nation Army",
+     "artist": "The White Stripes",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ed0929a4c44d77c4dc524a10748fc2f6/250x250-000000-80-0-0.jpg",
+     "rank": 918131
+    },
+    {
+     "id": "dz:679217",
+     "title": "Hung Up",
+     "artist": "Madonna",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8e499d7b0e9be5b77eb6c2697e179fe3/250x250-000000-80-0-0.jpg",
+     "rank": 917400
+    },
+    {
+     "id": "dz:382428781",
+     "title": "Unforgettable (feat. Swae Lee)",
+     "artist": "French Montana",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b9b0f5d741397596eefe0c1db4c5aea1/250x250-000000-80-0-0.jpg",
+     "rank": 915710
+    },
+    {
+     "id": "dz:4685514",
+     "title": "The Way I Are",
+     "artist": "Timbaland",
+     "art": "https://cdn-images.dzcdn.net/images/cover/016ad07cfa4af4432d766abc25c9ee8c/250x250-000000-80-0-0.jpg",
+     "rank": 913752
+    },
+    {
+     "id": "dz:2386586085",
+     "title": "FE!N (feat. Playboi Carti)",
+     "artist": "Travis Scott",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6c91e64b7157f1332a4f6b0de9e4c714/250x250-000000-80-0-0.jpg",
+     "rank": 913127
+    },
+    {
+     "id": "dz:3165861441",
+     "title": "Gasolina",
+     "artist": "Daddy Yankee",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d386e42d5c4dfb603e958371b79869f5/250x250-000000-80-0-0.jpg",
+     "rank": 909706
+    },
+    {
+     "id": "dz:111482314",
+     "title": "Adventure of a Lifetime",
+     "artist": "Coldplay",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6c217fb56f7f7961c634d6e9bca9ddae/250x250-000000-80-0-0.jpg",
+     "rank": 906516
+    },
+    {
+     "id": "dz:398570642",
+     "title": "Bitter Sweet Symphony",
+     "artist": "The Verve",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ecc7727e897198892b98e7c019fba45f/250x250-000000-80-0-0.jpg",
+     "rank": 903083
+    },
+    {
      "id": "dz:2633773772",
      "title": "World Hold On (Children of the Sky)",
      "artist": "Bob Sinclar",
      "art": "https://cdn-images.dzcdn.net/images/cover/99d4bfbbcc2b5fe8b29d79f490a39cdb/250x250-000000-80-0-0.jpg",
      "rank": 899490
+    },
+    {
+     "id": "dz:72160317",
+     "title": "The Monster",
+     "artist": "Eminem",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b6938db3addc3ccd9575d6d12220e466/250x250-000000-80-0-0.jpg",
+     "rank": 897975
+    },
+    {
+     "id": "dz:15546830",
+     "title": "Pumped Up Kicks",
+     "artist": "Foster The People",
+     "art": "https://cdn-images.dzcdn.net/images/cover/fc73624907c40d356ca26152754cef43/250x250-000000-80-0-0.jpg",
+     "rank": 896811
+    },
+    {
+     "id": "dz:983832",
+     "title": "A Thousand Miles",
+     "artist": "Vanessa Carlton",
+     "art": "https://cdn-images.dzcdn.net/images/cover/990e08407e928abdbb14db86e5563ed0/250x250-000000-80-0-0.jpg",
+     "rank": 894479
+    },
+    {
+     "id": "dz:4181750",
+     "title": "Murder On The Dancefloor",
+     "artist": "Sophie Ellis-Bextor",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7c86bb64afe6a14a3939d9da84fee56c/250x250-000000-80-0-0.jpg",
+     "rank": 891308
+    },
+    {
+     "id": "dz:2297911845",
+     "title": "(It Goes Like) Nanana",
+     "artist": "Peggy Gou",
+     "art": "https://cdn-images.dzcdn.net/images/cover/da81d86b3bc191357af8f86da1ad2751/250x250-000000-80-0-0.jpg",
+     "rank": 886255
+    },
+    {
+     "id": "dz:371593461",
+     "title": "Feel It Still",
+     "artist": "Portugal. The Man",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c088a8e43543bd7995f40cde3c174ab3/250x250-000000-80-0-0.jpg",
+     "rank": 885403
+    },
+    {
+     "id": "dz:92720006",
+     "title": "T.N.T.",
+     "artist": "AC/DC",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ba5eaf2f3a49768164d0728b7ba64372/250x250-000000-80-0-0.jpg",
+     "rank": 884676
+    },
+    {
+     "id": "dz:92720036",
+     "title": "Hells Bells",
+     "artist": "AC/DC",
+     "art": "https://cdn-images.dzcdn.net/images/cover/41041b14873956eff0459c8ea2c296a8/250x250-000000-80-0-0.jpg",
+     "rank": 871564
+    },
+    {
+     "id": "dz:518458142",
+     "title": "Paradise City",
+     "artist": "Guns N' Roses",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8bfe7b3b0985d9ff0751090fb2b6f73f/250x250-000000-80-0-0.jpg",
+     "rank": 871540
+    },
+    {
+     "id": "dz:107471416",
+     "title": "Sugar (feat. Francesco Yates)",
+     "artist": "Robin Schulz",
+     "art": "https://cdn-images.dzcdn.net/images/cover/62cda7f414795d5cfb9fdb1201d9bed0/250x250-000000-80-0-0.jpg",
+     "rank": 867814
     },
     {
      "id": "dz:3026450",
@@ -105,6 +294,13 @@
      "rank": 862272
     },
     {
+     "id": "dz:979041",
+     "title": "Smack That",
+     "artist": "Akon",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bc4d98904d61661cc6d7dd53745340d0/250x250-000000-80-0-0.jpg",
+     "rank": 860263
+    },
+    {
      "id": "dz:4005760701",
      "title": "Love Tonight",
      "artist": "Shouse",
@@ -112,11 +308,25 @@
      "rank": 858593
     },
     {
+     "id": "dz:3120617",
+     "title": "Suddenly I See",
+     "artist": "KT Tunstall",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b00b9ee9d0543257b70abf6b28aee606/250x250-000000-80-0-0.jpg",
+     "rank": 857777
+    },
+    {
      "id": "dz:676840",
      "title": "Bleed It Out",
      "artist": "Linkin Park",
      "art": "https://cdn-images.dzcdn.net/images/cover/2dd699adcd68089f49f3ab558a2bd296/250x250-000000-80-0-0.jpg",
      "rank": 857664
+    },
+    {
+     "id": "dz:1411240392",
+     "title": "Dragostea din tei",
+     "artist": "O-Zone",
+     "art": "https://cdn-images.dzcdn.net/images/cover/75a7a0c9d2afaad5aaa4d67249eaea29/250x250-000000-80-0-0.jpg",
+     "rank": 849477
     },
     {
      "id": "dz:3098217",
@@ -133,11 +343,39 @@
      "rank": 841264
     },
     {
+     "id": "dz:794020",
+     "title": "4 Minutes (feat. Justin Timberlake and Timbaland)",
+     "artist": "Madonna",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e6f20f5a022403e93a94e5b9e7c1b81d/250x250-000000-80-0-0.jpg",
+     "rank": 840730
+    },
+    {
      "id": "dz:1372169352",
      "title": "Never Going Home",
      "artist": "Kungs",
      "art": "https://cdn-images.dzcdn.net/images/cover/552d4b14030ff623aa13567f27705b68/250x250-000000-80-0-0.jpg",
      "rank": 839451
+    },
+    {
+     "id": "dz:3121463",
+     "title": "The Passenger",
+     "artist": "Iggy Pop",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2a84ce055806af659cafc43e1913f08d/250x250-000000-80-0-0.jpg",
+     "rank": 839155
+    },
+    {
+     "id": "dz:456011702",
+     "title": "Pray For Me",
+     "artist": "The Weeknd",
+     "art": "https://cdn-images.dzcdn.net/images/cover/13869a0eae29bc107b9bf5f545c14095/250x250-000000-80-0-0.jpg",
+     "rank": 838946
+    },
+    {
+     "id": "dz:2953166",
+     "title": "Pon de Replay",
+     "artist": "Rihanna",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7324007a556009d008075eeb32157c16/250x250-000000-80-0-0.jpg",
+     "rank": 837986
     },
     {
      "id": "dz:70403440",
@@ -147,11 +385,60 @@
      "rank": 834656
     },
     {
+     "id": "dz:2309928755",
+     "title": "Am I Dreaming",
+     "artist": "Metro Boomin",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bec6e38cb8986f3e5b3b7bd70e154d4f/250x250-000000-80-0-0.jpg",
+     "rank": 832280
+    },
+    {
      "id": "dz:70016835",
      "title": "Lovely Day",
      "artist": "Bill Withers",
      "art": "https://cdn-images.dzcdn.net/images/cover/a21685522410a1b07d544a79ca4e4b7a/250x250-000000-80-0-0.jpg",
      "rank": 829759
+    },
+    {
+     "id": "dz:11390027",
+     "title": "Sandstorm",
+     "artist": "Darude",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4813de733c6fb05c90187ab5cf3e13c7/250x250-000000-80-0-0.jpg",
+     "rank": 827812
+    },
+    {
+     "id": "dz:1143493",
+     "title": "Take A Look Around",
+     "artist": "Limp Bizkit",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f17a6d764d4eea95dab085c917e1ce7f/250x250-000000-80-0-0.jpg",
+     "rank": 826791
+    },
+    {
+     "id": "dz:80274568",
+     "title": "Bodies",
+     "artist": "Drowning Pool",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4c1c8cfc234a28d26ce12415654be1b7/250x250-000000-80-0-0.jpg",
+     "rank": 824324
+    },
+    {
+     "id": "dz:3129413",
+     "title": "DARE (feat. Shaun Ryder & Roses Gabor)",
+     "artist": "Gorillaz",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3dc29a565149240729afc08e1f251b46/250x250-000000-80-0-0.jpg",
+     "rank": 823028
+    },
+    {
+     "id": "dz:70093876",
+     "title": "Moonlight Shadow",
+     "artist": "Mike Oldfield",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e07b185becbe0b6ab014c36748efe0c3/250x250-000000-80-0-0.jpg",
+     "rank": 822997
+    },
+    {
+     "id": "dz:88845907",
+     "title": "Shout",
+     "artist": "Tears For Fears",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5413c924601f881a7209bab7b1909880/250x250-000000-80-0-0.jpg",
+     "rank": 819942
     },
     {
      "id": "dz:7561784",
@@ -161,11 +448,81 @@
      "rank": 819460
     },
     {
+     "id": "dz:387670601",
+     "title": "Axel F",
+     "artist": "Crazy Frog",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b4f389a59fa6f9f9fd09c2af0a702d18/250x250-000000-80-0-0.jpg",
+     "rank": 818473
+    },
+    {
+     "id": "dz:2511224",
+     "title": "Kryptonite",
+     "artist": "3 Doors Down",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e075197e5985cd4269f829f1ea217cad/250x250-000000-80-0-0.jpg",
+     "rank": 816454
+    },
+    {
+     "id": "dz:444887352",
+     "title": "Don't Be so Shy",
+     "artist": "Imany",
+     "art": "https://cdn-images.dzcdn.net/images/cover/efc65955212090009f3b65a4d9435ceb/250x250-000000-80-0-0.jpg",
+     "rank": 813319
+    },
+    {
+     "id": "dz:37734441",
+     "title": "CASTLE OF GLASS",
+     "artist": "Linkin Park",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0ce480e7723712dee352c68fdfef2599/250x250-000000-80-0-0.jpg",
+     "rank": 807292
+    },
+    {
      "id": "dz:72756752",
      "title": "Toca Toca",
      "artist": "Fly Project",
      "art": "https://cdn-images.dzcdn.net/images/cover/3cac91c5a481144dd2068b3b3892ff60/250x250-000000-80-0-0.jpg",
      "rank": 805881
+    },
+    {
+     "id": "dz:629561092",
+     "title": "Applause",
+     "artist": "Lady Gaga",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2355b9a023e34665e347afa8b53fd9e1/250x250-000000-80-0-0.jpg",
+     "rank": 799352
+    },
+    {
+     "id": "dz:623714212",
+     "title": "The Middle",
+     "artist": "Jimmy Eat World",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2686d323375a5c8996b2833719955e7d/250x250-000000-80-0-0.jpg",
+     "rank": 798811
+    },
+    {
+     "id": "dz:3497475851",
+     "title": "Legends Never Die",
+     "artist": "League Of Legends",
+     "art": "https://cdn-images.dzcdn.net/images/cover/58004db671f086318eab652cbd13f9d8/250x250-000000-80-0-0.jpg",
+     "rank": 794836
+    },
+    {
+     "id": "dz:4006895",
+     "title": "Carry on Wayward Son",
+     "artist": "Kansas",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3d01ed3162eb6f05659971155eec7336/250x250-000000-80-0-0.jpg",
+     "rank": 793962
+    },
+    {
+     "id": "dz:3018798101",
+     "title": "She Wolf",
+     "artist": "Shakira",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2ae86792415f9bd01ecfcaceb58c68dc/250x250-000000-80-0-0.jpg",
+     "rank": 793759
+    },
+    {
+     "id": "dz:90533115",
+     "title": "Run This Town",
+     "artist": "JAŸ-Z",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e0edb930ad843bb002c04956a81ce7de/250x250-000000-80-0-0.jpg",
+     "rank": 792271
     },
     {
      "id": "dz:3786206112",
@@ -175,11 +532,67 @@
      "rank": 791762
     },
     {
+     "id": "dz:1822997377",
+     "title": "Samba de Janeiro",
+     "artist": "Bellini",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c7f9d5dc4aa235c3d02bfbea3539152e/250x250-000000-80-0-0.jpg",
+     "rank": 788988
+    },
+    {
+     "id": "dz:65601534",
+     "title": "No Church In The Wild",
+     "artist": "JAŸ-Z",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b0604c988a2d55f36e33b970e5a32851/250x250-000000-80-0-0.jpg",
+     "rank": 785624
+    },
+    {
+     "id": "dz:13128242",
+     "title": "Hungry Eyes",
+     "artist": "Eric Carmen",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f24ac40f8c7a0dbe438399788763a042/250x250-000000-80-0-0.jpg",
+     "rank": 782096
+    },
+    {
+     "id": "dz:328213561",
+     "title": "Sirius",
+     "artist": "The Alan Parsons Project",
+     "art": "https://cdn-images.dzcdn.net/images/cover/399c52ec3a4ba14f29646a59ee69e1e5/250x250-000000-80-0-0.jpg",
+     "rank": 781951
+    },
+    {
+     "id": "dz:7667061",
+     "title": "All Of The Lights",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/742aba8510ba803bea51d304cf2ca786/250x250-000000-80-0-0.jpg",
+     "rank": 779665
+    },
+    {
      "id": "dz:1436196472",
      "title": "Following the Sun",
      "artist": "SUPER-Hi",
      "art": "https://cdn-images.dzcdn.net/images/cover/1cf98e43b5eca848e31520da5cd6c663/250x250-000000-80-0-0.jpg",
      "rank": 779061
+    },
+    {
+     "id": "dz:309174",
+     "title": "Lambada",
+     "artist": "Kaoma",
+     "art": "https://cdn-images.dzcdn.net/images/cover/fd4d708dc127726804135ff1b80b7a73/250x250-000000-80-0-0.jpg",
+     "rank": 778737
+    },
+    {
+     "id": "dz:1895560297",
+     "title": "Every You Every Me",
+     "artist": "Placebo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/704fc1d3226cbe373dfd6c00345f16f9/250x250-000000-80-0-0.jpg",
+     "rank": 777977
+    },
+    {
+     "id": "dz:82199334",
+     "title": "Circus",
+     "artist": "Britney Spears",
+     "art": "https://cdn-images.dzcdn.net/images/cover/16d60157d51a9e21ffac61b50a7d02d0/250x250-000000-80-0-0.jpg",
+     "rank": 776508
     },
     {
      "id": "dz:730428",
@@ -189,11 +602,46 @@
      "rank": 771508
     },
     {
+     "id": "dz:829185532",
+     "title": "Alone, Pt. II",
+     "artist": "Alan Walker",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5950c85f789a083d4be4dfaba9054483/250x250-000000-80-0-0.jpg",
+     "rank": 771060
+    },
+    {
      "id": "dz:4685512",
      "title": "Give It To Me",
      "artist": "Timbaland",
      "art": "https://cdn-images.dzcdn.net/images/cover/016ad07cfa4af4432d766abc25c9ee8c/250x250-000000-80-0-0.jpg",
      "rank": 768645
+    },
+    {
+     "id": "dz:70051871",
+     "title": "Ride on Time",
+     "artist": "Black Box",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ad31d939346f5770e86af0622c595d32/250x250-000000-80-0-0.jpg",
+     "rank": 766880
+    },
+    {
+     "id": "dz:509938462",
+     "title": "Bon Appétit",
+     "artist": "Katy Perry",
+     "art": "https://cdn-images.dzcdn.net/images/cover/052f3aeebf108bf7a28b0a82c5a1869d/250x250-000000-80-0-0.jpg",
+     "rank": 765504
+    },
+    {
+     "id": "dz:2606173",
+     "title": "Mercy",
+     "artist": "Duffy",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e5e9ef4482d4615992f2972ccd9f6e96/250x250-000000-80-0-0.jpg",
+     "rank": 761653
+    },
+    {
+     "id": "dz:62847143",
+     "title": "Turn Me On (feat. Nicki Minaj)",
+     "artist": "David Guetta",
+     "art": "https://cdn-images.dzcdn.net/images/cover/52330286cb5008805253fd77c7111d3f/250x250-000000-80-0-0.jpg",
+     "rank": 761177
     },
     {
      "id": "dz:79959586",
@@ -203,11 +651,102 @@
      "rank": 759440
     },
     {
+     "id": "dz:2816017052",
+     "title": "BAND4BAND",
+     "artist": "Central Cee",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8508be30ca355ef44597e9be0f834232/250x250-000000-80-0-0.jpg",
+     "rank": 759424
+    },
+    {
+     "id": "dz:3025714351",
+     "title": "Heartbeat",
+     "artist": "Childish Gambino",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ca5edd8386863d0465b8586ccfe573ee/250x250-000000-80-0-0.jpg",
+     "rank": 757472
+    },
+    {
+     "id": "dz:925110",
+     "title": "Shut Up And Drive",
+     "artist": "Rihanna",
+     "art": "https://cdn-images.dzcdn.net/images/cover/91276466fbc876d96be9e6926060af60/250x250-000000-80-0-0.jpg",
+     "rank": 756819
+    },
+    {
      "id": "dz:124606176",
      "title": "Hymn for the Weekend",
      "artist": "Coldplay",
      "art": "https://cdn-images.dzcdn.net/images/cover/131085d3bb467b61f67197a3e78e08f7/250x250-000000-80-0-0.jpg",
      "rank": 756008
+    },
+    {
+     "id": "dz:1145593552",
+     "title": "My Head & My Heart",
+     "artist": "Ava Max",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0eca025ac1206d710f91c32e49d6e8a8/250x250-000000-80-0-0.jpg",
+     "rank": 754895
+    },
+    {
+     "id": "dz:882293",
+     "title": "Glamorous",
+     "artist": "Fergie",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0285dad64dcaaf6ff3652fbc8e3f58d6/250x250-000000-80-0-0.jpg",
+     "rank": 752424
+    },
+    {
+     "id": "dz:13393735",
+     "title": "Evacuate The Dancefloor",
+     "artist": "Cascada",
+     "art": "https://cdn-images.dzcdn.net/images/cover/45db415a9431df0f4a579aa233284986/250x250-000000-80-0-0.jpg",
+     "rank": 750124
+    },
+    {
+     "id": "dz:24246281",
+     "title": "It's My Life",
+     "artist": "No Doubt",
+     "art": "https://cdn-images.dzcdn.net/images/cover/97b81fddd1fa280adb7ebc41c5a255e6/250x250-000000-80-0-0.jpg",
+     "rank": 749867
+    },
+    {
+     "id": "dz:3482970601",
+     "title": "Jealous",
+     "artist": "Eyedress",
+     "art": "https://cdn-images.dzcdn.net/images/cover/104e136464f58b91fcc6df505e856081/250x250-000000-80-0-0.jpg",
+     "rank": 746313
+    },
+    {
+     "id": "dz:2047662397",
+     "title": "Superhero (Heroes & Villains)",
+     "artist": "Metro Boomin",
+     "art": "https://cdn-images.dzcdn.net/images/cover/862ab860ff69c30deeb5979db6e46b62/250x250-000000-80-0-0.jpg",
+     "rank": 738150
+    },
+    {
+     "id": "dz:13144759",
+     "title": "Butterfly",
+     "artist": "Crazy Town",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4360765d7a2aceae49aaaa8cfcff6ddf/250x250-000000-80-0-0.jpg",
+     "rank": 736674
+    },
+    {
+     "id": "dz:549352972",
+     "title": "Bad Girls",
+     "artist": "M.I.A.",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ffa6721b93194f0f63f839f7f1fc1da5/250x250-000000-80-0-0.jpg",
+     "rank": 734892
+    },
+    {
+     "id": "dz:2963317",
+     "title": "Love Is All Around",
+     "artist": "Wet Wet Wet",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ae5239079a76ce9f1efdd3c5afce07fe/250x250-000000-80-0-0.jpg",
+     "rank": 733948
+    },
+    {
+     "id": "dz:939689012",
+     "title": "THE SCOTTS",
+     "artist": "THE SCOTTS ",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c960f0b900832a1c8ece116ccc789a27/250x250-000000-80-0-0.jpg",
+     "rank": 733547
     },
     {
      "id": "dz:3154917",
@@ -217,11 +756,46 @@
      "rank": 730695
     },
     {
+     "id": "dz:95963378",
+     "title": "Where Are Ü Now (with Justin Bieber)",
+     "artist": "Jack Ü",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f26a87471422a3800e576cf18bde4184/250x250-000000-80-0-0.jpg",
+     "rank": 730153
+    },
+    {
      "id": "dz:1559253732",
      "title": "Stumblin' In",
      "artist": "Chris Norman",
      "art": "https://cdn-images.dzcdn.net/images/cover/9c0d04338c4b5295ca58db08605f892f/250x250-000000-80-0-0.jpg",
      "rank": 728248
+    },
+    {
+     "id": "dz:60765507",
+     "title": "Feels Like We Only Go Backwards",
+     "artist": "Tame Impala",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9fe30ce99ef17cb1250bef071f15ccee/250x250-000000-80-0-0.jpg",
+     "rank": 728234
+    },
+    {
+     "id": "dz:2048795977",
+     "title": "Lay Low",
+     "artist": "Tiësto",
+     "art": "https://cdn-images.dzcdn.net/images/cover/11f9bdbb952751027b8f29a3518b721e/250x250-000000-80-0-0.jpg",
+     "rank": 727360
+    },
+    {
+     "id": "dz:439484762",
+     "title": "River",
+     "artist": "Eminem",
+     "art": "https://cdn-images.dzcdn.net/images/cover/432ed502692292710f09a88837077f5a/250x250-000000-80-0-0.jpg",
+     "rank": 726784
+    },
+    {
+     "id": "dz:15475926",
+     "title": "If You Had My Love",
+     "artist": "Jennifer Lopez",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e9e59d8b00661ff2971cf7e62e1d780c/250x250-000000-80-0-0.jpg",
+     "rank": 725444
     },
     {
      "id": "dz:2099312287",
@@ -231,11 +805,116 @@
      "rank": 725304
     },
     {
+     "id": "dz:679225",
+     "title": "Sorry",
+     "artist": "Madonna",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8e499d7b0e9be5b77eb6c2697e179fe3/250x250-000000-80-0-0.jpg",
+     "rank": 723737
+    },
+    {
+     "id": "dz:14235829",
+     "title": "I Follow Rivers",
+     "artist": "Lykke Li",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a91071665368a95007d4c40288e2074e/250x250-000000-80-0-0.jpg",
+     "rank": 721294
+    },
+    {
+     "id": "dz:2329875155",
+     "title": "fukumean",
+     "artist": "Gunna",
+     "art": "https://cdn-images.dzcdn.net/images/cover/35446b14e181f0a3fe415c06fec08d0b/250x250-000000-80-0-0.jpg",
+     "rank": 719337
+    },
+    {
+     "id": "dz:1200359872",
+     "title": "Your Love (9PM)",
+     "artist": "ATB",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d59a3057c3e0636760992fecb3e0e5d0/250x250-000000-80-0-0.jpg",
+     "rank": 718583
+    },
+    {
+     "id": "dz:80194320",
+     "title": "Hideaway",
+     "artist": "Kiesza",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e82b7ee9a70e690a0d927a6df8411176/250x250-000000-80-0-0.jpg",
+     "rank": 718369
+    },
+    {
+     "id": "dz:16412330",
+     "title": "Şımarık",
+     "artist": "Tarkan",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e6b020b3a610d615164d01fc2298fd61/250x250-000000-80-0-0.jpg",
+     "rank": 717780
+    },
+    {
+     "id": "dz:1049893",
+     "title": "Ma Baker",
+     "artist": "Boney M.",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5b95e4fc13571a55f02478665f3e2ec9/250x250-000000-80-0-0.jpg",
+     "rank": 716320
+    },
+    {
+     "id": "dz:520033002",
+     "title": "Don't Worry (with Ray Dalton)",
+     "artist": "Madcon",
+     "art": "https://cdn-images.dzcdn.net/images/cover/699e383f7ca80133bb37215f42835ffa/250x250-000000-80-0-0.jpg",
+     "rank": 711597
+    },
+    {
+     "id": "dz:646327222",
+     "title": "Ruff Ryders' Anthem",
+     "artist": "DMX",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0475f49b196030971890efc632288953/250x250-000000-80-0-0.jpg",
+     "rank": 710414
+    },
+    {
+     "id": "dz:2530363",
+     "title": "Lean Back",
+     "artist": "Terror Squad",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8ecc5d16327a2d0ca13312e3d0da043d/250x250-000000-80-0-0.jpg",
+     "rank": 703279
+    },
+    {
+     "id": "dz:1399345572",
+     "title": "Played-A-Live (The Bongo Song)",
+     "artist": "Safri Duo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/17ca418cde02c60bb4967c6e39aca66f/250x250-000000-80-0-0.jpg",
+     "rank": 702067
+    },
+    {
+     "id": "dz:14519027",
+     "title": "Talk That Talk",
+     "artist": "Rihanna",
+     "art": "https://cdn-images.dzcdn.net/images/cover/626d0721deb23c1142945ff506379534/250x250-000000-80-0-0.jpg",
+     "rank": 700365
+    },
+    {
+     "id": "dz:715929",
+     "title": "Remember the Name (feat. Styles of Beyond)",
+     "artist": "Fort Minor",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d4059c5525f643e2843b2f1e18e2d39f/250x250-000000-80-0-0.jpg",
+     "rank": 696898
+    },
+    {
+     "id": "dz:3496410431",
+     "title": "GODS",
+     "artist": "League Of Legends",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2da83f667965683428b9aecaab159771/250x250-000000-80-0-0.jpg",
+     "rank": 693799
+    },
+    {
      "id": "dz:2126030457",
      "title": "Bohemian Like You",
      "artist": "The Dandy Warhols",
      "art": "https://cdn-images.dzcdn.net/images/cover/f2f1f2caf987151c528b96bd5e7359d4/250x250-000000-80-0-0.jpg",
      "rank": 693097
+    },
+    {
+     "id": "dz:1759177047",
+     "title": "HOTEL LOBBY (Unc & Phew)",
+     "artist": "Quavo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e14bcd82335ee28bf7964b5fd9d762fd/250x250-000000-80-0-0.jpg",
+     "rank": 692225
     },
     {
      "id": "dz:68514262",
@@ -245,11 +924,67 @@
      "rank": 691114
     },
     {
+     "id": "dz:401358872",
+     "title": "The Spectre",
+     "artist": "Alan Walker",
+     "art": "https://cdn-images.dzcdn.net/images/cover/35592b9e5e8d281e958381beaa932bf4/250x250-000000-80-0-0.jpg",
+     "rank": 687807
+    },
+    {
+     "id": "dz:29199281",
+     "title": "Can't Be Touched",
+     "artist": "Body Head Bangerz",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bb530da0a09e0402997e96167ab76eba/250x250-000000-80-0-0.jpg",
+     "rank": 686075
+    },
+    {
+     "id": "dz:1995617597",
+     "title": "Like Glue",
+     "artist": "Sean Paul",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b990b1b0d495826b7bcf3e4d55224f43/250x250-000000-80-0-0.jpg",
+     "rank": 679855
+    },
+    {
      "id": "dz:997537362",
      "title": "Tell Me Why",
      "artist": "Supermode",
      "art": "https://cdn-images.dzcdn.net/images/cover/720970de7d75a525415a5d60bad8c23a/250x250-000000-80-0-0.jpg",
      "rank": 679455
+    },
+    {
+     "id": "dz:3805884212",
+     "title": "Maria",
+     "artist": "Blondie",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3daf8074abba747b47511efef3b167b8/250x250-000000-80-0-0.jpg",
+     "rank": 674189
+    },
+    {
+     "id": "dz:143042822",
+     "title": "Low Rider",
+     "artist": "War",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8b553c0e67fa4f104932da6bdb6586aa/250x250-000000-80-0-0.jpg",
+     "rank": 674066
+    },
+    {
+     "id": "dz:2120549077",
+     "title": "Kerosene",
+     "artist": "Crystal Castles",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b2d1eea56806fa20f589f9efbc6f76c1/250x250-000000-80-0-0.jpg",
+     "rank": 672812
+    },
+    {
+     "id": "dz:4087608",
+     "title": "All Summer Long",
+     "artist": "Kid Rock",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b0ce5aa10cc52b8dc6661c7ce9b6c876/250x250-000000-80-0-0.jpg",
+     "rank": 670841
+    },
+    {
+     "id": "dz:576439",
+     "title": "No Easy Way Out",
+     "artist": "Robert Tepper",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e66b5d3a40f69690c1633afb73cc590c/250x250-000000-80-0-0.jpg",
+     "rank": 669335
     },
     {
      "id": "dz:1906354687",
@@ -259,11 +994,60 @@
      "rank": 668341
     },
     {
+     "id": "dz:1173629942",
+     "title": "End of Line",
+     "artist": "Daft Punk",
+     "art": "https://cdn-images.dzcdn.net/images/cover/313e8a988614445ab1ad508da2805187/250x250-000000-80-0-0.jpg",
+     "rank": 664853
+    },
+    {
+     "id": "dz:608749",
+     "title": "Manic Monday",
+     "artist": "The Bangles",
+     "art": "https://cdn-images.dzcdn.net/images/cover/938d17e5a07d6178bcabbe2349a79ba0/250x250-000000-80-0-0.jpg",
+     "rank": 659854
+    },
+    {
      "id": "dz:1465854542",
      "title": "You",
      "artist": "Etienne de Crécy",
      "art": "https://cdn-images.dzcdn.net/images/cover/1dbc8e7b86404f0e8e348f1b42c92649/250x250-000000-80-0-0.jpg",
      "rank": 657457
+    },
+    {
+     "id": "dz:917594892",
+     "title": "Orinoco Flow (Sail Away)",
+     "artist": "Enya",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8e7deeaa0d3ef9ff7b907f5c1da8c086/250x250-000000-80-0-0.jpg",
+     "rank": 656713
+    },
+    {
+     "id": "dz:676912382",
+     "title": "Heads Will Roll",
+     "artist": "Yeah Yeah Yeahs",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9cd20d6cfadc92326b4a23cf1853a7a7/250x250-000000-80-0-0.jpg",
+     "rank": 652723
+    },
+    {
+     "id": "dz:1543584272",
+     "title": "Sahara",
+     "artist": "Hensonn",
+     "art": "https://cdn-images.dzcdn.net/images/cover/dee4b75b543c75d1afef6f001399e084/250x250-000000-80-0-0.jpg",
+     "rank": 645552
+    },
+    {
+     "id": "dz:2573922082",
+     "title": "leavemealone",
+     "artist": "Fred again..",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3b90105e74663fd164fceb2b0d2db3cd/250x250-000000-80-0-0.jpg",
+     "rank": 643124
+    },
+    {
+     "id": "dz:1151534142",
+     "title": "Midnight Sky",
+     "artist": "Miley Cyrus",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3f5dd91b74257de4190a92893347bdf8/250x250-000000-80-0-0.jpg",
+     "rank": 643063
     },
     {
      "id": "dz:111772878",
@@ -273,11 +1057,39 @@
      "rank": 642926
     },
     {
+     "id": "dz:19271551",
+     "title": "Come Along",
+     "artist": "Titiyo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/53aa0981d29f45f7f1be2c1985e50e38/250x250-000000-80-0-0.jpg",
+     "rank": 637807
+    },
+    {
+     "id": "dz:3125744",
+     "title": "Red Red Wine",
+     "artist": "UB40",
+     "art": "https://cdn-images.dzcdn.net/images/cover/67649d26b73794c3f2ad26be81a7b343/250x250-000000-80-0-0.jpg",
+     "rank": 636796
+    },
+    {
+     "id": "dz:2553746662",
+     "title": "Mask Off",
+     "artist": "Nicolas Julian",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c6df3857dbf94c0908d3c559e3544a08/250x250-000000-80-0-0.jpg",
+     "rank": 636642
+    },
+    {
      "id": "dz:1105734",
      "title": "Come As You Are",
      "artist": "Nirvana",
      "art": "https://cdn-images.dzcdn.net/images/cover/fe1082c5ef54876802146897e76b592e/250x250-000000-80-0-0.jpg",
      "rank": 636392
+    },
+    {
+     "id": "dz:432951302",
+     "title": "Take On Me",
+     "artist": "a-ha",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1a28cc1fde787f09921e900ac60c84bf/250x250-000000-80-0-0.jpg",
+     "rank": 635438
     },
     {
      "id": "dz:15590338",
@@ -287,11 +1099,88 @@
      "rank": 634424
     },
     {
+     "id": "dz:3168145421",
+     "title": "I Don't Feel Like Dancin'",
+     "artist": "Scissor Sisters",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5334799f2cf9fae5cb7ced93cca1c2f0/250x250-000000-80-0-0.jpg",
+     "rank": 633698
+    },
+    {
+     "id": "dz:3439503611",
+     "title": "It Feels So Good",
+     "artist": "Sonique",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e9f7742063c48b97e42d751fc0af942e/250x250-000000-80-0-0.jpg",
+     "rank": 631873
+    },
+    {
      "id": "dz:376386131",
      "title": "More Than Friends (feat. Kelli-Leigh)",
      "artist": "James Hype",
      "art": "https://cdn-images.dzcdn.net/images/cover/63451839c5a4a886958e4f3e65cd3b43/250x250-000000-80-0-0.jpg",
      "rank": 630614
+    },
+    {
+     "id": "dz:778768",
+     "title": "The Power of Good-Bye",
+     "artist": "Madonna",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b75d884b15db9c2b3376f93caa059a93/250x250-000000-80-0-0.jpg",
+     "rank": 630462
+    },
+    {
+     "id": "dz:990761",
+     "title": "Macarena",
+     "artist": "Los Del Río",
+     "art": "https://cdn-images.dzcdn.net/images/cover/472a63e73ad7e23165f6945be2b0eee2/250x250-000000-80-0-0.jpg",
+     "rank": 627440
+    },
+    {
+     "id": "dz:1787742227",
+     "title": "Missing",
+     "artist": "Everything But The Girl",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c16578f559914f7adbf8b3551eb4a081/250x250-000000-80-0-0.jpg",
+     "rank": 626122
+    },
+    {
+     "id": "dz:1174772",
+     "title": "The Riddle",
+     "artist": "Nik Kershaw",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ce29a69eecc2c08d2b772bf0c5cca02f/250x250-000000-80-0-0.jpg",
+     "rank": 616304
+    },
+    {
+     "id": "dz:1102518",
+     "title": "Only U",
+     "artist": "Ashanti",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1f8d7a15ab143414d10f6369b5ec5936/250x250-000000-80-0-0.jpg",
+     "rank": 612038
+    },
+    {
+     "id": "dz:1998272117",
+     "title": "Gatluak",
+     "artist": "Kronan",
+     "art": "https://cdn-images.dzcdn.net/images/cover/dfd9026368bc10087714db7dca19688c/250x250-000000-80-0-0.jpg",
+     "rank": 610794
+    },
+    {
+     "id": "dz:2674458872",
+     "title": "MONEY ON THE DASH",
+     "artist": "Elley Duhé",
+     "art": "https://cdn-images.dzcdn.net/images/cover/fe2ccda1385e5fd117e5472d830d3f87/250x250-000000-80-0-0.jpg",
+     "rank": 609861
+    },
+    {
+     "id": "dz:1851865187",
+     "title": "Scarface (Push It To The Limit)",
+     "artist": "Paul Engemann",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9cc27739273df10c34b248b03280ba7a/250x250-000000-80-0-0.jpg",
+     "rank": 607174
+    },
+    {
+     "id": "dz:3843390961",
+     "title": "Coco Jamboo",
+     "artist": "Mr. President",
+     "art": "https://cdn-images.dzcdn.net/images/cover/dae8923f6ed33a9ea3368b2efdbeff55/250x250-000000-80-0-0.jpg",
+     "rank": 604762
     },
     {
      "id": "dz:55074011",
@@ -301,11 +1190,53 @@
      "rank": 604316
     },
     {
+     "id": "dz:2120549137",
+     "title": "Transgender",
+     "artist": "Crystal Castles",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b2d1eea56806fa20f589f9efbc6f76c1/250x250-000000-80-0-0.jpg",
+     "rank": 601287
+    },
+    {
+     "id": "dz:1802221947",
+     "title": "Lights",
+     "artist": "Ellie Goulding",
+     "art": "https://cdn-images.dzcdn.net/images/cover/178ffb71ccfb70a3c164b79078e00458/250x250-000000-80-0-0.jpg",
+     "rank": 601202
+    },
+    {
+     "id": "dz:4001231211",
+     "title": "Right Here, Right Now",
+     "artist": "Fatboy Slim",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a851df879c6b8dc68286e309ca36dfb3/250x250-000000-80-0-0.jpg",
+     "rank": 598153
+    },
+    {
      "id": "dz:2482991481",
      "title": "The Logical Song",
      "artist": "Scooter",
      "art": "https://cdn-images.dzcdn.net/images/cover/db6409c134aae289a50a4dff27ec499e/250x250-000000-80-0-0.jpg",
      "rank": 596176
+    },
+    {
+     "id": "dz:886014",
+     "title": "Ella Elle L A",
+     "artist": "Kate Ryan",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e3f872e63ad676a62ba8a2b181106806/250x250-000000-80-0-0.jpg",
+     "rank": 594716
+    },
+    {
+     "id": "dz:2269016837",
+     "title": "The Lost Soul Down",
+     "artist": "Nbsplv",
+     "art": "https://cdn-images.dzcdn.net/images/cover/665584feba9acacd3dcab54634c56edd/250x250-000000-80-0-0.jpg",
+     "rank": 593103
+    },
+    {
+     "id": "dz:2358398035",
+     "title": "Disconnect",
+     "artist": "Becky Hill",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a8e283061c74e47494b1968a40e63943/250x250-000000-80-0-0.jpg",
+     "rank": 591894
     },
     {
      "id": "dz:3735708412",
@@ -315,11 +1246,130 @@
      "rank": 590776
     },
     {
+     "id": "dz:80275000",
+     "title": "Paralyzer",
+     "artist": "Finger Eleven",
+     "art": "https://cdn-images.dzcdn.net/images/cover/302f0325f79a75a76f778ee0a80dee48/250x250-000000-80-0-0.jpg",
+     "rank": 589761
+    },
+    {
+     "id": "dz:2057869367",
+     "title": "Big Jet Plane",
+     "artist": "Restricted",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8e62bd25b53a25a3d9ef88f8d57dea2f/250x250-000000-80-0-0.jpg",
+     "rank": 584695
+    },
+    {
+     "id": "dz:3123902",
+     "title": "Weather With You",
+     "artist": "Crowded House",
+     "art": "https://cdn-images.dzcdn.net/images/cover/02ff8eb7243d0f51dc087135012bdb02/250x250-000000-80-0-0.jpg",
+     "rank": 583868
+    },
+    {
+     "id": "dz:528869491",
+     "title": "Jesus Walks",
+     "artist": "Kanye West",
+     "art": "https://cdn-images.dzcdn.net/images/cover/069a5dba671436da9301aad36fc9a983/250x250-000000-80-0-0.jpg",
+     "rank": 577934
+    },
+    {
+     "id": "dz:3867267351",
+     "title": "I Ran (So Far Away)",
+     "artist": "A Flock Of Seagulls",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4e1ceb899c8ff2291587b416462e93e0/250x250-000000-80-0-0.jpg",
+     "rank": 576009
+    },
+    {
+     "id": "dz:2386559845",
+     "title": "Ray Of Solar",
+     "artist": "Swedish House Mafia",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f2c5f83057dad3a578559a8473a86e1c/250x250-000000-80-0-0.jpg",
+     "rank": 575185
+    },
+    {
+     "id": "dz:2386586015",
+     "title": "HYAENA",
+     "artist": "Travis Scott",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6c91e64b7157f1332a4f6b0de9e4c714/250x250-000000-80-0-0.jpg",
+     "rank": 572338
+    },
+    {
+     "id": "dz:2814355352",
+     "title": "Feel It",
+     "artist": "The Tamperer",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d9e2ca1297ea5c769384185dde549cb6/250x250-000000-80-0-0.jpg",
+     "rank": 572307
+    },
+    {
+     "id": "dz:1126603",
+     "title": "Fight Music",
+     "artist": "D12",
+     "art": "https://cdn-images.dzcdn.net/images/cover/df8e1ba1054c1eb75e3f22b6fe51291f/250x250-000000-80-0-0.jpg",
+     "rank": 572017
+    },
+    {
+     "id": "dz:106883562",
+     "title": "Crying at the Discoteque",
+     "artist": "Alcazar",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9804f0692de24b085a848e5eb901f3ab/250x250-000000-80-0-0.jpg",
+     "rank": 569852
+    },
+    {
+     "id": "dz:1496464302",
+     "title": "Ambition For Cash",
+     "artist": "Key Glock",
+     "art": "https://cdn-images.dzcdn.net/images/cover/571f2e76983bbb11409420add09c7c96/250x250-000000-80-0-0.jpg",
+     "rank": 569809
+    },
+    {
+     "id": "dz:1272458492",
+     "title": "Somebody To Love",
+     "artist": "Basstrologe",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1acef27ccb54125c42562a5a4cf0baa5/250x250-000000-80-0-0.jpg",
+     "rank": 568631
+    },
+    {
+     "id": "dz:85963015",
+     "title": "Exploration Of Space",
+     "artist": "Cosmic Gate",
+     "art": "https://cdn-images.dzcdn.net/images/cover/235efcb509f20a018f110bcf6ce6cf09/250x250-000000-80-0-0.jpg",
+     "rank": 566928
+    },
+    {
+     "id": "dz:734508752",
+     "title": "Paparazzi",
+     "artist": "Lady Gaga",
+     "art": "https://cdn-images.dzcdn.net/images/cover/fad7de079aa103d60ec1e2d1582c2281/250x250-000000-80-0-0.jpg",
+     "rank": 564763
+    },
+    {
+     "id": "dz:2885363032",
+     "title": "Bad Karma",
+     "artist": "Axel Thesleff",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b309d8d2a885e19cac16de0732de3621/250x250-000000-80-0-0.jpg",
+     "rank": 563366
+    },
+    {
+     "id": "dz:14524977",
+     "title": "Heart Skips a Beat (feat. Rizzle Kicks)",
+     "artist": "Olly Murs",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5c0bb2cb52c07b537ddd8f79ea8ee9cf/250x250-000000-80-0-0.jpg",
+     "rank": 550819
+    },
+    {
      "id": "dz:1379055342",
      "title": "All Good Things (Come To An End)",
      "artist": "Nelly Furtado",
      "art": "https://cdn-images.dzcdn.net/images/cover/a0b69fb75c9acec1e189a562b3285a55/250x250-000000-80-0-0.jpg",
      "rank": 548085
+    },
+    {
+     "id": "dz:3786808562",
+     "title": "Let the Beat Go On",
+     "artist": "Dr. Alban",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1a3ace96a1dbcc540cfdef7ba2e3b506/250x250-000000-80-0-0.jpg",
+     "rank": 547282
     },
     {
      "id": "dz:17148438",
@@ -329,11 +1379,95 @@
      "rank": 547248
     },
     {
+     "id": "dz:3089012",
+     "title": "The Good, The Bad And The Ugly",
+     "artist": "Ennio Morricone",
+     "art": "https://cdn-images.dzcdn.net/images/cover/de1b27f01ec86cd6afc65c1591313c1e/250x250-000000-80-0-0.jpg",
+     "rank": 545461
+    },
+    {
+     "id": "dz:3643199052",
+     "title": "The Fate of Ophelia",
+     "artist": "Taylor Swift",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e8a5eb15ffb5aa81db91233740fab76c/250x250-000000-80-0-0.jpg",
+     "rank": 541748
+    },
+    {
+     "id": "dz:3310512",
+     "title": "West End Girls",
+     "artist": "Pet Shop Boys",
+     "art": "https://cdn-images.dzcdn.net/images/cover/393d2ce1ba348485b895213e226bd9da/250x250-000000-80-0-0.jpg",
+     "rank": 538601
+    },
+    {
+     "id": "dz:3497814621",
+     "title": "PARANOIA",
+     "artist": "HEARTSTEEL",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b8add63bfef00aa9b8b9ce2888c89047/250x250-000000-80-0-0.jpg",
+     "rank": 536660
+    },
+    {
+     "id": "dz:1173629952",
+     "title": "Derezzed",
+     "artist": "Daft Punk",
+     "art": "https://cdn-images.dzcdn.net/images/cover/313e8a988614445ab1ad508da2805187/250x250-000000-80-0-0.jpg",
+     "rank": 534419
+    },
+    {
+     "id": "dz:3602693782",
+     "title": "Don't Stop The Music (Slowed)",
+     "artist": "Ed Marquis",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a2a7b40c9b10b4ca729a3c6b6db07446/250x250-000000-80-0-0.jpg",
+     "rank": 533635
+    },
+    {
      "id": "dz:1369412542",
      "title": "Colorado",
      "artist": "Milky Chance",
      "art": "https://cdn-images.dzcdn.net/images/cover/285882a0fb5e2df6700880988c89c647/250x250-000000-80-0-0.jpg",
      "rank": 533419
+    },
+    {
+     "id": "dz:123491176",
+     "title": "Clubbed to Death",
+     "artist": "Robert D",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b76219c2e3f238c6413b17cf23031a74/250x250-000000-80-0-0.jpg",
+     "rank": 526534
+    },
+    {
+     "id": "dz:548725862",
+     "title": "Gypsy Woman (She's Homeless) (La Da Dee La Da Da)",
+     "artist": "Crystal Waters",
+     "art": "https://cdn-images.dzcdn.net/images/cover/12c05f31d7113351a92e372879cf9880/250x250-000000-80-0-0.jpg",
+     "rank": 525743
+    },
+    {
+     "id": "dz:441426162",
+     "title": "Techno Syndrome (Mortal Kombat)",
+     "artist": "The Immortals",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3a93527b09a539e9b78a190dc26aeff2/250x250-000000-80-0-0.jpg",
+     "rank": 523597
+    },
+    {
+     "id": "dz:2223049637",
+     "title": "Keep Your Eyes Peeled",
+     "artist": "ULTRA SUNN",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bf76723d2db30e123ef7324532a8458c/250x250-000000-80-0-0.jpg",
+     "rank": 522935
+    },
+    {
+     "id": "dz:2079969417",
+     "title": "You Give Me A Feeling",
+     "artist": "Vintage Culture",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f44bbb20586c200c6a4a1b3d33fa5690/250x250-000000-80-0-0.jpg",
+     "rank": 522879
+    },
+    {
+     "id": "dz:1638506712",
+     "title": "Crystals",
+     "artist": "Isolate.exe",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d63fef196e33ff3dd74cf8941bb190f9/250x250-000000-80-0-0.jpg",
+     "rank": 516148
     },
     {
      "id": "dz:88449443",
@@ -343,11 +1477,88 @@
      "rank": 513856
     },
     {
+     "id": "dz:97173552",
+     "title": "Ain't Talkin' 'Bout Love",
+     "artist": "Van Halen",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4b833c9a27e8b9e6522037ce94db6658/250x250-000000-80-0-0.jpg",
+     "rank": 513772
+    },
+    {
+     "id": "dz:2522607211",
+     "title": "Force",
+     "artist": "Alan Walker",
+     "art": "https://cdn-images.dzcdn.net/images/cover/430e1f976e0bd1d49b6ffea1f0b0c288/250x250-000000-80-0-0.jpg",
+     "rank": 506111
+    },
+    {
+     "id": "dz:3611390832",
+     "title": "Think",
+     "artist": "KALEIDA",
+     "art": "https://cdn-images.dzcdn.net/images/cover/078701176283a58ab4feee816b6e5121/250x250-000000-80-0-0.jpg",
+     "rank": 505576
+    },
+    {
+     "id": "dz:2391684295",
+     "title": "My Addiction",
+     "artist": "Alex Guesta",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b9846f36c28c8fc9f33b411e7494e3ad/250x250-000000-80-0-0.jpg",
+     "rank": 504704
+    },
+    {
+     "id": "dz:3794589632",
+     "title": "Why We Lose",
+     "artist": "Cartoon",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0bb91937d9d793e5911026b0626305da/250x250-000000-80-0-0.jpg",
+     "rank": 501604
+    },
+    {
+     "id": "dz:1104527",
+     "title": "Round Round",
+     "artist": "Sugababes",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1fc2619763138c7dae688eb141daa5ec/250x250-000000-80-0-0.jpg",
+     "rank": 496352
+    },
+    {
      "id": "dz:987461812",
      "title": "Pigstep (Stereo Mix)",
      "artist": "Lena Raine",
      "art": "https://cdn-images.dzcdn.net/images/cover/03b7ba57eba9250f860d5b11ffc7dbf8/250x250-000000-80-0-0.jpg",
      "rank": 491687
+    },
+    {
+     "id": "dz:2733702",
+     "title": "Poker Face",
+     "artist": "Lady Gaga",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a37eda3f9211ed438b1651f2a0a5f4f2/250x250-000000-80-0-0.jpg",
+     "rank": 490372
+    },
+    {
+     "id": "dz:734508742",
+     "title": "LoveGame",
+     "artist": "Lady Gaga",
+     "art": "https://cdn-images.dzcdn.net/images/cover/fad7de079aa103d60ec1e2d1582c2281/250x250-000000-80-0-0.jpg",
+     "rank": 486508
+    },
+    {
+     "id": "dz:1939704487",
+     "title": "Ready To Fly",
+     "artist": "Sub Focus",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6260a2528f2e7257e5273dfb68d317bc/250x250-000000-80-0-0.jpg",
+     "rank": 486472
+    },
+    {
+     "id": "dz:2335413405",
+     "title": "Ascend (My Mind Edit)",
+     "artist": "Dezko",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f1322fac4c8e4db85ff2540143af6c8a/250x250-000000-80-0-0.jpg",
+     "rank": 483632
+    },
+    {
+     "id": "dz:90182731",
+     "title": "I Loved You (feat. Melissa Steel)",
+     "artist": "Blonde",
+     "art": "https://cdn-images.dzcdn.net/images/cover/24f1ad60ed462972c150555bdad53147/250x250-000000-80-0-0.jpg",
+     "rank": 482264
     },
     {
      "id": "dz:30762781",
@@ -357,11 +1568,123 @@
      "rank": 481601
     },
     {
+     "id": "dz:3045268991",
+     "title": "Don't You (Forget About Me)",
+     "artist": "Simple Minds",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b3ccf0868de68a10e4dfec5d5029bec3/250x250-000000-80-0-0.jpg",
+     "rank": 479964
+    },
+    {
+     "id": "dz:1765791277",
+     "title": "Shadow Lady",
+     "artist": "Portwave",
+     "art": "https://cdn-images.dzcdn.net/images/cover/291d8d660c304bf4e4b629b8f3d6ac74/250x250-000000-80-0-0.jpg",
+     "rank": 478890
+    },
+    {
+     "id": "dz:796301332",
+     "title": "Called Out In The Dark",
+     "artist": "Snow Patrol",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e9a9e851d965f52c07dd80b339cf4ce4/250x250-000000-80-0-0.jpg",
+     "rank": 476553
+    },
+    {
+     "id": "dz:13178654",
+     "title": "Aicha",
+     "artist": "Outlandish",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ca0369fa47f42b3809c32a2028f73df5/250x250-000000-80-0-0.jpg",
+     "rank": 476511
+    },
+    {
+     "id": "dz:540861142",
+     "title": "Let the Music Play",
+     "artist": "Shannon",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b38018daaefd56ce18e3125c7ed5d91c/250x250-000000-80-0-0.jpg",
+     "rank": 476272
+    },
+    {
+     "id": "dz:3731377",
+     "title": "Heavy Cross (Fred Falke Remix)",
+     "artist": "Gossip",
+     "art": "https://cdn-images.dzcdn.net/images/cover/40926286a839b50ec3edf7a8ca6cf74a/250x250-000000-80-0-0.jpg",
+     "rank": 475555
+    },
+    {
+     "id": "dz:2382069565",
+     "title": "Something Real",
+     "artist": "Post Malone",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5632768511a9f75966446ab265532d95/250x250-000000-80-0-0.jpg",
+     "rank": 473383
+    },
+    {
+     "id": "dz:3413930831",
+     "title": "Run to Me",
+     "artist": "Double You",
+     "art": "https://cdn-images.dzcdn.net/images/cover/711315bc27d6411e45e158dee0d84a17/250x250-000000-80-0-0.jpg",
+     "rank": 472337
+    },
+    {
+     "id": "dz:122844838",
+     "title": "The Original Theme from \"Blade\"",
+     "artist": "The Pump Panel, Dan Zamani, Tim Taylor (Missile Records)",
+     "art": "https://cdn-images.dzcdn.net/images/cover/fb7cb5107ce7726d908c00e8b21cad00/250x250-000000-80-0-0.jpg",
+     "rank": 471227
+    },
+    {
+     "id": "dz:135376666",
+     "title": "Edge of Seventeen",
+     "artist": "Stevie Nicks",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6ff23019f5d481542c19706995c7980c/250x250-000000-80-0-0.jpg",
+     "rank": 470055
+    },
+    {
+     "id": "dz:16620204",
+     "title": "Genesis",
+     "artist": "Grimes",
+     "art": "https://cdn-images.dzcdn.net/images/cover/933f719eb9a35bcde452c9bfe94c9d6d/250x250-000000-80-0-0.jpg",
+     "rank": 467837
+    },
+    {
+     "id": "dz:437462422",
+     "title": "Overload",
+     "artist": "Sugababes",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7be516eca7d7d564697a5d23341ba017/250x250-000000-80-0-0.jpg",
+     "rank": 460624
+    },
+    {
      "id": "dz:2277682",
      "title": "Shut Your Eyes",
      "artist": "Snow Patrol",
      "art": "https://cdn-images.dzcdn.net/images/cover/9ee7706b36b945e9702a4a6ff822cdf6/250x250-000000-80-0-0.jpg",
      "rank": 460225
+    },
+    {
+     "id": "dz:3615860382",
+     "title": "Think About Us (feat. Poppy Baskcomb)",
+     "artist": "Sonny Fodera",
+     "art": "https://cdn-images.dzcdn.net/images/cover/367b55d7f3eead92ec87a85908c5dec3/250x250-000000-80-0-0.jpg",
+     "rank": 456470
+    },
+    {
+     "id": "dz:2023250297",
+     "title": "Soviet Connection (Theme from GTA IV)",
+     "artist": "Michael Hunter",
+     "art": "https://cdn-images.dzcdn.net/images/cover/eae9571db0b59ffcf918f5facbf3a4e5/250x250-000000-80-0-0.jpg",
+     "rank": 456270
+    },
+    {
+     "id": "dz:3656062452",
+     "title": "Groovejet (If This Ain't Love)",
+     "artist": "Sophie Ellis-Bextor",
+     "art": "https://cdn-images.dzcdn.net/images/cover/23d4cf2b24bef51c3323ed6d149af625/250x250-000000-80-0-0.jpg",
+     "rank": 450052
+    },
+    {
+     "id": "dz:94820334",
+     "title": "Mr. Jones",
+     "artist": "Counting Crows",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0fafa654b694509e2f06bb62a96cf602/250x250-000000-80-0-0.jpg",
+     "rank": 445040
     },
     {
      "id": "dz:1961748297",
@@ -371,18 +1694,39 @@
      "rank": 442857
     },
     {
-     "id": "dz:3526387001",
-     "title": "Walk (feat. Kwabs)",
-     "artist": "BOVSKI",
-     "art": "https://cdn-images.dzcdn.net/images/cover/6d295fcdb5e1f156b99aabdec9d8d7f0/250x250-000000-80-0-0.jpg",
-     "rank": 438442
-    },
-    {
      "id": "dz:6113105",
      "title": "Watercolour",
      "artist": "Pendulum",
      "art": "https://cdn-images.dzcdn.net/images/cover/d4487e6e09a59bd14c7890b87f90ad4c/250x250-000000-80-0-0.jpg",
      "rank": 433205
+    },
+    {
+     "id": "dz:2314030",
+     "title": "I See Right Through To You",
+     "artist": "DJ Encore",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0112df89c13906c6e41a33dd120b48da/250x250-000000-80-0-0.jpg",
+     "rank": 432087
+    },
+    {
+     "id": "dz:2153935377",
+     "title": "Vibration (One More Time)",
+     "artist": "Sub Focus",
+     "art": "https://cdn-images.dzcdn.net/images/cover/43c526acb62e3fb77b639598b0bebe20/250x250-000000-80-0-0.jpg",
+     "rank": 429342
+    },
+    {
+     "id": "dz:1414907302",
+     "title": "Born This Way",
+     "artist": "Lady Gaga",
+     "art": "https://cdn-images.dzcdn.net/images/cover/978f47c36f2b688992c88c0dcae211a0/250x250-000000-80-0-0.jpg",
+     "rank": 427977
+    },
+    {
+     "id": "dz:2332582685",
+     "title": "Untitled #13 (Slowed + Reverb)",
+     "artist": "Glwzbll",
+     "art": "https://cdn-images.dzcdn.net/images/cover/50d240bab0c036c7957454633bcec699/250x250-000000-80-0-0.jpg",
+     "rank": 425217
     },
     {
      "id": "dz:1045832682",
@@ -392,11 +1736,60 @@
      "rank": 423608
     },
     {
+     "id": "dz:121017058",
+     "title": "Venger (feat. Greta Link)",
+     "artist": "Perturbator",
+     "art": "https://cdn-images.dzcdn.net/images/cover/65b46897c1a71ded88d18c9f32e61af2/250x250-000000-80-0-0.jpg",
+     "rank": 419904
+    },
+    {
      "id": "dz:2174201977",
      "title": "Beautiful Day",
      "artist": "U2",
      "art": "https://cdn-images.dzcdn.net/images/cover/ff34117d14ea62a431e6e16f1a74fa72/250x250-000000-80-0-0.jpg",
      "rank": 419724
+    },
+    {
+     "id": "dz:866235062",
+     "title": "Sunrise",
+     "artist": "Movin",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6d1cc759ce0c57573e9474d513f01f1f/250x250-000000-80-0-0.jpg",
+     "rank": 416920
+    },
+    {
+     "id": "dz:534964",
+     "title": "Freestyler",
+     "artist": "Bomfunk MC's",
+     "art": "https://cdn-images.dzcdn.net/images/cover/cafda36f44d15143abdb48cd18f604af/250x250-000000-80-0-0.jpg",
+     "rank": 410920
+    },
+    {
+     "id": "dz:3212563611",
+     "title": "Adagio For Strings",
+     "artist": "Tiësto",
+     "art": "https://cdn-images.dzcdn.net/images/cover/dcf1f850788fafd46b305d16c9ccd209/250x250-000000-80-0-0.jpg",
+     "rank": 399169
+    },
+    {
+     "id": "dz:3470815781",
+     "title": "To The Top (feat. Christopher Martin)",
+     "artist": "Gentleman",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e9febe6cbce88c564a69b2dcda325871/250x250-000000-80-0-0.jpg",
+     "rank": 397114
+    },
+    {
+     "id": "dz:13027976",
+     "title": "X Gon' Give It to Ya",
+     "artist": "DMX",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2d771185c28c01bc179500e93664bed2/250x250-000000-80-0-0.jpg",
+     "rank": 393429
+    },
+    {
+     "id": "dz:7804176",
+     "title": "Explosion",
+     "artist": "Kalwi & Remi",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6b5d3aac5d9ec81abf1177cd0bcab57d/250x250-000000-80-0-0.jpg",
+     "rank": 392327
     },
     {
      "id": "dz:1501659152",
@@ -406,11 +1799,32 @@
      "rank": 392128
     },
     {
+     "id": "dz:471132182",
+     "title": "Immigrant Song",
+     "artist": "Led Zeppelin",
+     "art": "https://cdn-images.dzcdn.net/images/cover/87e158f93de3f2709905dd6714818832/250x250-000000-80-0-0.jpg",
+     "rank": 388793
+    },
+    {
+     "id": "dz:1097093832",
+     "title": "Hope",
+     "artist": "Tobu",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f15a01312fb579f2fc65b73ce622ce88/250x250-000000-80-0-0.jpg",
+     "rank": 388327
+    },
+    {
      "id": "dz:8177332",
      "title": "Restless",
      "artist": "Kakkmaddafakka",
      "art": "https://cdn-images.dzcdn.net/images/cover/533df6c18486d7dc50d808446d3b5e2c/250x250-000000-80-0-0.jpg",
      "rank": 387713
+    },
+    {
+     "id": "dz:101022014",
+     "title": "Generate",
+     "artist": "Eric Prydz",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d2f0f2f8331e59e5e75b6e885a0ada46/250x250-000000-80-0-0.jpg",
+     "rank": 386088
     },
     {
      "id": "dz:414746462",
@@ -420,11 +1834,39 @@
      "rank": 380776
     },
     {
+     "id": "dz:480553372",
+     "title": "Cracks",
+     "artist": "Freestylers",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2419ffb617958af70245110d8d4d3609/250x250-000000-80-0-0.jpg",
+     "rank": 380421
+    },
+    {
+     "id": "dz:907306712",
+     "title": "In For The Kill",
+     "artist": "La Roux",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1d387cb950e18715b02cd127348364de/250x250-000000-80-0-0.jpg",
+     "rank": 377851
+    },
+    {
      "id": "dz:3036070741",
      "title": "Control",
      "artist": "Matrix & Futurebound",
      "art": "https://cdn-images.dzcdn.net/images/cover/48d748b8e27578868e09eb10d9859203/250x250-000000-80-0-0.jpg",
      "rank": 376383
+    },
+    {
+     "id": "dz:750113612",
+     "title": "Illuminate",
+     "artist": "Sub Focus",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1ad211063332743780d563f8d3907be6/250x250-000000-80-0-0.jpg",
+     "rank": 369438
+    },
+    {
+     "id": "dz:1097096612",
+     "title": "Sunburst",
+     "artist": "Tobu",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5992a585e78e0b3ae597dde4dad515bb/250x250-000000-80-0-0.jpg",
+     "rank": 367921
     },
     {
      "id": "dz:763450382",
@@ -434,11 +1876,46 @@
      "rank": 364136
     },
     {
+     "id": "dz:1264689762",
+     "title": "Church (feat. Teddy Verseti)",
+     "artist": "T-Pain",
+     "art": "https://cdn-images.dzcdn.net/images/cover/710ecdeec90b95e744f73003532927d5/250x250-000000-80-0-0.jpg",
+     "rank": 361296
+    },
+    {
+     "id": "dz:4146394712",
+     "title": "Time Back",
+     "artist": "Bad Style",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b26e03f292e6f1f7a8686a9bc778e3e5/250x250-000000-80-0-0.jpg",
+     "rank": 359449
+    },
+    {
      "id": "dz:61245286",
      "title": "Dreamscape",
      "artist": "009 Sound System",
      "art": "https://cdn-images.dzcdn.net/images/cover/e59b2a9bf224eead61285de358bf677b/250x250-000000-80-0-0.jpg",
      "rank": 347623
+    },
+    {
+     "id": "dz:2598565482",
+     "title": "Over My Shoulder",
+     "artist": "Mike + The Mechanics",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6baaba76f9676c9fcbac590258233ab2/250x250-000000-80-0-0.jpg",
+     "rank": 347345
+    },
+    {
+     "id": "dz:427219902",
+     "title": "Paranoid",
+     "artist": "Black Sabbath",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f7cb51f9d6947f02d943c1fb19bec312/250x250-000000-80-0-0.jpg",
+     "rank": 342143
+    },
+    {
+     "id": "dz:10196781",
+     "title": "Pass Out (feat. Seth Gueko)",
+     "artist": "Tinie Tempah",
+     "art": "https://cdn-images.dzcdn.net/images/cover/48f9a8dd7fc303b3b1379c3b8f5a485b/250x250-000000-80-0-0.jpg",
+     "rank": 338366
     },
     {
      "id": "dz:1496649862",
@@ -448,11 +1925,109 @@
      "rank": 336493
     },
     {
+     "id": "dz:598046262",
+     "title": "The Rain",
+     "artist": "DMX",
+     "art": "https://cdn-images.dzcdn.net/images/cover/648980d8e0ed9f0f5aa6ba160399c7d3/250x250-000000-80-0-0.jpg",
+     "rank": 335913
+    },
+    {
      "id": "dz:53028811",
      "title": "Ghost Assassin",
      "artist": "Maduk",
      "art": "https://cdn-images.dzcdn.net/images/cover/707df47b12fdb6c0324895780854afa6/250x250-000000-80-0-0.jpg",
      "rank": 333405
+    },
+    {
+     "id": "dz:1372667512",
+     "title": "Just Like a Pill",
+     "artist": "P!nk",
+     "art": "https://cdn-images.dzcdn.net/images/cover/75116fed2a7ca9c10bf4718baed8baee/250x250-000000-80-0-0.jpg",
+     "rank": 330868
+    },
+    {
+     "id": "dz:3383567691",
+     "title": "Ready Steady Go",
+     "artist": "Paul Oakenfold",
+     "art": "https://cdn-images.dzcdn.net/images/cover/923f899eab581e53eceaeb4a15bbf533/250x250-000000-80-0-0.jpg",
+     "rank": 322539
+    },
+    {
+     "id": "dz:668937112",
+     "title": "Powerless (Say What You Want)",
+     "artist": "Nelly Furtado",
+     "art": "https://cdn-images.dzcdn.net/images/cover/76b9f68279040d67c49c977b657f8907/250x250-000000-80-0-0.jpg",
+     "rank": 317886
+    },
+    {
+     "id": "dz:2404408815",
+     "title": "Ghost Voices",
+     "artist": "Virtual Self",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d88ec13c5befe65124c670d4bc2b9c68/250x250-000000-80-0-0.jpg",
+     "rank": 314860
+    },
+    {
+     "id": "dz:15686777",
+     "title": "Praise You",
+     "artist": "Fatboy Slim",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3893ecf99ac169ed8587ec2e22ef6b89/250x250-000000-80-0-0.jpg",
+     "rank": 311621
+    },
+    {
+     "id": "dz:3134749521",
+     "title": "Around the World",
+     "artist": "ARIIS",
+     "art": "https://cdn-images.dzcdn.net/images/cover/59a95f45607fa319463b0dbd3e27a462/250x250-000000-80-0-0.jpg",
+     "rank": 310915
+    },
+    {
+     "id": "dz:500090262",
+     "title": "Too Close",
+     "artist": "Alex Clare",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b3dcb92a7c20b5c7be515f924bbf5a6a/250x250-000000-80-0-0.jpg",
+     "rank": 302537
+    },
+    {
+     "id": "dz:1795356477",
+     "title": "Eyes on Fire",
+     "artist": "LEOWI",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ef7a5df1f0ab527d23831b8a47d8eff2/250x250-000000-80-0-0.jpg",
+     "rank": 302391
+    },
+    {
+     "id": "dz:1008880902",
+     "title": "Hackers",
+     "artist": "Karl Casey",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3a22d0043f063ac5a6166ec11a50cd23/250x250-000000-80-0-0.jpg",
+     "rank": 301398
+    },
+    {
+     "id": "dz:977470922",
+     "title": "Belt",
+     "artist": "Ekstrak",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ed9f4e484247c41934b899f69bec7e7b/250x250-000000-80-0-0.jpg",
+     "rank": 297874
+    },
+    {
+     "id": "dz:2189048707",
+     "title": "Let Me Down Slowly",
+     "artist": "Kratos",
+     "art": "https://cdn-images.dzcdn.net/images/cover/66c9866cb294f303cd5985373133219f/250x250-000000-80-0-0.jpg",
+     "rank": 297371
+    },
+    {
+     "id": "dz:105998356",
+     "title": "Walk (feat. Fetty Wap)",
+     "artist": "Kwabs",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7e289474ff1a2224c1617a9d7f400678/250x250-000000-80-0-0.jpg",
+     "rank": 293876
+    },
+    {
+     "id": "dz:2023271087",
+     "title": "Soviet Connection — The Theme from Grand Theft Auto IV",
+     "artist": "Michael Hunter",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6c7a8f6afb03d0696c0b4d93974402a9/250x250-000000-80-0-0.jpg",
+     "rank": 292152
     },
     {
      "id": "dz:738383872",
@@ -462,11 +2037,60 @@
      "rank": 283861
     },
     {
+     "id": "dz:3805776302",
+     "title": "In Your Eyes (Live From The Tension Tour)",
+     "artist": "Kylie Minogue",
+     "art": "https://cdn-images.dzcdn.net/images/cover/386a1eb35e2699578b80de9380674fa7/250x250-000000-80-0-0.jpg",
+     "rank": 279283
+    },
+    {
+     "id": "dz:3470766201",
+     "title": "Superior",
+     "artist": "Gentleman",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5ce36a7c4029c6c32f66cc477fd3f116/250x250-000000-80-0-0.jpg",
+     "rank": 277527
+    },
+    {
+     "id": "dz:965147472",
+     "title": "Son Of A Gun",
+     "artist": "Key Glock",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9ef0a8cff83580d5b3c34ede9664a0a5/250x250-000000-80-0-0.jpg",
+     "rank": 273853
+    },
+    {
      "id": "dz:76657567",
      "title": "Come on Now (Set It Off)",
      "artist": "Tube & Berger",
      "art": "https://cdn-images.dzcdn.net/images/cover/a67f65fa918fda58bf45f66a7de68e3f/250x250-000000-80-0-0.jpg",
      "rank": 269216
+    },
+    {
+     "id": "dz:2404839565",
+     "title": "Ciocolata",
+     "artist": "Tzanca Uraganu",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d4db5f5d0652e2b9bfc93e89c9e5b564/250x250-000000-80-0-0.jpg",
+     "rank": 261871
+    },
+    {
+     "id": "dz:80198286",
+     "title": "Lovers on the Sun (feat. Sam Martin)",
+     "artist": "David Guetta",
+     "art": "https://cdn-images.dzcdn.net/images/cover/24d3e54ac48a69ea172a36198cb49680/250x250-000000-80-0-0.jpg",
+     "rank": 258020
+    },
+    {
+     "id": "dz:1760909207",
+     "title": "Relax, Take It Easy",
+     "artist": "MIKA",
+     "art": "https://cdn-images.dzcdn.net/images/cover/47c526f1a14dbeabb40352e400153bba/250x250-000000-80-0-0.jpg",
+     "rank": 256552
+    },
+    {
+     "id": "dz:61245296",
+     "title": "Born To Be Wasted",
+     "artist": "009 Sound System",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e59b2a9bf224eead61285de358bf677b/250x250-000000-80-0-0.jpg",
+     "rank": 254823
     },
     {
      "id": "dz:1922397017",
@@ -483,6 +2107,13 @@
      "rank": 254416
     },
     {
+     "id": "dz:1217527502",
+     "title": "La Bamba",
+     "artist": "Los Lobos",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8a135244856f4a1541d3b1c23e82eb78/250x250-000000-80-0-0.jpg",
+     "rank": 251277
+    },
+    {
      "id": "dz:2175277707",
      "title": "All I See",
      "artist": "Anja Schneider",
@@ -497,11 +2128,88 @@
      "rank": 239912
     },
     {
+     "id": "dz:145018974",
+     "title": "Us Against the World",
+     "artist": "Darren Styles",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6a2569f34f8d4a6572855d737a72a7a2/250x250-000000-80-0-0.jpg",
+     "rank": 235764
+    },
+    {
+     "id": "dz:2607925",
+     "title": "Breaking the Habit",
+     "artist": "Linkin Park",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d49e0dd7cbf6f32e09261e0a49981660/250x250-000000-80-0-0.jpg",
+     "rank": 234988
+    },
+    {
+     "id": "dz:3067843481",
+     "title": "Killamonjaro",
+     "artist": "KILLY",
+     "art": "https://cdn-images.dzcdn.net/images/cover/83445d331349a5ca7490e7b8a08b8f93/250x250-000000-80-0-0.jpg",
+     "rank": 233744
+    },
+    {
+     "id": "dz:3069960631",
+     "title": "Our House",
+     "artist": "Madness",
+     "art": "https://cdn-images.dzcdn.net/images/cover/37e474b613114d44d9c8f24c26caa93c/250x250-000000-80-0-0.jpg",
+     "rank": 232243
+    },
+    {
+     "id": "dz:2040504927",
+     "title": "Softcore",
+     "artist": "The Neighbourhood",
+     "art": "https://cdn-images.dzcdn.net/images/cover/804616497a6e2908b528698dc85358b7/250x250-000000-80-0-0.jpg",
+     "rank": 232072
+    },
+    {
+     "id": "dz:144280642",
+     "title": "Le Sciantose Aliene",
+     "artist": "Fratelli Stellari",
+     "art": "https://cdn-images.dzcdn.net/images/cover/cc6545033b9007d8e75810a33b25d17b/250x250-000000-80-0-0.jpg",
+     "rank": 230860
+    },
+    {
      "id": "dz:609311272",
      "title": "Tu Bie",
      "artist": "AirDice",
      "art": "https://cdn-images.dzcdn.net/images/cover/09fa5cf617d49230b53351f8ddb6e6df/250x250-000000-80-0-0.jpg",
      "rank": 228305
+    },
+    {
+     "id": "dz:2770014631",
+     "title": "Ordinary Days V2",
+     "artist": "Klaus Veen",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7419af046c52f7c44fc00ba42afda5c6/250x250-000000-80-0-0.jpg",
+     "rank": 227866
+    },
+    {
+     "id": "dz:87213777",
+     "title": "Dangerous (feat. Sam Martin)",
+     "artist": "David Guetta",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1be5c19b38770609a0884b988d7094c4/250x250-000000-80-0-0.jpg",
+     "rank": 220002
+    },
+    {
+     "id": "dz:61245295",
+     "title": "With A Spirit",
+     "artist": "009 Sound System",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e59b2a9bf224eead61285de358bf677b/250x250-000000-80-0-0.jpg",
+     "rank": 219153
+    },
+    {
+     "id": "dz:429977002",
+     "title": "Slow It Down",
+     "artist": "Amy Macdonald",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d72fb9afb4d6f4a119c3670e5b6b6623/250x250-000000-80-0-0.jpg",
+     "rank": 213135
+    },
+    {
+     "id": "dz:1744278947",
+     "title": "Deep Space Samurai",
+     "artist": "Forever Sunset",
+     "art": "https://cdn-images.dzcdn.net/images/cover/435a4461b2c21c2cac963abc1b3d8384/250x250-000000-80-0-0.jpg",
+     "rank": 205402
     },
     {
      "id": "dz:1067020512",
@@ -511,11 +2219,25 @@
      "rank": 204926
     },
     {
+     "id": "dz:91682906",
+     "title": "Bridges",
+     "artist": "Shaggy",
+     "art": "https://cdn-images.dzcdn.net/images/cover/306798935b5717308953d0baebe33ec4/250x250-000000-80-0-0.jpg",
+     "rank": 203584
+    },
+    {
      "id": "dz:679919202",
      "title": "Banquet",
      "artist": "Bloc Party",
      "art": "https://cdn-images.dzcdn.net/images/cover/b81f605b54bf17db18de007600affcf8/250x250-000000-80-0-0.jpg",
      "rank": 202774
+    },
+    {
+     "id": "dz:9992969",
+     "title": "Hey Baby (Drop It to the Floor) (feat. T-Pain)",
+     "artist": "Pitbull",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0c5e3bc474b4f8a409bb7b1622cfb929/250x250-000000-80-0-0.jpg",
+     "rank": 202644
     },
     {
      "id": "dz:2517523361",
@@ -525,11 +2247,67 @@
      "rank": 201575
     },
     {
+     "id": "dz:1762785867",
+     "title": "Foxtrot Uniform Charlie Kilo",
+     "artist": "Bloodhound Gang",
+     "art": "https://cdn-images.dzcdn.net/images/cover/39b8a8bd0600aa21b1477989659378ae/250x250-000000-80-0-0.jpg",
+     "rank": 200279
+    },
+    {
+     "id": "dz:69212777",
+     "title": "The Duck Song",
+     "artist": "Bryant Oden",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4d8c6db797673b43e7c0876fdc655932/250x250-000000-80-0-0.jpg",
+     "rank": 198768
+    },
+    {
+     "id": "dz:2288483837",
+     "title": "Aweah",
+     "artist": "Yo Maps",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f299180b0e6fc7c98330ab4192ce67cd/250x250-000000-80-0-0.jpg",
+     "rank": 194395
+    },
+    {
+     "id": "dz:2316687275",
+     "title": "Spectrum (Say My Name)",
+     "artist": "Florence + The Machine",
+     "art": "https://cdn-images.dzcdn.net/images/cover/37c5da6642be2d3ddc9ec3471e3a1fd6/250x250-000000-80-0-0.jpg",
+     "rank": 187303
+    },
+    {
+     "id": "dz:3557222121",
+     "title": "São Paulo",
+     "artist": "The Weeknd",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e991ec2d52609a6b804d27b253a8f611/250x250-000000-80-0-0.jpg",
+     "rank": 183030
+    },
+    {
      "id": "dz:2278180337",
      "title": "Heartbeat",
      "artist": "Vicetone",
      "art": "https://cdn-images.dzcdn.net/images/cover/427d4d8d9d2ad31d9947350505823ff1/250x250-000000-80-0-0.jpg",
      "rank": 173581
+    },
+    {
+     "id": "dz:3902234801",
+     "title": "Base After Base 2.0",
+     "artist": "Djvi",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b45f0c5ceeefbd368ba7a5f8cd7d55b0/250x250-000000-80-0-0.jpg",
+     "rank": 165490
+    },
+    {
+     "id": "dz:6123728",
+     "title": "Alejandro",
+     "artist": "Lady Gaga",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a68eb9fd1a508df75909c40aa859aa81/250x250-000000-80-0-0.jpg",
+     "rank": 162671
+    },
+    {
+     "id": "dz:3919578931",
+     "title": "Who Likes to Party",
+     "artist": "Kevin MacLeod",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f26fbe934ace14dfb225786614304f62/250x250-000000-80-0-0.jpg",
+     "rank": 162238
     },
     {
      "id": "dz:23612001",
@@ -539,11 +2317,46 @@
      "rank": 154623
     },
     {
+     "id": "dz:62208443",
+     "title": "You're not alone",
+     "artist": "Maxter",
+     "art": "https://cdn-images.dzcdn.net/images/cover/54ccb05156c46daa4f7e459c8ae0a134/250x250-000000-80-0-0.jpg",
+     "rank": 153789
+    },
+    {
+     "id": "dz:3461713",
+     "title": "Stars",
+     "artist": "Firevision",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c04e3a16af70c27570e51c94a49ce0a3/250x250-000000-80-0-0.jpg",
+     "rank": 152970
+    },
+    {
      "id": "dz:1865588977",
      "title": "Into the Fire",
      "artist": "Kove",
      "art": "https://cdn-images.dzcdn.net/images/cover/54c1b7f6997ec53b958a28e01891c205/250x250-000000-80-0-0.jpg",
      "rank": 151968
+    },
+    {
+     "id": "dz:3902235361",
+     "title": "Can't Let Go 2.0",
+     "artist": "Djvi",
+     "art": "https://cdn-images.dzcdn.net/images/cover/46f2188546676ddc54b1a488cfd3f681/250x250-000000-80-0-0.jpg",
+     "rank": 143017
+    },
+    {
+     "id": "dz:688198712",
+     "title": "Let's Get It Started",
+     "artist": "The Black Eyed Peas",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d50d4b9f208497bffb7cd237900aa78d/250x250-000000-80-0-0.jpg",
+     "rank": 140894
+    },
+    {
+     "id": "dz:3212563551",
+     "title": "Suburban Train",
+     "artist": "Tiësto",
+     "art": "https://cdn-images.dzcdn.net/images/cover/dcf1f850788fafd46b305d16c9ccd209/250x250-000000-80-0-0.jpg",
+     "rank": 138379
     },
     {
      "id": "dz:1611059702",
@@ -553,11 +2366,109 @@
      "rank": 134953
     },
     {
+     "id": "dz:1123400972",
+     "title": "Mr Rock & Roll",
+     "artist": "Amy Macdonald",
+     "art": "https://cdn-images.dzcdn.net/images/cover/27d2aa60431c9dbdb3b871e24af3f9ae/250x250-000000-80-0-0.jpg",
+     "rank": 133987
+    },
+    {
+     "id": "dz:13784899",
+     "title": "Walk Like an Egyptian",
+     "artist": "The Bangles",
+     "art": "https://cdn-images.dzcdn.net/images/cover/49bf07b7bfa385dd1196e1d2c0df6c95/250x250-000000-80-0-0.jpg",
+     "rank": 124321
+    },
+    {
+     "id": "dz:7546493",
+     "title": "What You Know",
+     "artist": "Two Door Cinema Club",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7fc54eedf6752146ea59e7570b48ad3e/250x250-000000-80-0-0.jpg",
+     "rank": 124105
+    },
+    {
+     "id": "dz:14464378",
+     "title": "Judas",
+     "artist": "Lady Gaga",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a546c6696d61a071c97a990239b50fb5/250x250-000000-80-0-0.jpg",
+     "rank": 123327
+    },
+    {
+     "id": "dz:5702224",
+     "title": "Telephone",
+     "artist": "Lady Gaga",
+     "art": "https://cdn-images.dzcdn.net/images/cover/91c3cbb89f4a69576d6ce1fc9e86bf72/250x250-000000-80-0-0.jpg",
+     "rank": 120641
+    },
+    {
+     "id": "dz:373698151",
+     "title": "300 Violin Orchestra (Instrumental)",
+     "artist": "Jorge Quintero",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f70e8dc1175dfcb08d50d26af0c399fb/250x250-000000-80-0-0.jpg",
+     "rank": 114555
+    },
+    {
+     "id": "dz:434309812",
+     "title": "Knowhow",
+     "artist": "Fox Stevenson",
+     "art": "https://cdn-images.dzcdn.net/images/cover/95edd701cf99283062c70ed3a0299792/250x250-000000-80-0-0.jpg",
+     "rank": 100207
+    },
+    {
+     "id": "dz:7226151",
+     "title": "DJ Got Us Fallin' In Love (feat. Pitbull)",
+     "artist": "USHER",
+     "art": "https://cdn-images.dzcdn.net/images/cover/dce24a48f339b72c01ba4db7af7a929d/250x250-000000-80-0-0.jpg",
+     "rank": 91128
+    },
+    {
+     "id": "dz:1450967472",
+     "title": "STURM - A COLORS SHOW",
+     "artist": "Yung Kafa & Kücük Efendi",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7ef14a2ee7b4e004c719f3562b54d86a/250x250-000000-80-0-0.jpg",
+     "rank": 76212
+    },
+    {
+     "id": "dz:93715224",
+     "title": "When Love Takes Over (feat. Kelly Rowland)",
+     "artist": "David Guetta",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ee1ea209237b95cf27a1427ac5ecdec0/250x250-000000-80-0-0.jpg",
+     "rank": 73549
+    },
+    {
+     "id": "dz:698394372",
+     "title": "Main Theme",
+     "artist": "Tim Haywood",
+     "art": "https://cdn-images.dzcdn.net/images/cover/aca2cebb9555a40a75600a473ac0863f/250x250-000000-80-0-0.jpg",
+     "rank": 70496
+    },
+    {
+     "id": "dz:2057242757",
+     "title": "The Bad Touch",
+     "artist": "Bloodhound Gang",
+     "art": "https://cdn-images.dzcdn.net/images/cover/68d1ff1bafc009df9d8dc1bb4708b7cf/250x250-000000-80-0-0.jpg",
+     "rank": 64442
+    },
+    {
      "id": "dz:2966558101",
      "title": "Something Good",
      "artist": "Armitage",
      "art": "https://cdn-images.dzcdn.net/images/cover/e7c836ab786c5c5f964212a549e1e62e/250x250-000000-80-0-0.jpg",
      "rank": 60191
+    },
+    {
+     "id": "dz:886378902",
+     "title": "Sweet Dreams",
+     "artist": "Beyoncé",
+     "art": "https://cdn-images.dzcdn.net/images/cover/28d23a446b474facb8645d9f9138d334/250x250-000000-80-0-0.jpg",
+     "rank": 53893
+    },
+    {
+     "id": "dz:606114752",
+     "title": "Ghosts N Stuff",
+     "artist": "deadmau5",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3ce1e9be934ec88dc381159eb64a0176/250x250-000000-80-0-0.jpg",
+     "rank": 48921
     },
     {
      "id": "dz:1443185312",
@@ -567,11 +2478,11 @@
      "rank": 41368
     },
     {
-     "id": "dz:66771578",
-     "title": "New Age (In the Style of Marlon Roudette) [Karaoke Instrumental Version]",
-     "artist": "All Hits Gold",
-     "art": "https://cdn-images.dzcdn.net/images/cover/5fbe7c94c9b2b358db62793dfd58ade3/250x250-000000-80-0-0.jpg",
-     "rank": 26065
+     "id": "dz:948604612",
+     "title": "One More Night",
+     "artist": "Silent Circle",
+     "art": "https://cdn-images.dzcdn.net/images/cover/499de93186fda82805bc7ea9953161ab/250x250-000000-80-0-0.jpg",
+     "rank": 30187
     },
     {
      "id": "dz:1699666417",
@@ -587,7 +2498,8 @@
      "art": "https://cdn-images.dzcdn.net/images/cover/ff7544fc76b72e75a697d6312aa0b20e/250x250-000000-80-0-0.jpg",
      "rank": 967
     }
-   ]
+   ],
+   "focus": "50% 24%"
   },
   {
    "id": "kanye-west",

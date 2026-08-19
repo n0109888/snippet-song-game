@@ -2858,6 +2858,4934 @@
    "focus": "50% 12%"
   },
   {
+   "id": "onepixel-90",
+   "name": "ONEPIXEL 90",
+   "note": "onepixel 90",
+   "image": "/onepixel-90.png",
+   "tracks": [
+    {
+     "id": "dz:17347911",
+     "title": "Mr. Vain (Original Radio Edit)",
+     "artist": "Culture Beat",
+     "art": "https://cdn-images.dzcdn.net/images/cover/206689d00d08934d9dafe9d010f28089/250x250-000000-80-0-0.jpg",
+     "rank": 783217,
+     "date": "1993-01-01"
+    },
+    {
+     "id": "dz:3684450862",
+     "title": "Think About the Way",
+     "artist": "Ice MC",
+     "art": "https://cdn-images.dzcdn.net/images/cover/506b47b3c76818dd08491a2de84a166c/250x250-000000-80-0-0.jpg",
+     "rank": 580562,
+     "date": "1994-01-01"
+    },
+    {
+     "id": "dz:918091082",
+     "title": "Somebody Dance with Me",
+     "artist": "DJ Bobo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/54a77c51fbbc277b0b2f161415fb9495/250x250-000000-80-0-0.jpg",
+     "rank": 467920,
+     "date": "2017-04-21"
+    },
+    {
+     "id": "dz:428735372",
+     "title": "It's Alright (The Guvnor Mix)",
+     "artist": "East 17",
+     "art": "https://cdn-images.dzcdn.net/images/cover/22f7300c069f31ac9936dab23cb644c4/250x250-000000-80-0-0.jpg",
+     "rank": 562879,
+     "date": "1992-01-01"
+    },
+    {
+     "id": "dz:4096754",
+     "title": "Be My Lover",
+     "artist": "La Bouche",
+     "art": "https://cdn-images.dzcdn.net/images/cover/02f880e927fe2d0ea5c5c234ef0bd050/250x250-000000-80-0-0.jpg",
+     "rank": 810289,
+     "date": "2009-08-31"
+    },
+    {
+     "id": "dz:94676692",
+     "title": "All That She Wants",
+     "artist": "Ace of Base",
+     "art": "https://cdn-images.dzcdn.net/images/cover/599c31e92ab91c01f8fb889a96e54544/250x250-000000-80-0-0.jpg",
+     "rank": 861237,
+     "date": "2015-01-19"
+    },
+    {
+     "id": "dz:2834954462",
+     "title": "The Spirit of Hawk",
+     "artist": "Rednex",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e494d433f4c89fabd4d28ba5a150a0b1/250x250-000000-80-0-0.jpg",
+     "rank": 69988,
+     "date": "2017-04-09"
+    },
+    {
+     "id": "dz:13166572",
+     "title": "Sweet Dreams",
+     "artist": "La Bouche",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c8fdde82cddf77b7a209ad5706bc02f2/250x250-000000-80-0-0.jpg",
+     "rank": 672155,
+     "date": "2007-03-01"
+    },
+    {
+     "id": "dz:3782900362",
+     "title": "It's My Life",
+     "artist": "Dr. Alban",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e6f6ca68c135edd64ced16a29cb07e37/250x250-000000-80-0-0.jpg",
+     "rank": 493569,
+     "date": "2026-01-28"
+    },
+    {
+     "id": "dz:143154464",
+     "title": "More And More (Single Version)",
+     "artist": "Captain Hollywood Project",
+     "art": "https://cdn-images.dzcdn.net/images/cover/55053ac3f523c231fb7850e67731b9e6/250x250-000000-80-0-0.jpg",
+     "rank": 671187,
+     "date": "1992-07-10"
+    },
+    {
+     "id": "dz:3801341602",
+     "title": "Sing Hallelujah! (Short Version)",
+     "artist": "Dr. Alban",
+     "art": "https://cdn-images.dzcdn.net/images/cover/332e1a5c1b0c81b38032fd50e355e00f/250x250-000000-80-0-0.jpg",
+     "rank": 745953,
+     "date": "2026-01-28"
+    },
+    {
+     "id": "dz:3558361541",
+     "title": "Jein",
+     "artist": "Fettes Brot",
+     "art": "https://cdn-images.dzcdn.net/images/cover/04ec597a56b302b187b416e25c8fa63b/250x250-000000-80-0-0.jpg",
+     "rank": 565653,
+     "date": "1996-04-08"
+    },
+    {
+     "id": "dz:1584416372",
+     "title": "Gangsta's Paradise",
+     "artist": "Coolio",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a123b2c32996a8c8664a82cb4219ce0c/250x250-000000-80-0-0.jpg",
+     "rank": 968342,
+     "date": "1995-10-02"
+    },
+    {
+     "id": "dz:5105781",
+     "title": "Narcotic",
+     "artist": "Liquido",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d87cbdc3b15fceae18aea54f94b74b7f/250x250-000000-80-0-0.jpg",
+     "rank": 780972,
+     "date": "2026-01-28"
+    },
+    {
+     "id": "dz:1670911932",
+     "title": "I Wanna Give (Extended Radio)",
+     "artist": "Taleesa",
+     "art": "https://cdn-images.dzcdn.net/images/cover/13ba58b10a1804894e169c9d686ce718/250x250-000000-80-0-0.jpg",
+     "rank": 59541,
+     "date": "2014-07-15"
+    },
+    {
+     "id": "dz:1806786907",
+     "title": "Would I Lie To You?",
+     "artist": "Charles & Eddie",
+     "art": "https://cdn-images.dzcdn.net/images/cover/41d82d36dbf9b4ed25024a1ef5b5bf5c/250x250-000000-80-0-0.jpg",
+     "rank": 741102,
+     "date": "2022-07-01"
+    },
+    {
+     "id": "dz:93915710",
+     "title": "Ruby",
+     "artist": "Kaiser Chiefs",
+     "art": "https://cdn-images.dzcdn.net/images/cover/627058076669a0d5e95acf591e400acd/250x250-000000-80-0-0.jpg",
+     "rank": 451479,
+     "date": "2015-01-22"
+    },
+    {
+     "id": "dz:1484703292",
+     "title": "Somebody's Watching Me",
+     "artist": "Rockwell",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6c222ff151184d53d441fc8c7c3163e8/250x250-000000-80-0-0.jpg",
+     "rank": 745694,
+     "date": "2021-09-10"
+    },
+    {
+     "id": "dz:698260",
+     "title": "Big in Japan",
+     "artist": "Alphaville",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3cba7135b09c8e54f36a85ab857c5dff/250x250-000000-80-0-0.jpg",
+     "rank": 820384,
+     "date": "2005-02-22"
+    },
+    {
+     "id": "dz:3328953781",
+     "title": "My Heart Goes Boom (La Di Da Da) (Radio Version / Reloaded)",
+     "artist": "French Affair",
+     "art": "https://cdn-images.dzcdn.net/images/cover/12078bb963cf1463d6fdce1efbdab01a/250x250-000000-80-0-0.jpg",
+     "rank": 581416,
+     "date": "2025-04-23"
+    },
+    {
+     "id": "dz:74249000",
+     "title": "Cheri Cheri Lady",
+     "artist": "Modern Talking",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e087110af2549642da54098a5c14b7ab/250x250-000000-80-0-0.jpg",
+     "rank": 859136,
+     "date": "2014-03-24"
+    },
+    {
+     "id": "dz:89629751",
+     "title": "Move Your Body Golden Remixes (Gabry Ponte Radio Rework)",
+     "artist": "Eiffel 65",
+     "art": "https://cdn-images.dzcdn.net/images/cover/690959ec4df4eec17371ac2b8e4ea3dd/250x250-000000-80-0-0.jpg",
+     "rank": 171172,
+     "date": "2014-11-04"
+    },
+    {
+     "id": "dz:548507",
+     "title": "You're My Heart, You're My Soul",
+     "artist": "Modern Talking",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f5ab7814eda8bdbab33e9bb6941655f3/250x250-000000-80-0-0.jpg",
+     "rank": 626059,
+     "date": "2005-09-23"
+    },
+    {
+     "id": "dz:706041",
+     "title": "A Neverending Dream",
+     "artist": "X-Perience",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2fa4f8fb5f0cb2e64f86d4b7fa4d8465/250x250-000000-80-0-0.jpg",
+     "rank": 404254,
+     "date": "1996-11-15"
+    },
+    {
+     "id": "dz:420879302",
+     "title": "Oh La La La",
+     "artist": "2 Eivissa",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8b2986cf7046642825a7abf4efa0b601/250x250-000000-80-0-0.jpg",
+     "rank": 445635,
+     "date": "2006-07-18"
+    },
+    {
+     "id": "dz:3843388071",
+     "title": "Take Me to the Limit (Radio Version)",
+     "artist": "Mr. President",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9e25b1b6830401df5851834f37e6aa14/250x250-000000-80-0-0.jpg",
+     "rank": 261073,
+     "date": "1997-09-08"
+    },
+    {
+     "id": "dz:1541481822",
+     "title": "Super Sonic (Brainbug Remix)",
+     "artist": "Music Instructor",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d25bfa82292630ce3e47602e199b5fc1/250x250-000000-80-0-0.jpg",
+     "rank": 160265,
+     "date": "2021-05-07"
+    },
+    {
+     "id": "dz:114906188",
+     "title": "Popcorn (Radio Version)",
+     "artist": "Richi M.",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6aca219782e20fddcd22fa259e44507f/250x250-000000-80-0-0.jpg",
+     "rank": 121117,
+     "date": "2015-12-10"
+    },
+    {
+     "id": "dz:3801341602",
+     "title": "Sing Hallelujah! (Short Version)",
+     "artist": "Dr. Alban",
+     "art": "https://cdn-images.dzcdn.net/images/cover/332e1a5c1b0c81b38032fd50e355e00f/250x250-000000-80-0-0.jpg",
+     "rank": 745953,
+     "date": "2026-01-28"
+    },
+    {
+     "id": "dz:25574781",
+     "title": "Dreams (Will Come Alive)",
+     "artist": "2 Brothers On the 4th Floor",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0c61e6f3b7c63fa0c80831941bbff3ad/250x250-000000-80-0-0.jpg",
+     "rank": 674740,
+     "date": "1994-01-01"
+    },
+    {
+     "id": "dz:627758712",
+     "title": "So Strung Out (The Distance & Riddick Edit)",
+     "artist": "C-Block",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7c0d025e0b740a2389f0ccf87bd11954/250x250-000000-80-0-0.jpg",
+     "rank": 412482,
+     "date": "1996-08-02"
+    },
+    {
+     "id": "dz:133204792",
+     "title": "Encore Une Fois (Future Breeze Edit)",
+     "artist": "Sash!",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0f129de47fc2e4e3f9ec9ba385459e32/250x250-000000-80-0-0.jpg",
+     "rank": 716853,
+     "date": "2016-09-30"
+    },
+    {
+     "id": "dz:3324866971",
+     "title": "Everybody's Free (To Feel Good) (Album Version)",
+     "artist": "Rozalla",
+     "art": "https://cdn-images.dzcdn.net/images/cover/25d81f7f4be4002753a8ac231993dae6/250x250-000000-80-0-0.jpg",
+     "rank": 201224,
+     "date": "1992-01-01"
+    },
+    {
+     "id": "dz:60758744",
+     "title": "U Got 2 Let The Music (Brescia Edit)",
+     "artist": "Cappella",
+     "art": "https://cdn-images.dzcdn.net/images/cover/96de18ac025a2826f2addba2ada42383/250x250-000000-80-0-0.jpg",
+     "rank": 489269,
+     "date": "2012-10-29"
+    },
+    {
+     "id": "dz:61057255",
+     "title": "Bla Bla Bla",
+     "artist": "Gigi D'Agostino",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a1464bff04bac153df57573d0e4ec76f/250x250-000000-80-0-0.jpg",
+     "rank": 768795,
+     "date": "2009-11-20"
+    },
+    {
+     "id": "dz:135335112",
+     "title": "Turn the Tide",
+     "artist": "Sylver",
+     "art": "https://cdn-images.dzcdn.net/images/cover/833d330160860fc8dca9c35776695642/250x250-000000-80-0-0.jpg",
+     "rank": 557607,
+     "date": "2001-05-07"
+    },
+    {
+     "id": "dz:628266",
+     "title": "Hey Ya!",
+     "artist": "OutKast",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f81783b6cc6030733cd475f820855562/250x250-000000-80-0-0.jpg",
+     "rank": 891263,
+     "date": "2003-09-23"
+    },
+    {
+     "id": "dz:145429544",
+     "title": "Candy Shop",
+     "artist": "50 Cent",
+     "art": "https://cdn-images.dzcdn.net/images/cover/58ec83e8f74b55096f2115523eb9e7df/250x250-000000-80-0-0.jpg",
+     "rank": 785772,
+     "date": "2017-03-31"
+    },
+    {
+     "id": "dz:13783449",
+     "title": "Yeah! (feat. Lil Jon & Ludacris)",
+     "artist": "USHER",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b89c20012cccb051c8a4e04d98386f95/250x250-000000-80-0-0.jpg",
+     "rank": 910078,
+     "date": "2004-03-23"
+    },
+    {
+     "id": "dz:3786149242",
+     "title": "What Is Love (7” Mix)",
+     "artist": "Haddaway",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3fb1136475de9b9159ab8ab9a3773ed4/250x250-000000-80-0-0.jpg",
+     "rank": 908164,
+     "date": "2026-01-28"
+    },
+    {
+     "id": "dz:5404532",
+     "title": "Party All the Time",
+     "artist": "Eddie Murphy",
+     "art": "https://cdn-images.dzcdn.net/images/cover/65689ec5162126a39cf7bff42a28ba50/250x250-000000-80-0-0.jpg",
+     "rank": 535319,
+     "date": "2010-03-01"
+    },
+    {
+     "id": "dz:1912802487",
+     "title": "It's a Sin (2018 Remaster)",
+     "artist": "Pet Shop Boys",
+     "art": "https://cdn-images.dzcdn.net/images/cover/57939be5e72e576765491b2170c6617c/250x250-000000-80-0-0.jpg",
+     "rank": 387100,
+     "date": "1987-09-07"
+    },
+    {
+     "id": "dz:62419007",
+     "title": "Flashdance...What a Feeling (Radio Edit)",
+     "artist": "Irene Cara",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7b3f6fd3ca6c036861f4e5cb8d7737f8/250x250-000000-80-0-0.jpg",
+     "rank": 843966,
+     "date": "1983-11-02"
+    },
+    {
+     "id": "dz:3518231",
+     "title": "Never Ending Story",
+     "artist": "Limahl",
+     "art": "https://cdn-images.dzcdn.net/images/cover/92a3450c8f3f7e42f336f22c07eb6113/250x250-000000-80-0-0.jpg",
+     "rank": 780084,
+     "date": "1996-07-22"
+    },
+    {
+     "id": "dz:428735742",
+     "title": "Don't Leave Me This Way (with Sarah Jane Morris)",
+     "artist": "The Communards",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5656707f92ecf4d061614498b9d926e8/250x250-000000-80-0-0.jpg",
+     "rank": 744806,
+     "date": "2002-01-01"
+    },
+    {
+     "id": "dz:3130318",
+     "title": "Gold",
+     "artist": "Spandau Ballet",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b88d3c3ad23435fb5b8d52038551c1f6/250x250-000000-80-0-0.jpg",
+     "rank": 654506,
+     "date": "2000-05-15"
+    },
+    {
+     "id": "dz:428690122",
+     "title": "Smalltown Boy",
+     "artist": "Bronski Beat",
+     "art": "https://cdn-images.dzcdn.net/images/cover/61410b340cfe33f8bd07e4879cdd6aa3/250x250-000000-80-0-0.jpg",
+     "rank": 784912,
+     "date": "1984-10-15"
+    },
+    {
+     "id": "dz:706051",
+     "title": "Blue Monday '88",
+     "artist": "New Order",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d268853991f812087660bfc8d54ed518/250x250-000000-80-0-0.jpg",
+     "rank": 810157,
+     "date": "1994-01-01"
+    },
+    {
+     "id": "dz:1806332357",
+     "title": "You Spin Me Round (Like a Record)",
+     "artist": "Dead Or Alive",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0507305d9949537a84a39e0b17b18ffd/250x250-000000-80-0-0.jpg",
+     "rank": 517167,
+     "date": "2022-07-01"
+    },
+    {
+     "id": "dz:134706074",
+     "title": "No Limit",
+     "artist": "2 Unlimited",
+     "art": "https://cdn-images.dzcdn.net/images/cover/37e6834a65f160a58c3b58dc8a76d240/250x250-000000-80-0-0.jpg",
+     "rank": 703427,
+     "date": "1993-05-10"
+    },
+    {
+     "id": "dz:428735762",
+     "title": "You Make Me Feel (Mighty Real)",
+     "artist": "Jimmy Somerville",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5656707f92ecf4d061614498b9d926e8/250x250-000000-80-0-0.jpg",
+     "rank": 654547,
+     "date": "2002-01-01"
+    },
+    {
+     "id": "dz:2175412647",
+     "title": "Major Tom (Völlig losgelöst) (2022 Remaster)",
+     "artist": "Peter Schilling",
+     "art": "https://cdn-images.dzcdn.net/images/cover/dbc32c34f53fdcfd6ea5dac729a2840c/250x250-000000-80-0-0.jpg",
+     "rank": 308436,
+     "date": "1982-10-04"
+    },
+    {
+     "id": "dz:3786434762",
+     "title": "You're A Woman",
+     "artist": "Bad Boys Blue",
+     "art": "https://cdn-images.dzcdn.net/images/cover/09a8aa5ac2beb17ddd6e103a0738b4ac/250x250-000000-80-0-0.jpg",
+     "rank": 475833,
+     "date": "2026-01-28"
+    },
+    {
+     "id": "dz:3413784021",
+     "title": "Only You",
+     "artist": "Savage",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9f137ffcfec35e33380e1e8b44a6abb1/250x250-000000-80-0-0.jpg",
+     "rank": 303378,
+     "date": "1989-01-01"
+    },
+    {
+     "id": "dz:548510",
+     "title": "Brother Louie",
+     "artist": "Modern Talking",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f5ab7814eda8bdbab33e9bb6941655f3/250x250-000000-80-0-0.jpg",
+     "rank": 758378,
+     "date": "2005-09-23"
+    },
+    {
+     "id": "dz:2226176",
+     "title": "Face To Face - Heart To Heart",
+     "artist": "The Twins",
+     "art": "https://cdn-images.dzcdn.net/images/cover/cba589975d6744b1cc25eecb96ffda28/250x250-000000-80-0-0.jpg",
+     "rank": 357090,
+     "date": "2008-09-16"
+    },
+    {
+     "id": "dz:2536136",
+     "title": "The Great Commandment",
+     "artist": "Camouflage",
+     "art": "https://cdn-images.dzcdn.net/images/cover/efefdd5d6846c03df9edcb62b8c0838c/250x250-000000-80-0-0.jpg",
+     "rank": 558771,
+     "date": "1988-03-03"
+    },
+    {
+     "id": "dz:698260",
+     "title": "Big in Japan",
+     "artist": "Alphaville",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3cba7135b09c8e54f36a85ab857c5dff/250x250-000000-80-0-0.jpg",
+     "rank": 820384,
+     "date": "2005-02-22"
+    },
+    {
+     "id": "dz:479843772",
+     "title": "Relax (Come Fighting)",
+     "artist": "Frankie Goes To Hollywood",
+     "art": "https://cdn-images.dzcdn.net/images/cover/fd85f3ff2f1424d7f545c98e94c84e96/250x250-000000-80-0-0.jpg",
+     "rank": 560727,
+     "date": "2018-04-01"
+    },
+    {
+     "id": "dz:2896479041",
+     "title": "Cambodia",
+     "artist": "Kim Wilde",
+     "art": "https://cdn-images.dzcdn.net/images/cover/892ea2e3616b6e615b5d27272d68bda3/250x250-000000-80-0-0.jpg",
+     "rank": 779116,
+     "date": "2006-03-13"
+    },
+    {
+     "id": "dz:1468795122",
+     "title": "Flashdance... What A Feeling (1995 Version)",
+     "artist": "Irene Cara",
+     "art": "https://cdn-images.dzcdn.net/images/cover/97f507821a661850a83818f28c94ab5d/250x250-000000-80-0-0.jpg",
+     "rank": 228082,
+     "date": "2021-08-20"
+    },
+    {
+     "id": "dz:971342",
+     "title": "You're My Heart, You're My Soul (feat. Eric Singleton) (Modern Talking Mix '98)",
+     "artist": "Modern Talking",
+     "art": "https://cdn-images.dzcdn.net/images/cover/181f3d35a25b715b21655a6289c1a1ec/250x250-000000-80-0-0.jpg",
+     "rank": 525290,
+     "date": "1998-05-11"
+    },
+    {
+     "id": "dz:5503498",
+     "title": "Break My Stride",
+     "artist": "Matthew Wilder",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2f3701dfb1ff6b4d93e303b2e71a1a2f/250x250-000000-80-0-0.jpg",
+     "rank": 722246,
+     "date": "1983-03-19"
+    },
+    {
+     "id": "dz:540168502",
+     "title": "Maniac",
+     "artist": "Michael Sembello",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bfa5c96e4b7da2e78247ed2ee56d6d1a/250x250-000000-80-0-0.jpg",
+     "rank": 899809,
+     "date": "2018-08-10"
+    },
+    {
+     "id": "dz:2537733",
+     "title": "Love Is A Shield (Single Version)",
+     "artist": "Camouflage",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5e2dce6e96ae01ea0e1fffc174db5b9c/250x250-000000-80-0-0.jpg",
+     "rank": 451113,
+     "date": "1997-10-02"
+    },
+    {
+     "id": "dz:6638669",
+     "title": "Situation (U.S. 12\" Mix)",
+     "artist": "Yazoo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/22b385e0e12ccfc8ff3eec3143d8a5c0/250x250-000000-80-0-0.jpg",
+     "rank": 221457,
+     "date": "1999-09-03"
+    },
+    {
+     "id": "dz:3159913",
+     "title": "Männer",
+     "artist": "Herbert Grönemeyer",
+     "art": "https://cdn-images.dzcdn.net/images/cover/41c7d29ca817eb0457929b5aca80ed73/250x250-000000-80-0-0.jpg",
+     "rank": 571747,
+     "date": "2016-08-05"
+    },
+    {
+     "id": "dz:61512948",
+     "title": "Lady Of Ice",
+     "artist": "Fancy",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e923d29adaec98bdf796fcf5c6899555/250x250-000000-80-0-0.jpg",
+     "rank": 344106,
+     "date": "2009-09-18"
+    },
+    {
+     "id": "dz:1174770",
+     "title": "I Won't Let The Sun Go Down On Me",
+     "artist": "Nik Kershaw",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ce29a69eecc2c08d2b772bf0c5cca02f/250x250-000000-80-0-0.jpg",
+     "rank": 496099,
+     "date": "1991-11-25"
+    },
+    {
+     "id": "dz:68515055",
+     "title": "Enjoy the Silence",
+     "artist": "Depeche Mode",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e73716d037ee24f1331a8c0332526590/250x250-000000-80-0-0.jpg",
+     "rank": 963501,
+     "date": "1998-09-28"
+    },
+    {
+     "id": "dz:68513610",
+     "title": "Just Can't Get Enough",
+     "artist": "Depeche Mode",
+     "art": "https://cdn-images.dzcdn.net/images/cover/55972109f7c4049deb78402a94ee3b7b/250x250-000000-80-0-0.jpg",
+     "rank": 869374,
+     "date": "2006-11-08"
+    },
+    {
+     "id": "dz:68514099",
+     "title": "People Are People",
+     "artist": "Depeche Mode",
+     "art": "https://cdn-images.dzcdn.net/images/cover/55972109f7c4049deb78402a94ee3b7b/250x250-000000-80-0-0.jpg",
+     "rank": 626860,
+     "date": "2006-11-08"
+    },
+    {
+     "id": "dz:428692132",
+     "title": "Hit That Perfect Beat",
+     "artist": "Bronski Beat",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1a34f4247b141924637ca20873ea35a9/250x250-000000-80-0-0.jpg",
+     "rank": 428598,
+     "date": "1986-01-01"
+    },
+    {
+     "id": "dz:15707214",
+     "title": "Go West (2003 Remaster)",
+     "artist": "Pet Shop Boys",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b032e0e6281ee7535e0756a213aede73/250x250-000000-80-0-0.jpg",
+     "rank": 166933,
+     "date": "2006-10-10"
+    },
+    {
+     "id": "dz:2210634457",
+     "title": "Domino dancing (2023 Remaster)",
+     "artist": "Pet Shop Boys",
+     "art": "https://cdn-images.dzcdn.net/images/cover/eef912644e7cbdcc3729a4acd9845ad4/250x250-000000-80-0-0.jpg",
+     "rank": 234434,
+     "date": "2023-06-16"
+    },
+    {
+     "id": "dz:3803600192",
+     "title": "Don't Go (Live)",
+     "artist": "Yazoo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f54f0d92c8711e2d590ae58f26e0f2a6/250x250-000000-80-0-0.jpg",
+     "rank": 210449,
+     "date": "2026-01-28"
+    },
+    {
+     "id": "dz:70646929",
+     "title": "You Keep Me Hangin On",
+     "artist": "Kim Wilde",
+     "art": "https://cdn-images.dzcdn.net/images/cover/17fe6b02a891d9e057f3536521478d05/250x250-000000-80-0-0.jpg",
+     "rank": 694109,
+     "date": "2013-09-23"
+    },
+    {
+     "id": "dz:1787638887",
+     "title": "Hymn (2009 Remaster)",
+     "artist": "Ultravox",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bb9e2b8a8ce1aee0383fd27622b16457/250x250-000000-80-0-0.jpg",
+     "rank": 252974,
+     "date": "1982-10-15"
+    },
+    {
+     "id": "dz:13751762",
+     "title": "Touch in the Night (Radio Version)",
+     "artist": "Silent Circle",
+     "art": "https://cdn-images.dzcdn.net/images/cover/933c97ea426b36f8b3ab08c649aedeb5/250x250-000000-80-0-0.jpg",
+     "rank": 627772,
+     "date": "2011-09-23"
+    },
+    {
+     "id": "dz:4288159",
+     "title": "Self Control",
+     "artist": "Laura Branigan",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e8d7d2bb9f156110a5be3734c246c99a/250x250-000000-80-0-0.jpg",
+     "rank": 847859,
+     "date": "2009-10-06"
+    },
+    {
+     "id": "dz:127364653",
+     "title": "Boys (Summertime Love)",
+     "artist": "Sabrina",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6a6d775450aa8688f9564d0765de1e4d/250x250-000000-80-0-0.jpg",
+     "rank": 706129,
+     "date": "2015-01-01"
+    },
+    {
+     "id": "dz:1954253467",
+     "title": "It's Raining Men (Single Version)",
+     "artist": "The Weather Girls",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b34cd72aabec39a446518dff8230bd49/250x250-000000-80-0-0.jpg",
+     "rank": 485427,
+     "date": "1982-09-10"
+    },
+    {
+     "id": "dz:971346",
+     "title": "No 1 Hit Medley",
+     "artist": "Modern Talking",
+     "art": "https://cdn-images.dzcdn.net/images/cover/181f3d35a25b715b21655a6289c1a1ec/250x250-000000-80-0-0.jpg",
+     "rank": 417491,
+     "date": "1998-05-11"
+    },
+    {
+     "id": "dz:364951",
+     "title": "Daddy Cool",
+     "artist": "Boney M.",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c2ecc5f062629f42115e28f9a2b6ccd0/250x250-000000-80-0-0.jpg",
+     "rank": 846449,
+     "date": "2007-03-30"
+    },
+    {
+     "id": "dz:364962",
+     "title": "Rasputin",
+     "artist": "Boney M.",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1c8adc5ca978db9e7a07e61de2becd3f/250x250-000000-80-0-0.jpg",
+     "rank": 813220,
+     "date": "2007-03-30"
+    },
+    {
+     "id": "dz:364962",
+     "title": "Rasputin",
+     "artist": "Boney M.",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1c8adc5ca978db9e7a07e61de2becd3f/250x250-000000-80-0-0.jpg",
+     "rank": 813220,
+     "date": "2007-03-30"
+    },
+    {
+     "id": "dz:5932520",
+     "title": "The Living Daylights",
+     "artist": "a-ha",
+     "art": "https://cdn-images.dzcdn.net/images/cover/072a44473ac6ca5e75ed9dba24d688b7/250x250-000000-80-0-0.jpg",
+     "rank": 432022,
+     "date": "2010-05-03"
+    },
+    {
+     "id": "dz:664107",
+     "title": "Take on Me",
+     "artist": "a-ha",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e0ce8977ab98d73bcea00fc838ece034/250x250-000000-80-0-0.jpg",
+     "rank": 988080,
+     "date": "2007-01-29"
+    },
+    {
+     "id": "dz:6638669",
+     "title": "Situation (U.S. 12\" Mix)",
+     "artist": "Yazoo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/22b385e0e12ccfc8ff3eec3143d8a5c0/250x250-000000-80-0-0.jpg",
+     "rank": 221457,
+     "date": "1999-09-03"
+    },
+    {
+     "id": "dz:7571451",
+     "title": "Lost in Music (Dimitri from Paris Remix)",
+     "artist": "Sister Sledge",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0faaa22d32f80a71982c92cc6317de75/250x250-000000-80-0-0.jpg",
+     "rank": 349507,
+     "date": "2010-11-15"
+    },
+    {
+     "id": "dz:7675051",
+     "title": "Danger Zone (From \"Top Gun\" Original Soundtrack)",
+     "artist": "Kenny Loggins",
+     "art": "https://cdn-images.dzcdn.net/images/cover/021a1143e9f19493379b8cf01fa1c7c5/250x250-000000-80-0-0.jpg",
+     "rank": 731017,
+     "date": "1999-01-01"
+    },
+    {
+     "id": "dz:786717",
+     "title": "Believe",
+     "artist": "Cher",
+     "art": "https://cdn-images.dzcdn.net/images/cover/af263778ad6ef2f3f5be381292ed02a8/250x250-000000-80-0-0.jpg",
+     "rank": 863082,
+     "date": "1998-10-26"
+    },
+    {
+     "id": "dz:1559253732",
+     "title": "Stumblin' In",
+     "artist": "Chris Norman",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9c0d04338c4b5295ca58db08605f892f/250x250-000000-80-0-0.jpg",
+     "rank": 728248,
+     "date": "2021-11-26"
+    },
+    {
+     "id": "dz:884037",
+     "title": "SOS",
+     "artist": "ABBA",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b8b70d474b7a8f27799e0d665e9b737e/250x250-000000-80-0-0.jpg",
+     "rank": 742855,
+     "date": "2008-06-02"
+    },
+    {
+     "id": "dz:1761374997",
+     "title": "Ghetto",
+     "artist": "Akon",
+     "art": "https://cdn-images.dzcdn.net/images/cover/76e62a7fa8b58436ccfcbe3aa2bb8d18/250x250-000000-80-0-0.jpg",
+     "rank": 817727,
+     "date": "2007-03-29"
+    },
+    {
+     "id": "dz:6177415",
+     "title": "Freed From Desire",
+     "artist": "Gala",
+     "art": "https://cdn-images.dzcdn.net/images/cover/cf41c96ff1b6e1d4b5649920c6af9d6a/250x250-000000-80-0-0.jpg",
+     "rank": 855543,
+     "date": "2010-05-05"
+    },
+    {
+     "id": "dz:6628158",
+     "title": "Show Me Love",
+     "artist": "Robin S",
+     "art": "https://cdn-images.dzcdn.net/images/cover/95e8fd5910548808417046907299f9df/250x250-000000-80-0-0.jpg",
+     "rank": 855240,
+     "date": "2008-12-23"
+    },
+    {
+     "id": "dz:89629717",
+     "title": "Blue (Da Ba Dee) (DJ Ponte Ice Pop Radio)",
+     "artist": "Eiffel 65",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4413792d4e41060db54f7570dba9b8b8/250x250-000000-80-0-0.jpg",
+     "rank": 678677,
+     "date": "2015-01-29"
+    },
+    {
+     "id": "dz:11390027",
+     "title": "Sandstorm",
+     "artist": "Darude",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4813de733c6fb05c90187ab5cf3e13c7/250x250-000000-80-0-0.jpg",
+     "rank": 827812,
+     "date": "2000-01-01"
+    },
+    {
+     "id": "dz:3786149242",
+     "title": "What Is Love (7” Mix)",
+     "artist": "Haddaway",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3fb1136475de9b9159ab8ab9a3773ed4/250x250-000000-80-0-0.jpg",
+     "rank": 908164,
+     "date": "2026-01-28"
+    },
+    {
+     "id": "dz:712072122",
+     "title": "Killer",
+     "artist": "Adamski",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9dc3e8c756bd3e9c6aad4a85cae47f07/250x250-000000-80-0-0.jpg",
+     "rank": 434578,
+     "date": "2019-07-19"
+    },
+    {
+     "id": "dz:70051871",
+     "title": "Ride on Time",
+     "artist": "Black Box",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ad31d939346f5770e86af0622c595d32/250x250-000000-80-0-0.jpg",
+     "rank": 766880,
+     "date": "2006-09-01"
+    },
+    {
+     "id": "dz:3785420292",
+     "title": "I've Been Thinking About You",
+     "artist": "Londonbeat",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d3db984137e7c7fd7afcb9bd0c99e7ea/250x250-000000-80-0-0.jpg",
+     "rank": 401074,
+     "date": "2005-02-07"
+    },
+    {
+     "id": "dz:3802727942",
+     "title": "Sing It Back (Boris Musical Mix Edit)",
+     "artist": "Moloko",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f4b02730a1d752dcb30f672bb6ff8f27/250x250-000000-80-0-0.jpg",
+     "rank": 627014,
+     "date": "1999-03-15"
+    },
+    {
+     "id": "dz:994491",
+     "title": "Macarena",
+     "artist": "Los Del Río",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6a827921da4e6afde64294d7483cbf0e/250x250-000000-80-0-0.jpg",
+     "rank": 848710,
+     "date": "2002-05-20"
+    },
+    {
+     "id": "dz:778758",
+     "title": "Frozen",
+     "artist": "Madonna",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b75d884b15db9c2b3376f93caa059a93/250x250-000000-80-0-0.jpg",
+     "rank": 739040,
+     "date": "1998-06-02"
+    },
+    {
+     "id": "dz:2939932941",
+     "title": "Walking In Memphis (2024 Remaster)",
+     "artist": "Cher",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e3cfd79716de5b90a95c85b996fe65d0/250x250-000000-80-0-0.jpg",
+     "rank": 257266,
+     "date": "2024-09-20"
+    },
+    {
+     "id": "dz:3087542",
+     "title": "Let Me Entertain You",
+     "artist": "Robbie Williams",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0bbbf3f78a76b07b834ed7c0271b30be/250x250-000000-80-0-0.jpg",
+     "rank": 568021,
+     "date": "2004-04-01"
+    },
+    {
+     "id": "dz:89748393",
+     "title": "The Bad Touch",
+     "artist": "Bloodhound Gang",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c25bb2e38019a0230b3b27a41745cb62/250x250-000000-80-0-0.jpg",
+     "rank": 654223,
+     "date": "2012-06-05"
+    },
+    {
+     "id": "dz:3167612",
+     "title": "Kingston Town",
+     "artist": "UB40",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a7700a7cc51ad1fd8bbd6464b183f469/250x250-000000-80-0-0.jpg",
+     "rank": 824087,
+     "date": "2000-11-09"
+    },
+    {
+     "id": "dz:866829",
+     "title": "Life",
+     "artist": "Des'ree",
+     "art": "https://cdn-images.dzcdn.net/images/cover/798a04eb129a85e09ce654b336a44e9e/250x250-000000-80-0-0.jpg",
+     "rank": 727815,
+     "date": "1998-06-25"
+    },
+    {
+     "id": "dz:14637544",
+     "title": "I Can't Dance",
+     "artist": "Genesis",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ade41e71897cafc574156046b9633c14/250x250-000000-80-0-0.jpg",
+     "rank": 791239,
+     "date": "2010-04-20"
+    },
+    {
+     "id": "dz:5503498",
+     "title": "Break My Stride",
+     "artist": "Matthew Wilder",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2f3701dfb1ff6b4d93e303b2e71a1a2f/250x250-000000-80-0-0.jpg",
+     "rank": 722246,
+     "date": "1983-03-19"
+    },
+    {
+     "id": "dz:540168502",
+     "title": "Maniac",
+     "artist": "Michael Sembello",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bfa5c96e4b7da2e78247ed2ee56d6d1a/250x250-000000-80-0-0.jpg",
+     "rank": 899809,
+     "date": "2018-08-10"
+    },
+    {
+     "id": "dz:1171163",
+     "title": "I'm Still Standing",
+     "artist": "Elton John",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3f099560bed3f4813a8bf71e203cd3f0/250x250-000000-80-0-0.jpg",
+     "rank": 941588,
+     "date": "2007-04-30"
+    },
+    {
+     "id": "dz:3282348",
+     "title": "(I'll Never Be) Maria Magdalena (Single Verison)",
+     "artist": "Sandra",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2b64565ea5605abe249c1478890214db/250x250-000000-80-0-0.jpg",
+     "rank": 383765,
+     "date": "2001-12-01"
+    },
+    {
+     "id": "dz:2362305695",
+     "title": "In the Army Now",
+     "artist": "Status Quo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/dcf3156c5897d036c9cb35926003df09/250x250-000000-80-0-0.jpg",
+     "rank": 307258,
+     "date": "2023-05-15"
+    },
+    {
+     "id": "dz:3528853",
+     "title": "Sunshine Reggae",
+     "artist": "Laid Back",
+     "art": "https://cdn-images.dzcdn.net/images/cover/77114ca16176adbf8b5c5f5b2f02dd71/250x250-000000-80-0-0.jpg",
+     "rank": 652925,
+     "date": "2008-10-06"
+    },
+    {
+     "id": "dz:776220",
+     "title": "Ain't Nobody",
+     "artist": "Chaka Khan",
+     "art": "https://cdn-images.dzcdn.net/images/cover/fdf67d18371aefc0d24ecda1ec3fef50/250x250-000000-80-0-0.jpg",
+     "rank": 765484,
+     "date": "1996-11-08"
+    },
+    {
+     "id": "dz:1787621717",
+     "title": "Dancing with Tears in My Eyes",
+     "artist": "Ultravox",
+     "art": "https://cdn-images.dzcdn.net/images/cover/296ce13319afa47599984e203b2122d3/250x250-000000-80-0-0.jpg",
+     "rank": 643791,
+     "date": "1984-11-02"
+    },
+    {
+     "id": "dz:917931",
+     "title": "All Night Long (All Night)",
+     "artist": "Lionel Richie",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3c8e66cb596759e815f12848a26c719c/250x250-000000-80-0-0.jpg",
+     "rank": 420222,
+     "date": "2007-04-19"
+    },
+    {
+     "id": "dz:678372",
+     "title": "La Isla Bonita",
+     "artist": "Madonna",
+     "art": "https://cdn-images.dzcdn.net/images/cover/43a8e2b1b035391f58b0927cf1040bc4/250x250-000000-80-0-0.jpg",
+     "rank": 943913,
+     "date": "2005-09-13"
+    },
+    {
+     "id": "dz:14613554",
+     "title": "Bamboleo",
+     "artist": "Gipsy Kings",
+     "art": "https://cdn-images.dzcdn.net/images/cover/cc974fa694e4ee6357f7b055a789768d/250x250-000000-80-0-0.jpg",
+     "rank": 278517,
+     "date": "2000-09-05"
+    },
+    {
+     "id": "dz:15175797",
+     "title": "Conga",
+     "artist": "Gloria Estefan and Miami Sound Machine",
+     "art": "https://cdn-images.dzcdn.net/images/cover/85d38d5d8a3edf8f6aaeb30f1bc4ffde/250x250-000000-80-0-0.jpg",
+     "rank": 329621,
+     "date": "1992-10-30"
+    },
+    {
+     "id": "dz:94556154",
+     "title": "Get Down On It",
+     "artist": "Kool & The Gang",
+     "art": "https://cdn-images.dzcdn.net/images/cover/432ebc60ba4d20887d67ef6b3cece11e/250x250-000000-80-0-0.jpg",
+     "rank": 778080,
+     "date": "2015-02-17"
+    },
+    {
+     "id": "dz:3134897",
+     "title": "Back To Life (However Do You Want Me)",
+     "artist": "Soul II Soul",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8c6f95e80d53b9f78ad0bc1f803c9e13/250x250-000000-80-0-0.jpg",
+     "rank": 480052,
+     "date": "1995-05-18"
+    },
+    {
+     "id": "dz:420143322",
+     "title": "Venus",
+     "artist": "Bananarama",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a23e6918f8ba83471f8a70f512f38263/250x250-000000-80-0-0.jpg",
+     "rank": 747015,
+     "date": "1986-01-01"
+    },
+    {
+     "id": "dz:24967291",
+     "title": "Part-Time Lover",
+     "artist": "Stevie Wonder",
+     "art": "https://cdn-images.dzcdn.net/images/cover/df498fc2f67f2ea6411e5429e2dcce5f/250x250-000000-80-0-0.jpg",
+     "rank": 790909,
+     "date": "1994-03-23"
+    },
+    {
+     "id": "dz:2274836717",
+     "title": "Push It (Re-recorded - Slowed + Reverb)",
+     "artist": "Salt-N-Pepa",
+     "art": "https://cdn-images.dzcdn.net/images/cover/40cb21e5f2b1267e4e50b28a31055087/250x250-000000-80-0-0.jpg",
+     "rank": 37678,
+     "date": "2023-05-02"
+    },
+    {
+     "id": "dz:2535353",
+     "title": "Wonderful Life",
+     "artist": "Black",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9dbec07d425020b13eb06b32503066ea/250x250-000000-80-0-0.jpg",
+     "rank": 740985,
+     "date": "1987-09-14"
+    },
+    {
+     "id": "dz:120731036",
+     "title": "Give It Up",
+     "artist": "KC & The Sunshine Band",
+     "art": "https://cdn-images.dzcdn.net/images/cover/58d96113cbc1f5e73c56aee492b8949d/250x250-000000-80-0-0.jpg",
+     "rank": 477559,
+     "date": "2016-03-11"
+    },
+    {
+     "id": "dz:686746872",
+     "title": "Easy Lover (Extended Dance Remix)",
+     "artist": "Philip Bailey",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2d6a03f57098b6354d18782f28bb8476/250x250-000000-80-0-0.jpg",
+     "rank": 475605,
+     "date": "2019-05-31"
+    },
+    {
+     "id": "dz:3092940",
+     "title": "Don't You Want Me",
+     "artist": "The Human League",
+     "art": "https://cdn-images.dzcdn.net/images/cover/48b77b8c1f7cab7d2ac16ce70440ea03/250x250-000000-80-0-0.jpg",
+     "rank": 746675,
+     "date": "2003-03-01"
+    },
+    {
+     "id": "dz:3257507",
+     "title": "It's My Life (1997 Remaster)",
+     "artist": "Talk Talk",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b2dc7b1e677b06f29f8087a1fc9c102d/250x250-000000-80-0-0.jpg",
+     "rank": 743752,
+     "date": "2003-02-28"
+    },
+    {
+     "id": "dz:3092167",
+     "title": "The Look",
+     "artist": "Roxette",
+     "art": "https://cdn-images.dzcdn.net/images/cover/146abb75ffd7ad263c7356ef413a9f69/250x250-000000-80-0-0.jpg",
+     "rank": 811520,
+     "date": "2003-03-24"
+    },
+    {
+     "id": "dz:11118881",
+     "title": "We Are The World",
+     "artist": "U.S.A. for Africa",
+     "art": "https://cdn-images.dzcdn.net/images/cover/089229db83aee38d3f06a0debe407af5/250x250-000000-80-0-0.jpg",
+     "rank": 794203,
+     "date": "1985-01-01"
+    },
+    {
+     "id": "dz:70093876",
+     "title": "Moonlight Shadow (Remastered 2013)",
+     "artist": "Mike Oldfield",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e07b185becbe0b6ab014c36748efe0c3/250x250-000000-80-0-0.jpg",
+     "rank": 822997,
+     "date": "2013-09-02"
+    },
+    {
+     "id": "dz:576431",
+     "title": "Eye of the Tiger",
+     "artist": "Survivor",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e66b5d3a40f69690c1633afb73cc590c/250x250-000000-80-0-0.jpg",
+     "rank": 898987,
+     "date": "2006-02-28"
+    },
+    {
+     "id": "dz:3152709",
+     "title": "(I Just) Died In Your Arms",
+     "artist": "Cutting Crew",
+     "art": "https://cdn-images.dzcdn.net/images/cover/33ec2ce4c23becbf98a12280e9d47b19/250x250-000000-80-0-0.jpg",
+     "rank": 861935,
+     "date": "1992-07-11"
+    },
+    {
+     "id": "dz:97098410",
+     "title": "Jump (2015 Remaster)",
+     "artist": "Van Halen",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0649448bcdeeeb48c25edc0e83653711/250x250-000000-80-0-0.jpg",
+     "rank": 859713,
+     "date": "1984-01-04"
+    },
+    {
+     "id": "dz:44279781",
+     "title": "The Safety Dance",
+     "artist": "Men Without Hats",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1c0417b3e3a1c46434e8732ee70db651/250x250-000000-80-0-0.jpg",
+     "rank": 260211,
+     "date": "1998-07-14"
+    },
+    {
+     "id": "dz:80304804",
+     "title": "Walk of Life",
+     "artist": "Dire Straits",
+     "art": "https://cdn-images.dzcdn.net/images/cover/de4cb59d5fc53a9817014f79d56781db/250x250-000000-80-0-0.jpg",
+     "rank": 413745,
+     "date": "2005-11-15"
+    },
+    {
+     "id": "dz:3153065",
+     "title": "Bette Davis Eyes",
+     "artist": "Kim Carnes",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a49a8fa4ba167dcb8227edfdab793b91/250x250-000000-80-0-0.jpg",
+     "rank": 897454,
+     "date": "1993-07-12"
+    },
+    {
+     "id": "dz:561836",
+     "title": "Sweet Dreams (Are Made of This) (2005 Remaster)",
+     "artist": "Eurythmics",
+     "art": "https://cdn-images.dzcdn.net/images/cover/364f0d4ea4b5452b59e6664b9e5480f0/250x250-000000-80-0-0.jpg",
+     "rank": 963940,
+     "date": "2003-10-21"
+    },
+    {
+     "id": "dz:1079668",
+     "title": "Africa",
+     "artist": "Toto",
+     "art": "https://cdn-images.dzcdn.net/images/cover/153332e88a14255a8c3d5959a5a21882/250x250-000000-80-0-0.jpg",
+     "rank": 964180,
+     "date": "1982-04-08"
+    },
+    {
+     "id": "dz:346967941",
+     "title": "I'm So Excited",
+     "artist": "The Pointer Sisters",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3744e9fc5f2d34c051d0c01bf4ff0d9c/250x250-000000-80-0-0.jpg",
+     "rank": 890586,
+     "date": "1982-02-01"
+    },
+    {
+     "id": "dz:5231877",
+     "title": "Tainted Love (Re-Recorded)",
+     "artist": "Soft Cell",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c10f642dc7ecb1330cf92765c6a37dcd/250x250-000000-80-0-0.jpg",
+     "rank": 485654,
+     "date": "2010-01-01"
+    },
+    {
+     "id": "dz:884025",
+     "title": "Dancing Queen",
+     "artist": "ABBA",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b8b70d474b7a8f27799e0d665e9b737e/250x250-000000-80-0-0.jpg",
+     "rank": 946082,
+     "date": "2008-06-02"
+    },
+    {
+     "id": "dz:884041",
+     "title": "Gimme! Gimme! Gimme! (A Man After Midnight)",
+     "artist": "ABBA",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b8b70d474b7a8f27799e0d665e9b737e/250x250-000000-80-0-0.jpg",
+     "rank": 967569,
+     "date": "2008-06-02"
+    },
+    {
+     "id": "dz:716453",
+     "title": "Sounds Like a Melody",
+     "artist": "Alphaville",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b06d9eee96b46a01a9456c7f27ae1e64/250x250-000000-80-0-0.jpg",
+     "rank": 694540,
+     "date": "2005-07-05"
+    },
+    {
+     "id": "dz:918091092",
+     "title": "Pray (Radio Version)",
+     "artist": "DJ Bobo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/54a77c51fbbc277b0b2f161415fb9495/250x250-000000-80-0-0.jpg",
+     "rank": 385596,
+     "date": "2017-04-21"
+    },
+    {
+     "id": "dz:918197312",
+     "title": "Let the Dream Come True",
+     "artist": "DJ Bobo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8ae4d4bcd3b1289775fc2de5d48e05cf/250x250-000000-80-0-0.jpg",
+     "rank": 600658,
+     "date": "1994-10-28"
+    },
+    {
+     "id": "dz:918091062",
+     "title": "Freedom",
+     "artist": "DJ Bobo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/54a77c51fbbc277b0b2f161415fb9495/250x250-000000-80-0-0.jpg",
+     "rank": 215393,
+     "date": "2017-04-21"
+    },
+    {
+     "id": "dz:3328953781",
+     "title": "My Heart Goes Boom (La Di Da Da) (Radio Version / Reloaded)",
+     "artist": "French Affair",
+     "art": "https://cdn-images.dzcdn.net/images/cover/12078bb963cf1463d6fdce1efbdab01a/250x250-000000-80-0-0.jpg",
+     "rank": 581416,
+     "date": "2025-04-23"
+    },
+    {
+     "id": "dz:76840676",
+     "title": "When the Rain Begins to Fall",
+     "artist": "Jermaine Jackson",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f89b2502ee74032ef8d6f3f07dc6a706/250x250-000000-80-0-0.jpg",
+     "rank": 425583,
+     "date": "1984-04-14"
+    },
+    {
+     "id": "dz:1174676",
+     "title": "Running In The Family (7\" Version)",
+     "artist": "Level 42",
+     "art": "https://cdn-images.dzcdn.net/images/cover/67125cdf3956c3f88f2a4e41f9e3b0b4/250x250-000000-80-0-0.jpg",
+     "rank": 428768,
+     "date": "1998-10-26"
+    },
+    {
+     "id": "dz:2515435",
+     "title": "Starchild (Edit Album Version)",
+     "artist": "Level 42",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b276a47fc4034542b2cd7cb1c121198a/250x250-000000-80-0-0.jpg",
+     "rank": 99260,
+     "date": "2000-08-21"
+    },
+    {
+     "id": "dz:541622012",
+     "title": "Fresh",
+     "artist": "Kool & The Gang",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ce8a9c1ef60532284757467acbdad821/250x250-000000-80-0-0.jpg",
+     "rank": 789933,
+     "date": "2018-08-10"
+    },
+    {
+     "id": "dz:1496671542",
+     "title": "p:Machinery",
+     "artist": "Propaganda",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d67b0dae1b98ba82debf4302eb124322/250x250-000000-80-0-0.jpg",
+     "rank": 607460,
+     "date": "2021-09-24"
+    },
+    {
+     "id": "dz:554256162",
+     "title": "The Riddle Anthem (Rework)",
+     "artist": "Mike Candys & Jack Holiday",
+     "art": "https://cdn-images.dzcdn.net/images/cover/eabd75917e7eb797d3715cf49101018a/250x250-000000-80-0-0.jpg",
+     "rank": 337335,
+     "date": "2018-09-28"
+    },
+    {
+     "id": "dz:133238776",
+     "title": "Just an Illusion",
+     "artist": "Imagination",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ad7c31bb1f47d45e790b487dd967f995/250x250-000000-80-0-0.jpg",
+     "rank": 622079,
+     "date": "2016-10-21"
+    },
+    {
+     "id": "dz:3425153",
+     "title": "Sunglasses At Night",
+     "artist": "Corey Hart",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6f88debc72e2f01829c0d6864136de11/250x250-000000-80-0-0.jpg",
+     "rank": 491205,
+     "date": "1995-05-23"
+    },
+    {
+     "id": "dz:75782734",
+     "title": "Send Me An Angel '89",
+     "artist": "Real Life",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ee4cafa4db4b4860a688c4e9b34b74a0/250x250-000000-80-0-0.jpg",
+     "rank": 483345,
+     "date": "1989-11-07"
+    },
+    {
+     "id": "dz:120075176",
+     "title": "One Night In Bangkok (Radio Edit / From “Chess” / Remastered 2016)",
+     "artist": "Murray Head",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8b4d270335448765f7caf6e9dbd86f20/250x250-000000-80-0-0.jpg",
+     "rank": 745825,
+     "date": "2016-02-29"
+    },
+    {
+     "id": "dz:2891799832",
+     "title": "Kids In America",
+     "artist": "Kim Wilde",
+     "art": "https://cdn-images.dzcdn.net/images/cover/757e61221dd279212b585eb0745453cb/250x250-000000-80-0-0.jpg",
+     "rank": 754969,
+     "date": "1981-06-29"
+    },
+    {
+     "id": "dz:2814888",
+     "title": "Urgent",
+     "artist": "Foreigner",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a7545dbac40fbecabeafc4847bcba549/250x250-000000-80-0-0.jpg",
+     "rank": 765585,
+     "date": "2002-04-02"
+    },
+    {
+     "id": "dz:13179889",
+     "title": "Der Kommissar",
+     "artist": "After The Fire",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b8d0adee792e2e5cc78edef44955d958/250x250-000000-80-0-0.jpg",
+     "rank": 473765,
+     "date": "1982-08-21"
+    },
+    {
+     "id": "dz:15391705",
+     "title": "Broken Wings",
+     "artist": "Mr. Mister",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a68a0febe6f24646658e52968b26a35c/250x250-000000-80-0-0.jpg",
+     "rank": 702935,
+     "date": "1985-11-27"
+    },
+    {
+     "id": "dz:2403759835",
+     "title": "Jeopardy",
+     "artist": "The Greg Kihn band",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f22c03c6e6db2d24d87c3897612624dd/250x250-000000-80-0-0.jpg",
+     "rank": 603260,
+     "date": "1983-01-01"
+    },
+    {
+     "id": "dz:3818860",
+     "title": "Feel like Makin' Love (2009 Remaster)",
+     "artist": "Bad Company",
+     "art": "https://cdn-images.dzcdn.net/images/cover/59210df5e75083ecfee22b79712a40b9/250x250-000000-80-0-0.jpg",
+     "rank": 412335,
+     "date": "1985-06-01"
+    },
+    {
+     "id": "dz:2503272",
+     "title": "School",
+     "artist": "Supertramp",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6e982953fde60522577ef2958a17faa2/250x250-000000-80-0-0.jpg",
+     "rank": 778729,
+     "date": "1992-11-16"
+    },
+    {
+     "id": "dz:3785996502",
+     "title": "Lady in Black",
+     "artist": "Uriah Heep",
+     "art": "https://cdn-images.dzcdn.net/images/cover/033e66afc47e5256880392a61c88fef8/250x250-000000-80-0-0.jpg",
+     "rank": 427391,
+     "date": "2026-01-28"
+    },
+    {
+     "id": "dz:1137371042",
+     "title": "No Time for Caution",
+     "artist": "Hans Zimmer",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4193cfd449576b01d33adeb54c2589ce/250x250-000000-80-0-0.jpg",
+     "rank": 625910,
+     "date": "2014-11-18"
+    },
+    {
+     "id": "dz:3357587",
+     "title": "Too Shy",
+     "artist": "Kajagoogoo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f47b9e0243ff6b9945a530b39a6752ca/250x250-000000-80-0-0.jpg",
+     "rank": 727137,
+     "date": "2004-10-01"
+    },
+    {
+     "id": "dz:3129547",
+     "title": "Such a Shame (Original Version)",
+     "artist": "Talk Talk",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f258b1f28efc318baf8f507839f1dcbc/250x250-000000-80-0-0.jpg",
+     "rank": 698999,
+     "date": "2003-02-28"
+    },
+    {
+     "id": "dz:3136912",
+     "title": "Living in Another World (1997 Remaster)",
+     "artist": "Talk Talk",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8f946458459124422cd3f8f4cc189d6a/250x250-000000-80-0-0.jpg",
+     "rank": 524959,
+     "date": "2003-02-28"
+    },
+    {
+     "id": "dz:53990831",
+     "title": "Is It Like Today?",
+     "artist": "World Party",
+     "art": "https://cdn-images.dzcdn.net/images/cover/94899fce12caf4ed5fac37d998ce6de0/250x250-000000-80-0-0.jpg",
+     "rank": 371195,
+     "date": "2006-02-28"
+    },
+    {
+     "id": "dz:540861142",
+     "title": "Let the Music Play",
+     "artist": "Shannon",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b38018daaefd56ce18e3125c7ed5d91c/250x250-000000-80-0-0.jpg",
+     "rank": 476272,
+     "date": "2006-01-01"
+    },
+    {
+     "id": "dz:14639968",
+     "title": "Fascinated",
+     "artist": "Company B",
+     "art": "https://cdn-images.dzcdn.net/images/cover/12e8921c6068b9eb6840dcceb788088f/250x250-000000-80-0-0.jpg",
+     "rank": 352980,
+     "date": "2008-02-05"
+    },
+    {
+     "id": "dz:3133684",
+     "title": "Good Life",
+     "artist": "Inner City",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1f99d88dcc3a088d660ecb9a4d8bf766/250x250-000000-80-0-0.jpg",
+     "rank": 492441,
+     "date": "2003-03-01"
+    },
+    {
+     "id": "dz:936925",
+     "title": "I.O.U. (7\" Version)",
+     "artist": "Freeez",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e9575739525ba6438467c643cbbc991a/250x250-000000-80-0-0.jpg",
+     "rank": 562336,
+     "date": "1993-01-04"
+    },
+    {
+     "id": "dz:2600934",
+     "title": "Word Up",
+     "artist": "Cameo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9c142fb4e95eee8e074d9c5b23e17ac0/250x250-000000-80-0-0.jpg",
+     "rank": 600805,
+     "date": "2008-02-28"
+    },
+    {
+     "id": "dz:65461711",
+     "title": "Sternenhimmel",
+     "artist": "Hubert Kah",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b87b6302f63b36a8c03ce26e55f373a3/250x250-000000-80-0-0.jpg",
+     "rank": 527057,
+     "date": "2013-04-05"
+    },
+    {
+     "id": "dz:143157064",
+     "title": "Flying High (Radio Mix)",
+     "artist": "Captain Hollywood Project",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1f774c6cf82c3e40c38bdafcb4449a23/250x250-000000-80-0-0.jpg",
+     "rank": 453596,
+     "date": "1994-11-11"
+    },
+    {
+     "id": "dz:1857696737",
+     "title": "Why Does My Heart Feel So Bad?",
+     "artist": "Moby",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f7ebc61c0f1ed22494fcb53d12aab8cd/250x250-000000-80-0-0.jpg",
+     "rank": 290104,
+     "date": "2008-06-02"
+    },
+    {
+     "id": "dz:1061915",
+     "title": "Codo",
+     "artist": "DöF",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a598aa5784521ec742f6390c69aa06e8/250x250-000000-80-0-0.jpg",
+     "rank": 162470,
+     "date": "1997-06-02"
+    },
+    {
+     "id": "dz:1174769",
+     "title": "Wouldn't It Be Good",
+     "artist": "Nik Kershaw",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ce29a69eecc2c08d2b772bf0c5cca02f/250x250-000000-80-0-0.jpg",
+     "rank": 679977,
+     "date": "1991-11-25"
+    },
+    {
+     "id": "dz:3707673652",
+     "title": "It's Gonna Be Alright (DJ Guan's Club Mix)",
+     "artist": "Deep Zone",
+     "art": "https://cdn-images.dzcdn.net/images/cover/eb1d03b5f51c9f2550c71060f0c2cccd/250x250-000000-80-0-0.jpg",
+     "rank": 332960,
+     "date": "1995-09-18"
+    },
+    {
+     "id": "dz:134706074",
+     "title": "No Limit",
+     "artist": "2 Unlimited",
+     "art": "https://cdn-images.dzcdn.net/images/cover/37e6834a65f160a58c3b58dc8a76d240/250x250-000000-80-0-0.jpg",
+     "rank": 703427,
+     "date": "1993-05-10"
+    },
+    {
+     "id": "dz:5389412",
+     "title": "Knockin",
+     "artist": "Double Vision",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a1dec33664552fc30feb5186ed931c86/250x250-000000-80-0-0.jpg",
+     "rank": 222511,
+     "date": "2009-05-12"
+    },
+    {
+     "id": "dz:560269",
+     "title": "Insomnia (Monster Mix)",
+     "artist": "Faithless",
+     "art": "https://cdn-images.dzcdn.net/images/cover/09150c41390667202b0e0d9e7ca10105/250x250-000000-80-0-0.jpg",
+     "rank": 648575,
+     "date": "2005-08-30"
+    },
+    {
+     "id": "dz:560281",
+     "title": "God Is a DJ",
+     "artist": "Faithless",
+     "art": "https://cdn-images.dzcdn.net/images/cover/09150c41390667202b0e0d9e7ca10105/250x250-000000-80-0-0.jpg",
+     "rank": 585693,
+     "date": "2005-08-30"
+    },
+    {
+     "id": "dz:61419158",
+     "title": "The Riddle",
+     "artist": "Gigi D'Agostino",
+     "art": "https://cdn-images.dzcdn.net/images/cover/994e964d837047a3fdafe9e7d38ef088/250x250-000000-80-0-0.jpg",
+     "rank": 682368,
+     "date": "2012-10-26"
+    },
+    {
+     "id": "dz:17347911",
+     "title": "Mr. Vain (Original Radio Edit)",
+     "artist": "Culture Beat",
+     "art": "https://cdn-images.dzcdn.net/images/cover/206689d00d08934d9dafe9d010f28089/250x250-000000-80-0-0.jpg",
+     "rank": 783217,
+     "date": "1993-01-01"
+    },
+    {
+     "id": "dz:3117764",
+     "title": "Unfinished Sympathy (Paul Oakenfold Mix)",
+     "artist": "Massive Attack",
+     "art": "https://cdn-images.dzcdn.net/images/cover/986d9ed02ba096f7a7ef50e0bc8e9641/250x250-000000-80-0-0.jpg",
+     "rank": 561407,
+     "date": "2006-01-30"
+    },
+    {
+     "id": "dz:994697",
+     "title": "It's Like That",
+     "artist": "Run DMC",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6d818c116450680a05bf66d5cc146e6f/250x250-000000-80-0-0.jpg",
+     "rank": 414557,
+     "date": "2002-01-01"
+    },
+    {
+     "id": "dz:25640271",
+     "title": "Slave To The Music",
+     "artist": "Twenty 4 Seven",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4ce8ea41f7c7552c53b0d9d17e88b276/250x250-000000-80-0-0.jpg",
+     "rank": 428402,
+     "date": "2010-04-02"
+    },
+    {
+     "id": "dz:13190016",
+     "title": "Children",
+     "artist": "Robert Miles",
+     "art": "https://cdn-images.dzcdn.net/images/cover/cd3eb7eb28a5750faf5f32ffa5888d04/250x250-000000-80-0-0.jpg",
+     "rank": 656544,
+     "date": "1996-07-11"
+    },
+    {
+     "id": "dz:69072620",
+     "title": "Have You Ever Been Mellow (Flamman & Abraxas Radio Mix)",
+     "artist": "Party Animals",
+     "art": "https://cdn-images.dzcdn.net/images/cover/82f815f2ae2a8d7b9c338af1303e6628/250x250-000000-80-0-0.jpg",
+     "rank": 481115,
+     "date": "2014-01-30"
+    },
+    {
+     "id": "dz:2814355352",
+     "title": "Feel It (Radio Version)",
+     "artist": "The Tamperer",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d9e2ca1297ea5c769384185dde549cb6/250x250-000000-80-0-0.jpg",
+     "rank": 572307,
+     "date": "1998-01-12"
+    },
+    {
+     "id": "dz:1192505632",
+     "title": "Turn It Around",
+     "artist": "Alena",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f3480c259d3b2bcd547942b3644158fe/250x250-000000-80-0-0.jpg",
+     "rank": 299875,
+     "date": "1999-01-01"
+    },
+    {
+     "id": "dz:3617096802",
+     "title": "The Silmarillia (4 Strings Radio Edit) [4 Strings Remix]",
+     "artist": "Carlos",
+     "art": "https://cdn-images.dzcdn.net/images/cover/cb0bb7fb083299122d648b4de2d3689d/250x250-000000-80-0-0.jpg",
+     "rank": 39858,
+     "date": "2025-10-28"
+    },
+    {
+     "id": "dz:416878312",
+     "title": "Open Your Mind (Classic Mix)",
+     "artist": "U.s.u.r.a.",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d3a6675013e774e5558f3d53eaaf0a61/250x250-000000-80-0-0.jpg",
+     "rank": 473424,
+     "date": "1992-04-29"
+    },
+    {
+     "id": "dz:1802289357",
+     "title": "Back in My Life",
+     "artist": "Alice Deejay",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3c3ea5e1af3339bdf9757b90989ad64d/250x250-000000-80-0-0.jpg",
+     "rank": 510194,
+     "date": "2022-07-01"
+    },
+    {
+     "id": "dz:25574861",
+     "title": "Can't Help Myself (Radio Version)",
+     "artist": "2 Brothers On the 4th Floor",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0c61e6f3b7c63fa0c80831941bbff3ad/250x250-000000-80-0-0.jpg",
+     "rank": 349108,
+     "date": "1994-01-01"
+    },
+    {
+     "id": "dz:16204632",
+     "title": "Get A Way",
+     "artist": "Maxx",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f49a4b819f2c8653cf2a96e4bf419d1e/250x250-000000-80-0-0.jpg",
+     "rank": 661565,
+     "date": "2010-06-29"
+    },
+    {
+     "id": "it:360432841",
+     "title": "Got To Move Your Body (Single Mix)",
+     "artist": "Lick ft. Kentucky Martha",
+     "art": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/92/4c/da/924cdab1-355d-b01a-2770-37a84d1baee5/8710981050582.png/512x512bb.jpg",
+     "rank": null,
+     "date": "2010-03-05"
+    },
+    {
+     "id": "dz:61639624",
+     "title": "9Pm (Till I Come)",
+     "artist": "ATB",
+     "art": "https://cdn-images.dzcdn.net/images/cover/06ad6042750464941103c80e5e02d1cc/250x250-000000-80-0-0.jpg",
+     "rank": 702370,
+     "date": "1999-04-26"
+    },
+    {
+     "id": "dz:2827398112",
+     "title": "Rainbow in the Sky",
+     "artist": "DJ Paul Elstak",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8a365ccb009f0f2e8f60b1eb6cff40a9/250x250-000000-80-0-0.jpg",
+     "rank": 502033,
+     "date": "1995-06-01"
+    },
+    {
+     "id": "dz:12159134",
+     "title": "The Key, The Secret",
+     "artist": "Urban Cookie Collective",
+     "art": "https://cdn-images.dzcdn.net/images/cover/57ffff16dc7fff50b677277367f3fb6f/250x250-000000-80-0-0.jpg",
+     "rank": 468970,
+     "date": "2006-07-21"
+    },
+    {
+     "id": "dz:6472495",
+     "title": "Bailando (Video Edit)",
+     "artist": "Paradisio",
+     "art": "https://cdn-images.dzcdn.net/images/cover/91657c53ff26aab11e8614ead13a5eb1/250x250-000000-80-0-0.jpg",
+     "rank": 761595,
+     "date": "2010-06-21"
+    },
+    {
+     "id": "dz:100927554",
+     "title": "Dear Jessie",
+     "artist": "Rollergirl",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3eb429fe60058422af21d1784f611157/250x250-000000-80-0-0.jpg",
+     "rank": 472634,
+     "date": "2015-05-29"
+    },
+    {
+     "id": "dz:16652776",
+     "title": "Pump Up The Jam (Edit)",
+     "artist": "Technotronic",
+     "art": "https://cdn-images.dzcdn.net/images/cover/463f696456548aa9e5ce4f061f4d27f6/250x250-000000-80-0-0.jpg",
+     "rank": 668489,
+     "date": "2012-03-05"
+    },
+    {
+     "id": "dz:3783013662",
+     "title": "Look Who's Talking (Long Version)",
+     "artist": "Dr. Alban",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a5ee7a137f8462b841f92515a09b709e/250x250-000000-80-0-0.jpg",
+     "rank": 401632,
+     "date": "2026-01-28"
+    },
+    {
+     "id": "dz:3756677142",
+     "title": "I Like to Move It (Erick \"More\" Album Mix)",
+     "artist": "Reel 2 Real",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9b405cb9ee10002b80df30fb39397a40/250x250-000000-80-0-0.jpg",
+     "rank": 612830,
+     "date": "2026-01-28"
+    },
+    {
+     "id": "dz:2961503",
+     "title": "This Beat Is Technotronic",
+     "artist": "Technotronic",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8ddb94a0ba17254188a54d18b6173f7f/250x250-000000-80-0-0.jpg",
+     "rank": 326977,
+     "date": "2009-03-23"
+    },
+    {
+     "id": "dz:3413829991",
+     "title": "It's a Rainy Day",
+     "artist": "Ice MC",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4b8a0d20349ac9e597dc85c136a032c3/250x250-000000-80-0-0.jpg",
+     "rank": 595891,
+     "date": "1994-01-03"
+    },
+    {
+     "id": "dz:17347880",
+     "title": "Got to Get It (Original Radio Edit)",
+     "artist": "Culture Beat",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c8a76881bcf104d01bc7d83fc2c6a7cf/250x250-000000-80-0-0.jpg",
+     "rank": 421733,
+     "date": "1994-01-01"
+    },
+    {
+     "id": "dz:2168791217",
+     "title": "How Much Is The Fish?",
+     "artist": "Scooter",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b59f0ab1628e28db545386acf53a6ff5/250x250-000000-80-0-0.jpg",
+     "rank": 511273,
+     "date": "2023-03-01"
+    },
+    {
+     "id": "dz:133204794",
+     "title": "Ecuador (Original Radio Edit)",
+     "artist": "Sash!",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0f129de47fc2e4e3f9ec9ba385459e32/250x250-000000-80-0-0.jpg",
+     "rank": 689658,
+     "date": "2016-09-30"
+    },
+    {
+     "id": "dz:2325364275",
+     "title": "Move Your Ass! (Video Edit)",
+     "artist": "Scooter",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c5c3a7dd995dd5ef4fc6328d5f234fe7/250x250-000000-80-0-0.jpg",
+     "rank": 557999,
+     "date": "2023-06-15"
+    },
+    {
+     "id": "dz:1365099792",
+     "title": "The Launch (Radio Edit)",
+     "artist": "DJ Jean",
+     "art": "https://cdn-images.dzcdn.net/images/cover/98dac8489a638d9f9dddaca88d72d4ae/250x250-000000-80-0-0.jpg",
+     "rank": 448456,
+     "date": "1999-02-02"
+    },
+    {
+     "id": "dz:16499761",
+     "title": "Seven Days and One Week (Radio Edit)",
+     "artist": "BBE",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ff24114b3813d5f7597d74109f82df21/250x250-000000-80-0-0.jpg",
+     "rank": 560967,
+     "date": "2012-02-14"
+    },
+    {
+     "id": "dz:2366798795",
+     "title": "Feel What You Want (2020 Remaster) (Our Tribe Vocal Mix)",
+     "artist": "Kristine W",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b6457df35f8ce2a3efd85f027271f78b/250x250-000000-80-0-0.jpg",
+     "rank": 433291,
+     "date": "2020-09-11"
+    },
+    {
+     "id": "dz:517823912",
+     "title": "Be Yourself (Extended Mix)",
+     "artist": "Goodluck",
+     "art": "https://cdn-images.dzcdn.net/images/cover/276d947df3740215e8b84aa050d134c2/250x250-000000-80-0-0.jpg",
+     "rank": 138531,
+     "date": "2018-06-29"
+    },
+    {
+     "id": "dz:136330424",
+     "title": "Professional Widow (Armand's Star Trunk Funkin' Mix; Radio Edit; 2016 Remaster)",
+     "artist": "Tori Amos",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6bd1d8c5b3af2dc0321e96cfb8bd9fae/250x250-000000-80-0-0.jpg",
+     "rank": 506447,
+     "date": "2016-11-18"
+    },
+    {
+     "id": "dz:3433778281",
+     "title": "You Belong To Me (Red Jerry Mix)",
+     "artist": "JX",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e6242e280c473dd0052b04b9ea5b948b/250x250-000000-80-0-0.jpg",
+     "rank": 152828,
+     "date": "1995-07-01"
+    },
+    {
+     "id": "dz:4955231",
+     "title": "Don't Give Me Your Life (Radio Version)",
+     "artist": "Alex Party",
+     "art": "https://cdn-images.dzcdn.net/images/cover/19d56728f53c6791c62d09f44a87029d/250x250-000000-80-0-0.jpg",
+     "rank": 468566,
+     "date": "1995-01-01"
+    },
+    {
+     "id": "dz:1855992137",
+     "title": "Rise Up",
+     "artist": "Yves Larock",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a8892f8588e36b9a08a378be1c3f38ae/250x250-000000-80-0-0.jpg",
+     "rank": 702814,
+     "date": "2009-01-06"
+    },
+    {
+     "id": "dz:128297773",
+     "title": "La Passion",
+     "artist": "Gigi D'Agostino",
+     "art": "https://cdn-images.dzcdn.net/images/cover/424b0c45c9b5ca8261b9810462111b19/250x250-000000-80-0-0.jpg",
+     "rank": 513120,
+     "date": "2013-06-28"
+    },
+    {
+     "id": "dz:3785940702",
+     "title": "The First the Last Eternity (Till the End) (SNAP! vs. Tom Novy)",
+     "artist": "Snap!",
+     "art": "https://cdn-images.dzcdn.net/images/cover/da4467bc8d9b7feb871e8a0c4b68dad7/250x250-000000-80-0-0.jpg",
+     "rank": 92475,
+     "date": "2005-09-12"
+    },
+    {
+     "id": "dz:1802289857",
+     "title": "Free (DJ Hirohito Hitmix)",
+     "artist": "Nakatomi",
+     "art": "https://cdn-images.dzcdn.net/images/cover/162467e84d8346100b3bee11b167ca1f/250x250-000000-80-0-0.jpg",
+     "rank": 111930,
+     "date": "2022-07-01"
+    },
+    {
+     "id": "dz:1179480382",
+     "title": "Ode to the Bouncer",
+     "artist": "Studio Killers",
+     "art": "https://cdn-images.dzcdn.net/images/cover/64fad8024846cd61700fb304543fd35b/250x250-000000-80-0-0.jpg",
+     "rank": 308961,
+     "date": "2020-12-14"
+    },
+    {
+     "id": "dz:25880171",
+     "title": "The Summer Is Magic (Radio Mix)",
+     "artist": "Playahitty",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1096157ca75d5130b6d2998c088e244f/250x250-000000-80-0-0.jpg",
+     "rank": 627899,
+     "date": "1994-06-21"
+    },
+    {
+     "id": "dz:4107090701",
+     "title": "Don't Call Me Baby",
+     "artist": "Madison Avenue",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c1977d0c971f783f091fe10eeed37a47/250x250-000000-80-0-0.jpg",
+     "rank": 560893,
+     "date": "2000-11-07"
+    },
+    {
+     "id": "dz:511594332",
+     "title": "Turn Around (Radio Edit)",
+     "artist": "Phats & Small",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f8a3141c23104125afa20e1b67a07c60/250x250-000000-80-0-0.jpg",
+     "rank": 619077,
+     "date": "1999-01-01"
+    },
+    {
+     "id": "dz:75086637",
+     "title": "Sun Is Shining (Bob Marley vs. Funkstar de Luxe Extended Club Mix)",
+     "artist": "Bob Marley & The Wailers",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a5308c0152037691860e6c7b17a590cc/250x250-000000-80-0-0.jpg",
+     "rank": 154349,
+     "date": "2014-02-01"
+    },
+    {
+     "id": "dz:123528146",
+     "title": "Right Type of Mood",
+     "artist": "Herbie",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1621aeb1a417d94b11e33800a7cb2736/250x250-000000-80-0-0.jpg",
+     "rank": 208629,
+     "date": "2025-01-27"
+    },
+    {
+     "id": "dz:461012172",
+     "title": "Waterman 2017 (feat. Spyder)",
+     "artist": "Olav Basoski",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a3e74debc146244598bbc3999dbfc128/250x250-000000-80-0-0.jpg",
+     "rank": 276032,
+     "date": "2017-07-21"
+    },
+    {
+     "id": "dz:3575547601",
+     "title": "Your Smile (Viper Remix)",
+     "artist": "Charly Lownoise & Mental Theo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1e15e60fb6fada4513b5acb34bb7ab14/250x250-000000-80-0-0.jpg",
+     "rank": 177003,
+     "date": "1996-07-01"
+    },
+    {
+     "id": "dz:2827398132",
+     "title": "Luv U More (K&A's Radio Blast)",
+     "artist": "DJ Paul Elstak",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8a365ccb009f0f2e8f60b1eb6cff40a9/250x250-000000-80-0-0.jpg",
+     "rank": 458943,
+     "date": "1995-06-01"
+    },
+    {
+     "id": "dz:364519231",
+     "title": "Tears Don't Lie",
+     "artist": "Mark 'Oh",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c698806c84f03cc4d868c9646d80283f/250x250-000000-80-0-0.jpg",
+     "rank": 341493,
+     "date": "2017-05-19"
+    },
+    {
+     "id": "dz:1147677882",
+     "title": "Mirror Of Love (Extended Version)",
+     "artist": "2 Brothers On the 4th Floor",
+     "art": "https://cdn-images.dzcdn.net/images/cover/85d7686e59cb041ad50a53038293c90e/250x250-000000-80-0-0.jpg",
+     "rank": 18552,
+     "date": "2020-11-19"
+    },
+    {
+     "id": "dz:25574921",
+     "title": "There's A Key (Radio Version)",
+     "artist": "2 Brothers On the 4th Floor",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3f2d8ba71599cebd14f9fc7f2c5900c7/250x250-000000-80-0-0.jpg",
+     "rank": 123151,
+     "date": "2006-03-20"
+    },
+    {
+     "id": "dz:2522953",
+     "title": "This Is How We Do It",
+     "artist": "Montell Jordan",
+     "art": "https://cdn-images.dzcdn.net/images/cover/88df9f4cf7cad05f3d1f4cf1bcbeadbe/250x250-000000-80-0-0.jpg",
+     "rank": 674517,
+     "date": "1995-04-06"
+    },
+    {
+     "id": "dz:1802256287",
+     "title": "We're Going To Ibiza!",
+     "artist": "Vengaboys",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d0a38881e92f502fd15beb55d28e8f51/250x250-000000-80-0-0.jpg",
+     "rank": 541543,
+     "date": "2022-07-01"
+    },
+    {
+     "id": "dz:25576701",
+     "title": "Fairytales (Charly Lownoise & Mental Theo Hardcore Mix)",
+     "artist": "2 Brothers On the 4th Floor",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e07bcedf2089ee77b8f2b3851c35ae88/250x250-000000-80-0-0.jpg",
+     "rank": 37015,
+     "date": "2006-03-27"
+    },
+    {
+     "id": "dz:133204792",
+     "title": "Encore Une Fois (Future Breeze Edit)",
+     "artist": "Sash!",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0f129de47fc2e4e3f9ec9ba385459e32/250x250-000000-80-0-0.jpg",
+     "rank": 716853,
+     "date": "2016-09-30"
+    },
+    {
+     "id": "it:310819845",
+     "title": "Fable",
+     "artist": "The Allstars",
+     "art": "https://is1-ssl.mzstatic.com/image/thumb/Music/df/96/4c/mzi.trakvdwz.jpg/512x512bb.jpg",
+     "rank": null,
+     "date": "1996-01-01"
+    },
+    {
+     "id": "dz:2492515041",
+     "title": "One and One",
+     "artist": "Robert Miles",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b2ccd3540a3ba26a6e007e1e8d980fbf/250x250-000000-80-0-0.jpg",
+     "rank": 504785,
+     "date": "1996-02-08"
+    },
+    {
+     "id": "dz:562701722",
+     "title": "Wild Wild Son",
+     "artist": "Armin van Buuren",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1d2bf51b4cafc10b089a9834015965c6/250x250-000000-80-0-0.jpg",
+     "rank": 386874,
+     "date": "2018-10-12"
+    },
+    {
+     "id": "dz:626418",
+     "title": "Gettin' Jiggy Wit It",
+     "artist": "Will Smith",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e06e37cd6c0b10dde07ff71b4a95fc2a/250x250-000000-80-0-0.jpg",
+     "rank": 696814,
+     "date": "2002-11-25"
+    },
+    {
+     "id": "dz:687546662",
+     "title": "Whammer Slammer (Original Single Version)",
+     "artist": "Patrick Prins",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d65439a7e861e66a5b51890af8b3970e/250x250-000000-80-0-0.jpg",
+     "rank": 38496,
+     "date": "2019-05-30"
+    },
+    {
+     "id": "dz:1095034112",
+     "title": "Red Alert",
+     "artist": "Basement Jaxx",
+     "art": "https://cdn-images.dzcdn.net/images/cover/338b7e663d15f5491e27be8a2f2cd031/250x250-000000-80-0-0.jpg",
+     "rank": 486839,
+     "date": "1999-05-10"
+    },
+    {
+     "id": "dz:2830940642",
+     "title": "Life Is Like a Dance",
+     "artist": "DJ Paul Elstak",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6302bedd05c7be28614d2d1668ff63b9/250x250-000000-80-0-0.jpg",
+     "rank": 60193,
+     "date": "2010-05-17"
+    },
+    {
+     "id": "dz:61686532",
+     "title": "Love Religion (Video Edit)",
+     "artist": "U96",
+     "art": "https://cdn-images.dzcdn.net/images/cover/92353c43887ffb34df5c5b019f7f9124/250x250-000000-80-0-0.jpg",
+     "rank": 340681,
+     "date": "2007-06-01"
+    },
+    {
+     "id": "dz:2830940992",
+     "title": "Going Crazy (Forze DJ Team Mix)",
+     "artist": "Rave Nation",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6302bedd05c7be28614d2d1668ff63b9/250x250-000000-80-0-0.jpg",
+     "rank": 172805,
+     "date": "2010-05-17"
+    },
+    {
+     "id": "dz:2961499",
+     "title": "Get Up (Before The Night Is Over)",
+     "artist": "Technotronic",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8ddb94a0ba17254188a54d18b6173f7f/250x250-000000-80-0-0.jpg",
+     "rank": 522142,
+     "date": "2009-03-23"
+    },
+    {
+     "id": "dz:1787703427",
+     "title": "Sunchyme",
+     "artist": "Dario G",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2da43564df4479071feb047d23dd65d7/250x250-000000-80-0-0.jpg",
+     "rank": 468865,
+     "date": "1998-05-18"
+    },
+    {
+     "id": "dz:17347978",
+     "title": "Inside Out",
+     "artist": "Culture Beat",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7b59c8376ad6bf8a55e935aafc8fbed1/250x250-000000-80-0-0.jpg",
+     "rank": 268704,
+     "date": "2012-03-30"
+    },
+    {
+     "id": "dz:1686921027",
+     "title": "Think of You (127 BPM Cool Down Mixed Version)",
+     "artist": "Whigfield",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b2922b022196c9520c0e5b9ea3161bd6/250x250-000000-80-0-0.jpg",
+     "rank": 288126,
+     "date": "2022-04-15"
+    },
+    {
+     "id": "dz:134706082",
+     "title": "Maximum Overdrive",
+     "artist": "2 Unlimited",
+     "art": "https://cdn-images.dzcdn.net/images/cover/37e6834a65f160a58c3b58dc8a76d240/250x250-000000-80-0-0.jpg",
+     "rank": 264224,
+     "date": "1993-05-10"
+    },
+    {
+     "id": "dz:73133012",
+     "title": "Right in the Night (feat. Plavka) (Fall in Love with Music)",
+     "artist": "Jam & Spoon",
+     "art": "https://cdn-images.dzcdn.net/images/cover/74e4aa76edd35a7725e324b34132aa41/250x250-000000-80-0-0.jpg",
+     "rank": 488793,
+     "date": "2013-12-13"
+    },
+    {
+     "id": "dz:3843390961",
+     "title": "Coco Jamboo (Radio Version)",
+     "artist": "Mr. President",
+     "art": "https://cdn-images.dzcdn.net/images/cover/dae8923f6ed33a9ea3368b2efdbeff55/250x250-000000-80-0-0.jpg",
+     "rank": 604762,
+     "date": "1996-03-29"
+    },
+    {
+     "id": "dz:1524279982",
+     "title": "It's a Fine Day (Swiss Radio Cut)",
+     "artist": "Miss Jane",
+     "art": "https://cdn-images.dzcdn.net/images/cover/67968786444399aedd18854f849a2170/250x250-000000-80-0-0.jpg",
+     "rank": 93845,
+     "date": "2012-12-07"
+    },
+    {
+     "id": "dz:918085282",
+     "title": "Love Is All Around",
+     "artist": "DJ Bobo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/88de18534edfb9afb225f6f3e71d275d/250x250-000000-80-0-0.jpg",
+     "rank": 554432,
+     "date": "2010-02-26"
+    },
+    {
+     "id": "dz:2430577",
+     "title": "This Is The Way (Radio Edit)",
+     "artist": "E-Type",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6ab7184f53bb532128ad8598f95738f9/250x250-000000-80-0-0.jpg",
+     "rank": 293129,
+     "date": "1995-02-20"
+    },
+    {
+     "id": "dz:3374614161",
+     "title": "Africa",
+     "artist": "Dynamic Base",
+     "art": "https://cdn-images.dzcdn.net/images/cover/278ad297d859e0056a05cd9f0cf71e99/250x250-000000-80-0-0.jpg",
+     "rank": 1460,
+     "date": "2025-05-19"
+    },
+    {
+     "id": "dz:365360141",
+     "title": "Where Are You 2K17 (EDM Short Mix)",
+     "artist": "Paffendorf",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6b56b6e201b09c0f36055254b1a413f0/250x250-000000-80-0-0.jpg",
+     "rank": 83952,
+     "date": "2017-06-02"
+    },
+    {
+     "id": "dz:3786149272",
+     "title": "Rock My Heart",
+     "artist": "Haddaway",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3fb1136475de9b9159ab8ab9a3773ed4/250x250-000000-80-0-0.jpg",
+     "rank": 312824,
+     "date": "2026-01-28"
+    },
+    {
+     "id": "dz:3920673571",
+     "title": "It's Ok, All Right",
+     "artist": "Def Dames Dope",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4607852ee5f83ab52c6ca1342edd0de2/250x250-000000-80-0-0.jpg",
+     "rank": 157595,
+     "date": "1992-10-01"
+    },
+    {
+     "id": "dz:1802290987",
+     "title": "Up & Down",
+     "artist": "Vengaboys",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d7e62d9ef273cba4ae573567f5581613/250x250-000000-80-0-0.jpg",
+     "rank": 557238,
+     "date": "2022-07-01"
+    },
+    {
+     "id": "dz:61686530",
+     "title": "Club Bizarre",
+     "artist": "U96",
+     "art": "https://cdn-images.dzcdn.net/images/cover/92353c43887ffb34df5c5b019f7f9124/250x250-000000-80-0-0.jpg",
+     "rank": 706907,
+     "date": "2007-06-01"
+    },
+    {
+     "id": "dz:3286785761",
+     "title": "Can't Stop Raving (Video Mix)",
+     "artist": "Dune",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f36aa39078c663543855179bbeee9c9f/250x250-000000-80-0-0.jpg",
+     "rank": 456106,
+     "date": "1995-10-01"
+    },
+    {
+     "id": "dz:918091072",
+     "title": "Everybody",
+     "artist": "DJ Bobo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/54a77c51fbbc277b0b2f161415fb9495/250x250-000000-80-0-0.jpg",
+     "rank": 557457,
+     "date": "2017-04-21"
+    },
+    {
+     "id": "dz:1604465882",
+     "title": "Twilight Zone",
+     "artist": "2 Unlimited",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9774d5a5885e39b737356fc6f2fde1d2/250x250-000000-80-0-0.jpg",
+     "rank": 427400,
+     "date": "2022-01-21"
+    },
+    {
+     "id": "dz:2846815262",
+     "title": "Wrong = Right (Radio Edit)",
+     "artist": "DJ Jose",
+     "art": "https://cdn-images.dzcdn.net/images/cover/604f810ad0d9823a9f56e8a0c4ca0f98/250x250-000000-80-0-0.jpg",
+     "rank": 244833,
+     "date": "2000-01-02"
+    },
+    {
+     "id": "dz:2063947637",
+     "title": "Set You Free",
+     "artist": "N-Trance",
+     "art": "https://cdn-images.dzcdn.net/images/cover/18fc72cb98fe0233ba7b08dbc94070be/250x250-000000-80-0-0.jpg",
+     "rank": 493108,
+     "date": "1995-01-14"
+    },
+    {
+     "id": "dz:6628158",
+     "title": "Show Me Love",
+     "artist": "Robin S",
+     "art": "https://cdn-images.dzcdn.net/images/cover/95e8fd5910548808417046907299f9df/250x250-000000-80-0-0.jpg",
+     "rank": 855240,
+     "date": "2008-12-23"
+    },
+    {
+     "id": "dz:3506229691",
+     "title": "Horny ('98 Radio Edit)",
+     "artist": "Hot'n'Juicy",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0c67fc56f5b3943ab3348d56ffbcd5bc/250x250-000000-80-0-0.jpg",
+     "rank": 619882,
+     "date": "2024-06-27"
+    },
+    {
+     "id": "dz:1787737867",
+     "title": "Missing (Todd Terry Club Mix)",
+     "artist": "Everything But The Girl",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ab7d0e116949912e100848bad5857b9f/250x250-000000-80-0-0.jpg",
+     "rank": 790656,
+     "date": "1994-08-08"
+    },
+    {
+     "id": "dz:62072437",
+     "title": "Love Is a Wonderful Thing",
+     "artist": "Fatima Rainey",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ce941eb0487686343c9e3427a0d8bf95/250x250-000000-80-0-0.jpg",
+     "rank": 90708,
+     "date": "1997-03-15"
+    },
+    {
+     "id": "dz:491019402",
+     "title": "Million Reasons",
+     "artist": "Jess Panter",
+     "art": "https://cdn-images.dzcdn.net/images/cover/49d42f643e121bcae4ef85798b2c1e06/250x250-000000-80-0-0.jpg",
+     "rank": 30573,
+     "date": "2018-05-02"
+    },
+    {
+     "id": "dz:66494645",
+     "title": "Soldier Soldier (Short Summer Mix)",
+     "artist": "Captain Jack",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f0ecd7f27cc11e8672df2a122823497c/250x250-000000-80-0-0.jpg",
+     "rank": 51139,
+     "date": "2013-05-03"
+    },
+    {
+     "id": "dz:2325365885",
+     "title": "Friends",
+     "artist": "Scooter",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5cbd5e8040ed66ff66369728c7b9542d/250x250-000000-80-0-0.jpg",
+     "rank": 153059,
+     "date": "2023-06-15"
+    },
+    {
+     "id": "dz:1270591332",
+     "title": "I Need Your Lovin' (Like The Sunshine) (Club Mix)",
+     "artist": "Infectious!",
+     "art": "https://cdn-images.dzcdn.net/images/cover/13859664d2a32ef4326753273fc66f63/250x250-000000-80-0-0.jpg",
+     "rank": 420371,
+     "date": "2021-03-10"
+    },
+    {
+     "id": "dz:2830941172",
+     "title": "Hava Naquila",
+     "artist": "Party Animals",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6302bedd05c7be28614d2d1668ff63b9/250x250-000000-80-0-0.jpg",
+     "rank": 279294,
+     "date": "2010-05-17"
+    },
+    {
+     "id": "dz:16204630",
+     "title": "No More (I Can't Stand It)",
+     "artist": "Maxx",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f49a4b819f2c8653cf2a96e4bf419d1e/250x250-000000-80-0-0.jpg",
+     "rank": 448511,
+     "date": "2010-06-29"
+    },
+    {
+     "id": "dz:136330508",
+     "title": "Surrender Your Love (feat. John Reid) (MK Radio Edit)",
+     "artist": "Nightcrawlers",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d9e8694496d025662b82a04f4a9fd581/250x250-000000-80-0-0.jpg",
+     "rank": 114920,
+     "date": "1995-11-18"
+    },
+    {
+     "id": "dz:131708868",
+     "title": "Get Ready",
+     "artist": "2 Unlimited",
+     "art": "https://cdn-images.dzcdn.net/images/cover/fcf639eb7914835c67586b0b3da55fd3/250x250-000000-80-0-0.jpg",
+     "rank": 517398,
+     "date": "1992-02-24"
+    },
+    {
+     "id": "dz:1256900902",
+     "title": "Mo Money Mo Problems (feat. Puff Daddy & Mase) (2014 Remaster)",
+     "artist": "The Notorious B.I.G.",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c1a74b7fa8de503d015f37ab85b1ad1c/250x250-000000-80-0-0.jpg",
+     "rank": 644739,
+     "date": "2021-03-01"
+    },
+    {
+     "id": "dz:1583833312",
+     "title": "Splash",
+     "artist": "The Sunclub",
+     "art": "https://cdn-images.dzcdn.net/images/cover/633cba7893965af90c0710494e67aa21/250x250-000000-80-0-0.jpg",
+     "rank": 112613,
+     "date": "2021-11-12"
+    },
+    {
+     "id": "dz:633930102",
+     "title": "Café Del Mar (Three 'n One Remix)",
+     "artist": "Energy 52",
+     "art": "https://cdn-images.dzcdn.net/images/cover/eda3ee07b1580d560d848a0ce299b4da/250x250-000000-80-0-0.jpg",
+     "rank": 372092,
+     "date": "2017-07-28"
+    },
+    {
+     "id": "dz:60758745",
+     "title": "Move It Up (FIERCE EDIT)",
+     "artist": "Cappella",
+     "art": "https://cdn-images.dzcdn.net/images/cover/96de18ac025a2826f2addba2ada42383/250x250-000000-80-0-0.jpg",
+     "rank": 178922,
+     "date": "2012-10-29"
+    },
+    {
+     "id": "dz:3752089",
+     "title": "Stupidisco (Radio Edit)",
+     "artist": "Junior Jack",
+     "art": "https://cdn-images.dzcdn.net/images/cover/022ef849e06bd81080ae4cd724de45a4/250x250-000000-80-0-0.jpg",
+     "rank": 452403,
+     "date": "2004-06-21"
+    },
+    {
+     "id": "dz:1802255707",
+     "title": "Will I Ever",
+     "artist": "Alice Deejay",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f6fa2812f6e143c984ff9b1a0bd68f2f/250x250-000000-80-0-0.jpg",
+     "rank": 377721,
+     "date": "2022-07-01"
+    },
+    {
+     "id": "dz:3362662781",
+     "title": "Stars",
+     "artist": "Charly Lownoise & Mental Theo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9a08df4a72ae6b290a730122c60563f0/250x250-000000-80-0-0.jpg",
+     "rank": 257607,
+     "date": "2025-06-06"
+    },
+    {
+     "id": "dz:25574791",
+     "title": "Never Alone",
+     "artist": "2 Brothers On the 4th Floor",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0c61e6f3b7c63fa0c80831941bbff3ad/250x250-000000-80-0-0.jpg",
+     "rank": 488053,
+     "date": "1994-01-01"
+    },
+    {
+     "id": "dz:75070408",
+     "title": "Groove Is in the Heart",
+     "artist": "Deee-Lite",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b9c2a8e11dd928500a228f824c58e4ae/250x250-000000-80-0-0.jpg",
+     "rank": 706317,
+     "date": "2014-01-21"
+    },
+    {
+     "id": "dz:477388412",
+     "title": "Don't Stop Movin' (A. Manetta Mix)",
+     "artist": "Livin' Joy",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1f0c5d7cb2cee6b894e9c7e3013e9e14/250x250-000000-80-0-0.jpg",
+     "rank": 66400,
+     "date": "2018-03-30"
+    },
+    {
+     "id": "dz:133204800",
+     "title": "Mysterious Times (Radio Mix)",
+     "artist": "Sash!",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0f129de47fc2e4e3f9ec9ba385459e32/250x250-000000-80-0-0.jpg",
+     "rank": 500673,
+     "date": "2016-09-30"
+    },
+    {
+     "id": "dz:469289552",
+     "title": "Why Not Jazz (Remix)",
+     "artist": "Leonardo Pancaldi",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0cc5f4a0398d1b68150f8e629df5b318/250x250-000000-80-0-0.jpg",
+     "rank": 22272,
+     "date": "2018-03-08"
+    },
+    {
+     "id": "dz:3793844862",
+     "title": "Cult of SNAP! (World Power Mix)",
+     "artist": "Snap!",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b3ce6b89abebab98bcac1fad1170759e/250x250-000000-80-0-0.jpg",
+     "rank": 231952,
+     "date": "2020-08-14"
+    },
+    {
+     "id": "dz:133204796",
+     "title": "Stay (Original Single Edit)",
+     "artist": "Sash!",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0f129de47fc2e4e3f9ec9ba385459e32/250x250-000000-80-0-0.jpg",
+     "rank": 505122,
+     "date": "2016-09-30"
+    },
+    {
+     "id": "dz:469203182",
+     "title": "Ooh Aah...Just a Little Bit (Motiv8 Radio Edit)",
+     "artist": "Gina G",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f2891404e3ce06fc51f90422000fb17c/250x250-000000-80-0-0.jpg",
+     "rank": 409268,
+     "date": "1996-01-01"
+    },
+    {
+     "id": "dz:548095832",
+     "title": "Make Me Do",
+     "artist": "FÄIS",
+     "art": "https://cdn-images.dzcdn.net/images/cover/604d0067c454578d624f01c0351635fe/250x250-000000-80-0-0.jpg",
+     "rank": 180849,
+     "date": "2018-08-31"
+    },
+    {
+     "id": "dz:78304246",
+     "title": "Put Your Hands Up (DJ Tonka Radio Edit)",
+     "artist": "Black & White Brothers",
+     "art": "https://cdn-images.dzcdn.net/images/cover/89ef8614c5588b136ff167859c39eb34/250x250-000000-80-0-0.jpg",
+     "rank": 303542,
+     "date": "1998-04-06"
+    },
+    {
+     "id": "dz:2629683362",
+     "title": "Ebeneezer Goode (Beat Edit)",
+     "artist": "The Shamen",
+     "art": "https://cdn-images.dzcdn.net/images/cover/224f810deb334a5079a610bfbea7912e/250x250-000000-80-0-0.jpg",
+     "rank": 383369,
+     "date": "1992-05-05"
+    },
+    {
+     "id": "dz:3770980372",
+     "title": "Fiesta",
+     "artist": "The Sunclub",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4f5c3f865e364fd21a3cb46bfac56488/250x250-000000-80-0-0.jpg",
+     "rank": 21209,
+     "date": "2026-01-18"
+    },
+    {
+     "id": "dz:145242924",
+     "title": "Perfect Waves (feat. Iris Rijnsewijn)",
+     "artist": "Kwambo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/21d2b2803f531c200f9a49a421681da6/250x250-000000-80-0-0.jpg",
+     "rank": 30128,
+     "date": "2017-02-22"
+    },
+    {
+     "id": "dz:14144619",
+     "title": "Magic Carpet Ride",
+     "artist": "Mighty Dub Katz",
+     "art": "https://cdn-images.dzcdn.net/images/cover/206c15594f8414c44be89308b3779674/250x250-000000-80-0-0.jpg",
+     "rank": 159268,
+     "date": "2007-04-29"
+    },
+    {
+     "id": "dz:603415762",
+     "title": "You Don't Know Me (feat. Duane Harden) (Radio Edit)",
+     "artist": "Armand Van Helden",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ff5ad8759214769ed6dc0e045d59e391/250x250-000000-80-0-0.jpg",
+     "rank": 721750,
+     "date": "1998-01-01"
+    },
+    {
+     "id": "dz:452893052",
+     "title": "Lee",
+     "artist": "MOGUAI",
+     "art": "https://cdn-images.dzcdn.net/images/cover/60e9d48783e3846279e98cc965cfff3d/250x250-000000-80-0-0.jpg",
+     "rank": 174264,
+     "date": "2018-01-29"
+    },
+    {
+     "id": "dz:82265248",
+     "title": "Born Slippy (Nuxx)",
+     "artist": "Underworld",
+     "art": "https://cdn-images.dzcdn.net/images/cover/97460d8b65336a11623fb223930e74d0/250x250-000000-80-0-0.jpg",
+     "rank": 759735,
+     "date": "2014-08-18"
+    },
+    {
+     "id": "dz:950467",
+     "title": "On a Ragga Tip '97 (Original Mix)",
+     "artist": "Sl2",
+     "art": "https://cdn-images.dzcdn.net/images/cover/20f723d6aaeb51a47058f7c8ff7b43b2/250x250-000000-80-0-0.jpg",
+     "rank": 402554,
+     "date": "1996-04-01"
+    },
+    {
+     "id": "dz:2876045572",
+     "title": "Give It Up",
+     "artist": "The Good Men",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c76c3dadfd2f355f394fc93ff7fb076c/250x250-000000-80-0-0.jpg",
+     "rank": 122602,
+     "date": "2024-07-26"
+    },
+    {
+     "id": "dz:78304375",
+     "title": "Dirty Cash (Money Talks) (Sold Out 7 Inch Mix)",
+     "artist": "Adventures Of Stevie V",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f58ca44dda8bfe754cfc09c243194387/250x250-000000-80-0-0.jpg",
+     "rank": 617952,
+     "date": "1989-12-01"
+    },
+    {
+     "id": "dz:3516816861",
+     "title": "No Time to Waste",
+     "artist": "T-Spoon",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d2f4da156ad6cd3146befc5af4f36c85/250x250-000000-80-0-0.jpg",
+     "rank": 231454,
+     "date": "1994-01-01"
+    },
+    {
+     "id": "dz:13938978",
+     "title": "Gotta Let You Go",
+     "artist": "Dominica",
+     "art": "https://cdn-images.dzcdn.net/images/cover/702058c41c153da57cdcefe561de5239/250x250-000000-80-0-0.jpg",
+     "rank": 17745,
+     "date": "2011-09-27"
+    },
+    {
+     "id": "dz:116924416",
+     "title": "I Can't Stand It (feat. Capt. Hollywood)",
+     "artist": "Twenty 4 Seven",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d6287f851eca2e533b0cb3f201623048/250x250-000000-80-0-0.jpg",
+     "rank": 352693,
+     "date": "2016-01-06"
+    },
+    {
+     "id": "dz:2168791267",
+     "title": "Weekend!",
+     "artist": "Scooter",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b59f0ab1628e28db545386acf53a6ff5/250x250-000000-80-0-0.jpg",
+     "rank": 465012,
+     "date": "2023-03-01"
+    },
+    {
+     "id": "dz:97157490",
+     "title": "The Nighttrain (Original)",
+     "artist": "Kadoc",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1ea2fd27f4570489caa4c817a3edc3a2/250x250-000000-80-0-0.jpg",
+     "rank": 376550,
+     "date": "1995-09-29"
+    },
+    {
+     "id": "dz:1352362492",
+     "title": "I'm Gonna Get You (Original Flavour Mix)",
+     "artist": "Bizarre Inc",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e37aa72a3282074859abc4467c191856/250x250-000000-80-0-0.jpg",
+     "rank": 524151,
+     "date": "1992-01-03"
+    },
+    {
+     "id": "dz:2105865757",
+     "title": "Shine On",
+     "artist": "Sonic Surfers",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c7d904217251dc7ecb51b634b285924b/250x250-000000-80-0-0.jpg",
+     "rank": 37353,
+     "date": "1994-09-19"
+    },
+    {
+     "id": "dz:733059222",
+     "title": "Faces",
+     "artist": "2 Unlimited",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e7e9989fdf29261b6737d2ce93863d39/250x250-000000-80-0-0.jpg",
+     "rank": 203680,
+     "date": "2014-05-05"
+    },
+    {
+     "id": "dz:2872898922",
+     "title": "Hideaway (Deep Dish Radio Edit)",
+     "artist": "De'Lacy",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c535d082eaedd294da95bc22e2c5f1aa/250x250-000000-80-0-0.jpg",
+     "rank": 412402,
+     "date": "2009-04-10"
+    },
+    {
+     "id": "dz:3198531571",
+     "title": "Heartbreak (Make Me A Dancer)",
+     "artist": "Freemasons",
+     "art": "https://cdn-images.dzcdn.net/images/cover/dc98d62d7eeb066f53bec23935158f03/250x250-000000-80-0-0.jpg",
+     "rank": 370617,
+     "date": "2025-01-24"
+    },
+    {
+     "id": "dz:2644963412",
+     "title": "Phorever People (Beatmasters Heavenly Edit)",
+     "artist": "The Shamen",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a420db709c9bb9fc0ec587041c80617e/250x250-000000-80-0-0.jpg",
+     "rank": 299510,
+     "date": "1992-01-01"
+    },
+    {
+     "id": "dz:3140367081",
+     "title": "Poco Loco",
+     "artist": "Poco Loco Gang",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7ba7e92cc60329d12c6ce89791b3b7f0/250x250-000000-80-0-0.jpg",
+     "rank": 236632,
+     "date": "1998-07-13"
+    },
+    {
+     "id": "dz:635094532",
+     "title": "No Sleep (feat. Bonn)",
+     "artist": "Martin Garrix",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3f790c1aad25737895be8c26a712658b/250x250-000000-80-0-0.jpg",
+     "rank": 546256,
+     "date": "2019-02-21"
+    },
+    {
+     "id": "dz:3516767201",
+     "title": "Sex on the Beach (Ibiza Mix)",
+     "artist": "T-Spoon",
+     "art": "https://cdn-images.dzcdn.net/images/cover/874f2589c47d3e742cad4318a760a196/250x250-000000-80-0-0.jpg",
+     "rank": 352069,
+     "date": "1997-01-01"
+    },
+    {
+     "id": "dz:90282705",
+     "title": "Love Come Home (Klubbheads Vs. DJ Jean Mix)",
+     "artist": "DJ Jean",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2e6b528e003aeae2891122a39a8a95d3/250x250-000000-80-0-0.jpg",
+     "rank": 181170,
+     "date": "2014-11-13"
+    },
+    {
+     "id": "dz:3491214131",
+     "title": "Move to the Rhythm (Radio Version)",
+     "artist": "Bass Bumpers",
+     "art": "https://cdn-images.dzcdn.net/images/cover/353d5f44422c11e8419e96e27b5b7625/250x250-000000-80-0-0.jpg",
+     "rank": 212693,
+     "date": "2013-03-29"
+    },
+    {
+     "id": "dz:1125855542",
+     "title": "Hot Shot '97 (Rollercoaster Radio Mix)",
+     "artist": "Karen Young",
+     "art": "https://cdn-images.dzcdn.net/images/cover/60d12376f2003ea3aab04bb27d16546d/250x250-000000-80-0-0.jpg",
+     "rank": 13606,
+     "date": "1997-11-02"
+    },
+    {
+     "id": "dz:2045592697",
+     "title": "To France (Radio Edit)",
+     "artist": "Novaspace",
+     "art": "https://cdn-images.dzcdn.net/images/cover/346eaf923e10edc4e56e5b87d89a3f58/250x250-000000-80-0-0.jpg",
+     "rank": 269602,
+     "date": "2004-01-01"
+    },
+    {
+     "id": "dz:71038286",
+     "title": "(I Wanna Give You) Devotion (Original Radio Version)",
+     "artist": "Nomad",
+     "art": "https://cdn-images.dzcdn.net/images/cover/414ccfc944f563b7ceda394f9accd3f7/250x250-000000-80-0-0.jpg",
+     "rank": 389940,
+     "date": "2013-09-09"
+    },
+    {
+     "id": "dz:3785940732",
+     "title": "Welcome to Tomorrow (Are You Ready) (SNAP! vs. Fragma)",
+     "artist": "Snap!",
+     "art": "https://cdn-images.dzcdn.net/images/cover/da4467bc8d9b7feb871e8a0c4b68dad7/250x250-000000-80-0-0.jpg",
+     "rank": 98246,
+     "date": "2005-09-12"
+    },
+    {
+     "id": "dz:3801786632",
+     "title": "The World in My Hands (We Are One)",
+     "artist": "Snap!",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8d14bece363e1d276cd9344573c42133/250x250-000000-80-0-0.jpg",
+     "rank": 140249,
+     "date": "1994-01-06"
+    },
+    {
+     "id": "dz:973723182",
+     "title": "Touch Me",
+     "artist": "49ers",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1d73c3cf5bd4c1463b7a5ffe76bc47af/250x250-000000-80-0-0.jpg",
+     "rank": 555699,
+     "date": "2020-05-29"
+    },
+    {
+     "id": "dz:2814355302",
+     "title": "If You Buy This Record (Your Life Will Be Better)",
+     "artist": "The Tamperer",
+     "art": "https://cdn-images.dzcdn.net/images/cover/38550431a065a237ad01e9533c74602d/250x250-000000-80-0-0.jpg",
+     "rank": 250935,
+     "date": "1998-01-01"
+    },
+    {
+     "id": "dz:12159136",
+     "title": "High On A Happy Vibe",
+     "artist": "Urban Cookie Collective",
+     "art": "https://cdn-images.dzcdn.net/images/cover/57ffff16dc7fff50b677277367f3fb6f/250x250-000000-80-0-0.jpg",
+     "rank": 154223,
+     "date": "2006-07-21"
+    },
+    {
+     "id": "dz:129736034",
+     "title": "U Sure Do (Strike 7\" Mix)",
+     "artist": "Strike",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0fc707635fcafc750d905d9bd9560ad9/250x250-000000-80-0-0.jpg",
+     "rank": 416142,
+     "date": "1994-12-01"
+    },
+    {
+     "id": "dz:33898231",
+     "title": "My Little Fantasy (Radio Edit)",
+     "artist": "4 Tune Fairytales",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2fe7a871266461631c83e64c5f4cf929/250x250-000000-80-0-0.jpg",
+     "rank": 261361,
+     "date": "2010-12-02"
+    },
+    {
+     "id": "dz:2877231462",
+     "title": "Parada de Tettas",
+     "artist": "Vengaboys",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f94fd6f14518b24b9e80926e756c3b3d/250x250-000000-80-0-0.jpg",
+     "rank": 233192,
+     "date": "2024-07-12"
+    },
+    {
+     "id": "dz:61639633",
+     "title": "Killer (Video Edit)",
+     "artist": "ATB",
+     "art": "https://cdn-images.dzcdn.net/images/cover/34be197693da3d53960daf95141e73e0/250x250-000000-80-0-0.jpg",
+     "rank": 97274,
+     "date": "1999-05-31"
+    },
+    {
+     "id": "dz:70051871",
+     "title": "Ride on Time",
+     "artist": "Black Box",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ad31d939346f5770e86af0622c595d32/250x250-000000-80-0-0.jpg",
+     "rank": 766880,
+     "date": "2006-09-01"
+    },
+    {
+     "id": "dz:7930525",
+     "title": "Nana (Suicide Remix by Digital Boy)",
+     "artist": "N.U.K.E.",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1f8486f0cb3752d1894493eb71b902b3/250x250-000000-80-0-0.jpg",
+     "rank": 49594,
+     "date": "2010-11-16"
+    },
+    {
+     "id": "dz:3920750951",
+     "title": "Ain't nothin' to it (12'' radio version)",
+     "artist": "Def Dames Dope",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9cf4fca14b24e06ad69d503e232e5ab8/250x250-000000-80-0-0.jpg",
+     "rank": 100014,
+     "date": "1993-11-11"
+    },
+    {
+     "id": "dz:1614316392",
+     "title": "Power of American Natives (Airplay Edit)",
+     "artist": "Dance 2 Trance",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7b8e003bbe1ae618909325f88925dfd7/250x250-000000-80-0-0.jpg",
+     "rank": 361946,
+     "date": "1992-01-01"
+    },
+    {
+     "id": "dz:3785940642",
+     "title": "Do You See the Light? (Looking For) (SNAP! vs. Plaything)",
+     "artist": "Snap!",
+     "art": "https://cdn-images.dzcdn.net/images/cover/da4467bc8d9b7feb871e8a0c4b68dad7/250x250-000000-80-0-0.jpg",
+     "rank": 175424,
+     "date": "2005-09-12"
+    },
+    {
+     "id": "dz:61639626",
+     "title": "Don't Stop",
+     "artist": "ATB",
+     "art": "https://cdn-images.dzcdn.net/images/cover/06ad6042750464941103c80e5e02d1cc/250x250-000000-80-0-0.jpg",
+     "rank": 577337,
+     "date": "1999-04-26"
+    },
+    {
+     "id": "dz:600159",
+     "title": "One Night in Heaven",
+     "artist": "M People",
+     "art": "https://cdn-images.dzcdn.net/images/cover/03ae0d6ea06504c955ff6661049af62b/250x250-000000-80-0-0.jpg",
+     "rank": 357599,
+     "date": "2005-02-21"
+    },
+    {
+     "id": "dz:13145552",
+     "title": "September '99 (Phats & Small Remix)",
+     "artist": "Earth, Wind & Fire",
+     "art": "https://cdn-images.dzcdn.net/images/cover/179b140f43b18bfddb0a6a564dbb0559/250x250-000000-80-0-0.jpg",
+     "rank": 344366,
+     "date": "1999-11-01"
+    },
+    {
+     "id": "dz:90630503",
+     "title": "Swamp Thing",
+     "artist": "The Grid",
+     "art": "https://cdn-images.dzcdn.net/images/cover/23200f2a6cecb3df661cd187a6889dba/250x250-000000-80-0-0.jpg",
+     "rank": 253004,
+     "date": "2014-11-28"
+    },
+    {
+     "id": "dz:871221512",
+     "title": "Here We Go",
+     "artist": "Stakka Bo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/859187c7f15192fd4ec1ecf958c927c5/250x250-000000-80-0-0.jpg",
+     "rank": 138697,
+     "date": "2020-02-12"
+    },
+    {
+     "id": "dz:3782962302",
+     "title": "Exterminate",
+     "artist": "Snap!",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e26643f384fb6a8ad1db73b47ff1cb1b/250x250-000000-80-0-0.jpg",
+     "rank": 319182,
+     "date": "2020-11-13"
+    },
+    {
+     "id": "dz:116101146",
+     "title": "Last Train to Trancentral (feat. Crystal) (Deltic 12\" Mix)",
+     "artist": "People Of 'K'",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9b475440eb80ba70b9d9bd3ac1cc316f/250x250-000000-80-0-0.jpg",
+     "rank": 25668,
+     "date": "2015-03-09"
+    },
+    {
+     "id": "dz:6732913",
+     "title": "Vamos A La Playa (Video Edit)",
+     "artist": "Miranda",
+     "art": "https://cdn-images.dzcdn.net/images/cover/74e292fff18e0b53f4de35f93b4edeb5/250x250-000000-80-0-0.jpg",
+     "rank": 326914,
+     "date": "2010-08-02"
+    },
+    {
+     "id": "dz:3803066022",
+     "title": "Ooops Up (7” Edit)",
+     "artist": "Snap!",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e47a1268f974b03df6d347be6ed1d755/250x250-000000-80-0-0.jpg",
+     "rank": 282624,
+     "date": "2010-05-14"
+    },
+    {
+     "id": "dz:1761578617",
+     "title": "Killin' Time (Album Version)",
+     "artist": "Tina Cousins",
+     "art": "https://cdn-images.dzcdn.net/images/cover/21dae740410775719342a862f4097a2d/250x250-000000-80-0-0.jpg",
+     "rank": 98453,
+     "date": "2000-06-06"
+    },
+    {
+     "id": "dz:41610111",
+     "title": "Burnin' Love (The Viper Remix)",
+     "artist": "Critical Mass",
+     "art": "https://cdn-images.dzcdn.net/images/cover/71b092a83d7014897e8061336c545933/250x250-000000-80-0-0.jpg",
+     "rank": 224502,
+     "date": "2011-10-07"
+    },
+    {
+     "id": "dz:103473756",
+     "title": "Proximus (Radio Edit)",
+     "artist": "Mauro Picotto",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ea0f3db1d6ac85580b7ae6d35c7354d9/250x250-000000-80-0-0.jpg",
+     "rank": 75592,
+     "date": "2013-05-24"
+    },
+    {
+     "id": "dz:38100631",
+     "title": "Dancin' On A Higher Ground (Original Radio Edit)",
+     "artist": "Fun Da Mental",
+     "art": "https://cdn-images.dzcdn.net/images/cover/799b43b6a234293a6571cc7affdeaad6/250x250-000000-80-0-0.jpg",
+     "rank": 104939,
+     "date": "2013-10-27"
+    },
+    {
+     "id": "dz:127524339",
+     "title": "Somebody Real",
+     "artist": "Bit Machine",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0632ecbbed082b2194232c51899ac474/250x250-000000-80-0-0.jpg",
+     "rank": 157492,
+     "date": "2016-07-04"
+    },
+    {
+     "id": "dz:1042280",
+     "title": "Run Away",
+     "artist": "Real McCoy",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8cdc05b609232d463417238a6dc09e89/250x250-000000-80-0-0.jpg",
+     "rank": 548018,
+     "date": "1995-04-10"
+    },
+    {
+     "id": "dz:61663492",
+     "title": "Why Don't You Dance with Me? (Club Mix)",
+     "artist": "Future Breeze",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d6cbb1b164ae847a6ad96747dfa32764/250x250-000000-80-0-0.jpg",
+     "rank": 191287,
+     "date": "1996-09-01"
+    },
+    {
+     "id": "dz:70051866",
+     "title": "Everybody Everybody",
+     "artist": "Black Box",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ad31d939346f5770e86af0622c595d32/250x250-000000-80-0-0.jpg",
+     "rank": 462899,
+     "date": "2006-09-01"
+    },
+    {
+     "id": "dz:89381107",
+     "title": "Passion (Of Your Passion) (7\" Edit)",
+     "artist": "Gat Decor",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d22fdf6cf0d538df15321c1afd5ae377/250x250-000000-80-0-0.jpg",
+     "rank": 210255,
+     "date": "2014-10-31"
+    },
+    {
+     "id": "dz:15177960",
+     "title": "Move Any Mountain (Album Version)",
+     "artist": "The Shamen",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a35f26e8af2398a99a2086625e82c612/250x250-000000-80-0-0.jpg",
+     "rank": 56392,
+     "date": "1991-10-22"
+    },
+    {
+     "id": "dz:487484142",
+     "title": "September",
+     "artist": "Earth, Wind & Fire",
+     "art": "https://cdn-images.dzcdn.net/images/cover/18f41ecd3781fb96bffa2b0b49955db5/250x250-000000-80-0-0.jpg",
+     "rank": 930298,
+     "date": "2018-04-17"
+    },
+    {
+     "id": "dz:745478322",
+     "title": "Shined On Me",
+     "artist": "Praise Cats",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f6b9d4c89114c04ae6388f3f8f4a4f03/250x250-000000-80-0-0.jpg",
+     "rank": 638090,
+     "date": "2002-01-02"
+    },
+    {
+     "id": "dz:1686920947",
+     "title": "Saturday Night (136 BPM Cardio Mixed Version)",
+     "artist": "Whigfield",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b2922b022196c9520c0e5b9ea3161bd6/250x250-000000-80-0-0.jpg",
+     "rank": 58565,
+     "date": "2022-04-15"
+    },
+    {
+     "id": "dz:2366798855",
+     "title": "Luv 4 Luv (2020 Remaster) (StoneBridge Club Mix)",
+     "artist": "Robin S",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b6457df35f8ce2a3efd85f027271f78b/250x250-000000-80-0-0.jpg",
+     "rank": 398076,
+     "date": "2020-09-11"
+    },
+    {
+     "id": "dz:985364022",
+     "title": "SEXY EYES (性感舞后最新單曲)",
+     "artist": "Whigfield",
+     "art": "https://cdn-images.dzcdn.net/images/cover/fde8c57c416afc39936df278e06d86ab/250x250-000000-80-0-0.jpg",
+     "rank": 95775,
+     "date": "2020-06-07"
+    },
+    {
+     "id": "dz:994481",
+     "title": "Don't You Want Me (Hooj Mix Edit)",
+     "artist": "Felix",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6a827921da4e6afde64294d7483cbf0e/250x250-000000-80-0-0.jpg",
+     "rank": 368053,
+     "date": "2002-05-20"
+    },
+    {
+     "id": "dz:1377877312",
+     "title": "Loops & Tings (Fruit Loops Mix)",
+     "artist": "jens",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7d658b084442ce9d366ff4c6d3f2a880/250x250-000000-80-0-0.jpg",
+     "rank": 331526,
+     "date": "1998-07-01"
+    },
+    {
+     "id": "dz:1614843262",
+     "title": "Komodo",
+     "artist": "Mauro Picotto",
+     "art": "https://cdn-images.dzcdn.net/images/cover/aaba1046e56b3ad00f438ce7532582af/250x250-000000-80-0-0.jpg",
+     "rank": 523038,
+     "date": "2022-01-07"
+    },
+    {
+     "id": "dz:461011172",
+     "title": "Plastic Dreams",
+     "artist": "Jaydee",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3e27c47005aa785e3a5cf909ff980223/250x250-000000-80-0-0.jpg",
+     "rank": 609306,
+     "date": "2011-03-25"
+    },
+    {
+     "id": "dz:558166042",
+     "title": "Strobe Lights",
+     "artist": "Roy Dest",
+     "art": "https://cdn-images.dzcdn.net/images/cover/83c7c1b739effcaf9125145f3791e93a/250x250-000000-80-0-0.jpg",
+     "rank": 22411,
+     "date": "2018-10-08"
+    },
+    {
+     "id": "dz:38100521",
+     "title": "Stay With Me 4 Ever (Original Radio Edit)",
+     "artist": "Definition Of Joy",
+     "art": "https://cdn-images.dzcdn.net/images/cover/aee93a62614a9817f00a2026e0d541b1/250x250-000000-80-0-0.jpg",
+     "rank": 178315,
+     "date": "2013-10-27"
+    },
+    {
+     "id": "dz:70051874",
+     "title": "Strike It Up",
+     "artist": "Black Box",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ad31d939346f5770e86af0622c595d32/250x250-000000-80-0-0.jpg",
+     "rank": 517826,
+     "date": "2006-09-01"
+    },
+    {
+     "id": "dz:60784067",
+     "title": "U Got 2 Know 2010 (Original Extended Clubmix)",
+     "artist": "Cappella",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c0185102ad5f9e4c0adad92d602bd681/250x250-000000-80-0-0.jpg",
+     "rank": 116861,
+     "date": "2012-10-29"
+    },
+    {
+     "id": "dz:3420294861",
+     "title": "Hold That Sucker Down",
+     "artist": "O.T. Quartet",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8d6aa9e20448c44ad7afb741e00dbfc4/250x250-000000-80-0-0.jpg",
+     "rank": 345524,
+     "date": "1994-07-18"
+    },
+    {
+     "id": "dz:2435104105",
+     "title": "The Real Thing (Joy Brothers 7\" Dance Mix)",
+     "artist": "Tony Di Bart",
+     "art": "https://cdn-images.dzcdn.net/images/cover/38db29e906ccd1ce44ccf9874df731f0/250x250-000000-80-0-0.jpg",
+     "rank": 15383,
+     "date": "2023-09-08"
+    },
+    {
+     "id": "dz:3575443501",
+     "title": "Every Single Day (Crazibiza Radio Edit)",
+     "artist": "DJ Jean",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f3836664100a0fce700202f24e7f4247/250x250-000000-80-0-0.jpg",
+     "rank": 73969,
+     "date": "2017-09-18"
+    },
+    {
+     "id": "dz:61692441",
+     "title": "Bang (Radio Edit)",
+     "artist": "The Riders",
+     "art": "https://cdn-images.dzcdn.net/images/cover/844f2f839f6a0dbb8823605470e5cd83/250x250-000000-80-0-0.jpg",
+     "rank": 77578,
+     "date": "2007-01-01"
+    },
+    {
+     "id": "dz:61638627",
+     "title": "Because the Night (Radio Edit)",
+     "artist": "Jan Wayne",
+     "art": "https://cdn-images.dzcdn.net/images/cover/04c5f2d45e2d43c575d781049b1e250e/250x250-000000-80-0-0.jpg",
+     "rank": 472890,
+     "date": "2014-05-15"
+    },
+    {
+     "id": "dz:371243281",
+     "title": "Move On Baby",
+     "artist": "Cappella",
+     "art": "https://cdn-images.dzcdn.net/images/cover/29015742684e80b6190442ae94823ef2/250x250-000000-80-0-0.jpg",
+     "rank": 351752,
+     "date": "2016-10-21"
+    },
+    {
+     "id": "dz:4188327",
+     "title": "Godfather",
+     "artist": "Cool James",
+     "art": "https://cdn-images.dzcdn.net/images/cover/63ac6567a8f3ecd4b2884d32a53a0d33/250x250-000000-80-0-0.jpg",
+     "rank": 85402,
+     "date": "2009-07-31"
+    },
+    {
+     "id": "dz:61057192",
+     "title": "United",
+     "artist": "Mark 'Oh",
+     "art": "https://cdn-images.dzcdn.net/images/cover/dac9c9df3cc2c39dc3676808ab685e95/250x250-000000-80-0-0.jpg",
+     "rank": 71021,
+     "date": "2009-11-06"
+    },
+    {
+     "id": "dz:2753265041",
+     "title": "Ayla",
+     "artist": "Kosmonova",
+     "art": "https://cdn-images.dzcdn.net/images/cover/775d815ecf658dee7ac26308214b6997/250x250-000000-80-0-0.jpg",
+     "rank": 256799,
+     "date": "2024-05-17"
+    },
+    {
+     "id": "dz:121665394",
+     "title": "L'amour Toujours (Small Mix)",
+     "artist": "Gigi D'Agostino",
+     "art": "https://cdn-images.dzcdn.net/images/cover/20ece63b81a9ede7f9ef67453279c966/250x250-000000-80-0-0.jpg",
+     "rank": 423704,
+     "date": "2014-05-30"
+    },
+    {
+     "id": "dz:3289112261",
+     "title": "Hardcore Vibes",
+     "artist": "Dune",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0f4d42042b737164b7d29e52a06a59a5/250x250-000000-80-0-0.jpg",
+     "rank": 459777,
+     "date": "1995-08-01"
+    },
+    {
+     "id": "dz:85309018",
+     "title": "Base of Love, Pt. 3",
+     "artist": "general base",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7eb3df75540bddf1079893cb867d659a/250x250-000000-80-0-0.jpg",
+     "rank": 174474,
+     "date": "2014-09-10"
+    },
+    {
+     "id": "dz:2105154",
+     "title": "The Rythm Makes You Wanna Dance (Rhythm mix)",
+     "artist": "Magic Affair",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bce8680161a1d5716995e23369f81f92/250x250-000000-80-0-0.jpg",
+     "rank": 115472,
+     "date": "2008-05-30"
+    },
+    {
+     "id": "dz:2300137915",
+     "title": "Hyper Hyper",
+     "artist": "Scooter",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4c6e48101dd82796f35316274fcfc49e/250x250-000000-80-0-0.jpg",
+     "rank": 404355,
+     "date": "2023-06-02"
+    },
+    {
+     "id": "dz:3427570901",
+     "title": "Disco Fans",
+     "artist": "Star Wash",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4565a058d5e0b2a23776a525952549ff/250x250-000000-80-0-0.jpg",
+     "rank": 233434,
+     "date": "2017-08-09"
+    },
+    {
+     "id": "dz:733441",
+     "title": "Happy People (feat. Marky Mark)",
+     "artist": "Prince Ital Joe",
+     "art": "https://cdn-images.dzcdn.net/images/cover/50e217d877abeec3278ec99c929c553b/250x250-000000-80-0-0.jpg",
+     "rank": 440669,
+     "date": "1994-04-29"
+    },
+    {
+     "id": "dz:61419158",
+     "title": "The Riddle",
+     "artist": "Gigi D'Agostino",
+     "art": "https://cdn-images.dzcdn.net/images/cover/994e964d837047a3fdafe9e7d38ef088/250x250-000000-80-0-0.jpg",
+     "rank": 682368,
+     "date": "2012-10-26"
+    },
+    {
+     "id": "dz:918197312",
+     "title": "Let the Dream Come True",
+     "artist": "DJ Bobo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8ae4d4bcd3b1289775fc2de5d48e05cf/250x250-000000-80-0-0.jpg",
+     "rank": 600658,
+     "date": "1994-10-28"
+    },
+    {
+     "id": "dz:2776806",
+     "title": "Feel the heat of the night (Radio Edit)",
+     "artist": "Masterboy",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bc95ac2a9e3a686ff23ec2310ba06598/250x250-000000-80-0-0.jpg",
+     "rank": 600429,
+     "date": "2006-01-23"
+    },
+    {
+     "id": "dz:2620560202",
+     "title": "Piece Of My Heart (Single Mix)",
+     "artist": "Intermission",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b787d08e3bca75e8b47b8e2761130378/250x250-000000-80-0-0.jpg",
+     "rank": 406539,
+     "date": "1993-01-01"
+    },
+    {
+     "id": "dz:2208313",
+     "title": "Omen III (Single Edit)",
+     "artist": "Magic Affair",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c1c4b4016608f399c3f45f8251bba76c/250x250-000000-80-0-0.jpg",
+     "rank": 541645,
+     "date": "2008-04-08"
+    },
+    {
+     "id": "dz:3843390611",
+     "title": "I Give You My Heart",
+     "artist": "Mr. President",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6dbbea4e3a10a91717e4ab0f45914d62/250x250-000000-80-0-0.jpg",
+     "rank": 462079,
+     "date": "1996-05-17"
+    },
+    {
+     "id": "dz:25640311",
+     "title": "Paradise",
+     "artist": "Twenty 4 Seven",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4ce8ea41f7c7552c53b0d9d17e88b276/250x250-000000-80-0-0.jpg",
+     "rank": 125440,
+     "date": "2010-04-02"
+    },
+    {
+     "id": "dz:1912289627",
+     "title": "Somewhere over the Rainbow",
+     "artist": "Marusha",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8fcd29fa708cc14e7200030460a2022f/250x250-000000-80-0-0.jpg",
+     "rank": 391220,
+     "date": "1994-06-01"
+    },
+    {
+     "id": "dz:2500802",
+     "title": "Dooh Dooh",
+     "artist": "Barcode Brothers",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ac2aefaaa4b67f3eeddcbd825f0c84fd/250x250-000000-80-0-0.jpg",
+     "rank": 367931,
+     "date": "2013-04-12"
+    },
+    {
+     "id": "dz:1802256287",
+     "title": "We're Going To Ibiza!",
+     "artist": "Vengaboys",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d0a38881e92f502fd15beb55d28e8f51/250x250-000000-80-0-0.jpg",
+     "rank": 541543,
+     "date": "2022-07-01"
+    },
+    {
+     "id": "dz:3843390961",
+     "title": "Coco Jamboo (Radio Version)",
+     "artist": "Mr. President",
+     "art": "https://cdn-images.dzcdn.net/images/cover/dae8923f6ed33a9ea3368b2efdbeff55/250x250-000000-80-0-0.jpg",
+     "rank": 604762,
+     "date": "1996-03-29"
+    },
+    {
+     "id": "dz:94877938",
+     "title": "Das Boot",
+     "artist": "U96",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0ddb52bcc9ce34a883099581ba4a280a/250x250-000000-80-0-0.jpg",
+     "rank": 491462,
+     "date": "2015-01-02"
+    },
+    {
+     "id": "dz:2208314",
+     "title": "In The Middle Of The Night",
+     "artist": "Magic Affair",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c1c4b4016608f399c3f45f8251bba76c/250x250-000000-80-0-0.jpg",
+     "rank": 333452,
+     "date": "2008-04-08"
+    },
+    {
+     "id": "dz:588319532",
+     "title": "Naked in the Rain",
+     "artist": "Infinity",
+     "art": "https://cdn-images.dzcdn.net/images/cover/515405098e13cd23048a5f47033db5bb/250x250-000000-80-0-0.jpg",
+     "rank": 175979,
+     "date": "2001-10-19"
+    },
+    {
+     "id": "dz:89629797",
+     "title": "Blue (Da Ba Dee) (Video Edit)",
+     "artist": "Eiffel 65",
+     "art": "https://cdn-images.dzcdn.net/images/cover/03aaa3268500f38fe03588f7b25522dd/250x250-000000-80-0-0.jpg",
+     "rank": 872907,
+     "date": "1998-11-11"
+    },
+    {
+     "id": "dz:61685640",
+     "title": "Heaven",
+     "artist": "U96",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1e8682ed28009b3233c2968daf5c2ab9/250x250-000000-80-0-0.jpg",
+     "rank": 337679,
+     "date": "2007-06-01"
+    },
+    {
+     "id": "dz:61406115",
+     "title": "Love Me (Club House Mix)",
+     "artist": "Patric Osborn",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5bb865535df42c9a1167e6134b462623/250x250-000000-80-0-0.jpg",
+     "rank": 74730,
+     "date": "2012-10-26"
+    },
+    {
+     "id": "dz:3808634112",
+     "title": "I Like to Move It (Harry \"Choo Choo\" Romero vs. Erick Morillo Main Mix)",
+     "artist": "Reel 2 Real",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e45f645a8ccbf61c229928feaea44222/250x250-000000-80-0-0.jpg",
+     "rank": 55663,
+     "date": "2026-01-28"
+    },
+    {
+     "id": "dz:133204792",
+     "title": "Encore Une Fois (Future Breeze Edit)",
+     "artist": "Sash!",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0f129de47fc2e4e3f9ec9ba385459e32/250x250-000000-80-0-0.jpg",
+     "rank": 716853,
+     "date": "2016-09-30"
+    },
+    {
+     "id": "dz:3196855",
+     "title": "Fly High",
+     "artist": "Me & My",
+     "art": "https://cdn-images.dzcdn.net/images/cover/064e27e7e848e26f9f5b1e569b21a32b/250x250-000000-80-0-0.jpg",
+     "rank": 101919,
+     "date": "2005-09-23"
+    },
+    {
+     "id": "dz:15396988",
+     "title": "Quit Playing Games (With My Heart)",
+     "artist": "Backstreet Boys",
+     "art": "https://cdn-images.dzcdn.net/images/cover/52f58f75fc623f6202d1825cc0081dcd/250x250-000000-80-0-0.jpg",
+     "rank": 339246,
+     "date": "2001-10-23"
+    },
+    {
+     "id": "dz:634747382",
+     "title": "I Like It (Radio Edit)",
+     "artist": "Narcotic Thrust",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6c471f95774ec85a1fe0866957a9835d/250x250-000000-80-0-0.jpg",
+     "rank": 311132,
+     "date": "2004-01-19"
+    },
+    {
+     "id": "dz:143157076",
+     "title": "Impossible (Radio Edit)",
+     "artist": "Captain Hollywood Project",
+     "art": "https://cdn-images.dzcdn.net/images/cover/73ad0f443ab932deb0caada916dc6ba4/250x250-000000-80-0-0.jpg",
+     "rank": 442078,
+     "date": "1993-09-17"
+    },
+    {
+     "id": "dz:61701868",
+     "title": "Johnny B.",
+     "artist": "Down Low",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e5365223b6b7d63f68027ecda7b9875b/250x250-000000-80-0-0.jpg",
+     "rank": 299865,
+     "date": "2021-02-18"
+    },
+    {
+     "id": "dz:3823782821",
+     "title": "What You Know Bout Love",
+     "artist": "Pop Smoke",
+     "art": "https://cdn-images.dzcdn.net/images/cover/dd80d50c9c2076b23c94ed201c59c57e/250x250-000000-80-0-0.jpg",
+     "rank": 717764,
+     "date": "2020-07-20"
+    },
+    {
+     "id": "dz:970550",
+     "title": "Out of Touch",
+     "artist": "Daryl Hall & John Oates",
+     "art": "https://cdn-images.dzcdn.net/images/cover/118e86b388cc06ce480e5e9b760dd651/250x250-000000-80-0-0.jpg",
+     "rank": 509407,
+     "date": "2001-01-23"
+    },
+    {
+     "id": "dz:3129589",
+     "title": "Fly Away",
+     "artist": "Lenny Kravitz",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b45b7a2c24f8481a976a15d98bb39784/250x250-000000-80-0-0.jpg",
+     "rank": 668463,
+     "date": "2000-10-24"
+    },
+    {
+     "id": "dz:925653",
+     "title": "Mr. Jones",
+     "artist": "Counting Crows",
+     "art": "https://cdn-images.dzcdn.net/images/cover/dd42edba056119169528c4e0a6a784c5/250x250-000000-80-0-0.jpg",
+     "rank": 687568,
+     "date": "2007-09-18"
+    },
+    {
+     "id": "dz:106883562",
+     "title": "Crying at the Discoteque (Radio Edit)",
+     "artist": "Alcazar",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9804f0692de24b085a848e5eb901f3ab/250x250-000000-80-0-0.jpg",
+     "rank": 569852,
+     "date": "2015-09-04"
+    },
+    {
+     "id": "dz:3786437562",
+     "title": "You Bring on the Sun",
+     "artist": "Londonbeat",
+     "art": "https://cdn-images.dzcdn.net/images/cover/51bbaa7c22249af7cc9f77e990d085fb/250x250-000000-80-0-0.jpg",
+     "rank": 128638,
+     "date": "2007-09-19"
+    },
+    {
+     "id": "dz:60784067",
+     "title": "U Got 2 Know 2010 (Original Extended Clubmix)",
+     "artist": "Cappella",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c0185102ad5f9e4c0adad92d602bd681/250x250-000000-80-0-0.jpg",
+     "rank": 116861,
+     "date": "2012-10-29"
+    },
+    {
+     "id": "dz:40983421",
+     "title": "To France",
+     "artist": "Mike Oldfield",
+     "art": "https://cdn-images.dzcdn.net/images/cover/775009052670ff68e42814c6b62c0bd7/250x250-000000-80-0-0.jpg",
+     "rank": 654994,
+     "date": "2012-07-28"
+    },
+    {
+     "id": "dz:698274",
+     "title": "Forever Young",
+     "artist": "Alphaville",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3cba7135b09c8e54f36a85ab857c5dff/250x250-000000-80-0-0.jpg",
+     "rank": 960598,
+     "date": "2005-02-22"
+    },
+    {
+     "id": "dz:698274",
+     "title": "Forever Young",
+     "artist": "Alphaville",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3cba7135b09c8e54f36a85ab857c5dff/250x250-000000-80-0-0.jpg",
+     "rank": 960598,
+     "date": "2005-02-22"
+    },
+    {
+     "id": "dz:647871552",
+     "title": "To Germany With Love (2019 Remaster)",
+     "artist": "Alphaville",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3717af2cad9c1e74ea25761c94d8c0a7/250x250-000000-80-0-0.jpg",
+     "rank": 215699,
+     "date": "2019-03-15"
+    },
+    {
+     "id": "dz:698248",
+     "title": "A Victory of Love",
+     "artist": "Alphaville",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3cba7135b09c8e54f36a85ab857c5dff/250x250-000000-80-0-0.jpg",
+     "rank": 500009,
+     "date": "2005-02-22"
+    },
+    {
+     "id": "dz:698255",
+     "title": "Summer in Berlin",
+     "artist": "Alphaville",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3cba7135b09c8e54f36a85ab857c5dff/250x250-000000-80-0-0.jpg",
+     "rank": 421988,
+     "date": "2005-02-22"
+    },
+    {
+     "id": "dz:698270",
+     "title": "Fallen Angel",
+     "artist": "Alphaville",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3cba7135b09c8e54f36a85ab857c5dff/250x250-000000-80-0-0.jpg",
+     "rank": 342947,
+     "date": "2005-02-22"
+    },
+    {
+     "id": "dz:698280",
+     "title": "In the Mood",
+     "artist": "Alphaville",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3cba7135b09c8e54f36a85ab857c5dff/250x250-000000-80-0-0.jpg",
+     "rank": 310740,
+     "date": "2005-02-22"
+    },
+    {
+     "id": "dz:716453",
+     "title": "Sounds Like a Melody",
+     "artist": "Alphaville",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b06d9eee96b46a01a9456c7f27ae1e64/250x250-000000-80-0-0.jpg",
+     "rank": 694540,
+     "date": "2005-07-05"
+    },
+    {
+     "id": "dz:647871602",
+     "title": "Lies (2019 Remaster)",
+     "artist": "Alphaville",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3717af2cad9c1e74ea25761c94d8c0a7/250x250-000000-80-0-0.jpg",
+     "rank": 159179,
+     "date": "2019-03-15"
+    },
+    {
+     "id": "dz:698260",
+     "title": "Big in Japan",
+     "artist": "Alphaville",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3cba7135b09c8e54f36a85ab857c5dff/250x250-000000-80-0-0.jpg",
+     "rank": 820384,
+     "date": "2005-02-22"
+    },
+    {
+     "id": "dz:2976149501",
+     "title": "The Jet Set (Single Remix; 2019 Remaster)",
+     "artist": "Alphaville",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a55fbcbedb34fc55e32a3407f48270de/250x250-000000-80-0-0.jpg",
+     "rank": 209867,
+     "date": "2024-09-27"
+    },
+    {
+     "id": "dz:914062362",
+     "title": "Dolce Vita",
+     "artist": "Ryan Paris",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c7a7d5eb7477407ff252d48ca1a48950/250x250-000000-80-0-0.jpg",
+     "rank": 676962,
+     "date": "2020-03-27"
+    },
+    {
+     "id": "dz:884013",
+     "title": "Angels (Love Is The Answer)",
+     "artist": "Morandi",
+     "art": "https://cdn-images.dzcdn.net/images/cover/719d3c13f068456bb6c88fcd2e9c361f/250x250-000000-80-0-0.jpg",
+     "rank": 442474,
+     "date": "2008-03-20"
+    },
+    {
+     "id": "dz:997537362",
+     "title": "Tell Me Why (Radio Edit)",
+     "artist": "Supermode",
+     "art": "https://cdn-images.dzcdn.net/images/cover/720970de7d75a525415a5d60bad8c23a/250x250-000000-80-0-0.jpg",
+     "rank": 679455,
+     "date": "2006-01-01"
+    },
+    {
+     "id": "dz:3141540",
+     "title": "Désenchantée (Radio Edit)",
+     "artist": "Kate Ryan",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9ea1fa6508902bf2d8928904aa05ae2a/250x250-000000-80-0-0.jpg",
+     "rank": 420350,
+     "date": "2008-07-04"
+    },
+    {
+     "id": "dz:575228",
+     "title": "Left Outside Alone",
+     "artist": "Anastacia",
+     "art": "https://cdn-images.dzcdn.net/images/cover/adcc3162f6abf31d2ddcffe5f0887694/250x250-000000-80-0-0.jpg",
+     "rank": 792064,
+     "date": "2005-10-25"
+    },
+    {
+     "id": "dz:46251471",
+     "title": "Ella, elle l'a (Remasterisé en 2004)",
+     "artist": "France Gall",
+     "art": "https://cdn-images.dzcdn.net/images/cover/42e4896decb76161c7551096a954f308/250x250-000000-80-0-0.jpg",
+     "rank": 968374,
+     "date": "1987-04-06"
+    },
+    {
+     "id": "dz:134036248",
+     "title": "Another Day in Paradise (2016 Remaster)",
+     "artist": "Phil Collins",
+     "art": "https://cdn-images.dzcdn.net/images/cover/73e6481676a8ab3e93f0f7b79a9cff68/250x250-000000-80-0-0.jpg",
+     "rank": 949542,
+     "date": "2016-10-14"
+    },
+    {
+     "id": "dz:3138703",
+     "title": "Can't Get You out of My Head",
+     "artist": "Kylie Minogue",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b9c59c53c8b8a65c7bb5f44ba1e52e93/250x250-000000-80-0-0.jpg",
+     "rank": 610372,
+     "date": "2003-02-28"
+    },
+    {
+     "id": "dz:3135553",
+     "title": "One More Time",
+     "artist": "Daft Punk",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5718f7c81c27e0b2417e2a4c45224f8a/250x250-000000-80-0-0.jpg",
+     "rank": 930849,
+     "date": "2001-03-12"
+    },
+    {
+     "id": "dz:398570642",
+     "title": "Bitter Sweet Symphony (Remastered 2016)",
+     "artist": "The Verve",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ecc7727e897198892b98e7c019fba45f/250x250-000000-80-0-0.jpg",
+     "rank": 903083,
+     "date": "2017-09-01"
+    },
+    {
+     "id": "dz:3439850251",
+     "title": "Sky",
+     "artist": "Sonique",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c661b8fab2d6f1e15bba1bd82be2e422/250x250-000000-80-0-0.jpg",
+     "rank": 527523,
+     "date": "2000-10-21"
+    },
+    {
+     "id": "dz:10307838",
+     "title": "White Flag",
+     "artist": "Dido",
+     "art": "https://cdn-images.dzcdn.net/images/cover/06811e80e48fdeacee5ffa4621e12488/250x250-000000-80-0-0.jpg",
+     "rank": 612335,
+     "date": "2003-09-29"
+    },
+    {
+     "id": "dz:2430349",
+     "title": "All Good Things (Come To An End)",
+     "artist": "Nelly Furtado",
+     "art": "https://cdn-images.dzcdn.net/images/cover/55a124e01e46d0aa494fc59afe53c639/250x250-000000-80-0-0.jpg",
+     "rank": 415355,
+     "date": "2006-06-12"
+    },
+    {
+     "id": "dz:1042543",
+     "title": "Another Night",
+     "artist": "Real McCoy",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8cdc05b609232d463417238a6dc09e89/250x250-000000-80-0-0.jpg",
+     "rank": 689243,
+     "date": "1995-04-10"
+    },
+    {
+     "id": "dz:3156196761",
+     "title": "Lola's Theme (Radio Edit)",
+     "artist": "The Shapeshifters",
+     "art": "https://cdn-images.dzcdn.net/images/cover/12d23d9263f1453d563b91980aae6b8e/250x250-000000-80-0-0.jpg",
+     "rank": 621400,
+     "date": "2004-01-01"
+    },
+    {
+     "id": "dz:1822997377",
+     "title": "Samba de Janeiro (Album Version)",
+     "artist": "Bellini",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c7f9d5dc4aa235c3d02bfbea3539152e/250x250-000000-80-0-0.jpg",
+     "rank": 788988,
+     "date": "2022-07-22"
+    },
+    {
+     "id": "dz:518458172",
+     "title": "Sweet Child O' Mine",
+     "artist": "Guns N' Roses",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8bfe7b3b0985d9ff0751090fb2b6f73f/250x250-000000-80-0-0.jpg",
+     "rank": 934281,
+     "date": "2018-06-29"
+    },
+    {
+     "id": "dz:84124185",
+     "title": "Payphone",
+     "artist": "Maroon 5",
+     "art": "https://cdn-images.dzcdn.net/images/cover/24dfd43026f70e260f13c05bf86bb20a/250x250-000000-80-0-0.jpg",
+     "rank": 530440,
+     "date": "2012-07-17"
+    },
+    {
+     "id": "dz:119615552",
+     "title": "Somebody That I Used To Know",
+     "artist": "Gotye",
+     "art": "https://cdn-images.dzcdn.net/images/cover/99447608a95fbc873fcd69c553e88e10/250x250-000000-80-0-0.jpg",
+     "rank": 520308,
+     "date": "2012-01-20"
+    },
+    {
+     "id": "dz:13158212",
+     "title": "Beds Are Burning (Remastered)",
+     "artist": "Midnight Oil",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b3c13f6fddafdab5e9325888ba565e02/250x250-000000-80-0-0.jpg",
+     "rank": 820880,
+     "date": "1987-10-02"
+    },
+    {
+     "id": "dz:136334560",
+     "title": "Losing My Religion",
+     "artist": "R.E.M.",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a968ed3814acb2ef8f3929b1bebcb42d/250x250-000000-80-0-0.jpg",
+     "rank": 973013,
+     "date": "2016-11-18"
+    },
+    {
+     "id": "dz:136339500",
+     "title": "Shiny Happy People",
+     "artist": "R.E.M.",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a968ed3814acb2ef8f3929b1bebcb42d/250x250-000000-80-0-0.jpg",
+     "rank": 812068,
+     "date": "2016-11-18"
+    },
+    {
+     "id": "dz:3154047",
+     "title": "The One I Love (Remastered 2006)",
+     "artist": "R.E.M.",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d433c86a9d90ed9dded043d52f5d2c0c/250x250-000000-80-0-0.jpg",
+     "rank": 665730,
+     "date": "2006-09-12"
+    },
+    {
+     "id": "dz:121922404",
+     "title": "Orange Crush",
+     "artist": "R.E.M.",
+     "art": "https://cdn-images.dzcdn.net/images/cover/461c2f9d406b6ca835a0a2a5e499c1ca/250x250-000000-80-0-0.jpg",
+     "rank": 505823,
+     "date": "2016-04-01"
+    },
+    {
+     "id": "dz:136341488",
+     "title": "Imitation Of Life",
+     "artist": "R.E.M.",
+     "art": "https://cdn-images.dzcdn.net/images/cover/525927b07e8d6029df264e07fc995c31/250x250-000000-80-0-0.jpg",
+     "rank": 631304,
+     "date": "2016-11-18"
+    },
+    {
+     "id": "dz:71828729",
+     "title": "If Today Was Your Last Day",
+     "artist": "Nickelback",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bc844f574c47ba2f0db583115916472f/250x250-000000-80-0-0.jpg",
+     "rank": 599816,
+     "date": "2013-11-01"
+    },
+    {
+     "id": "dz:71828723",
+     "title": "How You Remind Me",
+     "artist": "Nickelback",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bc844f574c47ba2f0db583115916472f/250x250-000000-80-0-0.jpg",
+     "rank": 924419,
+     "date": "2013-11-01"
+    },
+    {
+     "id": "dz:2503284",
+     "title": "Give A Little Bit",
+     "artist": "Supertramp",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6e982953fde60522577ef2958a17faa2/250x250-000000-80-0-0.jpg",
+     "rank": 798656,
+     "date": "1992-11-16"
+    },
+    {
+     "id": "dz:15598892",
+     "title": "Save Tonight",
+     "artist": "Eagle-Eye Cherry",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a3a274790a8b242ec71692fc06cf2e4e/250x250-000000-80-0-0.jpg",
+     "rank": 465531,
+     "date": "2025-02-09"
+    },
+    {
+     "id": "dz:1399345572",
+     "title": "Played-A-Live (The Bongo Song) (Radio Edit)",
+     "artist": "Safri Duo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/17ca418cde02c60bb4967c6e39aca66f/250x250-000000-80-0-0.jpg",
+     "rank": 702067,
+     "date": "2021-06-09"
+    },
+    {
+     "id": "dz:15590338",
+     "title": "Pocketful of Sunshine",
+     "artist": "Natasha Bedingfield",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f694093e743c7fe0fc24ced31247c6ce/250x250-000000-80-0-0.jpg",
+     "rank": 634424,
+     "date": "2008-01-22"
+    },
+    {
+     "id": "dz:4288159",
+     "title": "Self Control",
+     "artist": "Laura Branigan",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e8d7d2bb9f156110a5be3734c246c99a/250x250-000000-80-0-0.jpg",
+     "rank": 847859,
+     "date": "2009-10-06"
+    },
+    {
+     "id": "dz:1078779",
+     "title": "Hold the Line",
+     "artist": "Toto",
+     "art": "https://cdn-images.dzcdn.net/images/cover/18a61113ea28b3261a97c6ca167f00ba/250x250-000000-80-0-0.jpg",
+     "rank": 875351,
+     "date": "1978-10-10"
+    },
+    {
+     "id": "dz:142337683",
+     "title": "Mask Off",
+     "artist": "Future",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5186078c5bd5623ebec9b2753d8aaebe/250x250-000000-80-0-0.jpg",
+     "rank": 825648,
+     "date": "2017-02-17"
+    },
+    {
+     "id": "dz:111772878",
+     "title": "Sick and Tired",
+     "artist": "Anastacia",
+     "art": "https://cdn-images.dzcdn.net/images/cover/00db310d3f9b9f98cf887bfcd8e530a3/250x250-000000-80-0-0.jpg",
+     "rank": 642926,
+     "date": "2015-11-06"
+    },
+    {
+     "id": "dz:355108531",
+     "title": "White Wedding (Pt. 1)",
+     "artist": "Billy Idol",
+     "art": "https://cdn-images.dzcdn.net/images/cover/dd56e697dda18672018f6f54207361e5/250x250-000000-80-0-0.jpg",
+     "rank": 713059,
+     "date": "2017-04-28"
+    },
+    {
+     "id": "dz:15543742",
+     "title": "Cry for You",
+     "artist": "September",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5c7d954400e81607aa5a75bca87bc2b1/250x250-000000-80-0-0.jpg",
+     "rank": 737304,
+     "date": "2007-03-08"
+    },
+    {
+     "id": "dz:925110",
+     "title": "Shut Up And Drive",
+     "artist": "Rihanna",
+     "art": "https://cdn-images.dzcdn.net/images/cover/91276466fbc876d96be9e6926060af60/250x250-000000-80-0-0.jpg",
+     "rank": 756819,
+     "date": "2008-06-17"
+    },
+    {
+     "id": "dz:734508762",
+     "title": "Poker Face",
+     "artist": "Lady Gaga",
+     "art": "https://cdn-images.dzcdn.net/images/cover/fad7de079aa103d60ec1e2d1582c2281/250x250-000000-80-0-0.jpg",
+     "rank": 591629,
+     "date": "2019-08-23"
+    },
+    {
+     "id": "dz:74062292",
+     "title": "Paranoid (2012 - Remaster)",
+     "artist": "Black Sabbath",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2e4dbd533ee46c7a712c5fabfe284fb3/250x250-000000-80-0-0.jpg",
+     "rank": 495811,
+     "date": "2014-01-21"
+    },
+    {
+     "id": "dz:725261",
+     "title": "Otherside",
+     "artist": "Red Hot Chili Peppers",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5e61e8290a4d1d64ca58920656c9602d/250x250-000000-80-0-0.jpg",
+     "rank": 923277,
+     "date": "2004-10-26"
+    },
+    {
+     "id": "dz:3482970601",
+     "title": "Jealous",
+     "artist": "Eyedress",
+     "art": "https://cdn-images.dzcdn.net/images/cover/104e136464f58b91fcc6df505e856081/250x250-000000-80-0-0.jpg",
+     "rank": 746313,
+     "date": "2019-12-06"
+    },
+    {
+     "id": "dz:3130293",
+     "title": "Galvanize",
+     "artist": "The Chemical Brothers",
+     "art": "https://cdn-images.dzcdn.net/images/cover/51d7e6bb289a89b531aaa7d047baa6ea/250x250-000000-80-0-0.jpg",
+     "rank": 680746,
+     "date": "2005-01-24"
+    },
+    {
+     "id": "dz:392047102",
+     "title": "Called Out In The Dark",
+     "artist": "Snow Patrol",
+     "art": "https://cdn-images.dzcdn.net/images/cover/86c9c8ec2465fa3eafa68588ac03707d/250x250-000000-80-0-0.jpg",
+     "rank": 214744,
+     "date": "2013-05-28"
+    },
+    {
+     "id": "dz:4670273",
+     "title": "Rude Boy",
+     "artist": "Rihanna",
+     "art": "https://cdn-images.dzcdn.net/images/cover/af82bfab0277506de1d91c3f9d2e28c3/250x250-000000-80-0-0.jpg",
+     "rank": 855223,
+     "date": "2009-11-23"
+    },
+    {
+     "id": "dz:4195715",
+     "title": "Undisclosed Desires",
+     "artist": "Muse",
+     "art": "https://cdn-images.dzcdn.net/images/cover/79845461299661387ade37f8e34d643c/250x250-000000-80-0-0.jpg",
+     "rank": 791085,
+     "date": "2009-09-10"
+    },
+    {
+     "id": "dz:563683852",
+     "title": "Hey, Soul Sister",
+     "artist": "Train",
+     "art": "https://cdn-images.dzcdn.net/images/cover/90989ab8998af9d5957b43bae748788d/250x250-000000-80-0-0.jpg",
+     "rank": 862234,
+     "date": "2010-12-01"
+    },
+    {
+     "id": "dz:117106932",
+     "title": "Dreamer (Re-Original 7-inch Mix)",
+     "artist": "Livin' Joy",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0ef022d3d20ed7fa43500a08194768e9/250x250-000000-80-0-0.jpg",
+     "rank": 596218,
+     "date": "2016-01-08"
+    },
+    {
+     "id": "dz:2271563",
+     "title": "Fast Car",
+     "artist": "Tracy Chapman",
+     "art": "https://cdn-images.dzcdn.net/images/cover/32069557a9c4a451638263eeb69df2b4/250x250-000000-80-0-0.jpg",
+     "rank": 879650,
+     "date": "1988-01-01"
+    },
+    {
+     "id": "dz:7278768",
+     "title": "I Don't Feel Like Dancin'",
+     "artist": "Scissor Sisters",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7bde59f5a34a0d855a9b90986068925f/250x250-000000-80-0-0.jpg",
+     "rank": 394590,
+     "date": "2006-09-18"
+    },
+    {
+     "id": "dz:3867266271",
+     "title": "I Ran (So Far Away)",
+     "artist": "A Flock Of Seagulls",
+     "art": "https://cdn-images.dzcdn.net/images/cover/358c8d7c05f787736bf407bf92b0ad8a/250x250-000000-80-0-0.jpg",
+     "rank": 571223,
+     "date": "2026-02-26"
+    },
+    {
+     "id": "dz:2300863",
+     "title": "Don't Sweat The Technique",
+     "artist": "Eric B. & Rakim",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7109a9f85fcce55a599960c1e5d083d6/250x250-000000-80-0-0.jpg",
+     "rank": 501679,
+     "date": "2007-07-19"
+    },
+    {
+     "id": "dz:4255658",
+     "title": "Come On Eileen (Single Edit)",
+     "artist": "Dexys Midnight Runners",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9850d5fd87645fa448066952591330d5/250x250-000000-80-0-0.jpg",
+     "rank": 657835,
+     "date": "2009-09-21"
+    },
+    {
+     "id": "dz:3120617",
+     "title": "Suddenly I See",
+     "artist": "KT Tunstall",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b00b9ee9d0543257b70abf6b28aee606/250x250-000000-80-0-0.jpg",
+     "rank": 857777,
+     "date": "2006-02-07"
+    },
+    {
+     "id": "dz:2574588",
+     "title": "Sweet About Me",
+     "artist": "Gabriella Cilmi",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3524dd49c19d1f8b64007e1c78187e8e/250x250-000000-80-0-0.jpg",
+     "rank": 304526,
+     "date": "2008-11-10"
+    },
+    {
+     "id": "dz:73982869",
+     "title": "Rather Be (feat. Jess Glynne)",
+     "artist": "Clean Bandit",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3193132d50c74a62d1cd419fa170139a/250x250-000000-80-0-0.jpg",
+     "rank": 951463,
+     "date": "2014-01-17"
+    },
+    {
+     "id": "dz:67576433",
+     "title": "Crush",
+     "artist": "Jennifer Paige",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4770bb5036319fd2cf0673cebcde6e46/250x250-000000-80-0-0.jpg",
+     "rank": 355975,
+     "date": "2013-06-07"
+    },
+    {
+     "id": "dz:7261270",
+     "title": "Supreme (2004 Mix)",
+     "artist": "Robbie Williams",
+     "art": "https://cdn-images.dzcdn.net/images/cover/be6eff1549d39e792a908ae64444006a/250x250-000000-80-0-0.jpg",
+     "rank": 386791,
+     "date": "2010-10-08"
+    },
+    {
+     "id": "dz:3098282",
+     "title": "In Your Eyes",
+     "artist": "Kylie Minogue",
+     "art": "https://cdn-images.dzcdn.net/images/cover/834a7fd1964efa083b6e5bf82b49f406/250x250-000000-80-0-0.jpg",
+     "rank": 368527,
+     "date": "2002-11-19"
+    },
+    {
+     "id": "dz:2430344",
+     "title": "Say It Right",
+     "artist": "Nelly Furtado",
+     "art": "https://cdn-images.dzcdn.net/images/cover/55a124e01e46d0aa494fc59afe53c639/250x250-000000-80-0-0.jpg",
+     "rank": 540909,
+     "date": "2006-06-12"
+    },
+    {
+     "id": "dz:3867266271",
+     "title": "I Ran (So Far Away)",
+     "artist": "A Flock Of Seagulls",
+     "art": "https://cdn-images.dzcdn.net/images/cover/358c8d7c05f787736bf407bf92b0ad8a/250x250-000000-80-0-0.jpg",
+     "rank": 571223,
+     "date": "2026-02-26"
+    },
+    {
+     "id": "dz:680601",
+     "title": "Edge of Seventeen",
+     "artist": "Stevie Nicks",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ab42dd1a71de8ef5857cb981190b8a78/250x250-000000-80-0-0.jpg",
+     "rank": 695064,
+     "date": "2007-03-27"
+    },
+    {
+     "id": "dz:3140693",
+     "title": "We Belong",
+     "artist": "Pat Benatar",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4a02dc7a24f69c0407ace18d486fc51b/250x250-000000-80-0-0.jpg",
+     "rank": 378543,
+     "date": "2008-06-24"
+    },
+    {
+     "id": "dz:3656062452",
+     "title": "Groovejet (If This Ain't Love) (2020)",
+     "artist": "Sophie Ellis-Bextor",
+     "art": "https://cdn-images.dzcdn.net/images/cover/23d4cf2b24bef51c3323ed6d149af625/250x250-000000-80-0-0.jpg",
+     "rank": 450052,
+     "date": "2020-11-13"
+    },
+    {
+     "id": "dz:86490715",
+     "title": "Oogum Boogum Song",
+     "artist": "Brenton Wood",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2da09e0a44c45d39975eab0208562b09/250x250-000000-80-0-0.jpg",
+     "rank": 579476,
+     "date": "2014-10-07"
+    },
+    {
+     "id": "dz:3134928",
+     "title": "Sitting Down Here",
+     "artist": "Lene Marlin",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5d8b224bbff78614d78f50becefe51fb/250x250-000000-80-0-0.jpg",
+     "rank": 705482,
+     "date": "1999-05-31"
+    },
+    {
+     "id": "dz:13178654",
+     "title": "Aicha",
+     "artist": "Outlandish",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ca0369fa47f42b3809c32a2028f73df5/250x250-000000-80-0-0.jpg",
+     "rank": 476511,
+     "date": "2003-07-18"
+    },
+    {
+     "id": "dz:3401078",
+     "title": "All Rise",
+     "artist": "Blue",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f092a37842de0ddba1562c2888bd6d6f/250x250-000000-80-0-0.jpg",
+     "rank": 286179,
+     "date": "2003-03-03"
+    },
+    {
+     "id": "dz:2315711",
+     "title": "Breakfast At Tiffany's",
+     "artist": "Deep Blue Something",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f27d35f211f3e2975176f41bd8ac079b/250x250-000000-80-0-0.jpg",
+     "rank": 665535,
+     "date": "2007-07-19"
+    },
+    {
+     "id": "dz:3156760",
+     "title": "Bitch",
+     "artist": "Meredith Brooks",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d65259e5a4778af1813373a8f06c4d20/250x250-000000-80-0-0.jpg",
+     "rank": 710759,
+     "date": "1997-04-24"
+    },
+    {
+     "id": "dz:122015000",
+     "title": "One More Night (2016 Remaster)",
+     "artist": "Phil Collins",
+     "art": "https://cdn-images.dzcdn.net/images/cover/898bc8349e4d55b9282af885975c372b/250x250-000000-80-0-0.jpg",
+     "rank": 754429,
+     "date": "1985-01-25"
+    },
+    {
+     "id": "dz:3123902",
+     "title": "Weather With You",
+     "artist": "Crowded House",
+     "art": "https://cdn-images.dzcdn.net/images/cover/02ff8eb7243d0f51dc087135012bdb02/250x250-000000-80-0-0.jpg",
+     "rank": 583868,
+     "date": "1991-06-24"
+    },
+    {
+     "id": "dz:19271551",
+     "title": "Come Along",
+     "artist": "Titiyo",
+     "art": "https://cdn-images.dzcdn.net/images/cover/53aa0981d29f45f7f1be2c1985e50e38/250x250-000000-80-0-0.jpg",
+     "rank": 637807,
+     "date": "2001-08-20"
+    },
+    {
+     "id": "dz:2538019231",
+     "title": "Hysteria",
+     "artist": "Muse",
+     "art": "https://cdn-images.dzcdn.net/images/cover/fc1237878aab62be8ff624f575961e68/250x250-000000-80-0-0.jpg",
+     "rank": 872207,
+     "date": "2023-11-17"
+    },
+    {
+     "id": "dz:3380593991",
+     "title": "Try Again",
+     "artist": "Aaliyah",
+     "art": "https://cdn-images.dzcdn.net/images/cover/12411556e913fe4322f19d2cf43f906e/250x250-000000-80-0-0.jpg",
+     "rank": 718272,
+     "date": "2000-03-28"
+    },
+    {
+     "id": "dz:646870592",
+     "title": "Grace Kelly",
+     "artist": "MIKA",
+     "art": "https://cdn-images.dzcdn.net/images/cover/59267b908a7882fcd3cca3601536c316/250x250-000000-80-0-0.jpg",
+     "rank": 483518,
+     "date": "2019-03-15"
+    },
+    {
+     "id": "dz:6685848",
+     "title": "Bad Day",
+     "artist": "Daniel Powter",
+     "art": "https://cdn-images.dzcdn.net/images/cover/90db17ba5563a51136265536d1d70e43/250x250-000000-80-0-0.jpg",
+     "rank": 830650,
+     "date": "2005-02-22"
+    },
+    {
+     "id": "dz:13139729",
+     "title": "Dancing in the Moonlight",
+     "artist": "Toploader",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c3fbf427ae03233a7aad35f09e629094/250x250-000000-80-0-0.jpg",
+     "rank": 455095,
+     "date": "2001-02-14"
+    },
+    {
+     "id": "dz:24165101",
+     "title": "I'm Like A Bird",
+     "artist": "Nelly Furtado",
+     "art": "https://cdn-images.dzcdn.net/images/cover/93a9609ca602d9162a3c3cc74f4a710d/250x250-000000-80-0-0.jpg",
+     "rank": 390825,
+     "date": "2006-07-18"
+    },
+    {
+     "id": "dz:15376488",
+     "title": "Lose My Breath",
+     "artist": "Destiny's Child",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a834c91eee2bb719f89287aa6d93ff51/250x250-000000-80-0-0.jpg",
+     "rank": 528716,
+     "date": "2004-11-16"
+    },
+    {
+     "id": "dz:1089860",
+     "title": "Who's That Girl?",
+     "artist": "Eve",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e6fbd16f5088fc0d10f88b4bcd498002/250x250-000000-80-0-0.jpg",
+     "rank": 731725,
+     "date": "2001-03-22"
+    },
+    {
+     "id": "dz:2430336",
+     "title": "Maneater",
+     "artist": "Nelly Furtado",
+     "art": "https://cdn-images.dzcdn.net/images/cover/55a124e01e46d0aa494fc59afe53c639/250x250-000000-80-0-0.jpg",
+     "rank": 620919,
+     "date": "2006-06-12"
+    },
+    {
+     "id": "dz:15209461",
+     "title": "Objection (Tango)",
+     "artist": "Shakira",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3c50690401eed099df05e72f5080af1b/250x250-000000-80-0-0.jpg",
+     "rank": 682479,
+     "date": "2001-11-13"
+    },
+    {
+     "id": "dz:13141169",
+     "title": "Larger Than Life",
+     "artist": "Backstreet Boys",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d61eaad8f321ea876a5f5c7219aae892/250x250-000000-80-0-0.jpg",
+     "rank": 673143,
+     "date": "1999-05-18"
+    },
+    {
+     "id": "dz:968798",
+     "title": "Rivers of Babylon",
+     "artist": "Boney M.",
+     "art": "https://cdn-images.dzcdn.net/images/cover/24290d29032e06a3669ab17c5e1b7a2a/250x250-000000-80-0-0.jpg",
+     "rank": 736184,
+     "date": "2008-05-12"
+    },
+    {
+     "id": "dz:24246271",
+     "title": "Just A Girl",
+     "artist": "No Doubt",
+     "art": "https://cdn-images.dzcdn.net/images/cover/97b81fddd1fa280adb7ebc41c5a255e6/250x250-000000-80-0-0.jpg",
+     "rank": 789630,
+     "date": "2003-10-28"
+    },
+    {
+     "id": "dz:608749",
+     "title": "Manic Monday",
+     "artist": "The Bangles",
+     "art": "https://cdn-images.dzcdn.net/images/cover/938d17e5a07d6178bcabbe2349a79ba0/250x250-000000-80-0-0.jpg",
+     "rank": 659854,
+     "date": "2003-04-23"
+    },
+    {
+     "id": "dz:3786035262",
+     "title": "Nur geträumt",
+     "artist": "Nena",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c7c1153188e48a2ae756b1bc3fd6b441/250x250-000000-80-0-0.jpg",
+     "rank": 570027,
+     "date": "1983-09-23"
+    },
+    {
+     "id": "dz:1264689762",
+     "title": "Church (feat. Teddy Verseti)",
+     "artist": "T-Pain",
+     "art": "https://cdn-images.dzcdn.net/images/cover/710ecdeec90b95e744f73003532927d5/250x250-000000-80-0-0.jpg",
+     "rank": 361296,
+     "date": "2007-06-05"
+    },
+    {
+     "id": "dz:3434762331",
+     "title": "Superior",
+     "artist": "Gentleman",
+     "art": "https://cdn-images.dzcdn.net/images/cover/33cbfc63c59bb261318123ea10563528/250x250-000000-80-0-0.jpg",
+     "rank": 77121,
+     "date": "2004-01-01"
+    },
+    {
+     "id": "dz:1081050",
+     "title": "Johnny B.",
+     "artist": "The Hooters",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ed86407d9712c21e5177390822daf4b3/250x250-000000-80-0-0.jpg",
+     "rank": 308072,
+     "date": "2010-07-19"
+    },
+    {
+     "id": "dz:1174772",
+     "title": "The Riddle",
+     "artist": "Nik Kershaw",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ce29a69eecc2c08d2b772bf0c5cca02f/250x250-000000-80-0-0.jpg",
+     "rank": 616304,
+     "date": "1991-11-25"
+    },
+    {
+     "id": "dz:3805884212",
+     "title": "Maria",
+     "artist": "Blondie",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3daf8074abba747b47511efef3b167b8/250x250-000000-80-0-0.jpg",
+     "rank": 674189,
+     "date": "2025-10-17"
+    },
+    {
+     "id": "dz:2896479041",
+     "title": "Cambodia",
+     "artist": "Kim Wilde",
+     "art": "https://cdn-images.dzcdn.net/images/cover/892ea2e3616b6e615b5d27272d68bda3/250x250-000000-80-0-0.jpg",
+     "rank": 779116,
+     "date": "2006-03-13"
+    },
+    {
+     "id": "dz:16375512",
+     "title": "Fairytale Gone Bad (Radio version)",
+     "artist": "Sunrise Avenue",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ab9c43b013a7daa9c58ef6d247d55fc0/250x250-000000-80-0-0.jpg",
+     "rank": 339578,
+     "date": "2006-08-23"
+    },
+    {
+     "id": "dz:1057312",
+     "title": "Runaway Train (2022 Remaster)",
+     "artist": "Soul Asylum",
+     "art": "https://cdn-images.dzcdn.net/images/cover/518b3872eb41d98ca9c78edf4e55c8f7/250x250-000000-80-0-0.jpg",
+     "rank": 760213,
+     "date": "1992-10-06"
+    },
+    {
+     "id": "dz:3121749",
+     "title": "Call Me",
+     "artist": "Blondie",
+     "art": "https://cdn-images.dzcdn.net/images/cover/12dffbecbedd1c532b9b27049bb44d35/250x250-000000-80-0-0.jpg",
+     "rank": 520096,
+     "date": "2005-07-05"
+    },
+    {
+     "id": "dz:992131",
+     "title": "Torn",
+     "artist": "Natalie Imbruglia",
+     "art": "https://cdn-images.dzcdn.net/images/cover/62f49979daf12319e406af9389e9c487/250x250-000000-80-0-0.jpg",
+     "rank": 880877,
+     "date": "1997-11-10"
+    },
+    {
+     "id": "dz:3167194",
+     "title": "The Tide Is High (Remastered 2001)",
+     "artist": "Blondie",
+     "art": "https://cdn-images.dzcdn.net/images/cover/07347dddc5fcf55249cd8b610b6652a9/250x250-000000-80-0-0.jpg",
+     "rank": 566380,
+     "date": "2001-08-30"
+    },
+    {
+     "id": "dz:2612171402",
+     "title": "A Horse with No Name (George Martin Remix)",
+     "artist": "America",
+     "art": "https://cdn-images.dzcdn.net/images/cover/dbea640c059db2fca49f619fb06362a6/250x250-000000-80-0-0.jpg",
+     "rank": 73931,
+     "date": "2023-01-12"
+    },
+    {
+     "id": "dz:2525861",
+     "title": "Message In A Bottle",
+     "artist": "The Police",
+     "art": "https://cdn-images.dzcdn.net/images/cover/316afdaed93c4a18cf730389648d03d6/250x250-000000-80-0-0.jpg",
+     "rank": 871597,
+     "date": "2002-02-10"
+    },
+    {
+     "id": "dz:421388782",
+     "title": "Cruel Summer",
+     "artist": "Bananarama",
+     "art": "https://cdn-images.dzcdn.net/images/cover/be55cf2c332627c5f32c943ae62f5396/250x250-000000-80-0-0.jpg",
+     "rank": 767454,
+     "date": "2017-04-14"
+    },
+    {
+     "id": "dz:680601",
+     "title": "Edge of Seventeen",
+     "artist": "Stevie Nicks",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ab42dd1a71de8ef5857cb981190b8a78/250x250-000000-80-0-0.jpg",
+     "rank": 695064,
+     "date": "2007-03-27"
+    },
+    {
+     "id": "dz:3977905",
+     "title": "The Boys Of Summer",
+     "artist": "Don Henley",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e374e05d5e2991dda20e1b2636e69cc9/250x250-000000-80-0-0.jpg",
+     "rank": 753593,
+     "date": "2009-06-16"
+    },
+    {
+     "id": "dz:694980162",
+     "title": "Sharp Dressed Man (2019 Remaster)",
+     "artist": "ZZ Top",
+     "art": "https://cdn-images.dzcdn.net/images/cover/dc1bbf42966fcc6dcc1b019572f42458/250x250-000000-80-0-0.jpg",
+     "rank": 748638,
+     "date": "2019-06-14"
+    },
+    {
+     "id": "dz:24246391",
+     "title": "Don't Speak",
+     "artist": "No Doubt",
+     "art": "https://cdn-images.dzcdn.net/images/cover/97b81fddd1fa280adb7ebc41c5a255e6/250x250-000000-80-0-0.jpg",
+     "rank": 900209,
+     "date": "2003-10-28"
+    },
+    {
+     "id": "dz:14500181",
+     "title": "When We Stand Together",
+     "artist": "Nickelback",
+     "art": "https://cdn-images.dzcdn.net/images/cover/cbc70503f0f074fe816d22d52ca5e216/250x250-000000-80-0-0.jpg",
+     "rank": 585765,
+     "date": "2011-11-14"
+    },
+    {
+     "id": "dz:692002952",
+     "title": "Sucker",
+     "artist": "Jonas Brothers",
+     "art": "https://cdn-images.dzcdn.net/images/cover/89834d35dd6320600b90f044e9bbf467/250x250-000000-80-0-0.jpg",
+     "rank": 722087,
+     "date": "2019-06-07"
+    },
+    {
+     "id": "dz:24265341",
+     "title": "Wild 2Nite",
+     "artist": "Shaggy",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a49ff414566e90bb55110fe39e333465/250x250-000000-80-0-0.jpg",
+     "rank": 152234,
+     "date": "2005-09-20"
+    },
+    {
+     "id": "dz:734508742",
+     "title": "LoveGame",
+     "artist": "Lady Gaga",
+     "art": "https://cdn-images.dzcdn.net/images/cover/fad7de079aa103d60ec1e2d1582c2281/250x250-000000-80-0-0.jpg",
+     "rank": 486508,
+     "date": "2019-08-23"
+    },
+    {
+     "id": "dz:925110",
+     "title": "Shut Up And Drive",
+     "artist": "Rihanna",
+     "art": "https://cdn-images.dzcdn.net/images/cover/91276466fbc876d96be9e6926060af60/250x250-000000-80-0-0.jpg",
+     "rank": 756819,
+     "date": "2008-06-17"
+    },
+    {
+     "id": "dz:71528390",
+     "title": "Run It! (feat. Juelz Santana)",
+     "artist": "Chris Brown",
+     "art": "https://cdn-images.dzcdn.net/images/cover/7cac77f62765a1cffa38128a38ccc464/250x250-000000-80-0-0.jpg",
+     "rank": 465042,
+     "date": "2005-11-29"
+    },
+    {
+     "id": "dz:1104527",
+     "title": "Round Round",
+     "artist": "Sugababes",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1fc2619763138c7dae688eb141daa5ec/250x250-000000-80-0-0.jpg",
+     "rank": 496352,
+     "date": "2002-09-09"
+    },
+    {
+     "id": "dz:3976201",
+     "title": "Gives You Hell",
+     "artist": "The All-American Rejects",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1a160e0a3293f354717a64bfbba7e94c/250x250-000000-80-0-0.jpg",
+     "rank": 678009,
+     "date": "2008-12-16"
+    },
+    {
+     "id": "dz:536408",
+     "title": "Sweetest Girl (Dollar Bill) (feat. Akon, Lil' Wayne & Niia)",
+     "artist": "Wyclef Jean",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2a0fe3540c7fbb9f779c9e6cd12742c3/250x250-000000-80-0-0.jpg",
+     "rank": 558522,
+     "date": "2007-08-14"
+    },
+    {
+     "id": "dz:3819653",
+     "title": "Follow Me",
+     "artist": "Uncle Kracker",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4c5cae288ea63e37ea904ac492dea926/250x250-000000-80-0-0.jpg",
+     "rank": 583725,
+     "date": "2000-06-13"
+    },
+    {
+     "id": "dz:2426752",
+     "title": "Rich Girl",
+     "artist": "Gwen Stefani",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c133e6ca154037e1de95fb82475d206b/250x250-000000-80-0-0.jpg",
+     "rank": 507802,
+     "date": "2005-10-24"
+    },
+    {
+     "id": "dz:13131047",
+     "title": "Beautiful Liar",
+     "artist": "Beyoncé",
+     "art": "https://cdn-images.dzcdn.net/images/cover/a3afedf4800754b8c87eda2bf5cbd06b/250x250-000000-80-0-0.jpg",
+     "rank": 515073,
+     "date": "2007-05-29"
+    },
+    {
+     "id": "dz:82199334",
+     "title": "Circus",
+     "artist": "Britney Spears",
+     "art": "https://cdn-images.dzcdn.net/images/cover/16d60157d51a9e21ffac61b50a7d02d0/250x250-000000-80-0-0.jpg",
+     "rank": 776508,
+     "date": "2008-12-02"
+    },
+    {
+     "id": "dz:2485123",
+     "title": "Sweet Dreams",
+     "artist": "Beyoncé",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1f0450a010b5a825194d7ca00b3067ab/250x250-000000-80-0-0.jpg",
+     "rank": 551083,
+     "date": "2008-11-14"
+    },
+    {
+     "id": "dz:15475937",
+     "title": "Let's Get Loud",
+     "artist": "Jennifer Lopez",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e9e59d8b00661ff2971cf7e62e1d780c/250x250-000000-80-0-0.jpg",
+     "rank": 765438,
+     "date": "1999-06-01"
+    },
+    {
+     "id": "dz:13704591",
+     "title": "Livin' la Vida Loca",
+     "artist": "Ricky Martin",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f8e6944a9665236019347784149ce7c9/250x250-000000-80-0-0.jpg",
+     "rank": 734942,
+     "date": "1999-05-01"
+    },
+    {
+     "id": "dz:546248912",
+     "title": "Closing Time",
+     "artist": "Semisonic",
+     "art": "https://cdn-images.dzcdn.net/images/cover/051e2547fcaa760b2ba40cc685791b47/250x250-000000-80-0-0.jpg",
+     "rank": 656557,
+     "date": "2018-08-31"
+    },
+    {
+     "id": "dz:2509102",
+     "title": "Suga Suga",
+     "artist": "Baby Bash",
+     "art": "https://cdn-images.dzcdn.net/images/cover/98c657a324eb66cb5b37ebe718c0c3dd/250x250-000000-80-0-0.jpg",
+     "rank": 801629,
+     "date": "2007-07-12"
+    },
+    {
+     "id": "dz:24246281",
+     "title": "It's My Life",
+     "artist": "No Doubt",
+     "art": "https://cdn-images.dzcdn.net/images/cover/97b81fddd1fa280adb7ebc41c5a255e6/250x250-000000-80-0-0.jpg",
+     "rank": 749867,
+     "date": "2003-10-28"
+    },
+    {
+     "id": "dz:539407",
+     "title": "Love Is Beautiful",
+     "artist": "Mark Medlock",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b703409ea926eb0e4a7984726990faec/250x250-000000-80-0-0.jpg",
+     "rank": 127506,
+     "date": "2007-11-09"
+    },
+    {
+     "id": "dz:1760941607",
+     "title": "With Every Heartbeat (Tong and Spoon Wonderland Remix)",
+     "artist": "Robyn",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d4a0142f07d132fbfc5ad5a639c2384f/250x250-000000-80-0-0.jpg",
+     "rank": 6993,
+     "date": "2008-01-29"
+    },
+    {
+     "id": "dz:1102518",
+     "title": "Only U (No Intro)",
+     "artist": "Ashanti",
+     "art": "https://cdn-images.dzcdn.net/images/cover/1f8d7a15ab143414d10f6369b5ec5936/250x250-000000-80-0-0.jpg",
+     "rank": 612038,
+     "date": "2004-12-03"
+    },
+    {
+     "id": "dz:1414907322",
+     "title": "Judas",
+     "artist": "Lady Gaga",
+     "art": "https://cdn-images.dzcdn.net/images/cover/978f47c36f2b688992c88c0dcae211a0/250x250-000000-80-0-0.jpg",
+     "rank": 494714,
+     "date": "2021-06-25"
+    },
+    {
+     "id": "dz:12270342",
+     "title": "Hey Baby (Drop It to the Floor) (feat. T-Pain)",
+     "artist": "Pitbull",
+     "art": "https://cdn-images.dzcdn.net/images/cover/507351fd7b00a3bafb8b1a9d64793b4c/250x250-000000-80-0-0.jpg",
+     "rank": 506642,
+     "date": "2011-06-17"
+    },
+    {
+     "id": "dz:439484762",
+     "title": "River",
+     "artist": "Eminem",
+     "art": "https://cdn-images.dzcdn.net/images/cover/432ed502692292710f09a88837077f5a/250x250-000000-80-0-0.jpg",
+     "rank": 726784,
+     "date": "2017-12-15"
+    },
+    {
+     "id": "dz:15597819",
+     "title": "Just Like a Pill",
+     "artist": "P!nk",
+     "art": "https://cdn-images.dzcdn.net/images/cover/822dd8968617b2da70dcaa5804556512/250x250-000000-80-0-0.jpg",
+     "rank": 560456,
+     "date": "2010-11-12"
+    },
+    {
+     "id": "dz:13128242",
+     "title": "Hungry Eyes (From \"Dirty Dancing\" Soundtrack)",
+     "artist": "Eric Carmen",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f24ac40f8c7a0dbe438399788763a042/250x250-000000-80-0-0.jpg",
+     "rank": 782096,
+     "date": "1987-09-24"
+    },
+    {
+     "id": "dz:916426",
+     "title": "Sing For The Moment",
+     "artist": "Eminem",
+     "art": "https://cdn-images.dzcdn.net/images/cover/ec3c8ed67427064c70f67e5815b74cef/250x250-000000-80-0-0.jpg",
+     "rank": 838913,
+     "date": "2007-09-13"
+    },
+    {
+     "id": "dz:725837",
+     "title": "Give It Away",
+     "artist": "Red Hot Chili Peppers",
+     "art": "https://cdn-images.dzcdn.net/images/cover/5d7af03204d679ef877b9033d279d8bd/250x250-000000-80-0-0.jpg",
+     "rank": 790816,
+     "date": "1991-09-24"
+    },
+    {
+     "id": "dz:646296402",
+     "title": "Let's Get It Started (Spike Mix)",
+     "artist": "The Black Eyed Peas",
+     "art": "https://cdn-images.dzcdn.net/images/cover/34133e8960696660db3d120b95f59543/250x250-000000-80-0-0.jpg",
+     "rank": 596090,
+     "date": "2019-03-15"
+    },
+    {
+     "id": "dz:4655980",
+     "title": "Let's Get Excited",
+     "artist": "Alesha Dixon",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0b807a0808fed9268121bc615b64833b/250x250-000000-80-0-0.jpg",
+     "rank": 209219,
+     "date": "2008-11-21"
+    },
+    {
+     "id": "dz:948604612",
+     "title": "One More Night (Radio Edit Remastered)",
+     "artist": "Silent Circle",
+     "art": "https://cdn-images.dzcdn.net/images/cover/499de93186fda82805bc7ea9953161ab/250x250-000000-80-0-0.jpg",
+     "rank": 30187,
+     "date": "2020-05-29"
+    },
+    {
+     "id": "dz:2168791347",
+     "title": "One (Always Hardcore)",
+     "artist": "Scooter",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b59f0ab1628e28db545386acf53a6ff5/250x250-000000-80-0-0.jpg",
+     "rank": 510439,
+     "date": "2023-03-01"
+    },
+    {
+     "id": "dz:107351294",
+     "title": "Get It On Tonite",
+     "artist": "Montell Jordan",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2490ebf535cce9277eb16332e1eb9a6c/250x250-000000-80-0-0.jpg",
+     "rank": 422169,
+     "date": "2015-09-25"
+    },
+    {
+     "id": "dz:848836952",
+     "title": "Back for Good (Radio Mix)",
+     "artist": "Take That",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6d6f6f1f78d0dea393db47a641402419/250x250-000000-80-0-0.jpg",
+     "rank": 710195,
+     "date": "1995-05-08"
+    },
+    {
+     "id": "dz:3139704181",
+     "title": "Femme Like U (Tribute 2024 Remix by Tribbs)",
+     "artist": "K-Maro",
+     "art": "https://cdn-images.dzcdn.net/images/cover/505d77c197046c6e79f62201b7811139/250x250-000000-80-0-0.jpg",
+     "rank": 1317,
+     "date": "2024-12-13"
+    },
+    {
+     "id": "dz:3151232",
+     "title": "It Ain't Over 'Til It's Over",
+     "artist": "Lenny Kravitz",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6a40fdebd05516980c02b6980ef12c2c/250x250-000000-80-0-0.jpg",
+     "rank": 843802,
+     "date": "1992-07-11"
+    },
+    {
+     "id": "dz:668937112",
+     "title": "Powerless (Say What You Want)",
+     "artist": "Nelly Furtado",
+     "art": "https://cdn-images.dzcdn.net/images/cover/76b9f68279040d67c49c977b657f8907/250x250-000000-80-0-0.jpg",
+     "rank": 317886,
+     "date": "2019-04-26"
+    },
+    {
+     "id": "dz:61914316",
+     "title": "In the Shadows",
+     "artist": "The Rasmus",
+     "art": "https://cdn-images.dzcdn.net/images/cover/e6552cfa639f0bf22e13d980c1e6ebc7/250x250-000000-80-0-0.jpg",
+     "rank": 790164,
+     "date": "2003-03-24"
+    },
+    {
+     "id": "dz:683846",
+     "title": "Laura non c'è",
+     "artist": "Nek",
+     "art": "https://cdn-images.dzcdn.net/images/cover/41245901d699d35f5b50936beb0cf55b/250x250-000000-80-0-0.jpg",
+     "rank": 666517,
+     "date": "2003-10-10"
+    },
+    {
+     "id": "dz:3429210",
+     "title": "Fading Like a Flower",
+     "artist": "Dancing DJs",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4a28d107d735d849456b680d7170f88e/250x250-000000-80-0-0.jpg",
+     "rank": 245860,
+     "date": "2005-09-30"
+    },
+    {
+     "id": "dz:3051999",
+     "title": "Mas Que Nada",
+     "artist": "Sergio Mendes",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4a38de1d45ba8994c2655151692e10c0/250x250-000000-80-0-0.jpg",
+     "rank": 285516,
+     "date": "2006-02-14"
+    },
+    {
+     "id": "dz:3679567702",
+     "title": "Im Nin'Alu (The Journey Mix 2025)",
+     "artist": "Ofra Haza",
+     "art": "https://cdn-images.dzcdn.net/images/cover/dd0f58dac0ae4249ae34e468c7c889d8/250x250-000000-80-0-0.jpg",
+     "rank": 63573,
+     "date": "2025-11-30"
+    },
+    {
+     "id": "dz:778768",
+     "title": "The Power of Good-Bye",
+     "artist": "Madonna",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b75d884b15db9c2b3376f93caa059a93/250x250-000000-80-0-0.jpg",
+     "rank": 630462,
+     "date": "1998-06-02"
+    },
+    {
+     "id": "dz:71059074",
+     "title": "Cool Kids",
+     "artist": "Echosmith",
+     "art": "https://cdn-images.dzcdn.net/images/cover/9b4accedfad083b7ac85c1011f8eaa2e/250x250-000000-80-0-0.jpg",
+     "rank": 758982,
+     "date": "2013-10-04"
+    },
+    {
+     "id": "dz:83841464",
+     "title": "Riptide",
+     "artist": "Vance Joy",
+     "art": "https://cdn-images.dzcdn.net/images/cover/d3f67e81d134e4036fd2e68a062210c4/250x250-000000-80-0-0.jpg",
+     "rank": 957313,
+     "date": "2014-09-08"
+    },
+    {
+     "id": "dz:121239412",
+     "title": "7 Years",
+     "artist": "Lukas Graham",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f6cd3eb9df8634eb5cd2ca4ff0458a65/250x250-000000-80-0-0.jpg",
+     "rank": 745660,
+     "date": "2016-04-01"
+    },
+    {
+     "id": "dz:96485040",
+     "title": "Confidence",
+     "artist": "Kim",
+     "art": "https://cdn-images.dzcdn.net/images/cover/c5bf2ff1339b34a1d4bb62fc8bf310af/250x250-000000-80-0-0.jpg",
+     "rank": 788942,
+     "date": "2009-01-01"
+    },
+    {
+     "id": "dz:608749",
+     "title": "Manic Monday",
+     "artist": "The Bangles",
+     "art": "https://cdn-images.dzcdn.net/images/cover/938d17e5a07d6178bcabbe2349a79ba0/250x250-000000-80-0-0.jpg",
+     "rank": 659854,
+     "date": "2003-04-23"
+    },
+    {
+     "id": "dz:13784901",
+     "title": "If She Knew What She Wants (Extended Remix)",
+     "artist": "The Bangles",
+     "art": "https://cdn-images.dzcdn.net/images/cover/49bf07b7bfa385dd1196e1d2c0df6c95/250x250-000000-80-0-0.jpg",
+     "rank": 129843,
+     "date": "1986-01-10"
+    },
+    {
+     "id": "dz:679225",
+     "title": "Sorry",
+     "artist": "Madonna",
+     "art": "https://cdn-images.dzcdn.net/images/cover/8e499d7b0e9be5b77eb6c2697e179fe3/250x250-000000-80-0-0.jpg",
+     "rank": 723737,
+     "date": "2005-11-11"
+    },
+    {
+     "id": "dz:4670276",
+     "title": "Te Amo (Album Version)",
+     "artist": "Rihanna",
+     "art": "https://cdn-images.dzcdn.net/images/cover/af82bfab0277506de1d91c3f9d2e28c3/250x250-000000-80-0-0.jpg",
+     "rank": 796958,
+     "date": "2009-11-23"
+    },
+    {
+     "id": "dz:1697351887",
+     "title": "Shut Up",
+     "artist": "The Black Eyed Peas",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0e4b70f9985801a0acbcef1782bd18eb/250x250-000000-80-0-0.jpg",
+     "rank": 818889,
+     "date": "2022-04-01"
+    },
+    {
+     "id": "dz:3824997371",
+     "title": "Into the Groove",
+     "artist": "Madonna",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4d2889b2f34142eef8fc1056dfda8ce9/250x250-000000-80-0-0.jpg",
+     "rank": 758902,
+     "date": "2009-09-29"
+    },
+    {
+     "id": "dz:130399608",
+     "title": "Our House",
+     "artist": "Madness",
+     "art": "https://cdn-images.dzcdn.net/images/cover/923dfcdc15c163b822079825aea9f065/250x250-000000-80-0-0.jpg",
+     "rank": 338719,
+     "date": "1997-09-09"
+    },
+    {
+     "id": "dz:3867266271",
+     "title": "I Ran (So Far Away)",
+     "artist": "A Flock Of Seagulls",
+     "art": "https://cdn-images.dzcdn.net/images/cover/358c8d7c05f787736bf407bf92b0ad8a/250x250-000000-80-0-0.jpg",
+     "rank": 571223,
+     "date": "2026-02-26"
+    },
+    {
+     "id": "dz:3186444541",
+     "title": "Currency (Count On Me) (ft Cimafunk and PAMÉ)",
+     "artist": "ANOTR",
+     "art": "https://cdn-images.dzcdn.net/images/cover/0c825e1a2a97cffc54ed018b145bc8ae/250x250-000000-80-0-0.jpg",
+     "rank": 561085,
+     "date": "2025-01-31"
+    },
+    {
+     "id": "dz:520033002",
+     "title": "Don't Worry (with Ray Dalton) (Radio Edit)",
+     "artist": "Madcon",
+     "art": "https://cdn-images.dzcdn.net/images/cover/699e383f7ca80133bb37215f42835ffa/250x250-000000-80-0-0.jpg",
+     "rank": 711597,
+     "date": "2018-07-06"
+    },
+    {
+     "id": "dz:2267535047",
+     "title": "Dance with Somebody",
+     "artist": "Mando Diao",
+     "art": "https://cdn-images.dzcdn.net/images/cover/3e023fe5fc8cb8bc8a25f2b7ac896fb3/250x250-000000-80-0-0.jpg",
+     "rank": 422673,
+     "date": "2009-02-13"
+    },
+    {
+     "id": "dz:90071935",
+     "title": "When the Beat Drops Out",
+     "artist": "Marlon Roudette",
+     "art": "https://cdn-images.dzcdn.net/images/cover/f9850f0779df1f39516ef9c436b55c1b/250x250-000000-80-0-0.jpg",
+     "rank": 278420,
+     "date": "2014-11-21"
+    },
+    {
+     "id": "dz:3957322",
+     "title": "(When You Gonna) Give It Up to Me (Radio Version)",
+     "artist": "Sean Paul",
+     "art": "https://cdn-images.dzcdn.net/images/cover/6b590b3ceb0d166993fbc1c6f5a5ed1f/250x250-000000-80-0-0.jpg",
+     "rank": 924187,
+     "date": "2006-06-20"
+    },
+    {
+     "id": "dz:17148438",
+     "title": "Glow",
+     "artist": "Madcon",
+     "art": "https://cdn-images.dzcdn.net/images/cover/2776a5c5f2930e60c276c45542c64cd8/250x250-000000-80-0-0.jpg",
+     "rank": 516651,
+     "date": "2010-10-29"
+    },
+    {
+     "id": "dz:2525867",
+     "title": "Fields Of Gold",
+     "artist": "Sting",
+     "art": "https://cdn-images.dzcdn.net/images/cover/316afdaed93c4a18cf730389648d03d6/250x250-000000-80-0-0.jpg",
+     "rank": 779655,
+     "date": "2002-02-10"
+    },
+    {
+     "id": "dz:979041",
+     "title": "Smack That (Clean)",
+     "artist": "Akon",
+     "art": "https://cdn-images.dzcdn.net/images/cover/bc4d98904d61661cc6d7dd53745340d0/250x250-000000-80-0-0.jpg",
+     "rank": 860263,
+     "date": "2006-11-14"
+    },
+    {
+     "id": "dz:540861142",
+     "title": "Let the Music Play",
+     "artist": "Shannon",
+     "art": "https://cdn-images.dzcdn.net/images/cover/b38018daaefd56ce18e3125c7ed5d91c/250x250-000000-80-0-0.jpg",
+     "rank": 476272,
+     "date": "2006-01-01"
+    },
+    {
+     "id": "dz:629460",
+     "title": "Karma",
+     "artist": "Alicia Keys",
+     "art": "https://cdn-images.dzcdn.net/images/cover/cef30c1c2a5a63c773d26d56049c81e5/250x250-000000-80-0-0.jpg",
+     "rank": 545571,
+     "date": "2003-12-02"
+    },
+    {
+     "id": "dz:13144759",
+     "title": "Butterfly",
+     "artist": "Crazy Town",
+     "art": "https://cdn-images.dzcdn.net/images/cover/4360765d7a2aceae49aaaa8cfcff6ddf/250x250-000000-80-0-0.jpg",
+     "rank": 736674,
+     "date": "2000-12-15"
+    },
+    {
+     "id": "dz:676183",
+     "title": "In the End",
+     "artist": "Linkin Park",
+     "art": "https://cdn-images.dzcdn.net/images/cover/033a271b5ec10842c287827c39244fb5/250x250-000000-80-0-0.jpg",
+     "rank": 982895,
+     "date": "2000-10-24"
+    }
+   ]
+  },
+  {
    "id": "kanye-west",
    "name": "Kanye West",
    "note": "",

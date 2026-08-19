@@ -27,9 +27,9 @@ export const TIERS: Tier[] = [
 
 export const STAGE_OPTIONS = TIERS.map((t) => t.seconds);
 
-/** Snippet lengths read with a space before the unit, everywhere they appear. */
+/** Snippet lengths run straight into the unit, everywhere they appear. */
 export function formatSeconds(value: number): string {
-  return `${Number(value.toFixed(2))} s`;
+  return `${Number(value.toFixed(2))}s`;
 }
 
 /**

@@ -11,14 +11,13 @@ export const DEFAULT_STAGES: number[] = [0.1, 0.5, 2, 8, 15];
 
 export interface Rules {
   stages: number[];
-  guesses: number;
   artHint: boolean;
+  /** Reveal the artist after this many misses. Null when the hint is off. */
   artistAfter: number | null;
 }
 
 export const DEFAULT_RULES: Rules = {
   stages: DEFAULT_STAGES,
-  guesses: DEFAULT_STAGES.length,
   artHint: false,
   artistAfter: null,
 };

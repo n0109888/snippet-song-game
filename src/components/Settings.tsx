@@ -47,7 +47,7 @@ export default function Settings({
     const next = normalizeStages(
       on ? rules.stages.filter((s) => s !== value) : [...rules.stages, value],
     );
-    onRules({ ...rules, stages: next, guesses: Math.max(rules.guesses, next.length) });
+    onRules({ ...rules, stages: next });
   }
 
   return (
@@ -145,25 +145,6 @@ export default function Settings({
 
         {advanced ? (
           <div className="flex flex-col gap-5">
-            <Row label="Guesses">
-              <div className="flex gap-1">
-                {[2, 3, 4, 5, 6, 8].map((n) => (
-                  <button
-                    key={n}
-                    type="button"
-                    onClick={() => onRules({ ...rules, guesses: n })}
-                    className={`h-8 flex-1 rounded-chip border font-mono text-xs transition-colors duration-150 ease-out ${
-                      rules.guesses === n
-                        ? "border-line-strong text-ink"
-                        : "border-line text-muted hover:text-ink"
-                    }`}
-                  >
-                    {n}
-                  </button>
-                ))}
-              </div>
-            </Row>
-
             <Row label="Hints">
               <div className="flex flex-col gap-1">
                 <label className="flex items-center gap-2 text-xs text-muted">
@@ -180,7 +161,7 @@ export default function Settings({
                     type="checkbox"
                     checked={rules.artistAfter !== null}
                     onChange={(e) =>
-                      onRules({ ...rules, artistAfter: e.target.checked ? 3 : null })
+                      onRules({ ...rules, artistAfter: e.target.checked ? 2 : null })
                     }
                     className="accent-[var(--color-accent)]"
                   />

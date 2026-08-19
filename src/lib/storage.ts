@@ -33,8 +33,6 @@ function readRules(v: unknown): Rules {
   const stages = Array.isArray(r.stages) ? normalizeStages(r.stages) : DEFAULT_RULES.stages;
   return {
     stages,
-    guesses:
-      typeof r.guesses === "number" && r.guesses > 0 ? r.guesses : Math.max(stages.length, 1),
     artHint: typeof r.artHint === "boolean" ? r.artHint : false,
     artistAfter: typeof r.artistAfter === "number" ? r.artistAfter : null,
   };

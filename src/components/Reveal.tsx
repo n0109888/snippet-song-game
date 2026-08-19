@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Player from "./Player";
+import { formatSeconds } from "@/lib/round";
 import type { AudioEngine } from "@/lib/audio";
 import type { Track } from "@/lib/types";
 
@@ -11,10 +12,6 @@ interface RevealProps {
   atLength: number | null;
   engine: AudioEngine;
   onNext: () => void;
-}
-
-function format(seconds: number): string {
-  return `${Number(seconds.toFixed(2))}s`;
 }
 
 export default function Reveal({ track, solved, atLength, engine, onNext }: RevealProps) {
@@ -71,7 +68,7 @@ export default function Reveal({ track, solved, atLength, engine, onNext }: Reve
           boxShadow: `0 0 26px -2px color-mix(in srgb, ${tone} 50%, transparent)`,
         }}
       >
-        {solved && atLength !== null ? `Guessed in ${format(atLength)}!` : "Lost!"}
+        {solved && atLength !== null ? `Guessed in ${formatSeconds(atLength)}!` : "Lost!"}
       </span>
 
       {/* The clip keeps playing, so you can just listen before moving on. */}

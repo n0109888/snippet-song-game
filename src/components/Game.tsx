@@ -25,8 +25,10 @@ import { parsePastedLines, parsePlaylistLink } from "@/lib/links";
 import {
   SourceError,
   loadDeezerPlaylist,
+  loadSpotifyEmbed,
   loadSpotifyPlaylist,
   resolvePreviews,
+  spotifyReader,
 } from "@/lib/sources";
 import { titleMatches } from "@/lib/normalize";
 import { DEFAULT_PREFS, readPrefs, writePrefs, type Prefs } from "@/lib/storage";
@@ -142,9 +144,11 @@ export default function Game() {
    */
   const topUp = useCallback(async (from: number) => {
     if (resolvingRef.current) return;
+    // Art as well as audio: the Spotify reader supplies previews but no cover,
+    // so a track can be playable and still need the lookup for its hint.
     const pending = queueRef.current
       .slice(from, from + LOOKAHEAD)
-      .filter((t) => t.preview === null);
+      .filter((t) => t.preview === null || t.art === null);
     if (pending.length === 0) return;
 
     resolvingRef.current = true;
@@ -154,7 +158,9 @@ export default function Game() {
 
       const next = queueRef.current.map((t) => {
         const hit = found.get(t.id);
-        return hit ? { ...t, preview: hit.preview, art: t.art ?? hit.art } : t;
+        // Keep whatever the source already gave us, it is an exact match where
+        // the lookup is only ever a search for the closest title.
+        return hit ? { ...t, preview: t.preview ?? hit.preview, art: t.art ?? hit.art } : t;
       });
       // Tracks the lookup could not match are dropped, but never one at or
       // before the cursor, because that would swap the song being played.
@@ -308,20 +314,24 @@ export default function Game() {
       void engine().resume();
       setPhase("loading");
 
-      const headers: Record<string, string> = {};
-      if (parsed.kind === "spotify") {
+      // The reader handles any public playlist with no sign in, so it is tried
+      // first. Signing in is only a fallback for when it is not deployed.
+      const useReader = parsed.kind === "spotify" && spotifyReader() !== "";
+
+      let token = "";
+      if (parsed.kind === "spotify" && !useReader) {
         if (!clientId()) {
-          setError("Spotify client id is not configured.");
+          setError("Spotify links are not set up on this site. Paste a Deezer link instead.");
           setPhase("setup");
           return;
         }
-        const token = await accessToken();
-        if (!token) {
+        const live = await accessToken();
+        if (!live) {
           setPhase("setup");
           await beginLogin(value);
           return;
         }
-        headers.authorization = `Bearer ${token}`;
+        token = live;
       }
 
       let payload: { name: string; tracks: RawTrack[] };
@@ -329,7 +339,9 @@ export default function Game() {
         payload =
           parsed.kind === "deezer"
             ? await loadDeezerPlaylist(parsed.id)
-            : await loadSpotifyPlaylist(parsed.id, headers.authorization?.slice(7) ?? "");
+            : useReader
+              ? await loadSpotifyEmbed(parsed.id)
+              : await loadSpotifyPlaylist(parsed.id, token);
       } catch (err) {
         if (err instanceof SourceError && err.code === "unauthorized") {
           signOut();
@@ -788,6 +800,7 @@ export default function Game() {
                 playing={playing}
                 disabled={false}
                 loading={loadingAudio}
+                engine={engine()}
                 onPlay={play}
               />
 
@@ -870,7 +883,7 @@ export default function Game() {
             <div className="flex flex-col gap-1">
               <span className="text-base font-semibold">Reset</span>
               <span className="text-sm text-muted">
-                Clears this round. Stages, theme and volume are kept.
+                Fully resets all rounds.
               </span>
             </div>
             <div className="flex gap-2">

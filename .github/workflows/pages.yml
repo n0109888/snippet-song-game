@@ -37,6 +37,7 @@ jobs:
           NEXT_PUBLIC_BASE_PATH: /snippet-song-game
           NEXT_PUBLIC_SPOTIFY_CLIENT_ID: ${{ vars.NEXT_PUBLIC_SPOTIFY_CLIENT_ID }}
           NEXT_PUBLIC_SPOTIFY_REDIRECT_URI: ${{ vars.NEXT_PUBLIC_SPOTIFY_REDIRECT_URI }}
+          NEXT_PUBLIC_SPOTIFY_PROXY: ${{ vars.NEXT_PUBLIC_SPOTIFY_PROXY }}
 
       # Pages will not serve files or folders that start with an underscore
       # unless this file is present, which would break every _next asset.

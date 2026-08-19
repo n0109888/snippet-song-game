@@ -183,8 +183,13 @@ export default function GuessInput({
           type="button"
           onClick={onSkip}
           disabled={disabled}
-          className="h-11 shrink-0 rounded-control border border-line px-4 text-sm text-muted transition-colors duration-150 ease-out hover:border-line-strong hover:text-ink disabled:opacity-40"
+          className="flex h-11 shrink-0 items-center gap-2 rounded-control border border-line px-4 text-sm text-muted transition-colors duration-150 ease-out hover:border-line-strong hover:text-ink disabled:opacity-40"
         >
+          {/* The media skip glyph: jump to the next one. */}
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className="h-4 w-4">
+            <path d="M5 4.6a1 1 0 0 1 1.54-.84l10.1 6.56a1 1 0 0 1 0 1.68L6.54 18.56A1 1 0 0 1 5 17.72z" />
+            <rect x="17.6" y="4" width="2.4" height="16" rx="1.2" />
+          </svg>
           Skip
         </button>
       </div>

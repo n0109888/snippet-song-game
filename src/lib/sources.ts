@@ -227,6 +227,65 @@ export class SourceError extends Error {
   }
 }
 
+/**
+ * Base URL of the playlist reader worker. Empty when it has not been deployed,
+ * in which case the Spotify link falls back to signing in.
+ */
+export function spotifyReader(): string {
+  return process.env.NEXT_PUBLIC_SPOTIFY_PROXY ?? "";
+}
+
+/**
+ * Read a public Spotify playlist through the reader worker. No sign in, and no
+ * ownership limit, because it goes through the public embed rather than the
+ * Web API. Previews come back with it, so these tracks need no lookup at all.
+ */
+export async function loadSpotifyEmbed(
+  id: string,
+): Promise<{ name: string; tracks: RawTrack[] }> {
+  const base = spotifyReader();
+  if (!base) throw new SourceError("Spotify links are not set up on this site.", "upstream");
+
+  let res: Response;
+  try {
+    res = await fetch(`${base}?id=${encodeURIComponent(id)}`);
+  } catch {
+    throw new SourceError("Could not reach Spotify.", "upstream");
+  }
+
+  const data = (await res.json().catch(() => ({}))) as {
+    name?: string;
+    error?: string;
+    tracks?: { id?: string; title?: string; artist?: string; preview?: string | null }[];
+  };
+
+  if (!res.ok) {
+    throw new SourceError(
+      data.error ?? "Could not load that playlist.",
+      res.status === 404 ? "not_found" : "upstream",
+    );
+  }
+
+  const tracks: RawTrack[] = [];
+  for (const t of data.tracks ?? []) {
+    if (!t.title || !t.artist) continue;
+    tracks.push({
+      id: t.id ?? `spotify:embed:${tracks.length}`,
+      title: t.title,
+      artist: t.artist,
+      // The embed carries no per track cover, so the art hint fills it in from
+      // the same lookup that already backs the pasted and Deezer sources.
+      art: null,
+      link: null,
+      preview: t.preview ?? null,
+    });
+    if (tracks.length >= MAX_TRACKS) break;
+  }
+
+  if (tracks.length === 0) throw new SourceError("That playlist has no playable tracks.", "empty");
+  return { name: data.name ?? "Playlist", tracks };
+}
+
 export async function loadDeezerPlaylist(id: string): Promise<{ name: string; tracks: RawTrack[] }> {
   const meta = await jsonp<{ title?: string; error?: unknown }>(
     `https://api.deezer.com/playlist/${encodeURIComponent(id)}`,

@@ -30,7 +30,12 @@ export class AudioEngine {
   private readonly inflight = new Map<string, Promise<AudioBuffer>>();
   private readonly raw = new Map<string, ArrayBuffer>();
   private readonly fetching = new Map<string, Promise<void>>();
-  private playing: { source: AudioBufferSourceNode; gain: GainNode } | null = null;
+  private playing: {
+    source: AudioBufferSourceNode;
+    gain: GainNode;
+    startAt: number;
+    length: number;
+  } | null = null;
   private volume = 0.8;
   private readonly onsets = new Map<string, number>();
   /** Continuous playback state for the post guess player. */
@@ -264,6 +269,17 @@ export class AudioEngine {
     this.onsets.delete(trackId);
   }
 
+  /**
+   * How far through the snippet playback is, 0 to 1. Read off the audio clock
+   * rather than wall time, so the stage bar tracks what is actually sounding.
+   */
+  snippetProgress(): number {
+    if (!this.playing || !this.ctx) return 0;
+    const { startAt, length } = this.playing;
+    if (length <= 0) return 1;
+    return Math.max(0, Math.min(1, (this.ctx.currentTime - startAt) / length));
+  }
+
   stop(): void {
     if (!this.playing) return;
     const { source } = this.playing;
@@ -316,7 +332,7 @@ export class AudioEngine {
     source.start(startAt, safeOffset, length);
     source.stop(endAt);
 
-    this.playing = { source, gain };
+    this.playing = { source, gain, startAt, length };
   }
 }
 

@@ -1,6 +1,8 @@
 "use client";
 
-import { tierFor } from "@/lib/round";
+import { useEffect, useRef } from "react";
+import { formatSeconds, lengthShare, tierFor } from "@/lib/round";
+import type { AudioEngine } from "@/lib/audio";
 
 interface StageProps {
   stages: number[];
@@ -9,11 +11,8 @@ interface StageProps {
   playing: boolean;
   disabled: boolean;
   loading?: boolean;
+  engine: AudioEngine;
   onPlay: () => void;
-}
-
-function format(seconds: number): string {
-  return `${Number(seconds.toFixed(2))}s`;
 }
 
 export default function Stage({
@@ -22,17 +21,39 @@ export default function Stage({
   playing,
   disabled,
   loading = false,
+  engine,
   onPlay,
 }: StageProps) {
   const index = Math.min(unlocked, stages.length - 1);
   const current = stages[index] ?? 0;
   const tier = tierFor(current);
+  const longest = Math.max(...stages);
+  const fillRef = useRef<HTMLDivElement | null>(null);
+
+  /**
+   * The playhead for the stage being played. Written straight to the node on
+   * each frame, because a 15s clip would otherwise be nine hundred renders, and
+   * wound back to the start whenever playback stops, the way a player does.
+   */
+  useEffect(() => {
+    const node = fillRef.current;
+    if (!node) return;
+    if (!playing) {
+      node.style.width = "0%";
+      return;
+    }
+    let frame = requestAnimationFrame(function tick() {
+      node.style.width = `${engine.snippetProgress() * 100}%`;
+      frame = requestAnimationFrame(tick);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [playing, engine, index]);
 
   return (
     <div className="flex flex-col items-center gap-6">
-      {/* One segment per difficulty, in its own colour. */}
+      {/* One bar per difficulty, each as wide as its snippet is long. */}
       <div
-        className="flex w-full gap-1.5"
+        className="flex w-full items-center gap-1.5"
         role="progressbar"
         aria-valuemin={1}
         aria-valuemax={stages.length}
@@ -41,16 +62,32 @@ export default function Stage({
       >
         {stages.map((length, i) => {
           const t = tierFor(length);
-          const reached = i <= index;
+          const past = i < index;
+          const active = i === index;
           return (
             <div
               key={`${length}-${i}`}
-              className="h-2 flex-1 rounded-full transition-opacity duration-150 ease-out"
+              // Grow in proportion, from a zero basis, so the row still fills
+              // the card whatever mix of lengths is selected.
               style={{
-                backgroundColor: reached ? t.color : "var(--color-line)",
-                opacity: reached ? (i === index ? 1 : 0.35) : 1,
+                flex: `${lengthShare(length, longest)} 0 0%`,
+                minWidth: "6px",
+                backgroundColor: past
+                  ? `color-mix(in srgb, ${t.color} 34%, transparent)`
+                  : active
+                    ? `color-mix(in srgb, ${t.color} 20%, transparent)`
+                    : "var(--color-line)",
               }}
-            />
+              className="h-2 overflow-hidden rounded-full"
+            >
+              {active ? (
+                <div
+                  ref={fillRef}
+                  className="h-full w-0 rounded-full"
+                  style={{ backgroundColor: t.color }}
+                />
+              ) : null}
+            </div>
           );
         })}
       </div>
@@ -62,7 +99,9 @@ export default function Stage({
         >
           {tier.name}
         </span>
-        <span className="font-mono text-5xl leading-tight tabular-nums">{format(current)}</span>
+        <span className="font-mono text-5xl leading-tight tabular-nums">
+          {formatSeconds(current)}
+        </span>
       </div>
 
       <button

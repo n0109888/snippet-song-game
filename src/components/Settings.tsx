@@ -1,6 +1,6 @@
 "use client";
 
-import { TIERS, normalizeStages, type Hints, type Rules } from "@/lib/round";
+import { TIERS, formatSeconds, normalizeStages, type Hints, type Rules } from "@/lib/round";
 import type { StartMode } from "@/lib/types";
 
 interface SettingsProps {
@@ -21,10 +21,6 @@ interface SettingsProps {
   onHome: () => void;
   onHistory: () => void;
   onReset: () => void;
-}
-
-function seconds(value: number): string {
-  return `${Number(value.toFixed(2))}s`;
 }
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
@@ -78,10 +74,31 @@ function IconButton({
       onClick={onClick}
       title={label}
       aria-label={label}
-      className="pill grid h-9 flex-1 place-items-center rounded-full border border-line text-muted hover:border-line-strong hover:text-ink"
+      className="pill grid h-12 flex-1 place-items-center rounded-full border border-line-strong text-ink hover:border-accent hover:text-accent"
     >
       {children}
     </button>
+  );
+}
+
+/**
+ * Drawn rather than typed, because the glyphs for these were tiny and sat off
+ * centre. Stroked so all three read at the same weight.
+ */
+function Icon({ children }: { children: React.ReactNode }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.9}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+      className="h-[22px] w-[22px]"
+    >
+      {children}
+    </svg>
   );
 }
 
@@ -117,13 +134,22 @@ export default function Settings({
       {inRound ? (
         <div className="flex gap-1.5 border-b border-line pb-5">
           <IconButton label="Back to packs" onClick={onHome}>
-            <span className="text-base leading-none">&#8962;</span>
+            <Icon>
+              <path d="M3.5 10.5 12 3.5l8.5 7" />
+              <path d="M5.5 9.5V20h13V9.5" />
+              <path d="M9.75 20v-5.5h4.5V20" />
+            </Icon>
           </IconButton>
           <IconButton label="This round" onClick={onHistory}>
-            <span className="font-mono text-[13px] leading-none">&#9776;</span>
+            <Icon>
+              <path d="M4 6.5h16M4 12h16M4 17.5h16" />
+            </Icon>
           </IconButton>
           <IconButton label="Start over" onClick={onReset}>
-            <span className="text-base leading-none">&#8635;</span>
+            <Icon>
+              <path d="M20 12a8 8 0 1 1-2.5-5.8" />
+              <path d="M20 3.5V7h-3.5" />
+            </Icon>
           </IconButton>
         </div>
       ) : null}
@@ -157,7 +183,7 @@ export default function Settings({
                   className="font-mono text-xs"
                   style={on ? { opacity: 0.85 } : { color: "var(--color-faint)" }}
                 >
-                  {seconds(tier.seconds)}
+                  {formatSeconds(tier.seconds)}
                 </span>
               </button>
             );

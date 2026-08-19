@@ -1,0 +1,5 @@
+name = "snippet-spotify"
+main = "index.js"
+compatibility_date = "2026-08-19"
+
+# Nothing is stored and nothing is secret, so there are no bindings or vars.

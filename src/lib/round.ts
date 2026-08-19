@@ -21,6 +21,21 @@ export const TIERS: Tier[] = [
 
 export const STAGE_OPTIONS = TIERS.map((t) => t.seconds);
 
+/** Snippet lengths read with a space before the unit, everywhere they appear. */
+export function formatSeconds(value: number): string {
+  return `${Number(value.toFixed(2))} s`;
+}
+
+/**
+ * A length's share of the widest bar, 0 to 1. Lengths run from 0.01s to 15s, so
+ * a straight ratio would leave the short ones too thin to see; the power curve
+ * keeps the order and the sense of scale while 0.01s still draws a bar.
+ */
+export function lengthShare(seconds: number, longest: number): number {
+  if (longest <= 0) return 1;
+  return (Math.max(0, Math.min(seconds, longest)) / longest) ** 0.35;
+}
+
 export function tierFor(seconds: number): Tier {
   return (
     TIERS.find((t) => t.seconds === seconds) ??

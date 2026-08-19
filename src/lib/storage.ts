@@ -1,9 +1,9 @@
 "use client";
 
-import { DIFFICULTIES, type DifficultyName, type Rules } from "./difficulty";
+import { DEFAULT_RULES, DIFFICULTIES, type DifficultyName, type Rules } from "./difficulty";
 import type { SourceKind, StartMode } from "./types";
 
-const KEY = "snippet.prefs.v1";
+const KEY = "snippet.prefs.v2";
 
 export interface Prefs {
   difficulty: DifficultyName;
@@ -16,7 +16,7 @@ export interface Prefs {
 
 export const DEFAULT_PREFS: Prefs = {
   difficulty: "Medium",
-  rules: DIFFICULTIES.Medium,
+  rules: DEFAULT_RULES,
   startMode: "start",
   volume: 0.8,
   lastSource: null,
@@ -31,8 +31,9 @@ function isRules(v: unknown): v is Rules {
     r.stages.length > 0 &&
     r.stages.every((s) => typeof s === "number" && s > 0) &&
     typeof r.guesses === "number" &&
-    typeof r.weight === "number" &&
-    typeof r.accent === "string"
+    r.guesses > 0 &&
+    typeof r.artHint === "boolean" &&
+    (r.artistAfter === null || typeof r.artistAfter === "number")
   );
 }
 

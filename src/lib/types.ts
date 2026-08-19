@@ -10,6 +10,8 @@ export interface Track {
   art: string | null;
   preview: string;
   link: string | null;
+  /** Deezer popularity, 0 to 1000000, higher is better known. Null when unknown. */
+  rank: number | null;
 }
 
 /** A track before preview resolution. */
@@ -20,6 +22,7 @@ export interface RawTrack {
   art: string | null;
   link: string | null;
   preview?: string | null;
+  rank?: number | null;
 }
 
 export interface LoadedPlaylist {

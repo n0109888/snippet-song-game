@@ -109,19 +109,19 @@ export default function Stage({
         onClick={onPlay}
         disabled={disabled}
         aria-label={playing ? "Stop" : "Play"}
-        className="grid h-24 w-24 shrink-0 place-items-center rounded-full border-[3px] bg-panel transition-transform duration-150 ease-out hover:scale-[1.05] active:scale-[0.96] disabled:opacity-40"
+        className="grid h-32 w-32 shrink-0 place-items-center rounded-full border-[3px] bg-panel transition-transform duration-150 ease-out hover:scale-[1.05] active:scale-[0.96] disabled:opacity-40"
         style={{ borderColor: tier.color }}
       >
         {loading ? (
           <span
-            className="block h-6 w-6 animate-pulse rounded-full"
+            className="block h-8 w-8 animate-pulse rounded-full"
             style={{ backgroundColor: tier.color }}
           />
         ) : playing ? (
-          <span className="block h-6 w-6 rounded-[3px]" style={{ backgroundColor: tier.color }} />
+          <span className="block h-8 w-8 rounded-[4px]" style={{ backgroundColor: tier.color }} />
         ) : (
           <span
-            className="ml-1.5 block h-0 w-0 border-y-[17px] border-l-[27px] border-y-transparent"
+            className="ml-2 block h-0 w-0 border-y-[23px] border-l-[36px] border-y-transparent"
             style={{ borderLeftColor: tier.color }}
           />
         )}

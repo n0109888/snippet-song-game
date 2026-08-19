@@ -108,16 +108,16 @@ export default function Player({ engine, trackId, previewUrl, autoPlay }: Player
         onClick={toggle}
         disabled={duration <= 0}
         aria-label={playing ? "Pause" : "Play"}
-        className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-line-strong transition-colors duration-150 ease-out hover:bg-[color-mix(in_srgb,var(--color-ink)_8%,transparent)] disabled:opacity-40"
+        className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-line-strong transition-colors duration-150 ease-out hover:bg-[color-mix(in_srgb,var(--color-ink)_8%,transparent)] disabled:opacity-40"
       >
         {playing ? (
-          <span className="flex gap-[3px]">
-            <span className="block h-3 w-[3px] bg-ink" />
-            <span className="block h-3 w-[3px] bg-ink" />
+          <span className="flex gap-[4px]">
+            <span className="block h-4 w-[3.5px] bg-ink" />
+            <span className="block h-4 w-[3.5px] bg-ink" />
           </span>
         ) : (
           <span
-            className="ml-[2px] block h-0 w-0 border-y-[6px] border-l-[9px] border-y-transparent"
+            className="ml-[3px] block h-0 w-0 border-y-[8px] border-l-[12px] border-y-transparent"
             style={{ borderLeftColor: "var(--color-ink)" }}
           />
         )}

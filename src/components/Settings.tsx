@@ -62,6 +62,18 @@ function Pill({
   );
 }
 
+/** A keyboard shortcut, spelled out so the round can be played without the mouse. */
+function Shortcut({ keys, action }: { keys: string; action: string }) {
+  return (
+    <div className="flex items-center justify-between gap-3">
+      <span className="text-sm text-muted">{action}</span>
+      <kbd className="rounded-control border border-line px-2 py-1 font-mono text-[11px] leading-none text-faint">
+        {keys}
+      </kbd>
+    </div>
+  );
+}
+
 /** The round's own controls, kept to icons so they stay out of the way. */
 function IconButton({
   label,
@@ -260,6 +272,13 @@ export default function Settings({
               <span className="capitalize">{t}</span>
             </Pill>
           ))}
+        </div>
+      </Row>
+
+      <Row label="Controls">
+        <div className="flex flex-col gap-2">
+          <Shortcut keys="Space" action="Pause / play" />
+          <Shortcut keys="\u2192" action="Skip" />
         </div>
       </Row>
     </div>

@@ -12,7 +12,11 @@ import type { RawTrack, Track } from "./types";
  * JSONP output instead.
  */
 
-const MAX_TRACKS = 200;
+/**
+ * Upper bound on a round, not a page size. Deezer pages until it runs out, so
+ * this only exists to stop a pathological playlist from loading forever.
+ */
+const MAX_TRACKS = 1000;
 const CONCURRENCY = 6;
 
 /** Deezer preview links are signed for 15 minutes, so they are held for less. */

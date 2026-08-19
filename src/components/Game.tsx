@@ -494,7 +494,7 @@ export default function Game() {
         else play();
         return;
       }
-      if (event.key === "s" || event.key === "S") {
+      if (event.key === "ArrowRight" || event.key === "s" || event.key === "S") {
         if (event.metaKey || event.ctrlKey || event.altKey) return;
         event.preventDefault();
         if (!reveal) miss();

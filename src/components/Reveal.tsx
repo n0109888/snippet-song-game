@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { HypeEmote } from "./Effects";
 import Player from "./Player";
 import { formatSeconds } from "@/lib/round";
 import type { AudioEngine } from "@/lib/audio";
@@ -24,40 +23,43 @@ export default function Reveal({ track, solved, atLength, max, engine, onNext }:
 
   return (
     <div className="reveal relative z-10 flex w-full max-w-lg flex-col items-center gap-6 text-center">
-      <div className="relative">
-        <div
-          className={`h-44 w-44 overflow-hidden rounded-panel bg-panel ${
-            max ? "gold-art" : solved ? "glow-in" : "miss-shake"
-          }`}
-          style={
-            solved
-              ? {
-                  // A glow rather than an outline, so the colour bleeds into the card.
-                  boxShadow: `0 0 60px 6px color-mix(in srgb, ${tone} 52%, transparent), 0 0 150px 40px color-mix(in srgb, ${tone} 22%, transparent)`,
-                }
-              : undefined
-          }
-        >
-          {track.art ? (
-            <Image
-              src={track.art}
-              alt=""
-              width={176}
-              height={176}
-              unoptimized
-              className="h-full w-full object-cover"
-            />
-          ) : null}
-        </div>
-        {/* Hung off the corner of the sleeve, the way a reaction lands on a clip. */}
-        {max ? <HypeEmote className="absolute -bottom-5 -right-6 h-20 w-20" /> : null}
+      <div
+        className={`h-44 w-44 overflow-hidden rounded-panel bg-panel ${
+          max ? "gold-art" : solved ? "glow-in" : "miss-shake"
+        }`}
+        style={
+          solved
+            ? {
+                // A glow rather than an outline, so the colour bleeds into the card.
+                boxShadow: `0 0 60px 6px color-mix(in srgb, ${tone} 52%, transparent), 0 0 150px 40px color-mix(in srgb, ${tone} 22%, transparent)`,
+              }
+            : undefined
+        }
+      >
+        {track.art ? (
+          <Image
+            src={track.art}
+            alt=""
+            width={176}
+            height={176}
+            unoptimized
+            className="h-full w-full object-cover"
+          />
+        ) : null}
       </div>
 
       <div className="flex flex-col items-center gap-2">
         {max ? (
-          <span className="gold-word text-4xl font-extrabold uppercase leading-none tracking-[0.06em]">
-            Inhuman
-          </span>
+          <div className="mb-1 flex flex-col items-center gap-1">
+            {/* The tier that was beaten, then what beating it means, which is
+                the line the whole card is built around. */}
+            <span className="max-kicker font-mono text-[11px] uppercase tracking-[0.4em] text-[var(--color-gold)]">
+              Inhuman
+            </span>
+            <span className="gold-word text-[3.4rem] font-extrabold uppercase leading-[0.95] tracking-[0.02em]">
+              Max win
+            </span>
+          </div>
         ) : null}
         {!solved ? (
           <span

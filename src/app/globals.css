@@ -312,19 +312,42 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /*
- * The max win. A wheel of light behind the reveal, the word struck in gold with
- * a highlight travelling across it, and an emote that lands and keeps bouncing.
- * All of it is transform, opacity or background-position, so it composites.
+ * The max win. Light rather than scenery: one flash, two rings thrown out from
+ * the middle, and the word landing hard with a highlight running across it.
+ * Every one of these plays once, so nothing is left turning behind the text.
  */
-@keyframes gold-rays {
+@keyframes gold-flash {
+  from {
+    opacity: 0.5;
+  }
   to {
-    transform: translate(-50%, -50%) rotate(360deg);
+    opacity: 0;
   }
 }
 
-.gold-rays {
-  animation: gold-rays 24s linear infinite;
-  opacity: 0.55;
+.gold-flash {
+  animation: gold-flash 420ms ease-out both;
+}
+
+@keyframes shock-ring {
+  from {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(0.25);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(3.4);
+  }
+}
+
+.shock-ring {
+  animation: shock-ring 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* The second ring chases the first, which is what makes it read as a hit. */
+.shock-ring-late {
+  animation-duration: 1100ms;
+  animation-delay: 140ms;
 }
 
 @keyframes gold-sheen {
@@ -333,6 +356,26 @@ input[type="range"]::-moz-range-thumb {
   }
   to {
     background-position: 260% 0;
+  }
+}
+
+/* Lands oversized and slams down to size, rather than fading in. */
+@keyframes max-slam {
+  0% {
+    opacity: 0;
+    /* Big, but not so big that the word's own overflow widens the card. */
+    transform: scale(1.9);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(0.9);
+  }
+  80% {
+    transform: scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -350,10 +393,30 @@ input[type="range"]::-moz-range-thumb {
   background-clip: text;
   color: transparent;
   /* The clipped text has no shadow of its own, so the halo goes behind it. */
-  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--color-gold) 55%, transparent));
+  filter: drop-shadow(0 0 22px color-mix(in srgb, var(--color-gold) 65%, transparent));
   animation:
-    verdict-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both,
-    gold-sheen 2.4s linear 320ms infinite;
+    max-slam 460ms cubic-bezier(0.22, 1, 0.36, 1) both,
+    gold-sheen 2.2s linear 460ms infinite;
+}
+
+/*
+ * The tier name arrives first and holds, so the word lands on top of it. It
+ * settles in on a transform rather than on letter-spacing, which would relayout
+ * the line on every frame.
+ */
+@keyframes max-kicker-in {
+  from {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.max-kicker {
+  animation: max-kicker-in 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 /*
@@ -384,59 +447,6 @@ input[type="range"]::-moz-range-thumb {
     gold-pulse 1.5s ease-in-out 350ms infinite;
 }
 
-/* The emote lands hard, overshoots, then settles into a small idle sway. */
-@keyframes emote-pop {
-  0% {
-    opacity: 0;
-    transform: scale(0.2) rotate(-24deg);
-  }
-  55% {
-    opacity: 1;
-    transform: scale(1.28) rotate(8deg);
-  }
-  75% {
-    transform: scale(0.94) rotate(-4deg);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
-  }
-}
-
-.emote-pop {
-  animation: emote-pop 620ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
-  animation-delay: 120ms;
-}
-
-@keyframes emote-wiggle {
-  0%,
-  100% {
-    transform: rotate(-7deg) scale(1);
-  }
-  50% {
-    transform: rotate(7deg) scale(1.06);
-  }
-}
-
-.emote-wiggle {
-  animation: emote-wiggle 900ms ease-in-out 740ms infinite;
-}
-
-@keyframes shock-ring {
-  from {
-    opacity: 0.85;
-    transform: scale(0.5);
-  }
-  to {
-    opacity: 0;
-    transform: scale(2.4);
-  }
-}
-
-.shock-ring {
-  animation: shock-ring 700ms cubic-bezier(0.22, 1, 0.36, 1) 240ms both;
-}
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -444,10 +454,5 @@ input[type="range"]::-moz-range-thumb {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-
-  /* A wheel of hard edged rays frozen mid turn is worse than no rays at all. */
-  .gold-rays {
-    display: none;
   }
 }

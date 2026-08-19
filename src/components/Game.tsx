@@ -528,13 +528,16 @@ export default function Game() {
   }
 
   /**
-   * Start over as if the page were freshly opened. Preferences live in their
-   * own key and are untouched, so stages, theme and volume survive.
+   * Deal the loaded pack again from the first song. It stays on the pack you
+   * picked, because losing that as well is not what starting over means; the
+   * home button beside it is how you leave. Only a round with no pack behind it
+   * has nothing to deal, and that can only be a fresh page.
    */
-  function resetEverything() {
-    engineRef.current?.stop();
-    if (revealTimer.current !== null) window.clearTimeout(revealTimer.current);
-    window.location.reload();
+  function startOver() {
+    setConfirmReset(false);
+    setSheetOpen(false);
+    if (playlist) startRound(playlist, prefs.sort);
+    else window.location.reload();
   }
 
 
@@ -728,18 +731,19 @@ export default function Game() {
           />
           <div className="press-in relative flex w-full max-w-xs flex-col gap-4 rounded-panel border border-line bg-panel p-5">
             <div className="flex flex-col gap-1">
-              <span className="text-base font-semibold">Reset</span>
+              <span className="text-base font-semibold">Start over</span>
               <span className="text-sm text-muted">
-                Fully resets all rounds.
+                Plays this pack again from the first song. What you have got so
+                far is cleared.
               </span>
             </div>
             <div className="flex gap-2">
               <button
                 type="button"
-                onClick={resetEverything}
+                onClick={startOver}
                 className="pill h-9 flex-1 rounded-full border border-transparent bg-[var(--color-bad)] text-sm font-medium text-white"
               >
-                Reset
+                Start over
               </button>
               <button
                 type="button"

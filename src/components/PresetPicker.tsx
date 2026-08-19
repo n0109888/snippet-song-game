@@ -34,6 +34,7 @@ export default function PresetPicker({ collections, busy, onStart }: PresetPicke
                   width={512}
                   height={512}
                   unoptimized
+                  priority
                   className="h-full w-full object-cover transition-transform duration-150 ease-out group-hover:scale-[1.03]"
                 />
               ) : null}

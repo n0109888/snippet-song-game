@@ -1,0 +1,15 @@
+node_modules
+.next
+out
+build
+.env*
+!.env.example
+.DS_Store
+*.log
+npm-debug.log*
+pnpm-debug.log*
+.audio-cache
+.playlist-cache
+next-env.d.ts
+.vercel
+*.tsbuildinfo

@@ -1,6 +1,6 @@
 /**
  * Web Audio playback. Snippet length is scheduled on the audio clock, never
- * with setTimeout, so a 0.01s snippet really is 0.01s. Only 30 second previews
+ * with setTimeout, so a 0.05s snippet really is 0.05s. Only 30 second previews
  * are ever fetched, decoded and held in memory.
  */
 
@@ -174,8 +174,8 @@ export class AudioEngine {
 
   /**
    * Offset of the first audible moment. Every preview measured here opens with
-   * 30 to 40ms of digital silence, so starting at sample zero makes a 0.01s
-   * snippet play nothing at all.
+   * 30 to 40ms of digital silence, so starting at sample zero would eat most of
+   * a 0.05s snippet.
    */
   onset(trackId: string): number {
     const cached = this.onsets.get(trackId);
@@ -294,7 +294,7 @@ export class AudioEngine {
 
   /**
    * Play `duration` seconds starting at `offset`. Both ends get a short fade,
-   * because at 0.01s an unramped edge is an audible click rather than a note.
+   * because at 0.05s an unramped edge is an audible click rather than a note.
    */
   play(trackId: string, offset: number, duration: number, onEnded?: () => void): void {
     const ctx = this.ensure();

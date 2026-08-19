@@ -11,7 +11,7 @@ export interface Tier {
 }
 
 export const TIERS: Tier[] = [
-  { seconds: 0.01, name: "Inhuman", color: "#8e1533" },
+  { seconds: 0.05, name: "Inhuman", color: "#8e1533" },
   { seconds: 0.1, name: "Impossible", color: "#c22947" },
   { seconds: 0.5, name: "Extreme", color: "#dd5b2e" },
   { seconds: 2, name: "Hard", color: "#e08c1f" },
@@ -27,9 +27,9 @@ export function formatSeconds(value: number): string {
 }
 
 /**
- * A length's share of the widest bar, 0 to 1. Lengths run from 0.01s to 15s, so
+ * A length's share of the widest bar, 0 to 1. Lengths run from 0.05s to 15s, so
  * a straight ratio would leave the short ones too thin to see; the power curve
- * keeps the order and the sense of scale while 0.01s still draws a bar.
+ * keeps the order and the sense of scale while 0.05s still draws a bar.
  */
 export function lengthShare(seconds: number, longest: number): number {
   if (longest <= 0) return 1;
@@ -43,7 +43,7 @@ export function tierFor(seconds: number): Tier {
   );
 }
 
-/** 0.01s is opt in, it is a tenth of a blink and most people want it off. */
+/** 0.05s is opt in, it is a twentieth of a second and most people want it off. */
 export const DEFAULT_STAGES: number[] = [0.1, 0.5, 2, 8, 15];
 
 export interface Rules {

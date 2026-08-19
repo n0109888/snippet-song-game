@@ -40,8 +40,11 @@ export default function SourcePicker({ busy, error, onLoadLink }: SourcePickerPr
         </button>
       </form>
 
-      <p className="text-xs text-faint">
-        Any public playlist. No account needed for either service.
+      {/* Said up front, because the Spotify limit is theirs and cannot be
+          worked around, and a short round is confusing without the reason. */}
+      <p className="text-xs leading-relaxed text-faint">
+        Any public playlist, no account needed. Spotify only shares the first 100 songs of a
+        playlist; a Deezer link loads all of them.
       </p>
 
       {error ? <p className="text-sm text-[var(--color-bad)]">{error}</p> : null}

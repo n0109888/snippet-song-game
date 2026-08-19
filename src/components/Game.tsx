@@ -11,7 +11,7 @@ import SourcePicker from "./SourcePicker";
 import Stage from "./Stage";
 import Summary, { ResultsList, type RoundResult } from "./Summary";
 import { AudioEngine, DecodeError, dropInOffset } from "@/lib/audio";
-import { SORTS, sortTracks, type Rules, type SortKey } from "@/lib/round";
+import { SORTS, sortTracks, tierFor, type Rules, type SortKey } from "@/lib/round";
 import { parsePastedLines, parsePlaylistLink } from "@/lib/links";
 import {
   SourceError,
@@ -80,6 +80,9 @@ export default function Game() {
   const [missKey, setMissKey] = useState(0);
   const [showResults, setShowResults] = useState(false);
   const [loadingAudio, setLoadingAudio] = useState(false);
+  /** Track whose audio, and artwork when hinted, are decoded and ready. */
+  const [readyId, setReadyId] = useState<string | null>(null);
+  const [confirmReset, setConfirmReset] = useState(false);
 
   const rules = prefs.rules;
   const stages = rules.stages;
@@ -161,6 +164,54 @@ export default function Game() {
     if (phase !== "playing") return;
     void topUp(cursor);
   }, [phase, cursor, topUp]);
+
+  /** Load artwork up front, so a hint is on screen the moment the track is. */
+  const warmArt = useCallback(async (url: string | null): Promise<void> => {
+    if (!url) return;
+    await new Promise<void>((resolve) => {
+      const img = new window.Image();
+      img.onload = () => resolve();
+      img.onerror = () => resolve();
+      img.src = url;
+    });
+  }, []);
+
+  /**
+   * Decode the current track's audio, and its artwork when hinted, before the
+   * track is shown. The next one is warmed in the background. Decoding is the
+   * slow part, so doing it here is what makes pressing play immediate.
+   */
+  useEffect(() => {
+    if (phase !== "playing") return;
+    const current = queue[cursor];
+    const next = queue[cursor + 1];
+    let cancelled = false;
+
+    const preview = current?.preview;
+    if (current && preview) {
+      void (async () => {
+        try {
+          await Promise.all([
+            engine().warm(current.id, preview),
+            rules.artHint ? warmArt(current.art) : Promise.resolve(),
+          ]);
+        } catch {
+          // Play surfaces the failure and refreshes the link.
+        }
+        if (!cancelled) setReadyId(current.id);
+      })();
+    }
+
+    const nextPreview = next?.preview;
+    if (next && nextPreview) {
+      void engine().warm(next.id, nextPreview).catch(() => undefined);
+      if (rules.artHint) void warmArt(next.art);
+    }
+
+    return () => {
+      cancelled = true;
+    };
+  }, [phase, queue, cursor, rules.artHint, warmArt]);
 
   /** Resolve one track right now, so pressing play never waits on the lookahead. */
   const resolveNow = useCallback(
@@ -244,6 +295,7 @@ export default function Game() {
         return;
       }
 
+      void engine().resume();
       setPhase("loading");
 
       const headers: Record<string, string> = {};
@@ -294,6 +346,7 @@ export default function Game() {
         setError("Use one Artist - Title per line.");
         return;
       }
+      void engine().resume();
       const raw: RawTrack[] = lines.map((line, i) => ({
         id: `paste:${i}:${line.artist}:${line.title}`,
         title: line.title,
@@ -312,6 +365,8 @@ export default function Game() {
       setError(null);
       setNotice(null);
       setPresetBusy(collection.id);
+      // Take the gesture now rather than waiting for the first press of play.
+      void engine().resume();
       const loaded = loadTracks(
         collection.tracks as RawTrack[],
         collection.name,
@@ -517,6 +572,11 @@ export default function Game() {
     return Math.round(24 * (1 - stageIndex / steps));
   }, [rules.artHint, stages.length, stageIndex]);
 
+  // Everything for this track is decoded, so play fires with no wait.
+  const audioReady = track ? readyId === track.id : false;
+
+  const tier = tierFor(stages[stageIndex] ?? 0);
+
   const artistAt =
     rules.artistAfter === null
       ? null
@@ -539,13 +599,29 @@ export default function Game() {
     />
   );
 
-  function leaveRound() {
+  /** Back to the pack list, keeping every preference. */
+  function goHome() {
     engineRef.current?.stop();
     if (revealTimer.current !== null) window.clearTimeout(revealTimer.current);
     setPlaying(false);
     setReveal(null);
-    setPhase(results.length > 0 ? "done" : "setup");
+    setResults([]);
+    setPlaylist(null);
+    setReadyId(null);
+    setError(null);
+    setPhase("setup");
   }
+
+  /**
+   * Start over as if the page were freshly opened. Preferences live in their
+   * own key and are untouched, so stages, theme and volume survive.
+   */
+  function resetEverything() {
+    engineRef.current?.stop();
+    if (revealTimer.current !== null) window.clearTimeout(revealTimer.current);
+    window.location.reload();
+  }
+
 
   return (
     <div className="flex h-dvh flex-col">
@@ -611,6 +687,13 @@ export default function Game() {
               engine={engine()}
               onNext={advance}
             />
+          ) : phase === "playing" && track && !audioReady ? (
+            <div className="flex flex-col items-center gap-4">
+              <span className="loader h-9 w-9 rounded-full border-2 border-line" />
+              <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-faint">
+                Loading
+              </span>
+            </div>
           ) : phase === "playing" && track ? (
             <div className="flex w-full max-w-lg flex-col gap-8">
               <div className="flex items-end justify-between gap-4">
@@ -676,7 +759,6 @@ export default function Game() {
                 playing={playing}
                 disabled={false}
                 loading={loadingAudio}
-                accent="var(--color-accent)"
                 onPlay={play}
               />
 
@@ -688,30 +770,19 @@ export default function Game() {
                 remaining={remaining}
               />
 
-              <div className="flex min-h-10 items-center justify-between gap-3">
+              <div className="flex min-h-12 flex-col items-center gap-2">
                 {error ? (
                   <span className="text-sm text-[var(--color-bad)]">{error}</span>
                 ) : showArtist ? (
-                  <span className="text-sm text-muted">{track.artist}</span>
-                ) : (
-                  <span />
-                )}
-                <div className="flex shrink-0 items-center gap-4">
-                  <button
-                    type="button"
-                    onClick={() => setShowResults(true)}
-                    className="font-mono text-[11px] uppercase tracking-[0.14em] text-faint transition-colors duration-150 ease-out hover:text-muted"
-                  >
-                    Results
-                  </button>
-                  <button
-                    type="button"
-                    onClick={leaveRound}
-                    className="font-mono text-[11px] uppercase tracking-[0.14em] text-faint transition-colors duration-150 ease-out hover:text-muted"
-                  >
-                    End
-                  </button>
-                </div>
+                  <div className="flex flex-col items-center gap-1">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-faint">
+                      Artist
+                    </span>
+                    <span className="text-xl font-semibold" style={{ color: tier.color }}>
+                      {track.artist}
+                    </span>
+                  </div>
+                ) : null}
               </div>
             </div>
           ) : phase === "loading" ? (
@@ -742,6 +813,36 @@ export default function Game() {
           </div>
         </main>
 
+        <div className="hidden w-14 shrink-0 flex-col items-center gap-3 py-6 lg:flex">
+          <button
+            type="button"
+            onClick={goHome}
+            title="Home"
+            aria-label="Home"
+            className="pill grid h-10 w-10 place-items-center rounded-full border border-line text-muted hover:border-line-strong hover:text-ink"
+          >
+            <span className="text-base leading-none">&#8962;</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setShowResults(true)}
+            title="History"
+            aria-label="History"
+            className="pill grid h-10 w-10 place-items-center rounded-full border border-line text-muted hover:border-line-strong hover:text-ink"
+          >
+            <span className="font-mono text-[13px] leading-none">&#9776;</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setConfirmReset(true)}
+            title="Reset"
+            aria-label="Reset"
+            className="pill grid h-10 w-10 place-items-center rounded-full border border-line text-muted hover:border-line-strong hover:text-ink"
+          >
+            <span className="text-base leading-none">&#8635;</span>
+          </button>
+        </div>
+
         <aside className="hidden w-64 shrink-0 overflow-y-auto border-l border-line px-5 py-6 lg:block">
           {ready ? settingsPanel : null}
         </aside>
@@ -757,6 +858,41 @@ export default function Game() {
         </div>
       </div>
 
+      {confirmReset ? (
+        <div className="fixed inset-0 z-40 flex items-center justify-center p-5">
+          <button
+            type="button"
+            aria-label="Cancel"
+            onClick={() => setConfirmReset(false)}
+            className="absolute inset-0 bg-[rgba(0,0,0,0.55)]"
+          />
+          <div className="press-in relative flex w-full max-w-xs flex-col gap-4 rounded-panel border border-line bg-panel p-5">
+            <div className="flex flex-col gap-1">
+              <span className="text-base font-semibold">Reset</span>
+              <span className="text-sm text-muted">
+                Clears this round. Stages, theme and volume are kept.
+              </span>
+            </div>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={resetEverything}
+                className="pill h-9 flex-1 rounded-full border border-transparent bg-[var(--color-bad)] text-sm font-medium text-white"
+              >
+                Reset
+              </button>
+              <button
+                type="button"
+                onClick={() => setConfirmReset(false)}
+                className="pill h-9 flex-1 rounded-full border border-line text-sm text-muted hover:text-ink"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
       {showResults ? (
         <div className="fixed inset-0 z-30 flex items-center justify-center p-5">
           <button
@@ -768,7 +904,7 @@ export default function Game() {
           <div className="press-in relative flex w-full max-w-md flex-col gap-4 rounded-panel border border-line bg-panel p-5">
             <div className="flex items-baseline justify-between">
               <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-faint">
-                This round
+                History
               </span>
               <span className="font-mono text-sm tabular-nums">
                 {results.filter((r) => r.solvedAt !== null).length}/{results.length}

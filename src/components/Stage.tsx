@@ -1,5 +1,7 @@
 "use client";
 
+import { tierFor } from "@/lib/round";
+
 interface StageProps {
   stages: number[];
   /** Highest stage the player has unlocked. */
@@ -7,11 +9,9 @@ interface StageProps {
   playing: boolean;
   disabled: boolean;
   loading?: boolean;
-  accent: string;
   onPlay: () => void;
 }
 
-/** Trims trailing zeros so 0.1 reads as 0.1s and 0.01 keeps both digits. */
 function format(seconds: number): string {
   return `${Number(seconds.toFixed(2))}s`;
 }
@@ -22,66 +22,71 @@ export default function Stage({
   playing,
   disabled,
   loading = false,
-  accent,
   onPlay,
 }: StageProps) {
-  const total = stages.reduce((sum, s) => sum + s, 0);
-  const current = stages[Math.min(unlocked, stages.length - 1)] ?? 0;
+  const index = Math.min(unlocked, stages.length - 1);
+  const current = stages[index] ?? 0;
+  const tier = tierFor(current);
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col items-center gap-6">
+      {/* One segment per difficulty, in its own colour. */}
       <div
-        className="flex h-2 w-full gap-[2px]"
+        className="flex w-full gap-1.5"
         role="progressbar"
         aria-valuemin={1}
         aria-valuemax={stages.length}
-        aria-valuenow={Math.min(unlocked + 1, stages.length)}
-        aria-label="Stage"
+        aria-valuenow={index + 1}
+        aria-label="Difficulty"
       >
         {stages.map((length, i) => {
-          const filled = i <= unlocked;
-          const isCurrent = i === unlocked;
+          const t = tierFor(length);
+          const reached = i <= index;
           return (
             <div
               key={`${length}-${i}`}
+              className="h-2 flex-1 rounded-full transition-opacity duration-150 ease-out"
               style={{
-                flexGrow: length / total,
-                backgroundColor: filled ? accent : "var(--color-line)",
-                opacity: filled && !isCurrent ? 0.45 : 1,
+                backgroundColor: reached ? t.color : "var(--color-line)",
+                opacity: reached ? (i === index ? 1 : 0.35) : 1,
               }}
-              className="rounded-[2px] transition-opacity duration-150 ease-out"
             />
           );
         })}
       </div>
 
-      <div className="flex items-center gap-6">
-        <button
-          type="button"
-          onClick={onPlay}
-          disabled={disabled}
-          aria-label={playing ? "Stop" : "Play"}
-          className="grid h-20 w-20 shrink-0 place-items-center rounded-full border border-line-strong bg-panel transition-[transform,opacity] duration-150 ease-out hover:border-[var(--color-ink)] active:scale-[0.97] disabled:opacity-40 disabled:hover:border-line-strong"
+      <div className="flex flex-col items-center gap-1">
+        <span
+          className="text-[2rem] font-bold uppercase leading-none tracking-[0.03em]"
+          style={{ color: tier.color }}
         >
-          {loading ? (
-            <span className="block h-5 w-5 animate-pulse rounded-full bg-muted" />
-          ) : playing ? (
-            <span className="block h-5 w-5 rounded-[2px] bg-ink" />
-          ) : (
-            <span
-              className="ml-1 block h-0 w-0 border-y-[13px] border-l-[21px] border-y-transparent"
-              style={{ borderLeftColor: "var(--color-ink)" }}
-            />
-          )}
-        </button>
-
-        <div className="flex flex-col gap-1">
-          <span className="font-mono text-4xl leading-none tabular-nums">{format(current)}</span>
-          <span className="font-mono text-xs text-faint">
-            {Math.min(unlocked + 1, stages.length)}/{stages.length}
-          </span>
-        </div>
+          {tier.name}
+        </span>
+        <span className="font-mono text-5xl leading-tight tabular-nums">{format(current)}</span>
       </div>
+
+      <button
+        type="button"
+        onClick={onPlay}
+        disabled={disabled}
+        aria-label={playing ? "Stop" : "Play"}
+        className="grid h-24 w-24 shrink-0 place-items-center rounded-full border-[3px] bg-panel transition-transform duration-150 ease-out hover:scale-[1.05] active:scale-[0.96] disabled:opacity-40"
+        style={{ borderColor: tier.color }}
+      >
+        {loading ? (
+          <span
+            className="block h-6 w-6 animate-pulse rounded-full"
+            style={{ backgroundColor: tier.color }}
+          />
+        ) : playing ? (
+          <span className="block h-6 w-6 rounded-[3px]" style={{ backgroundColor: tier.color }} />
+        ) : (
+          <span
+            className="ml-1.5 block h-0 w-0 border-y-[17px] border-l-[27px] border-y-transparent"
+            style={{ borderLeftColor: tier.color }}
+          />
+        )}
+      </button>
     </div>
   );
 }

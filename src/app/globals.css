@@ -219,6 +219,36 @@ input[type="range"]::-moz-range-thumb {
   display: none;
 }
 
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loader {
+  border-top-color: var(--color-accent);
+  animation: loader-spin 700ms linear infinite;
+}
+
+/* One look for every toggle and small action button. */
+.pill {
+  transition:
+    transform 160ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 160ms ease-out,
+    border-color 160ms ease-out,
+    color 160ms ease-out;
+}
+
+.pill:hover,
+.pill:focus-visible {
+  transform: translateY(-1px) scale(1.03);
+}
+
+.pill:active {
+  transform: scale(0.97);
+  transition-duration: 80ms;
+}
+
 /* Home buttons: a small, quick lift so the top of the app feels responsive. */
 .home {
   transition:

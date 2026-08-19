@@ -1,10 +1,32 @@
 import type { Track } from "./types";
 
 /**
- * Snippet lengths the player can switch on. The ladder is whatever is selected,
- * ascending, and skip walks it one step at a time.
+ * Snippet length is the difficulty. The ladder is whatever is selected,
+ * ascending, so a round runs from the hardest length you picked to the easiest.
  */
-export const STAGE_OPTIONS = [0.01, 0.1, 0.5, 2, 8, 15] as const;
+export interface Tier {
+  seconds: number;
+  name: string;
+  color: string;
+}
+
+export const TIERS: Tier[] = [
+  { seconds: 0.01, name: "Inhuman", color: "#8e1533" },
+  { seconds: 0.1, name: "Impossible", color: "#c22947" },
+  { seconds: 0.5, name: "Extreme", color: "#dd5b2e" },
+  { seconds: 2, name: "Hard", color: "#e08c1f" },
+  { seconds: 8, name: "Medium", color: "#c9b02b" },
+  { seconds: 15, name: "Easy", color: "#4fa860" },
+];
+
+export const STAGE_OPTIONS = TIERS.map((t) => t.seconds);
+
+export function tierFor(seconds: number): Tier {
+  return (
+    TIERS.find((t) => t.seconds === seconds) ??
+    ({ seconds, name: "Custom", color: "#e9a13b" } satisfies Tier)
+  );
+}
 
 /** 0.01s is opt in, it is a tenth of a blink and most people want it off. */
 export const DEFAULT_STAGES: number[] = [0.1, 0.5, 2, 8, 15];
@@ -59,5 +81,5 @@ export function sortTracks(tracks: readonly Track[], sort: SortKey): Track[] {
 /** Selected stages, ascending, never empty. */
 export function normalizeStages(stages: readonly number[]): number[] {
   const kept = STAGE_OPTIONS.filter((s) => stages.includes(s));
-  return kept.length > 0 ? [...kept] : [...DEFAULT_STAGES];
+  return kept.length > 0 ? kept : [...DEFAULT_STAGES];
 }

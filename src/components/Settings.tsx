@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { STAGE_OPTIONS, normalizeStages, type Rules } from "@/lib/round";
+import { TIERS, normalizeStages, type Rules } from "@/lib/round";
 import type { StartMode } from "@/lib/types";
 
 interface SettingsProps {
@@ -15,16 +14,42 @@ interface SettingsProps {
   onTheme: (theme: "dark" | "light") => void;
 }
 
-function label(seconds: number): string {
-  return `${Number(seconds.toFixed(2))}s`;
+function seconds(value: number): string {
+  return `${Number(value.toFixed(2))}s`;
 }
 
-function Row({ label: text, children }: { label: string; children: React.ReactNode }) {
+function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-2">
-      <span className="text-xs uppercase tracking-[0.08em] text-faint">{text}</span>
+      <span className="text-xs uppercase tracking-[0.1em] text-faint">{label}</span>
       {children}
     </div>
+  );
+}
+
+/** One look for every toggle here, so hints match the difficulty buttons. */
+function Pill({
+  on,
+  onClick,
+  children,
+}: {
+  on: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      aria-pressed={on}
+      onClick={onClick}
+      className={`pill h-9 rounded-full border px-4 text-xs ${
+        on
+          ? "border-transparent bg-accent font-medium text-bg"
+          : "border-line text-faint hover:border-line-strong hover:text-muted"
+      }`}
+    >
+      {children}
+    </button>
   );
 }
 
@@ -38,11 +63,9 @@ export default function Settings({
   onVolume,
   onTheme,
 }: SettingsProps) {
-  const [advanced, setAdvanced] = useState(false);
-
   function toggleStage(value: number) {
     const on = rules.stages.includes(value);
-    // Never let the last stage be switched off, there would be nothing to play.
+    // Never let the last one be switched off, there would be nothing to play.
     if (on && rules.stages.length === 1) return;
     const next = normalizeStages(
       on ? rules.stages.filter((s) => s !== value) : [...rules.stages, value],
@@ -52,44 +75,65 @@ export default function Settings({
 
   return (
     <div className="flex flex-col gap-7">
-      <Row label="Stages">
-        <div className="flex flex-wrap gap-1.5">
-          {STAGE_OPTIONS.map((value) => {
-            const on = rules.stages.includes(value);
+      <Row label="Difficulty">
+        <div className="flex flex-col gap-1.5">
+          {TIERS.map((tier) => {
+            const on = rules.stages.includes(tier.seconds);
             return (
               <button
-                key={value}
+                key={tier.seconds}
                 type="button"
                 aria-pressed={on}
-                onClick={() => toggleStage(value)}
-                className={`h-8 rounded-full border px-3 font-mono text-xs transition-[background-color,border-color,color,transform] duration-150 ease-out active:scale-95 ${
+                onClick={() => toggleStage(tier.seconds)}
+                style={
                   on
-                    ? "border-transparent bg-accent text-bg"
-                    : "border-line text-faint hover:border-line-strong hover:text-muted"
+                    ? { backgroundColor: tier.color, borderColor: tier.color }
+                    : { borderColor: `color-mix(in srgb, ${tier.color} 35%, transparent)` }
+                }
+                className={`pill flex h-10 items-center justify-between rounded-full border-2 px-4 ${
+                  on ? "text-white" : "hover:brightness-125"
                 }`}
               >
-                {label(value)}
+                <span
+                  className="text-sm font-semibold"
+                  style={on ? undefined : { color: tier.color }}
+                >
+                  {tier.name}
+                </span>
+                <span
+                  className="font-mono text-xs"
+                  style={on ? { opacity: 0.85 } : { color: "var(--color-faint)" }}
+                >
+                  {seconds(tier.seconds)}
+                </span>
               </button>
             );
           })}
         </div>
       </Row>
 
+      <Row label="Hints">
+        <div className="flex flex-wrap gap-1.5">
+          <Pill on={rules.artHint} onClick={() => onRules({ ...rules, artHint: !rules.artHint })}>
+            Album art
+          </Pill>
+          <Pill
+            on={rules.artistAfter !== null}
+            onClick={() =>
+              onRules({ ...rules, artistAfter: rules.artistAfter === null ? 2 : null })
+            }
+          >
+            Artist
+          </Pill>
+        </div>
+      </Row>
+
       <Row label="Song start">
-        <div className="flex gap-2">
+        <div className="flex gap-1.5">
           {(["start", "dropin"] as const).map((mode) => (
-            <button
-              key={mode}
-              type="button"
-              onClick={() => onStartMode(mode)}
-              className={`h-8 flex-1 rounded-chip border px-2 text-xs transition-colors duration-150 ease-out ${
-                startMode === mode
-                  ? "border-line-strong text-ink"
-                  : "border-line text-muted hover:text-ink"
-              }`}
-            >
+            <Pill key={mode} on={startMode === mode} onClick={() => onStartMode(mode)}>
               {mode === "start" ? "Clip start" : "Random"}
-            </button>
+            </Pill>
           ))}
         </div>
       </Row>
@@ -108,70 +152,14 @@ export default function Settings({
       </Row>
 
       <Row label="Theme">
-        <div className="flex gap-2">
+        <div className="flex gap-1.5">
           {(["dark", "light"] as const).map((t) => (
-            <button
-              key={t}
-              type="button"
-              onClick={() => onTheme(t)}
-              className={`h-8 flex-1 rounded-chip border px-2 text-xs capitalize transition-colors duration-150 ease-out ${
-                theme === t
-                  ? "border-line-strong text-ink"
-                  : "border-line text-muted hover:text-ink"
-              }`}
-            >
-              {t}
-            </button>
+            <Pill key={t} on={theme === t} onClick={() => onTheme(t)}>
+              <span className="capitalize">{t}</span>
+            </Pill>
           ))}
         </div>
       </Row>
-
-      <div className="flex flex-col gap-3 border-t border-line pt-5">
-        <button
-          type="button"
-          onClick={() => setAdvanced((a) => !a)}
-          aria-expanded={advanced}
-          className="flex items-center gap-2 text-left text-xs uppercase tracking-[0.08em] text-faint transition-colors duration-150 ease-out hover:text-muted"
-        >
-          <span
-            className="inline-block h-0 w-0 border-y-[3px] border-l-[5px] border-y-transparent transition-transform duration-150 ease-out"
-            style={{
-              borderLeftColor: "currentColor",
-              transform: advanced ? "rotate(90deg)" : "none",
-            }}
-          />
-          Advanced
-        </button>
-
-        {advanced ? (
-          <div className="flex flex-col gap-5">
-            <Row label="Hints">
-              <div className="flex flex-col gap-1">
-                <label className="flex items-center gap-2 text-xs text-muted">
-                  <input
-                    type="checkbox"
-                    checked={rules.artHint}
-                    onChange={(e) => onRules({ ...rules, artHint: e.target.checked })}
-                    className="accent-[var(--color-accent)]"
-                  />
-                  Album art
-                </label>
-                <label className="flex items-center gap-2 text-xs text-muted">
-                  <input
-                    type="checkbox"
-                    checked={rules.artistAfter !== null}
-                    onChange={(e) =>
-                      onRules({ ...rules, artistAfter: e.target.checked ? 2 : null })
-                    }
-                    className="accent-[var(--color-accent)]"
-                  />
-                  Artist
-                </label>
-              </div>
-            </Row>
-          </div>
-        ) : null}
-      </div>
     </div>
   );
 }

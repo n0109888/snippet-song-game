@@ -116,6 +116,19 @@ export class AudioEngine {
   }
 
   /**
+   * Fetch and decode ahead of time, for the current and next track. Decoding is
+   * the slow part, so doing it here is what makes pressing play immediate.
+   */
+  async warm(trackId: string, previewUrl: string): Promise<void> {
+    if (this.buffers.has(trackId)) return;
+    if (!this.ctx) {
+      await this.prefetch(trackId, previewUrl);
+      return;
+    }
+    await this.load(trackId, previewUrl);
+  }
+
+  /**
    * Decode into an AudioBuffer, fetching first when needed. Requires a context,
    * so this only runs once the player has interacted.
    */

@@ -28,7 +28,7 @@ export const viewport: Viewport = {
 };
 
 /** Applies the stored theme before first paint so it never flashes. */
-const THEME_SCRIPT = `try{var p=JSON.parse(localStorage.getItem('snippet.prefs.v2')||'{}');document.documentElement.dataset.theme=p.theme==='light'?'light':'dark';}catch(e){document.documentElement.dataset.theme='dark';}`;
+const THEME_SCRIPT = `try{var p=JSON.parse(localStorage.getItem('snippet.prefs.v3')||'{}');document.documentElement.dataset.theme=p.theme==='light'?'light':'dark';}catch(e){document.documentElement.dataset.theme='dark';}`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

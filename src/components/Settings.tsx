@@ -185,7 +185,7 @@ export default function Settings({
               {trackCount}
             </span>
           </button>
-          <span className="text-xs text-faint">Tap to see every song that loaded.</span>
+          <span className="text-xs text-faint">Tap to see every song.</span>
         </Row>
       ) : null}
 

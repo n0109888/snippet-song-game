@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { HypeEmote } from "./Effects";
 import Player from "./Player";
 import { formatSeconds } from "@/lib/round";
 import type { AudioEngine } from "@/lib/audio";
@@ -10,43 +11,54 @@ interface RevealProps {
   track: Track;
   solved: boolean;
   atLength: number | null;
+  /** Solved on the shortest snippet there is, the best the game has to give. */
+  max: boolean;
   engine: AudioEngine;
   onNext: () => void;
 }
 
-export default function Reveal({ track, solved, atLength, engine, onNext }: RevealProps) {
-  // The win green is the confetti green, so the badge and the paper agree.
-  const tone = solved ? "var(--color-win)" : "var(--color-bad)";
+export default function Reveal({ track, solved, atLength, max, engine, onNext }: RevealProps) {
+  // The win green is the confetti green, so the badge and the paper agree, and
+  // gold takes over the same way when the shortest snippet is named.
+  const tone = max ? "var(--color-gold)" : solved ? "var(--color-win)" : "var(--color-bad)";
 
   return (
     <div className="reveal relative z-10 flex w-full max-w-lg flex-col items-center gap-6 text-center">
-      <div
-        className={`h-44 w-44 overflow-hidden rounded-panel bg-panel ${
-          solved ? "glow-in" : "miss-shake"
-        }`}
-        style={
-          solved
-            ? {
-                // A glow rather than an outline, so the green bleeds into the card.
-                boxShadow:
-                  "0 0 60px 6px color-mix(in srgb, var(--color-win) 52%, transparent), 0 0 150px 40px color-mix(in srgb, var(--color-win) 22%, transparent)",
-              }
-            : undefined
-        }
-      >
-        {track.art ? (
-          <Image
-            src={track.art}
-            alt=""
-            width={176}
-            height={176}
-            unoptimized
-            className="h-full w-full object-cover"
-          />
-        ) : null}
+      <div className="relative">
+        <div
+          className={`h-44 w-44 overflow-hidden rounded-panel bg-panel ${
+            max ? "gold-art" : solved ? "glow-in" : "miss-shake"
+          }`}
+          style={
+            solved
+              ? {
+                  // A glow rather than an outline, so the colour bleeds into the card.
+                  boxShadow: `0 0 60px 6px color-mix(in srgb, ${tone} 52%, transparent), 0 0 150px 40px color-mix(in srgb, ${tone} 22%, transparent)`,
+                }
+              : undefined
+          }
+        >
+          {track.art ? (
+            <Image
+              src={track.art}
+              alt=""
+              width={176}
+              height={176}
+              unoptimized
+              className="h-full w-full object-cover"
+            />
+          ) : null}
+        </div>
+        {/* Hung off the corner of the sleeve, the way a reaction lands on a clip. */}
+        {max ? <HypeEmote className="absolute -bottom-5 -right-6 h-20 w-20" /> : null}
       </div>
 
       <div className="flex flex-col items-center gap-2">
+        {max ? (
+          <span className="gold-word text-4xl font-extrabold uppercase leading-none tracking-[0.06em]">
+            Inhuman
+          </span>
+        ) : null}
         {!solved ? (
           <span
             className="font-mono text-[11px] uppercase tracking-[0.26em]"
@@ -60,7 +72,9 @@ export default function Reveal({ track, solved, atLength, engine, onNext }: Reve
       </div>
 
       <span
-        className="verdict rounded-full border-[3px] px-6 py-2 text-2xl font-extrabold uppercase tracking-[0.04em]"
+        className={`verdict rounded-full border-[3px] px-6 py-2 text-2xl font-extrabold uppercase tracking-[0.04em] ${
+          max ? "gold-verdict" : ""
+        }`}
         style={{
           borderColor: tone,
           color: tone,

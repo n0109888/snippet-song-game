@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import { Confetti, MissWash } from "./Effects";
+import { Confetti, GoldWash, MissWash } from "./Effects";
 import GuessInput from "./GuessInput";
 import PresetPicker from "./PresetPicker";
 import Reveal from "./Reveal";
@@ -11,6 +11,7 @@ import Stage from "./Stage";
 import Summary, { ResultsList, type RoundResult } from "./Summary";
 import { AudioEngine, DecodeError, dropInOffset } from "@/lib/audio";
 import {
+  INHUMAN_SECONDS,
   NO_HINTS,
   SORTS,
   isMixedArtist,
@@ -468,6 +469,9 @@ export default function Game() {
   // Everything for this track is decoded, so play fires with no wait.
   const audioReady = track ? readyId === track.id : false;
 
+  // Named on the shortest snippet on the ladder: the celebration goes gold.
+  const maxWin = reveal !== null && reveal.solved && reveal.atLength === INHUMAN_SECONDS;
+
   const tier = tierFor(stages[stageIndex] ?? 0);
 
   // A pack of one artist answers its own artist hint, and its search needs no
@@ -561,7 +565,8 @@ export default function Game() {
           {onCard ? (
             <>
               {reveal && !reveal.solved ? <MissWash /> : null}
-              <Confetti fireKey={confettiKey} />
+              {maxWin ? <GoldWash /> : null}
+              <Confetti fireKey={confettiKey} gold={maxWin} />
             </>
           ) : null}
           {!ready ? null : phase === "done" ? (
@@ -579,6 +584,7 @@ export default function Game() {
               track={reveal.track}
               solved={reveal.solved}
               atLength={reveal.atLength}
+              max={maxWin}
               engine={engine()}
               onNext={advance}
             />
@@ -594,22 +600,29 @@ export default function Game() {
               <div className="flex items-end justify-between gap-4">
                 <div className="flex min-w-0 items-center gap-2">
                   <span className="truncate text-sm text-muted">{playlist?.name}</span>
-                  <select
-                    aria-label="Sort"
-                    value={prefs.sort}
-                    onChange={(e) => {
-                      const next = e.target.value as SortKey;
-                      update({ sort: next });
-                      if (playlist) startRound(playlist, next);
-                    }}
-                    className="h-7 shrink-0 rounded-chip border border-line bg-panel px-1.5 text-xs text-muted focus:border-line-strong"
-                  >
-                    {SORTS.map((o) => (
-                      <option key={o.key} value={o.key}>
-                        {o.label}
-                      </option>
-                    ))}
-                  </select>
+                  {/* The label lives inside the chip, so the order reads as a
+                      sentence without spending a second line on it. */}
+                  <label className="flex h-7 shrink-0 items-center rounded-chip border border-line bg-panel pl-2 focus-within:border-line-strong">
+                    <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-faint">
+                      Sort by
+                    </span>
+                    <select
+                      aria-label="Sort by"
+                      value={prefs.sort}
+                      onChange={(e) => {
+                        const next = e.target.value as SortKey;
+                        update({ sort: next });
+                        if (playlist) startRound(playlist, next);
+                      }}
+                      className="h-full rounded-chip bg-transparent px-1 text-xs text-muted"
+                    >
+                      {SORTS.map((o) => (
+                        <option key={o.key} value={o.key}>
+                          {o.label}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
                 </div>
 
                 <div className="flex shrink-0 items-end gap-5">

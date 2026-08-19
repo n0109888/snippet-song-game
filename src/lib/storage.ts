@@ -1,6 +1,6 @@
 "use client";
 
-import { DEFAULT_RULES, normalizeStages, type Rules, type SortKey } from "./round";
+import { DEFAULT_RULES, SORTS, normalizeStages, type Rules, type SortKey } from "./round";
 import type { SourceKind, StartMode } from "./types";
 
 const KEY = "snippet.prefs.v3";
@@ -47,8 +47,7 @@ export function readPrefs(): Prefs {
 
     return {
       rules: readRules(p.rules),
-      sort:
-        p.sort === "random" || p.sort === "date" || p.sort === "plays" ? p.sort : "plays",
+      sort: SORTS.some((o) => o.key === p.sort) ? (p.sort as SortKey) : DEFAULT_PREFS.sort,
       startMode: p.startMode === "dropin" || p.startMode === "start" ? p.startMode : "start",
       volume:
         typeof p.volume === "number" && p.volume >= 0 && p.volume <= 1

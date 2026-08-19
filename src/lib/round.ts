@@ -10,8 +10,14 @@ export interface Tier {
   color: string;
 }
 
+/**
+ * The shortest snippet on the ladder. Naming one from it is the best result the
+ * game has, so a win here gets its own celebration rather than the usual green.
+ */
+export const INHUMAN_SECONDS = 0.05;
+
 export const TIERS: Tier[] = [
-  { seconds: 0.05, name: "Inhuman", color: "#8e1533" },
+  { seconds: INHUMAN_SECONDS, name: "Inhuman", color: "#8e1533" },
   { seconds: 0.1, name: "Impossible", color: "#c22947" },
   { seconds: 0.5, name: "Extreme", color: "#dd5b2e" },
   { seconds: 2, name: "Hard", color: "#e08c1f" },
@@ -82,12 +88,13 @@ export function isMixedArtist(tracks: readonly Track[]): boolean {
   return top / tracks.length < 0.5;
 }
 
-export type SortKey = "plays" | "random" | "date";
+export type SortKey = "plays" | "random" | "date" | "oldest";
 
 export const SORTS: { key: SortKey; label: string }[] = [
   { key: "plays", label: "Most played" },
   { key: "random", label: "Random" },
   { key: "date", label: "Newest first" },
+  { key: "oldest", label: "Oldest first" },
 ];
 
 function shuffle<T>(items: readonly T[]): T[] {
@@ -109,9 +116,16 @@ export function sortTracks(tracks: readonly Track[], sort: SortKey): Track[] {
   if (sort === "random") return shuffle(tracks);
 
   const copy = [...tracks];
-  if (sort === "date") {
-    // Undated tracks sink to the bottom rather than jumbling the order.
-    return copy.sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""));
+  if (sort === "date" || sort === "oldest") {
+    const newestFirst = sort === "date";
+    // Undated tracks sink to the bottom rather than jumbling the order, which
+    // takes an explicit test now that one of the two orders is ascending.
+    return copy.sort((a, b) => {
+      const x = a.date ?? "";
+      const y = b.date ?? "";
+      if (!x || !y) return x ? -1 : y ? 1 : 0;
+      return newestFirst ? y.localeCompare(x) : x.localeCompare(y);
+    });
   }
   return copy.sort((a, b) => (b.rank ?? -1) - (a.rank ?? -1));
 }

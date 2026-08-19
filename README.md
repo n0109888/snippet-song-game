@@ -69,15 +69,29 @@ Leave both empty and the Deezer and paste sources still work.
 
 Edit `data/preset-playlist.json`. Nothing else needs to change.
 
-- `name`: label for the playlist.
-- `tracks`: array of songs, each with `id`, `title`, `artist`.
-- `art`: optional cover image URL, resolved automatically when omitted.
-- `id`: any stable unique string, it keys the preview cache and the drop in point.
+- `collections`: array of packs, each shown as a card on the Preset screen.
+- A pack has `id`, `name`, `note`, `image`, and `tracks`.
+- A track has `id`, `title`, `artist`, and optionally `art` and `rank`.
+- `rank` is popularity from 0 to 1000000 and is what difficulty sorts on.
 
-## Difficulty
+Previews are not stored, because the services sign them with an expiry. They are
+looked up at play time, a few songs ahead of you, so a 180 song pack starts
+instantly.
 
-Difficulty picks **which songs** you get, not how long the snippet is. Tracks are
-ordered by how well known they are, and each difficulty draws from a band of that
+## Preset and Custom
+
+**Preset** packs are the built in game. Each pack is a card you click to start.
+Right now there is one, the Kanye West discography, 180 songs. Genres or other
+artists are added by editing the JSON, nothing else changes.
+
+**Custom** is your own playlist, from a Spotify link, a Deezer link, or a pasted
+list. There is no difficulty setting here, because a playlist you chose is
+already the difficulty you wanted.
+
+## Difficulty, preset only
+
+Difficulty picks **which songs** you get, not how long the snippet is. Songs are
+ordered by how well known they are and each level draws from a band of that
 order. Easy gives you the hits, Impossible gives you the deep cuts.
 
 | Difficulty | Draws from | Score weight |
@@ -88,29 +102,55 @@ order. Easy gives you the hits, Impossible gives you the deep cuts.
 | Expert | 70 to 88 percent | 2.2 |
 | Impossible | Most obscure 12 percent | 3 |
 
-Bands are relative to the playlist you loaded, so an obscure playlist still has an
-Easy end and a mainstream one still has an Impossible end. Changing difficulty
-redraws the round. If a band cannot fill ten tracks it widens into its neighbours.
-
-Popularity comes from Deezer's `rank`. Spotify removed the `popularity` field in
-February 2026, so the rank is attached during preview lookup. A track with no
-known rank is only used to top up a short round.
+Bands are relative to the pack, so a pack of obscure songs still has an Easy end.
+Changing difficulty redraws the round. Popularity comes from Deezer's `rank`,
+because Spotify removed its `popularity` field in February 2026.
 
 ## Stages
 
-The stage ladder is a separate setting, because it is the skip progression, not
-the difficulty. The default ladder is `0.01 0.1 0.5 2 5 10`. You start on 0.01
-seconds, and every wrong guess or skip moves you to the next length. Pick a
-different ladder in the settings rail. Guess count and hints sit under Advanced.
+The stage ladder is the skip progression, separate from difficulty. Pick one in
+the settings menu:
+
+| Ladder | Lengths |
+| --- | --- |
+| Standard | 0.01, 0.1, 0.5, 2, 5, 10 |
+| Brutal | 0.01, 0.05, 0.2, 1 |
+| Quick | 0.1, 0.3, 1, 3, 8 |
+| Steady | 0.5, 1, 2, 5, 10 |
+| Generous | 1, 2, 4, 8, 16 |
+| Relaxed | 2, 4, 7, 12, 20 |
+
+You start on the shortest length. Every wrong guess or skip moves you one step
+along. Guess count and hints are under Advanced.
+
+## A round has no fixed length
+
+Play as long as you like. The round runs until you press End, which shows the
+summary of everything you played.
+
+## Where a clip starts
+
+Previews are 30 second excerpts and the services cut them from the middle of the
+song, not the beginning. Measured on a Deezer preview of Runaway, the clip opens
+at full level where the real track opens on a sparse piano note. So **Clip start**
+means the start of the 30 second clip, and **Random** picks a stable point inside
+it. Getting the true opening of a song would need the full recording, which this
+app never downloads.
 
 ## Keyboard
 
 | Key | Action |
 | --- | --- |
 | Space | Play, or advance the reveal |
+| Click | Advance the reveal |
 | Enter | Submit the highlighted suggestion |
 | S | Skip |
 | Escape | Close the dropdown or the settings sheet |
+
+## Theme
+
+Dark by default, light in the settings menu. The choice is stored and applied
+before the first paint, so it does not flash.
 
 ## Notes on the audio
 

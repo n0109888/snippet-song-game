@@ -2,10 +2,12 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import { Confetti, MissFlash } from "./Effects";
 import GuessInput from "./GuessInput";
+import PresetPicker from "./PresetPicker";
+import Reveal from "./Reveal";
 import Settings from "./Settings";
 import SourcePicker from "./SourcePicker";
-import Reveal from "./Reveal";
 import Stage from "./Stage";
 import Summary, { type RoundResult } from "./Summary";
 import { AudioEngine, DecodeError, dropInOffset } from "@/lib/audio";
@@ -28,8 +30,15 @@ import {
   readToken,
   signOut,
 } from "@/lib/spotify-pkce";
-import { isApiError, type LoadedPlaylist, type RawTrack, type StartMode, type Track } from "@/lib/types";
-import presetPlaylist from "../../data/preset-playlist.json";
+import {
+  isApiError,
+  type LoadedPlaylist,
+  type PresetCollection,
+  type RawTrack,
+  type StartMode,
+  type Track,
+} from "@/lib/types";
+import presetData from "../../data/preset-playlist.json";
 
 type Mode = "preset" | "custom";
 type Phase = "setup" | "loading" | "playing" | "done";
@@ -37,15 +46,20 @@ type Phase = "setup" | "loading" | "playing" | "done";
 interface RevealState {
   solved: boolean;
   track: Track;
-  /** Snippet length it was solved at, null when missed. */
   atLength: number | null;
 }
 
-const REVEAL_MS = 2400;
+const REVEAL_MS = 2600;
+/** How many upcoming tracks to keep preview-resolved ahead of the player. */
+const LOOKAHEAD = 4;
+
+const COLLECTIONS = (presetData as { collections?: PresetCollection[] }).collections ?? [];
 
 export default function Game() {
   const engineRef = useRef<AudioEngine | null>(null);
   const revealTimer = useRef<number | null>(null);
+  const queueRef = useRef<Track[]>([]);
+  const resolvingRef = useRef(false);
 
   const [ready, setReady] = useState(false);
   const [prefs, setPrefs] = useState<Prefs>(DEFAULT_PREFS);
@@ -53,8 +67,8 @@ export default function Game() {
 
   const [phase, setPhase] = useState<Phase>("setup");
   const [playlist, setPlaylist] = useState<LoadedPlaylist | null>(null);
-  const [order, setOrder] = useState<Track[]>([]);
-  const [index, setIndex] = useState(0);
+  const [queue, setQueue] = useState<Track[]>([]);
+  const [cursor, setCursor] = useState(0);
   const [misses, setMisses] = useState(0);
   const [results, setResults] = useState<RoundResult[]>([]);
   const [score, setScore] = useState(0);
@@ -66,12 +80,16 @@ export default function Game() {
   const [notice, setNotice] = useState<string | null>(null);
   const [signedIn, setSignedIn] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
+  const [presetBusy, setPresetBusy] = useState<string | null>(null);
+  const [confettiKey, setConfettiKey] = useState(0);
+  const [missKey, setMissKey] = useState(0);
 
   const rules = prefs.rules;
   const stages = rules.stages;
   const stageIndex = Math.min(misses, stages.length - 1);
-  const track = order[index];
+  const track = queue[cursor];
   const maxMisses = Math.min(rules.guesses, stages.length);
+  const remaining = maxMisses - misses;
 
   function engine(): AudioEngine {
     if (!engineRef.current) engineRef.current = new AudioEngine();
@@ -86,12 +104,11 @@ export default function Game() {
     });
   }, []);
 
-  // Restore preferences before the interactive panel paints, so no default
-  // values are ever shown first.
   useEffect(() => {
     const stored = readPrefs();
     setPrefs(stored);
     setSignedIn(readToken() !== null);
+    document.documentElement.dataset.theme = stored.theme;
     setReady(true);
   }, []);
 
@@ -107,67 +124,104 @@ export default function Game() {
     [],
   );
 
-  const loadTracks = useCallback(
-    async (raw: RawTrack[], name: string, source: LoadedPlaylist["source"], sourceId: string) => {
-      if (raw.length === 0) {
-        setError("That playlist has no playable tracks.");
-        setPhase("setup");
-        return;
-      }
+  /**
+   * Resolve previews for the next few tracks only. A playlist can hold hundreds
+   * of songs and a round has no fixed length, so resolving everything up front
+   * would be a long wait for audio the player may never reach.
+   */
+  const topUp = useCallback(async (from: number) => {
+    if (resolvingRef.current) return;
+    const pending = queueRef.current
+      .slice(from, from + LOOKAHEAD)
+      .filter((t) => t.preview === null);
+    if (pending.length === 0) return;
 
+    resolvingRef.current = true;
+    try {
       const res = await fetch("/api/preview", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ tracks: raw }),
+        body: JSON.stringify({ tracks: pending }),
       });
-      const data: unknown = await res.json().catch(() => null);
+      if (!res.ok) return;
+      const data = (await res.json()) as { tracks?: Track[] };
+      const found = new Map((data.tracks ?? []).map((t) => [t.id, t]));
 
-      if (!res.ok || !data) {
-        setError(isApiError(data) ? data.error : "Preview lookup failed.");
-        setPhase("setup");
-        return;
-      }
+      const next = queueRef.current.map((t) => {
+        const hit = found.get(t.id);
+        return hit ? { ...t, preview: hit.preview, art: t.art ?? hit.art } : t;
+      });
+      // Tracks the lookup could not match are dropped rather than left silent.
+      const attempted = new Set(pending.map((t) => t.id));
+      queueRef.current = next.filter((t) => t.preview !== null || !attempted.has(t.id));
+      setQueue(queueRef.current);
+    } catch {
+      // Leave the queue as it is, the player can skip past a bad track.
+    } finally {
+      resolvingRef.current = false;
+    }
+  }, []);
 
-      const payload = data as { tracks?: Track[]; skipped?: number };
-      const tracks = (payload.tracks ?? []).filter((t) => Boolean(t.preview));
+  useEffect(() => {
+    if (phase !== "playing") return;
+    void topUp(cursor);
+  }, [phase, cursor, topUp]);
+
+  // Warm the bytes for the current and next track once they have a preview.
+  useEffect(() => {
+    if (phase !== "playing") return;
+    for (const t of [queue[cursor], queue[cursor + 1]]) {
+      if (t?.preview) void engine().prefetch(t.id, t.preview).catch(() => undefined);
+    }
+  }, [phase, queue, cursor]);
+
+  const startRound = useCallback(
+    (loaded: LoadedPlaylist, difficulty: DifficultyName, useBands: boolean) => {
+      if (revealTimer.current !== null) window.clearTimeout(revealTimer.current);
+      engineRef.current?.stop();
+      const drawn = useBands
+        ? pickRound(loaded.tracks, difficulty, loaded.tracks.length)
+        : [...loaded.tracks].sort(() => Math.random() - 0.5);
+      queueRef.current = drawn;
+      setQueue(drawn);
+      setCursor(0);
+      setMisses(0);
+      setResults([]);
+      setScore(0);
+      setStreak(0);
+      setReveal(null);
+      setPlaying(false);
+      setError(null);
+      setPhase("playing");
+    },
+    [],
+  );
+
+  const loadTracks = useCallback(
+    (raw: RawTrack[], name: string, source: LoadedPlaylist["source"], sourceId: string) => {
+      const tracks: Track[] = raw.map((t) => ({
+        id: t.id,
+        title: t.title,
+        artist: t.artist,
+        art: t.art ?? null,
+        preview: t.preview ?? null,
+        link: t.link ?? null,
+        rank: t.rank ?? null,
+      }));
 
       if (tracks.length === 0) {
-        setError("No audio found for these tracks.");
+        setError("That playlist has no playable tracks.");
         setPhase("setup");
-        return;
+        return null;
       }
 
-      const skipped = payload.skipped ?? 0;
-      setNotice(
-        skipped > 0
-          ? `${skipped} track${skipped === 1 ? "" : "s"} had no audio and ${
-              skipped === 1 ? "was" : "were"
-            } skipped.`
-          : null,
-      );
-
-      const loaded: LoadedPlaylist = { name, source, sourceId, tracks, skipped };
+      const loaded: LoadedPlaylist = { name, source, sourceId, tracks };
       setPlaylist(loaded);
       update({ lastSource: source, lastSourceId: sourceId });
-      startRound(loaded);
+      return loaded;
     },
     [update],
   );
-
-  function startRound(loaded: LoadedPlaylist, difficulty: DifficultyName = prefs.difficulty) {
-    if (revealTimer.current !== null) window.clearTimeout(revealTimer.current);
-    engineRef.current?.stop();
-    setOrder(pickRound(loaded.tracks, difficulty));
-    setIndex(0);
-    setMisses(0);
-    setResults([]);
-    setScore(0);
-    setStreak(0);
-    setReveal(null);
-    setPlaying(false);
-    setError(null);
-    setPhase("playing");
-  }
 
   const loadLink = useCallback(
     async (value: string) => {
@@ -217,9 +271,16 @@ export default function Game() {
       }
 
       const payload = data as { name?: string; tracks?: RawTrack[] };
-      await loadTracks(payload.tracks ?? [], payload.name ?? "Playlist", parsed.kind, parsed.id);
+      const loaded = loadTracks(
+        payload.tracks ?? [],
+        payload.name ?? "Playlist",
+        parsed.kind,
+        parsed.id,
+      );
+      // Custom playlists are the player's own, so no popularity banding.
+      if (loaded) startRound(loaded, prefs.difficulty, false);
     },
-    [loadTracks],
+    [loadTracks, startRound, prefs.difficulty],
   );
 
   const loadPasted = useCallback(
@@ -231,7 +292,6 @@ export default function Game() {
         setError("Use one Artist - Title per line.");
         return;
       }
-      setPhase("loading");
       const raw: RawTrack[] = lines.map((line, i) => ({
         id: `paste:${i}:${line.artist}:${line.title}`,
         title: line.title,
@@ -239,22 +299,29 @@ export default function Game() {
         art: null,
         link: null,
       }));
-      await loadTracks(raw, "Pasted", "paste", "pasted");
+      const loaded = loadTracks(raw, "Pasted", "paste", "pasted");
+      if (loaded) startRound(loaded, prefs.difficulty, false);
     },
-    [loadTracks],
+    [loadTracks, startRound, prefs.difficulty],
   );
 
-  const loadPreset = useCallback(async () => {
-    setError(null);
-    setNotice(null);
-    const preset = presetPlaylist as { name?: string; tracks?: RawTrack[] };
-    const tracks = preset.tracks ?? [];
-    if (tracks.length === 0) return;
-    setPhase("loading");
-    await loadTracks(tracks, preset.name ?? "Preset", "preset", "preset");
-  }, [loadTracks]);
+  const startPreset = useCallback(
+    (collection: PresetCollection) => {
+      setError(null);
+      setNotice(null);
+      setPresetBusy(collection.id);
+      const loaded = loadTracks(
+        collection.tracks as RawTrack[],
+        collection.name,
+        "preset",
+        collection.id,
+      );
+      if (loaded) startRound(loaded, prefs.difficulty, true);
+      setPresetBusy(null);
+    },
+    [loadTracks, startRound, prefs.difficulty],
+  );
 
-  // Finish a Spotify redirect and resume whatever was being loaded.
   useEffect(() => {
     if (!ready) return;
     void (async () => {
@@ -270,17 +337,6 @@ export default function Game() {
     })();
   }, [ready, loadLink]);
 
-  // Keep the current and next track's audio warm. Bytes only, so this never
-  // creates an AudioContext ahead of a gesture.
-  useEffect(() => {
-    if (phase !== "playing") return;
-    const current = order[index];
-    const next = order[index + 1];
-    for (const t of [current, next]) {
-      if (t) void engine().prefetch(t.id, t.preview).catch(() => undefined);
-    }
-  }, [phase, order, index]);
-
   const advance = useCallback(() => {
     if (revealTimer.current !== null) {
       window.clearTimeout(revealTimer.current);
@@ -290,19 +346,19 @@ export default function Game() {
     setPlaying(false);
     setReveal(null);
     setMisses(0);
-    setIndex((i) => {
-      const next = i + 1;
-      if (next >= order.length) {
+    setCursor((c) => {
+      const next = c + 1;
+      if (next >= queueRef.current.length) {
         setPhase("done");
-        return i;
+        return c;
       }
       return next;
     });
-  }, [order.length]);
+  }, []);
 
   const finishTrack = useCallback(
     (solved: boolean, solvedAt: number | null) => {
-      const current = order[index];
+      const current = queueRef.current[cursor];
       if (!current) return;
       engineRef.current?.stop();
       setPlaying(false);
@@ -312,10 +368,12 @@ export default function Game() {
         track: current,
         atLength: solvedAt === null ? null : (stages[solvedAt] ?? null),
       });
+      if (solved) setConfettiKey((k) => k + 1);
+      else setMissKey((k) => k + 1);
       if (revealTimer.current !== null) window.clearTimeout(revealTimer.current);
       revealTimer.current = window.setTimeout(advance, REVEAL_MS);
     },
-    [order, index, advance, stages],
+    [cursor, advance, stages],
   );
 
   const miss = useCallback(() => {
@@ -346,7 +404,8 @@ export default function Game() {
   );
 
   const play = useCallback(() => {
-    if (!track || reveal) return;
+    if (!track?.preview || reveal) return;
+    const preview = track.preview;
 
     const audio = engine();
     if (playing) {
@@ -360,7 +419,7 @@ export default function Game() {
 
     void (async () => {
       try {
-        await audio.load(track.id, track.preview);
+        await audio.load(track.id, preview);
         const longest = Math.max(...stages);
         const offset =
           prefs.startMode === "dropin"
@@ -371,17 +430,15 @@ export default function Game() {
       } catch (err) {
         setPlaying(false);
         if (err instanceof DecodeError) {
-          // One bad track must not end the round.
-          setError("One track would not play. Skipped.");
-          miss();
+          setError("That track would not play.");
+          advance();
         } else {
           setError("Playback failed.");
         }
       }
     })();
-  }, [track, reveal, playing, stages, stageIndex, prefs.startMode, miss]);
+  }, [track, reveal, playing, stages, stageIndex, prefs.startMode, advance]);
 
-  // Keyboard control. Typing in a field always wins.
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
       const target = event.target as HTMLElement | null;
@@ -410,7 +467,6 @@ export default function Game() {
         if (!reveal) miss();
       }
     }
-
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [phase, reveal, sheetOpen, play, miss, advance]);
@@ -423,35 +479,10 @@ export default function Game() {
     return () => window.removeEventListener("offline", offline);
   }, []);
 
-  function pickDifficulty(name: DifficultyName) {
-    update({ difficulty: name });
-    // Redraw the round from the new popularity band.
-    if (playlist) startRound(playlist, name);
+  function setTheme(next: "dark" | "light") {
+    document.documentElement.dataset.theme = next;
+    update({ theme: next });
   }
-
-  function setRules(next: Rules) {
-    update({ rules: next });
-  }
-
-  function setStartMode(next: StartMode) {
-    update({ startMode: next });
-  }
-
-  const presetEmpty = (presetPlaylist as { tracks?: unknown[] }).tracks?.length === 0;
-
-  const settingsPanel = (
-    <Settings
-      rules={rules}
-      startMode={prefs.startMode}
-      volume={prefs.volume}
-      onStartMode={setStartMode}
-      onRules={setRules}
-      onVolume={(v) => {
-        update({ volume: v });
-        engine().setVolume(v);
-      }}
-    />
-  );
 
   const artBlur = useMemo(() => {
     if (!rules.artHint) return 0;
@@ -461,10 +492,37 @@ export default function Game() {
 
   const showArtist = rules.artistAfter !== null && misses >= rules.artistAfter;
 
+  const settingsPanel = (
+    <Settings
+      rules={rules}
+      startMode={prefs.startMode}
+      volume={prefs.volume}
+      theme={prefs.theme}
+      onStartMode={(next: StartMode) => update({ startMode: next })}
+      onRules={(next: Rules) => update({ rules: next })}
+      onVolume={(v) => {
+        update({ volume: v });
+        engine().setVolume(v);
+      }}
+      onTheme={setTheme}
+    />
+  );
+
+  function leaveRound() {
+    engineRef.current?.stop();
+    if (revealTimer.current !== null) window.clearTimeout(revealTimer.current);
+    setPlaying(false);
+    setReveal(null);
+    setPhase(results.length > 0 ? "done" : "setup");
+  }
+
   return (
     <div className="flex h-dvh flex-col">
+      <Confetti fireKey={confettiKey} />
+      <MissFlash fireKey={missKey} />
+
       <header className="flex shrink-0 items-center justify-between border-b border-line px-5 py-3">
-        <span className="font-mono text-sm tracking-[0.14em] uppercase">Snippet</span>
+        <span className="font-mono text-sm uppercase tracking-[0.14em]">Snippet</span>
 
         <div className="flex items-center gap-2">
           {(["preset", "custom"] as const).map((m) => (
@@ -477,12 +535,14 @@ export default function Game() {
                 setPlaylist(null);
                 setError(null);
                 setNotice(null);
+                setResults([]);
                 engineRef.current?.stop();
                 setPlaying(false);
-                if (m === "preset" && !presetEmpty) void loadPreset();
               }}
               className={`h-8 rounded-chip border px-3 text-xs transition-colors duration-150 ease-out ${
-                mode === m ? "border-line-strong text-ink" : "border-transparent text-faint hover:text-muted"
+                mode === m
+                  ? "border-line-strong text-ink"
+                  : "border-transparent text-faint hover:text-muted"
               }`}
             >
               {m === "preset" ? "Preset" : "Custom"}
@@ -492,40 +552,70 @@ export default function Game() {
       </header>
 
       <div className="flex min-h-0 flex-1 flex-col lg:flex-row">
-        <main className="flex min-h-0 flex-1 items-center justify-center px-5 py-6">
+        <main className="flex min-h-0 flex-1 items-center justify-center overflow-y-auto px-5 py-6">
           {!ready ? null : phase === "done" ? (
             <Summary
               results={results}
               score={score}
               stageCount={stages.length}
-              onAgain={() => playlist && startRound(playlist)}
+              onAgain={() => {
+                if (playlist) startRound(playlist, prefs.difficulty, mode === "preset");
+                else setPhase("setup");
+              }}
+              onExit={() => setPhase("setup")}
             />
           ) : phase === "playing" && reveal ? (
-            <Reveal track={reveal.track} solved={reveal.solved} atLength={reveal.atLength} />
+            <Reveal
+              track={reveal.track}
+              solved={reveal.solved}
+              atLength={reveal.atLength}
+              onNext={advance}
+            />
           ) : phase === "playing" && track ? (
             <div className="flex w-full max-w-lg flex-col gap-8">
-              <div className="flex items-center justify-between">
-                <div className="flex flex-wrap items-center gap-1">
-                  {DIFFICULTY_NAMES.map((name) => {
-                    const selected = prefs.difficulty === name;
-                    return (
-                      <button
-                        key={name}
-                        type="button"
-                        onClick={() => pickDifficulty(name)}
-                        style={selected ? { borderColor: DIFFICULTIES[name].accent } : undefined}
-                        className={`h-7 rounded-chip border px-2 text-xs transition-colors duration-150 ease-out ${
-                          selected ? "text-ink" : "border-transparent text-faint hover:text-muted"
-                        }`}
-                      >
-                        {name}
-                      </button>
-                    );
-                  })}
+              <div className="flex items-end justify-between gap-4">
+                {mode === "preset" ? (
+                  <div className="flex flex-wrap items-center gap-1">
+                    {DIFFICULTY_NAMES.map((name) => {
+                      const selected = prefs.difficulty === name;
+                      return (
+                        <button
+                          key={name}
+                          type="button"
+                          onClick={() => {
+                            update({ difficulty: name });
+                            if (playlist) startRound(playlist, name, true);
+                          }}
+                          style={selected ? { borderColor: DIFFICULTIES[name].accent } : undefined}
+                          className={`h-7 rounded-chip border px-2 text-xs transition-colors duration-150 ease-out ${
+                            selected ? "text-ink" : "border-transparent text-faint hover:text-muted"
+                          }`}
+                        >
+                          {name}
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <span className="truncate text-sm text-muted">{playlist?.name}</span>
+                )}
+
+                <div className="flex shrink-0 items-end gap-5">
+                  <div className="flex flex-col items-end">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-faint">
+                      Score
+                    </span>
+                    <span className="font-mono text-lg leading-none tabular-nums">{score}</span>
+                  </div>
+                  <div className="flex flex-col items-end">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-faint">
+                      Song
+                    </span>
+                    <span className="font-mono text-lg leading-none tabular-nums">
+                      {results.length + 1}
+                    </span>
+                  </div>
                 </div>
-                <span className="shrink-0 whitespace-nowrap font-mono text-xs text-faint tabular-nums">
-                  {score} · {index + 1}/{order.length}
-                </span>
               </div>
 
               {rules.artHint && track.art ? (
@@ -548,7 +638,7 @@ export default function Game() {
                 stages={stages}
                 unlocked={stageIndex}
                 playing={playing}
-                disabled={false}
+                disabled={!track.preview}
                 accent={DIFFICULTIES[prefs.difficulty].accent}
                 onPlay={play}
               />
@@ -558,33 +648,30 @@ export default function Game() {
                 disabled={false}
                 onGuess={guess}
                 onSkip={miss}
-                remaining={maxMisses - misses}
+                remaining={remaining}
               />
 
-              <div className="min-h-10">
-                {showArtist ? (
-                  <span className="text-sm text-muted">{track.artist}</span>
-                ) : error ? (
+              <div className="flex min-h-10 items-center justify-between gap-3">
+                {error ? (
                   <span className="text-sm text-[var(--color-bad)]">{error}</span>
-                ) : null}
+                ) : showArtist ? (
+                  <span className="text-sm text-muted">{track.artist}</span>
+                ) : (
+                  <span />
+                )}
+                <button
+                  type="button"
+                  onClick={leaveRound}
+                  className="shrink-0 font-mono text-[11px] uppercase tracking-[0.14em] text-faint transition-colors duration-150 ease-out hover:text-muted"
+                >
+                  End
+                </button>
               </div>
             </div>
           ) : phase === "loading" ? (
             <span className="font-mono text-xs text-faint">Loading</span>
           ) : mode === "preset" ? (
-            <div className="flex flex-col items-center gap-3">
-              <span className="text-sm text-muted">{presetEmpty ? "No songs" : "Ready"}</span>
-              {!presetEmpty ? (
-                <button
-                  type="button"
-                  onClick={() => void loadPreset()}
-                  className="h-10 rounded-control border border-line-strong px-4 text-sm transition-colors duration-150 ease-out hover:bg-[rgba(255,255,255,0.05)]"
-                >
-                  Start
-                </button>
-              ) : null}
-              {error ? <span className="text-sm text-[var(--color-bad)]">{error}</span> : null}
-            </div>
+            <PresetPicker collections={COLLECTIONS} busy={presetBusy} onStart={startPreset} />
           ) : (
             <SourcePicker
               busy={false}

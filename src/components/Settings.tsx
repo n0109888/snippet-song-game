@@ -1,26 +1,24 @@
 "use client";
 
 import { useState } from "react";
-import { LADDERS, type Rules } from "@/lib/difficulty";
+import { LADDERS, ladderLabel, type Rules } from "@/lib/difficulty";
 import type { StartMode } from "@/lib/types";
 
 interface SettingsProps {
   rules: Rules;
   startMode: StartMode;
   volume: number;
+  theme: "dark" | "light";
   onStartMode: (mode: StartMode) => void;
   onRules: (rules: Rules) => void;
   onVolume: (value: number) => void;
+  onTheme: (theme: "dark" | "light") => void;
 }
 
-function label(stages: number[]): string {
-  return stages.map((s) => (s < 1 ? s.toString() : String(s))).join(" ");
-}
-
-function Row({ label: text, children }: { label: string; children: React.ReactNode }) {
+function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-2">
-      <span className="text-xs uppercase tracking-[0.08em] text-faint">{text}</span>
+      <span className="text-xs uppercase tracking-[0.08em] text-faint">{label}</span>
       {children}
     </div>
   );
@@ -30,14 +28,47 @@ export default function Settings({
   rules,
   startMode,
   volume,
+  theme,
   onStartMode,
   onRules,
   onVolume,
+  onTheme,
 }: SettingsProps) {
   const [advanced, setAdvanced] = useState(false);
 
+  const currentIndex = LADDERS.findIndex(
+    (l) =>
+      l.stages.length === rules.stages.length && l.stages.every((s, i) => s === rules.stages[i]),
+  );
+
   return (
     <div className="flex flex-col gap-7">
+      <Row label="Stages">
+        <div className="flex flex-col gap-1.5">
+          <select
+            aria-label="Stage ladder"
+            value={currentIndex >= 0 ? currentIndex : 0}
+            onChange={(e) => {
+              const ladder = LADDERS[Number(e.target.value)];
+              if (!ladder) return;
+              onRules({
+                ...rules,
+                stages: ladder.stages,
+                guesses: Math.max(rules.guesses, ladder.stages.length),
+              });
+            }}
+            className="h-9 w-full rounded-control border border-line bg-panel px-2 text-sm text-ink focus:border-line-strong"
+          >
+            {LADDERS.map((ladder, i) => (
+              <option key={ladder.name} value={i}>
+                {ladder.name}
+              </option>
+            ))}
+          </select>
+          <span className="font-mono text-[11px] text-faint">{ladderLabel(rules.stages)}</span>
+        </div>
+      </Row>
+
       <Row label="Start">
         <div className="flex gap-2">
           {(["start", "dropin"] as const).map((mode) => (
@@ -51,40 +82,9 @@ export default function Settings({
                   : "border-line text-muted hover:text-ink"
               }`}
             >
-              {mode === "start" ? "From the start" : "Drop in"}
+              {mode === "start" ? "Clip start" : "Random"}
             </button>
           ))}
-        </div>
-      </Row>
-
-      <Row label="Stages">
-        <div className="flex flex-col gap-1">
-          {LADDERS.map((stages) => {
-            const selected =
-              stages.length === rules.stages.length &&
-              stages.every((s, i) => s === rules.stages[i]);
-            return (
-              <button
-                key={label(stages)}
-                type="button"
-                onClick={() =>
-                  onRules({
-                    ...rules,
-                    stages,
-                    // Keep every stage reachable unless the guess count was raised.
-                    guesses: Math.max(rules.guesses, stages.length),
-                  })
-                }
-                className={`h-8 rounded-chip border px-2 text-left font-mono text-xs transition-colors duration-150 ease-out ${
-                  selected
-                    ? "border-line-strong text-ink"
-                    : "border-transparent text-muted hover:text-ink"
-                }`}
-              >
-                {label(stages)}
-              </button>
-            );
-          })}
         </div>
       </Row>
 
@@ -99,6 +99,25 @@ export default function Settings({
           onChange={(e) => onVolume(Number(e.target.value))}
           className="w-full"
         />
+      </Row>
+
+      <Row label="Theme">
+        <div className="flex gap-2">
+          {(["dark", "light"] as const).map((t) => (
+            <button
+              key={t}
+              type="button"
+              onClick={() => onTheme(t)}
+              className={`h-8 flex-1 rounded-chip border px-2 text-xs capitalize transition-colors duration-150 ease-out ${
+                theme === t
+                  ? "border-line-strong text-ink"
+                  : "border-line text-muted hover:text-ink"
+              }`}
+            >
+              {t}
+            </button>
+          ))}
+        </div>
       </Row>
 
       <div className="flex flex-col gap-3 border-t border-line pt-5">

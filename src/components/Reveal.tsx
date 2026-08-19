@@ -6,21 +6,28 @@ import type { Track } from "@/lib/types";
 interface RevealProps {
   track: Track;
   solved: boolean;
-  /** Snippet length the track was solved at, null when it was missed. */
   atLength: number | null;
+  onNext: () => void;
 }
 
-/** Trims trailing zeros so 0.1 reads as 0.1s and 0.01 keeps both digits. */
 function format(seconds: number): string {
   return `${Number(seconds.toFixed(2))}s`;
 }
 
-export default function Reveal({ track, solved, atLength }: RevealProps) {
+export default function Reveal({ track, solved, atLength, onNext }: RevealProps) {
   const tone = solved ? "var(--color-good)" : "var(--color-bad)";
 
   return (
-    <div className="reveal flex w-full max-w-lg flex-col items-center gap-6 text-center">
-      <div className="h-44 w-44 overflow-hidden rounded-panel border border-line bg-panel">
+    <button
+      type="button"
+      onClick={onNext}
+      aria-label="Next"
+      className="reveal flex w-full max-w-lg cursor-pointer flex-col items-center gap-6 text-center"
+    >
+      <div
+        className={`h-44 w-44 overflow-hidden rounded-panel border bg-panel ${solved ? "" : "miss-shake"}`}
+        style={{ borderColor: tone }}
+      >
         {track.art ? (
           <Image
             src={track.art}
@@ -39,7 +46,6 @@ export default function Reveal({ track, solved, atLength }: RevealProps) {
             It was
           </span>
         ) : null}
-
         <h2 className="text-balance text-3xl leading-tight">{track.title}</h2>
         <p className="text-sm text-muted">{track.artist}</p>
       </div>
@@ -50,17 +56,6 @@ export default function Reveal({ track, solved, atLength }: RevealProps) {
       >
         {solved && atLength !== null ? `Guessed ${format(atLength)}` : "Missed"}
       </span>
-
-      {track.link ? (
-        <a
-          href={track.link}
-          target="_blank"
-          rel="noreferrer"
-          className="font-mono text-[11px] text-faint transition-colors duration-150 ease-out hover:text-muted"
-        >
-          Open
-        </a>
-      ) : null}
-    </div>
+    </button>
   );
 }

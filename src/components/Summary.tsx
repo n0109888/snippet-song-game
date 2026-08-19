@@ -14,6 +14,7 @@ interface SummaryProps {
   score: number;
   stageCount: number;
   onAgain: () => void;
+  onExit: () => void;
 }
 
 function textReport(results: RoundResult[], stageCount: number, score: number): string {
@@ -27,7 +28,7 @@ function textReport(results: RoundResult[], stageCount: number, score: number): 
   return `Snippet ${score}\n${lines.join("\n")}`;
 }
 
-export default function Summary({ results, score, stageCount, onAgain }: SummaryProps) {
+export default function Summary({ results, score, stageCount, onAgain, onExit }: SummaryProps) {
   const [copied, setCopied] = useState(false);
   const solved = results.filter((r) => r.solvedAt !== null).length;
 
@@ -43,14 +44,20 @@ export default function Summary({ results, score, stageCount, onAgain }: Summary
 
   return (
     <div className="flex w-full max-w-md flex-col gap-6">
-      <div className="flex items-baseline justify-between">
-        <span className="font-mono text-2xl tabular-nums">{score}</span>
-        <span className="font-mono text-xs text-faint">
-          {solved}/{results.length}
-        </span>
+      <div className="flex items-end justify-between">
+        <div className="flex flex-col">
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-faint">Score</span>
+          <span className="font-mono text-2xl leading-none tabular-nums">{score}</span>
+        </div>
+        <div className="flex flex-col items-end">
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-faint">Got</span>
+          <span className="font-mono text-2xl leading-none tabular-nums">
+            {solved}/{results.length}
+          </span>
+        </div>
       </div>
 
-      <ul className="flex flex-col gap-2">
+      <ul className="flex max-h-[46dvh] flex-col gap-2 overflow-y-auto">
         {results.map((r) => (
           <li key={r.track.id} className="flex items-center gap-3">
             <div className="flex shrink-0 gap-[2px]">
@@ -87,6 +94,13 @@ export default function Summary({ results, score, stageCount, onAgain }: Summary
           className="h-10 rounded-control border border-line-strong px-4 text-sm transition-colors duration-150 ease-out hover:bg-[rgba(255,255,255,0.05)]"
         >
           Again
+        </button>
+        <button
+          type="button"
+          onClick={onExit}
+          className="h-10 rounded-control border border-line px-4 text-sm text-muted transition-colors duration-150 ease-out hover:border-line-strong hover:text-ink"
+        >
+          Change
         </button>
         <button
           type="button"

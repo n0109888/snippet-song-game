@@ -180,7 +180,9 @@ export default function GuessInput({
         </button>
       </div>
 
-      <span className="font-mono text-xs text-faint">{remaining} left</span>
+      <span className="font-mono text-xs text-faint">
+        {remaining <= 1 ? "Last guess" : `${remaining} guesses left`}
+      </span>
     </div>
   );
 }

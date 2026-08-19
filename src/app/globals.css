@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0b0b0b;
+  --color-panel: #111111;
+  --color-line: rgba(255, 255, 255, 0.09);
+  --color-line-strong: rgba(255, 255, 255, 0.18);
+  --color-ink: #ededed;
+  --color-muted: #8a8a8a;
+  --color-faint: #5c5c5c;
+  --color-accent: #e9a13b;
+  --color-accent-dim: #7a5520;
+  --color-good: #7fb069;
+  --color-bad: #c4453c;
+
+  --radius-panel: 10px;
+  --radius-control: 8px;
+  --radius-chip: 6px;
+
+  --font-ui: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+* {
+  min-width: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+input[type="range"] {
+  appearance: none;
+  background: transparent;
+  height: 20px;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 2px;
+  background: var(--color-line-strong);
+}
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-ink);
+  margin-top: -5px;
+}
+input[type="range"]::-moz-range-track {
+  height: 2px;
+  background: var(--color-line-strong);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-ink);
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.reveal {
+  animation: reveal-in 160ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

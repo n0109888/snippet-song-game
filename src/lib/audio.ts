@@ -24,6 +24,8 @@ export class AudioEngine {
   private master: GainNode | null = null;
   private readonly buffers = new Map<string, AudioBuffer>();
   private readonly inflight = new Map<string, Promise<AudioBuffer>>();
+  private readonly raw = new Map<string, ArrayBuffer>();
+  private readonly fetching = new Map<string, Promise<void>>();
   private playing: { source: AudioBufferSourceNode; gain: GainNode } | null = null;
   private volume = 0.8;
 
@@ -60,7 +62,37 @@ export class AudioEngine {
     return this.buffers.get(trackId)?.duration ?? 0;
   }
 
-  /** Fetch through the same origin proxy and decode. Safe to call repeatedly. */
+  /**
+   * Fetch the encoded bytes. Deliberately does not touch the AudioContext, so
+   * the next track can be prefetched before the player has clicked anything.
+   */
+  async prefetch(trackId: string, previewUrl: string): Promise<void> {
+    if (this.buffers.has(trackId) || this.raw.has(trackId)) return;
+    const pending = this.fetching.get(trackId);
+    if (pending) {
+      await pending;
+      return;
+    }
+
+    const task = (async () => {
+      const res = await fetch(`/api/audio?src=${encodeURIComponent(previewUrl)}`);
+      if (!res.ok) throw new DecodeError(trackId);
+      const bytes = await res.arrayBuffer();
+      this.raw.set(trackId, bytes);
+    })();
+
+    this.fetching.set(trackId, task);
+    try {
+      await task;
+    } finally {
+      this.fetching.delete(trackId);
+    }
+  }
+
+  /**
+   * Decode into an AudioBuffer, fetching first when needed. Requires a context,
+   * so this only runs once the player has interacted.
+   */
   async load(trackId: string, previewUrl: string): Promise<AudioBuffer> {
     const cached = this.buffers.get(trackId);
     if (cached) return cached;
@@ -70,16 +102,21 @@ export class AudioEngine {
 
     const task = (async () => {
       const ctx = this.ensure();
-      const res = await fetch(`/api/audio?src=${encodeURIComponent(previewUrl)}`);
-      if (!res.ok) throw new DecodeError(trackId);
-      const bytes = await res.arrayBuffer();
+      await this.prefetch(trackId, previewUrl);
+      const bytes = this.raw.get(trackId);
+      if (!bytes) throw new DecodeError(trackId);
+
       let buffer: AudioBuffer;
       try {
-        buffer = await ctx.decodeAudioData(bytes);
+        // decodeAudioData detaches its input, so hand it a copy and keep the
+        // original for a possible retry.
+        buffer = await ctx.decodeAudioData(bytes.slice(0));
       } catch {
         throw new DecodeError(trackId);
       }
+
       this.buffers.set(trackId, buffer);
+      this.raw.delete(trackId);
       return buffer;
     })();
 

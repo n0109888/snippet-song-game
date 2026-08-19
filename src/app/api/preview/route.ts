@@ -15,7 +15,12 @@ import type { ApiError, RawTrack } from "@/lib/types";
  */
 
 const CONCURRENCY = 6;
-const previewCache = new TtlCache<string | null>(6 * 60 * 60 * 1000);
+interface Resolved {
+  preview: string | null;
+  art: string | null;
+}
+
+const previewCache = new TtlCache<Resolved>(6 * 60 * 60 * 1000);
 
 interface ItunesResult {
   trackName?: string;
@@ -32,7 +37,7 @@ interface DeezerResult {
   album?: { cover_medium?: string };
 }
 
-async function fromItunes(track: RawTrack): Promise<string | null> {
+async function fromItunes(track: RawTrack): Promise<Resolved | null> {
   const term = `${track.artist} ${track.title}`.replace(/\s+/g, " ").trim();
   const url = `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&entity=song&limit=5`;
 
@@ -43,13 +48,15 @@ async function fromItunes(track: RawTrack): Promise<string | null> {
   for (const r of data.results ?? []) {
     if (!r.previewUrl || !r.trackName || !r.artistName) continue;
     if (isSameRecording({ title: r.trackName, artist: r.artistName }, track)) {
-      return r.previewUrl;
+      // Ask for a larger square than the 100px the search returns.
+      const art = r.artworkUrl100?.replace("100x100bb", "512x512bb") ?? null;
+      return { preview: r.previewUrl, art };
     }
   }
   return null;
 }
 
-async function deezerQuery(query: string, track: RawTrack): Promise<string | null> {
+async function deezerQuery(query: string, track: RawTrack): Promise<Resolved | null> {
   const url = `https://api.deezer.com/search?q=${encodeURIComponent(query)}&limit=5`;
   const res = await fetchRetry(url, { cache: "no-store" });
   if (!res.ok) return null;
@@ -58,12 +65,14 @@ async function deezerQuery(query: string, track: RawTrack): Promise<string | nul
   for (const r of data.data ?? []) {
     const title = r.title_short ?? r.title;
     if (!r.preview || !title || !r.artist?.name) continue;
-    if (isSameRecording({ title, artist: r.artist.name }, track)) return r.preview;
+    if (isSameRecording({ title, artist: r.artist.name }, track)) {
+      return { preview: r.preview, art: r.album?.cover_medium ?? null };
+    }
   }
   return null;
 }
 
-async function fromDeezer(track: RawTrack): Promise<string | null> {
+async function fromDeezer(track: RawTrack): Promise<Resolved | null> {
   const strict = await deezerQuery(
     `artist:"${track.artist.replace(/"/g, "")}" track:"${track.title.replace(/"/g, "")}"`,
     track,
@@ -72,14 +81,14 @@ async function fromDeezer(track: RawTrack): Promise<string | null> {
   return deezerQuery(`${track.artist} ${track.title}`, track);
 }
 
-async function resolve(track: RawTrack): Promise<string | null> {
-  if (track.preview) return track.preview;
+async function resolve(track: RawTrack): Promise<Resolved> {
+  if (track.preview) return { preview: track.preview, art: track.art };
 
   const key = track.id;
   const cached = previewCache.get(key);
   if (cached !== undefined) return cached;
 
-  let found: string | null = null;
+  let found: Resolved | null = null;
   try {
     found = await fromItunes(track);
     if (!found) found = await fromDeezer(track);
@@ -88,8 +97,9 @@ async function resolve(track: RawTrack): Promise<string | null> {
     found = null;
   }
 
-  previewCache.set(key, found);
-  return found;
+  const result: Resolved = found ?? { preview: null, art: null };
+  previewCache.set(key, result);
+  return result;
 }
 
 interface Body {
@@ -120,9 +130,17 @@ export async function POST(request: Request): Promise<NextResponse> {
   try {
     const previews = await mapLimit(tracks, CONCURRENCY, (t) => resolve(t));
     const resolved = tracks
-      .map((track, i) => ({ track, preview: previews[i] ?? null }))
-      .filter((r): r is { track: RawTrack; preview: string } => r.preview !== null)
-      .map(({ track, preview }) => ({ ...track, preview }));
+      .map((track, i) => ({ track, found: previews[i] }))
+      .filter(
+        (r): r is { track: RawTrack; found: Resolved & { preview: string } } =>
+          r.found !== undefined && r.found.preview !== null,
+      )
+      // The lookup often knows the cover art for a track that arrived without one.
+      .map(({ track, found }) => ({
+        ...track,
+        preview: found.preview,
+        art: track.art ?? found.art,
+      }));
 
     return NextResponse.json({
       tracks: resolved,

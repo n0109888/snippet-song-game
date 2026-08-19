@@ -39,7 +39,7 @@ export function ResultsList({
     return <p className="text-sm text-faint">Nothing yet</p>;
   }
   return (
-    <ul className="flex max-h-[52dvh] flex-col gap-2 overflow-y-auto">
+    <ul className="no-bars flex max-h-[52dvh] flex-col gap-2 overflow-y-auto">
       {results.map((r, i) => (
         <li key={`${r.track.id}-${i}`} className="flex items-center gap-3">
           <div className="flex shrink-0 gap-[2px]">

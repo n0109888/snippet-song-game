@@ -43,7 +43,7 @@ export default function PresetPicker({ collections, busy, onStart }: PresetPicke
       {shown.length === 0 ? (
         <span className="text-sm text-faint">No match</span>
       ) : (
-        <div className="grid auto-rows-max grid-cols-2 content-start gap-4 overflow-y-auto pb-2 sm:grid-cols-3 md:grid-cols-4">
+        <div className="no-bars grid auto-rows-max grid-cols-2 content-start gap-4 overflow-y-auto overflow-x-hidden px-1 pb-3 pt-2 sm:grid-cols-3 md:grid-cols-4">
           {shown.map((collection, i) => (
             <button
               key={collection.id}

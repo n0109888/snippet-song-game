@@ -80,7 +80,8 @@ export default function Game() {
   const stages = rules.stages;
   const stageIndex = Math.min(misses, stages.length - 1);
   const track = queue[cursor];
-  const maxMisses = Math.min(rules.guesses, stages.length);
+  // One guess per stage, so every selected length is reachable.
+  const maxMisses = stages.length;
   const remaining = maxMisses - misses;
 
   function engine(): AudioEngine {
@@ -162,12 +163,13 @@ export default function Game() {
   }, [phase, cursor, topUp]);
 
   /** Resolve one track right now, so pressing play never waits on the lookahead. */
-  const resolveNow = useCallback(async (target: Track): Promise<string | null> => {
+  const resolveNow = useCallback(
+    async (target: Track, refresh = false): Promise<string | null> => {
     try {
       const res = await fetch("/api/preview", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ tracks: [target] }),
+        body: JSON.stringify({ tracks: [{ ...target, preview: null }], refresh }),
       });
       if (!res.ok) return null;
       const data = (await res.json()) as { tracks?: Track[] };
@@ -182,7 +184,20 @@ export default function Game() {
     } catch {
       return null;
     }
-  }, []);
+    },
+    [],
+  );
+
+  // Warm the artwork for the current and next track, so a hint appears at once.
+  useEffect(() => {
+    if (phase !== "playing" || !rules.artHint) return;
+    for (const t of [queue[cursor], queue[cursor + 1]]) {
+      if (t?.art) {
+        const img = new window.Image();
+        img.src = t.art;
+      }
+    }
+  }, [phase, queue, cursor, rules.artHint]);
 
   // Warm the bytes for the current and next track once they have a preview.
   useEffect(() => {
@@ -441,7 +456,20 @@ export default function Game() {
           return;
         }
 
-        await audio.load(track.id, preview);
+        let ready = preview;
+        try {
+          await audio.load(track.id, ready);
+        } catch (err) {
+          // A signed preview link can expire mid round. Get a fresh one and
+          // retry once before giving up on the track.
+          if (!(err instanceof DecodeError) || !err.expired) throw err;
+          audio.forget(track.id);
+          const fresh = await resolveNow(track, true);
+          if (!fresh) throw err;
+          ready = fresh;
+          await audio.load(track.id, ready);
+        }
+
         const longest = Math.max(...stages);
         const offset =
           prefs.startMode === "dropin"
@@ -516,7 +544,11 @@ export default function Game() {
     return Math.round(24 * (1 - stageIndex / steps));
   }, [rules.artHint, stages.length, stageIndex]);
 
-  const showArtist = rules.artistAfter !== null && misses >= rules.artistAfter;
+  const artistAt =
+    rules.artistAfter === null
+      ? null
+      : Math.min(rules.artistAfter, Math.max(1, stages.length - 1));
+  const showArtist = artistAt !== null && misses >= artistAt;
 
   const settingsPanel = (
     <Settings
@@ -584,8 +616,8 @@ export default function Game() {
             className={
               phase === "playing" || phase === "done"
                 ? // Phone shaped, so a recording of the centre crops cleanly.
-                  "flex h-full w-auto max-w-full shrink-0 items-center justify-center overflow-y-auto rounded-panel border border-line px-5 py-6 aspect-[9/16]"
-                : "flex h-full w-full items-center justify-center overflow-y-auto"
+                  "flex h-full w-auto max-w-full shrink-0 items-center justify-center no-bars overflow-y-auto rounded-panel border border-line px-5 py-6 aspect-[9/16]"
+                : "no-bars flex h-full w-full items-center justify-center overflow-y-auto"
             }
           >
           {!ready ? null : phase === "done" ? (

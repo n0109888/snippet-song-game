@@ -204,6 +204,21 @@ input[type="range"]::-moz-range-thumb {
     0 14px 30px -12px rgba(0, 0, 0, 0.26);
 }
 
+/*
+ * Scroll areas keep their scrolling but not the bar. The pack cards lift and
+ * scale on hover, which nudged the scroll height and flashed a bar on and off.
+ */
+.no-bars {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-bars::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
 /* Home buttons: a small, quick lift so the top of the app feels responsive. */
 .home {
   transition:

@@ -10,9 +10,9 @@ interface StageProps {
   onPlay: () => void;
 }
 
+/** Trims trailing zeros so 0.1 reads as 0.1s and 0.01 keeps both digits. */
 function format(seconds: number): string {
-  if (seconds < 1) return `${seconds.toFixed(2)}s`;
-  return Number.isInteger(seconds) ? `${seconds}s` : `${seconds.toFixed(1)}s`;
+  return `${Number(seconds.toFixed(2))}s`;
 }
 
 export default function Stage({

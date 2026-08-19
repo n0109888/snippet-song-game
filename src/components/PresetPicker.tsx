@@ -43,7 +43,7 @@ export default function PresetPicker({ collections, busy, onStart }: PresetPicke
       {shown.length === 0 ? (
         <span className="text-sm text-faint">No match</span>
       ) : (
-        <div className="grid grid-cols-2 gap-4 overflow-y-auto pb-2 sm:grid-cols-3 md:grid-cols-4">
+        <div className="grid auto-rows-max grid-cols-2 content-start gap-4 overflow-y-auto pb-2 sm:grid-cols-3 md:grid-cols-4">
           {shown.map((collection, i) => (
             <button
               key={collection.id}
@@ -53,7 +53,7 @@ export default function PresetPicker({ collections, busy, onStart }: PresetPicke
               aria-label={`Play ${collection.name}`}
               className="pack group flex flex-col overflow-hidden rounded-panel border border-line bg-panel text-left disabled:opacity-60"
             >
-              <div className="aspect-square w-full overflow-hidden bg-raised">
+              <div className="aspect-square w-full shrink-0 overflow-hidden bg-raised">
                 {(() => {
                   const src = broken[collection.id]
                     ? (collection.tracks[0]?.art ?? null)

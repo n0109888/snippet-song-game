@@ -9,13 +9,12 @@ import Reveal from "./Reveal";
 import Settings from "./Settings";
 import SourcePicker from "./SourcePicker";
 import Stage from "./Stage";
-import Summary, { type RoundResult } from "./Summary";
+import Summary, { ResultsList, type RoundResult } from "./Summary";
 import { AudioEngine, DecodeError, dropInOffset } from "@/lib/audio";
 import {
   DIFFICULTIES,
   DIFFICULTY_NAMES,
   pickRound,
-  scoreFor,
   type DifficultyName,
   type Rules,
 } from "@/lib/difficulty";
@@ -49,7 +48,6 @@ interface RevealState {
   atLength: number | null;
 }
 
-const REVEAL_MS = 2600;
 /** How many upcoming tracks to keep preview-resolved ahead of the player. */
 const LOOKAHEAD = 4;
 
@@ -71,8 +69,6 @@ export default function Game() {
   const [cursor, setCursor] = useState(0);
   const [misses, setMisses] = useState(0);
   const [results, setResults] = useState<RoundResult[]>([]);
-  const [score, setScore] = useState(0);
-  const [streak, setStreak] = useState(0);
   const [reveal, setReveal] = useState<RevealState | null>(null);
   const [playing, setPlaying] = useState(false);
 
@@ -83,6 +79,7 @@ export default function Game() {
   const [presetBusy, setPresetBusy] = useState<string | null>(null);
   const [confettiKey, setConfettiKey] = useState(0);
   const [missKey, setMissKey] = useState(0);
+  const [showResults, setShowResults] = useState(false);
 
   const rules = prefs.rules;
   const stages = rules.stages;
@@ -153,7 +150,9 @@ export default function Game() {
       });
       // Tracks the lookup could not match are dropped rather than left silent.
       const attempted = new Set(pending.map((t) => t.id));
-      queueRef.current = next.filter((t) => t.preview !== null || !attempted.has(t.id));
+      queueRef.current = next.filter(
+        (t, i) => i <= from || t.preview !== null || !attempted.has(t.id),
+      );
       setQueue(queueRef.current);
     } catch {
       // Leave the queue as it is, the player can skip past a bad track.
@@ -187,9 +186,7 @@ export default function Game() {
       setCursor(0);
       setMisses(0);
       setResults([]);
-      setScore(0);
-      setStreak(0);
-      setReveal(null);
+          setReveal(null);
       setPlaying(false);
       setError(null);
       setPhase("playing");
@@ -370,18 +367,15 @@ export default function Game() {
       });
       if (solved) setConfettiKey((k) => k + 1);
       else setMissKey((k) => k + 1);
-      if (revealTimer.current !== null) window.clearTimeout(revealTimer.current);
-      revealTimer.current = window.setTimeout(advance, REVEAL_MS);
     },
-    [cursor, advance, stages],
+    [cursor, stages],
   );
 
   const miss = useCallback(() => {
     if (reveal || phase !== "playing") return;
     const next = misses + 1;
     if (next >= maxMisses) {
-      setStreak(0);
-      finishTrack(false, null);
+        finishTrack(false, null);
       return;
     }
     engineRef.current?.stop();
@@ -393,14 +387,12 @@ export default function Game() {
     (value: string) => {
       if (!track || reveal || phase !== "playing") return;
       if (titleMatches(value, track.title)) {
-        setScore((s) => s + scoreFor(stageIndex, stages.length, prefs.difficulty, streak));
-        setStreak((s) => s + 1);
-        finishTrack(true, stageIndex);
+          finishTrack(true, stageIndex);
       } else {
         miss();
       }
     },
-    [track, reveal, phase, stageIndex, stages.length, prefs.difficulty, streak, finishTrack, miss],
+    [track, reveal, phase, stageIndex, finishTrack, miss],
   );
 
   const play = useCallback(() => {
@@ -424,7 +416,7 @@ export default function Game() {
         const offset =
           prefs.startMode === "dropin"
             ? dropInOffset(track.id, audio.duration(track.id), longest)
-            : 0;
+            : audio.onset(track.id);
         audio.play(track.id, offset, length, () => setPlaying(false));
         setPlaying(true);
       } catch (err) {
@@ -449,8 +441,9 @@ export default function Game() {
           target.tagName === "SELECT" ||
           target.isContentEditable);
 
-      if (event.key === "Escape" && sheetOpen) {
+      if (event.key === "Escape" && (sheetOpen || showResults)) {
         setSheetOpen(false);
+        setShowResults(false);
         return;
       }
       if (typing || phase !== "playing") return;
@@ -469,7 +462,7 @@ export default function Game() {
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [phase, reveal, sheetOpen, play, miss, advance]);
+  }, [phase, reveal, sheetOpen, showResults, play, miss, advance]);
 
   useEffect(() => {
     function offline() {
@@ -556,7 +549,6 @@ export default function Game() {
           {!ready ? null : phase === "done" ? (
             <Summary
               results={results}
-              score={score}
               stageCount={stages.length}
               onAgain={() => {
                 if (playlist) startRound(playlist, prefs.difficulty, mode === "preset");
@@ -569,6 +561,7 @@ export default function Game() {
               track={reveal.track}
               solved={reveal.solved}
               atLength={reveal.atLength}
+              engine={engine()}
               onNext={advance}
             />
           ) : phase === "playing" && track ? (
@@ -603,9 +596,11 @@ export default function Game() {
                 <div className="flex shrink-0 items-end gap-5">
                   <div className="flex flex-col items-end">
                     <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-faint">
-                      Score
+                      Correct
                     </span>
-                    <span className="font-mono text-lg leading-none tabular-nums">{score}</span>
+                    <span className="font-mono text-lg leading-none tabular-nums">
+                      {results.filter((r) => r.solvedAt !== null).length}
+                    </span>
                   </div>
                   <div className="flex flex-col items-end">
                     <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-faint">
@@ -659,13 +654,22 @@ export default function Game() {
                 ) : (
                   <span />
                 )}
-                <button
-                  type="button"
-                  onClick={leaveRound}
-                  className="shrink-0 font-mono text-[11px] uppercase tracking-[0.14em] text-faint transition-colors duration-150 ease-out hover:text-muted"
-                >
-                  End
-                </button>
+                <div className="flex shrink-0 items-center gap-4">
+                  <button
+                    type="button"
+                    onClick={() => setShowResults(true)}
+                    className="font-mono text-[11px] uppercase tracking-[0.14em] text-faint transition-colors duration-150 ease-out hover:text-muted"
+                  >
+                    Results
+                  </button>
+                  <button
+                    type="button"
+                    onClick={leaveRound}
+                    className="font-mono text-[11px] uppercase tracking-[0.14em] text-faint transition-colors duration-150 ease-out hover:text-muted"
+                  >
+                    End
+                  </button>
+                </div>
               </div>
             </div>
           ) : phase === "loading" ? (
@@ -709,6 +713,35 @@ export default function Game() {
           </button>
         </div>
       </div>
+
+      {showResults ? (
+        <div className="fixed inset-0 z-30 flex items-center justify-center p-5">
+          <button
+            type="button"
+            aria-label="Close"
+            onClick={() => setShowResults(false)}
+            className="absolute inset-0 bg-[rgba(0,0,0,0.55)]"
+          />
+          <div className="press-in relative flex w-full max-w-md flex-col gap-4 rounded-panel border border-line bg-panel p-5">
+            <div className="flex items-baseline justify-between">
+              <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-faint">
+                This round
+              </span>
+              <span className="font-mono text-sm tabular-nums">
+                {results.filter((r) => r.solvedAt !== null).length}/{results.length}
+              </span>
+            </div>
+            <ResultsList results={results} stageCount={stages.length} />
+            <button
+              type="button"
+              onClick={() => setShowResults(false)}
+              className="h-9 self-start rounded-control border border-line px-4 text-sm text-muted transition-colors duration-150 ease-out hover:border-line-strong hover:text-ink"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      ) : null}
 
       {sheetOpen ? (
         <div className="fixed inset-0 z-30 flex flex-col justify-end lg:hidden">

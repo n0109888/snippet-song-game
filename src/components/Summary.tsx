@@ -11,13 +11,12 @@ export interface RoundResult {
 
 interface SummaryProps {
   results: RoundResult[];
-  score: number;
   stageCount: number;
   onAgain: () => void;
   onExit: () => void;
 }
 
-function textReport(results: RoundResult[], stageCount: number, score: number): string {
+function textReport(results: RoundResult[], stageCount: number): string {
   const lines = results.map((r) => {
     const cells = Array.from({ length: stageCount }, (_, i) => {
       if (r.solvedAt === null) return ".";
@@ -25,16 +24,66 @@ function textReport(results: RoundResult[], stageCount: number, score: number): 
     });
     return cells.join("");
   });
-  return `Snippet ${score}\n${lines.join("\n")}`;
+  return `Snippet\n${lines.join("\n")}`;
 }
 
-export default function Summary({ results, score, stageCount, onAgain, onExit }: SummaryProps) {
+/** Shared by the end of round screen and the mid round results panel. */
+export function ResultsList({
+  results,
+  stageCount,
+}: {
+  results: RoundResult[];
+  stageCount: number;
+}) {
+  if (results.length === 0) {
+    return <p className="text-sm text-faint">Nothing yet</p>;
+  }
+  return (
+    <ul className="flex max-h-[52dvh] flex-col gap-2 overflow-y-auto">
+      {results.map((r, i) => (
+        <li key={`${r.track.id}-${i}`} className="flex items-center gap-3">
+          <div className="flex shrink-0 gap-[2px]">
+            {Array.from({ length: stageCount }, (_, s) => {
+              const hit = r.solvedAt !== null && s === r.solvedAt;
+              const used = r.solvedAt !== null && s < r.solvedAt;
+              return (
+                <span
+                  key={s}
+                  className="h-3 w-3 rounded-[2px]"
+                  style={{
+                    backgroundColor: hit
+                      ? "var(--color-good)"
+                      : used
+                        ? "var(--color-line-strong)"
+                        : "var(--color-line)",
+                  }}
+                />
+              );
+            })}
+          </div>
+          <span className="min-w-0 flex-1 truncate text-sm">
+            <span className={r.solvedAt === null ? "text-muted" : ""}>{r.track.title}</span>
+            <span className="text-faint"> {r.track.artist}</span>
+          </span>
+          <span
+            className="shrink-0 font-mono text-[10px] uppercase tracking-[0.12em]"
+            style={{ color: r.solvedAt === null ? "var(--color-bad)" : "var(--color-good)" }}
+          >
+            {r.solvedAt === null ? "Missed" : "Got it"}
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export default function Summary({ results, stageCount, onAgain, onExit }: SummaryProps) {
   const [copied, setCopied] = useState(false);
   const solved = results.filter((r) => r.solvedAt !== null).length;
 
   async function copy() {
     try {
-      await navigator.clipboard.writeText(textReport(results, stageCount, score));
+      await navigator.clipboard.writeText(textReport(results, stageCount));
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1500);
     } catch {
@@ -46,46 +95,16 @@ export default function Summary({ results, score, stageCount, onAgain, onExit }:
     <div className="flex w-full max-w-md flex-col gap-6">
       <div className="flex items-end justify-between">
         <div className="flex flex-col">
-          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-faint">Score</span>
-          <span className="font-mono text-2xl leading-none tabular-nums">{score}</span>
-        </div>
-        <div className="flex flex-col items-end">
-          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-faint">Got</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-faint">
+            Correct
+          </span>
           <span className="font-mono text-2xl leading-none tabular-nums">
             {solved}/{results.length}
           </span>
         </div>
       </div>
 
-      <ul className="flex max-h-[46dvh] flex-col gap-2 overflow-y-auto">
-        {results.map((r) => (
-          <li key={r.track.id} className="flex items-center gap-3">
-            <div className="flex shrink-0 gap-[2px]">
-              {Array.from({ length: stageCount }, (_, i) => {
-                const hit = r.solvedAt !== null && i === r.solvedAt;
-                const used = r.solvedAt !== null && i < r.solvedAt;
-                return (
-                  <span
-                    key={i}
-                    className="h-3 w-3 rounded-[2px]"
-                    style={{
-                      backgroundColor: hit
-                        ? "var(--color-accent)"
-                        : used
-                          ? "var(--color-line-strong)"
-                          : "var(--color-line)",
-                    }}
-                  />
-                );
-              })}
-            </div>
-            <span className="truncate text-sm">
-              <span className={r.solvedAt === null ? "text-muted" : ""}>{r.track.title}</span>
-              <span className="text-faint"> {r.track.artist}</span>
-            </span>
-          </li>
-        ))}
-      </ul>
+      <ResultsList results={results} stageCount={stageCount} />
 
       <div className="flex gap-2">
         <button

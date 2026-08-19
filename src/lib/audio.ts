@@ -28,6 +28,9 @@ export class AudioEngine {
   private readonly fetching = new Map<string, Promise<void>>();
   private playing: { source: AudioBufferSourceNode; gain: GainNode } | null = null;
   private volume = 0.8;
+  private readonly onsets = new Map<string, number>();
+  /** Continuous playback state for the post guess player. */
+  private full: { source: AudioBufferSourceNode; startedAt: number; from: number } | null = null;
 
   /** Must be called from a user gesture. Safari needs the resume as well. */
   ensure(): AudioContext {
@@ -128,6 +131,96 @@ export class AudioEngine {
     }
   }
 
+  /**
+   * Offset of the first audible moment. Every preview measured here opens with
+   * 30 to 40ms of digital silence, so starting at sample zero makes a 0.01s
+   * snippet play nothing at all.
+   */
+  onset(trackId: string): number {
+    const cached = this.onsets.get(trackId);
+    if (cached !== undefined) return cached;
+
+    const buffer = this.buffers.get(trackId);
+    if (!buffer) return 0;
+
+    const data = buffer.getChannelData(0);
+    const rate = buffer.sampleRate;
+    const window = Math.max(1, Math.floor(rate * 0.01));
+
+    // Overall level of the clip, sampled sparsely. The threshold is relative to
+    // it so a quiet song is not skipped past and a loud one is not cut short.
+    let total = 0;
+    let counted = 0;
+    for (let i = 0; i < data.length; i += 17) {
+      const v = data[i] ?? 0;
+      total += v * v;
+      counted += 1;
+    }
+    const overall = counted > 0 ? Math.sqrt(total / counted) : 0;
+    const threshold = Math.max(overall * 0.45, 0.01);
+
+    const limit = Math.min(data.length - window, Math.floor(rate * 3));
+    let found = 0;
+    for (let i = 0; i < limit; i += window) {
+      let sum = 0;
+      for (let j = i; j < i + window; j += 1) {
+        const v = data[j] ?? 0;
+        sum += v * v;
+      }
+      if (Math.sqrt(sum / window) > threshold) {
+        found = i / rate;
+        break;
+      }
+    }
+
+    this.onsets.set(trackId, found);
+    return found;
+  }
+
+  /** Continuous playback for the player, no scheduled end. */
+  playFull(trackId: string, from: number, onEnded?: () => void): void {
+    const ctx = this.ensure();
+    const buffer = this.buffers.get(trackId);
+    const master = this.master;
+    if (!buffer || !master) throw new DecodeError(trackId);
+
+    this.stop();
+    this.stopFull();
+
+    const start = Math.max(0, Math.min(from, buffer.duration - 0.05));
+    const source = ctx.createBufferSource();
+    source.buffer = buffer;
+    source.connect(master);
+    source.onended = () => {
+      if (this.full?.source === source) this.full = null;
+      onEnded?.();
+    };
+    source.start(0, start);
+    this.full = { source, startedAt: ctx.currentTime, from: start };
+  }
+
+  stopFull(): void {
+    if (!this.full) return;
+    const { source } = this.full;
+    this.full = null;
+    try {
+      source.onended = null;
+      source.stop();
+    } catch {
+      // Already stopped.
+    }
+  }
+
+  get fullPlaying(): boolean {
+    return this.full !== null;
+  }
+
+  /** Seconds into the track, for the player's progress bar. */
+  position(): number {
+    if (!this.full || !this.ctx) return 0;
+    return this.full.from + (this.ctx.currentTime - this.full.startedAt);
+  }
+
   stop(): void {
     if (!this.playing) return;
     const { source } = this.playing;
@@ -205,7 +298,7 @@ export function dropInOffset(
   longestStage: number,
 ): number {
   if (bufferDuration <= 0) return 0;
-  const fraction = 0.15 + (hash(trackId) % 1000) / 1000 * 0.5;
+  const fraction = 0.15 + ((hash(trackId) % 1000) / 1000) * 0.5;
   const wanted = bufferDuration * fraction;
   const latest = Math.max(0, bufferDuration - longestStage);
   return Math.max(0, Math.min(wanted, latest));

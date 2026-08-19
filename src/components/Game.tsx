@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import { Confetti, MissFlash } from "./Effects";
+import { Confetti, MissWash } from "./Effects";
 import GuessInput from "./GuessInput";
 import PresetPicker from "./PresetPicker";
 import Reveal from "./Reveal";
@@ -11,7 +11,16 @@ import SourcePicker from "./SourcePicker";
 import Stage from "./Stage";
 import Summary, { ResultsList, type RoundResult } from "./Summary";
 import { AudioEngine, DecodeError, dropInOffset } from "@/lib/audio";
-import { SORTS, sortTracks, tierFor, type Rules, type SortKey } from "@/lib/round";
+import {
+  NO_HINTS,
+  SORTS,
+  isMixedArtist,
+  sortTracks,
+  tierFor,
+  type Hints,
+  type Rules,
+  type SortKey,
+} from "@/lib/round";
 import { parsePastedLines, parsePlaylistLink } from "@/lib/links";
 import {
   SourceError,
@@ -77,7 +86,8 @@ export default function Game() {
   const [sheetOpen, setSheetOpen] = useState(false);
   const [presetBusy, setPresetBusy] = useState<string | null>(null);
   const [confettiKey, setConfettiKey] = useState(0);
-  const [missKey, setMissKey] = useState(0);
+  /** Asked for one song at a time, so they clear whenever the song does. */
+  const [hints, setHints] = useState<Hints>(NO_HINTS);
   const [showResults, setShowResults] = useState(false);
   const [loadingAudio, setLoadingAudio] = useState(false);
   /** Track whose audio, and artwork when hinted, are decoded and ready. */
@@ -191,10 +201,7 @@ export default function Game() {
     if (current && preview) {
       void (async () => {
         try {
-          await Promise.all([
-            engine().warm(current.id, preview),
-            rules.artHint ? warmArt(current.art) : Promise.resolve(),
-          ]);
+          await Promise.all([engine().warm(current.id, preview), warmArt(current.art)]);
         } catch {
           // Play surfaces the failure and refreshes the link.
         }
@@ -205,13 +212,13 @@ export default function Game() {
     const nextPreview = next?.preview;
     if (next && nextPreview) {
       void engine().warm(next.id, nextPreview).catch(() => undefined);
-      if (rules.artHint) void warmArt(next.art);
+      void warmArt(next.art);
     }
 
     return () => {
       cancelled = true;
     };
-  }, [phase, queue, cursor, rules.artHint, warmArt]);
+  }, [phase, queue, cursor, warmArt]);
 
   /** Resolve one track right now, so pressing play never waits on the lookahead. */
   const resolveNow = useCallback(
@@ -244,7 +251,10 @@ export default function Game() {
       setCursor(0);
       setMisses(0);
       setResults([]);
-          setReveal(null);
+      setReveal(null);
+      setHints(NO_HINTS);
+      // Zero means nothing to fire, so a fresh card does not replay the burst.
+      setConfettiKey(0);
       setPlaying(false);
       setError(null);
       setPhase("playing");
@@ -402,6 +412,7 @@ export default function Game() {
     engineRef.current?.stop();
     setPlaying(false);
     setReveal(null);
+    setHints(NO_HINTS);
     setMisses(0);
     setCursor((c) => {
       const next = c + 1;
@@ -426,7 +437,6 @@ export default function Game() {
         atLength: solvedAt === null ? null : (stages[solvedAt] ?? null),
       });
       if (solved) setConfettiKey((k) => k + 1);
-      else setMissKey((k) => k + 1);
     },
     [cursor, stages],
   );
@@ -566,38 +576,43 @@ export default function Game() {
     update({ theme: next });
   }
 
-  const artBlur = useMemo(() => {
-    if (!rules.artHint) return 0;
-    const steps = Math.max(1, stages.length - 1);
-    return Math.round(24 * (1 - stageIndex / steps));
-  }, [rules.artHint, stages.length, stageIndex]);
-
   // Everything for this track is decoded, so play fires with no wait.
   const audioReady = track ? readyId === track.id : false;
 
   const tier = tierFor(stages[stageIndex] ?? 0);
 
-  const artistAt =
-    rules.artistAfter === null
-      ? null
-      : Math.min(rules.artistAfter, Math.max(1, stages.length - 1));
-  const showArtist = artistAt !== null && misses >= artistAt;
+  // A pack of one artist answers its own artist hint, and its search needs no
+  // artist beside every title.
+  const mixedArtist = useMemo(
+    () => isMixedArtist(playlist?.tracks ?? []),
+    [playlist],
+  );
 
   const settingsPanel = (
     <Settings
       rules={rules}
+      hints={hints}
+      inRound={phase === "playing"}
+      showArtistHint={mixedArtist}
       startMode={prefs.startMode}
       volume={prefs.volume}
       theme={prefs.theme}
       onStartMode={(next: StartMode) => update({ startMode: next })}
       onRules={(next: Rules) => update({ rules: next })}
+      onHints={setHints}
       onVolume={(v) => {
         update({ volume: v });
         engine().setVolume(v);
       }}
       onTheme={setTheme}
+      onHome={goHome}
+      onHistory={() => setShowResults(true)}
+      onReset={() => setConfirmReset(true)}
     />
   );
+
+  // The phone shaped card, which is also what the effects are drawn inside.
+  const onCard = phase === "playing" || phase === "done";
 
   /** Back to the pack list, keeping every preference. */
   function goHome() {
@@ -609,6 +624,10 @@ export default function Game() {
     setPlaylist(null);
     setReadyId(null);
     setError(null);
+    setHints(NO_HINTS);
+    setConfettiKey(0);
+    setMode("preset");
+    setSheetOpen(false);
     setPhase("setup");
   }
 
@@ -625,11 +644,15 @@ export default function Game() {
 
   return (
     <div className="flex h-dvh flex-col">
-      <Confetti fireKey={confettiKey} />
-      <MissFlash fireKey={missKey} />
-
       <header className="flex shrink-0 items-center justify-between border-b border-line px-5 py-3">
-        <span className="font-mono text-sm uppercase tracking-[0.14em]">Snippet</span>
+        <button
+          type="button"
+          onClick={goHome}
+          title="Home"
+          className="home font-mono text-sm uppercase tracking-[0.14em] hover:text-accent"
+        >
+          Snippet
+        </button>
 
         <div className="flex items-center gap-2">
           {(["preset", "custom"] as const).map((m) => (
@@ -663,12 +686,19 @@ export default function Game() {
         <main className="flex min-h-0 flex-1 items-center justify-center overflow-hidden p-4">
           <div
             className={
-              phase === "playing" || phase === "done"
+              onCard
                 ? // Phone shaped, so a recording of the centre crops cleanly.
-                  "flex h-full w-auto max-w-full shrink-0 items-center justify-center no-bars overflow-y-auto rounded-panel border border-line px-5 py-6 aspect-[9/16]"
+                  "relative flex h-full w-auto max-w-full shrink-0 items-center justify-center no-bars overflow-y-auto rounded-panel border border-line px-5 py-6 aspect-[9/16]"
                 : "no-bars flex h-full w-full items-center justify-center overflow-y-auto"
             }
           >
+          {/* Both effects fill the card, so they only exist while it does. */}
+          {onCard ? (
+            <>
+              {reveal && !reveal.solved ? <MissWash /> : null}
+              <Confetti fireKey={confettiKey} />
+            </>
+          ) : null}
           {!ready ? null : phase === "done" ? (
             <Summary
               results={results}
@@ -737,17 +767,16 @@ export default function Game() {
                 </div>
               </div>
 
-              {rules.artHint && track.art ? (
+              {hints.art && track.art ? (
                 <div className="flex justify-center">
-                  <div className="h-28 w-28 overflow-hidden rounded-panel border border-line">
+                  <div className="glow-in h-28 w-28 overflow-hidden rounded-panel border border-line">
                     <Image
                       src={track.art}
                       alt=""
                       width={112}
                       height={112}
                       unoptimized
-                      style={{ filter: `blur(${artBlur}px)`, transform: "scale(1.15)" }}
-                      className="h-full w-full object-cover transition-[filter] duration-150 ease-out"
+                      className="h-full w-full object-cover"
                     />
                   </div>
                 </div>
@@ -764,6 +793,7 @@ export default function Game() {
 
               <GuessInput
                 tracks={playlist?.tracks ?? []}
+                showArtist={mixedArtist}
                 disabled={false}
                 onGuess={guess}
                 onSkip={miss}
@@ -773,7 +803,7 @@ export default function Game() {
               <div className="flex min-h-12 flex-col items-center gap-2">
                 {error ? (
                   <span className="text-sm text-[var(--color-bad)]">{error}</span>
-                ) : showArtist ? (
+                ) : hints.artist ? (
                   <div className="flex flex-col items-center gap-1">
                     <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-faint">
                       Artist
@@ -812,36 +842,6 @@ export default function Game() {
           )}
           </div>
         </main>
-
-        <div className="hidden w-14 shrink-0 flex-col items-center gap-3 py-6 lg:flex">
-          <button
-            type="button"
-            onClick={goHome}
-            title="Home"
-            aria-label="Home"
-            className="pill grid h-10 w-10 place-items-center rounded-full border border-line text-muted hover:border-line-strong hover:text-ink"
-          >
-            <span className="text-base leading-none">&#8962;</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setShowResults(true)}
-            title="History"
-            aria-label="History"
-            className="pill grid h-10 w-10 place-items-center rounded-full border border-line text-muted hover:border-line-strong hover:text-ink"
-          >
-            <span className="font-mono text-[13px] leading-none">&#9776;</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setConfirmReset(true)}
-            title="Reset"
-            aria-label="Reset"
-            className="pill grid h-10 w-10 place-items-center rounded-full border border-line text-muted hover:border-line-strong hover:text-ink"
-          >
-            <span className="text-base leading-none">&#8635;</span>
-          </button>
-        </div>
 
         <aside className="hidden w-64 shrink-0 overflow-y-auto border-l border-line px-5 py-6 lg:block">
           {ready ? settingsPanel : null}

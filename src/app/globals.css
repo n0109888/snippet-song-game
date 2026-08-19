@@ -13,6 +13,8 @@
   --color-accent: #e9a13b;
   --color-good: #6fbf73;
   --color-bad: #d1504a;
+  /* The reveal's green, matched to the confetti so a win reads as one colour. */
+  --color-win: #3ddc6a;
 
   --radius-panel: 10px;
   --radius-control: 8px;
@@ -34,6 +36,7 @@
   --color-accent: #b8730f;
   --color-good: #2f7d40;
   --color-bad: #b3332c;
+  --color-win: #17a349;
 }
 
 * {
@@ -133,17 +136,52 @@ input[type="range"]::-moz-range-thumb {
   animation: miss-shake 420ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
-@keyframes flash-out {
+/* A miss washes the card red and stays there, so it fades in and holds. */
+@keyframes wash-in {
   from {
-    opacity: 0.75;
+    opacity: 0;
   }
   to {
-    opacity: 0;
+    opacity: 1;
   }
 }
 
-.flash-out {
-  animation: flash-out 620ms ease-out both;
+.wash-in {
+  animation: wash-in 480ms ease-out both;
+}
+
+/* The green around the artwork blooms rather than snapping on. */
+@keyframes glow-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.glow-in {
+  animation: glow-in 340ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* The verdict sits slightly off square, the way a stamp lands. */
+@keyframes verdict-in {
+  from {
+    opacity: 0;
+    transform: rotate(-4deg) scale(1.3);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-4deg) scale(1);
+  }
+}
+
+.verdict {
+  transform: rotate(-4deg);
+  animation: verdict-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 90ms;
 }
 
 @keyframes press-in {

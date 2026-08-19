@@ -18,20 +18,31 @@ function format(seconds: number): string {
 }
 
 export default function Reveal({ track, solved, atLength, engine, onNext }: RevealProps) {
-  const tone = solved ? "var(--color-good)" : "var(--color-bad)";
+  // The win green is the confetti green, so the badge and the paper agree.
+  const tone = solved ? "var(--color-win)" : "var(--color-bad)";
 
   return (
-    <div className="reveal flex w-full max-w-lg flex-col items-center gap-6 text-center">
+    <div className="reveal relative z-10 flex w-full max-w-lg flex-col items-center gap-6 text-center">
       <div
-        className={`h-40 w-40 overflow-hidden rounded-panel border bg-panel ${solved ? "" : "miss-shake"}`}
-        style={{ borderColor: tone }}
+        className={`h-44 w-44 overflow-hidden rounded-panel bg-panel ${
+          solved ? "glow-in" : "miss-shake"
+        }`}
+        style={
+          solved
+            ? {
+                // A glow rather than an outline, so the green bleeds into the card.
+                boxShadow:
+                  "0 0 60px 6px color-mix(in srgb, var(--color-win) 52%, transparent), 0 0 150px 40px color-mix(in srgb, var(--color-win) 22%, transparent)",
+              }
+            : undefined
+        }
       >
         {track.art ? (
           <Image
             src={track.art}
             alt=""
-            width={160}
-            height={160}
+            width={176}
+            height={176}
             unoptimized
             className="h-full w-full object-cover"
           />
@@ -40,19 +51,27 @@ export default function Reveal({ track, solved, atLength, engine, onNext }: Reve
 
       <div className="flex flex-col items-center gap-2">
         {!solved ? (
-          <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-faint">
-            It was
+          <span
+            className="font-mono text-[11px] uppercase tracking-[0.26em]"
+            style={{ color: tone }}
+          >
+            It was&hellip;
           </span>
         ) : null}
-        <h2 className="text-balance text-3xl leading-tight">{track.title}</h2>
+        <h2 className="text-balance text-3xl font-bold leading-tight">{track.title}</h2>
         <p className="text-sm text-muted">{track.artist}</p>
       </div>
 
       <span
-        className="rounded-chip border px-3 py-1 font-mono text-[11px] uppercase tracking-[0.14em]"
-        style={{ borderColor: tone, color: tone }}
+        className="verdict rounded-full border-[3px] px-6 py-2 text-2xl font-extrabold uppercase tracking-[0.04em]"
+        style={{
+          borderColor: tone,
+          color: tone,
+          textShadow: `0 0 20px color-mix(in srgb, ${tone} 60%, transparent)`,
+          boxShadow: `0 0 26px -2px color-mix(in srgb, ${tone} 50%, transparent)`,
+        }}
       >
-        {solved && atLength !== null ? `Guessed ${format(atLength)}` : "Missed"}
+        {solved && atLength !== null ? `Guessed in ${format(atLength)}!` : "Lost!"}
       </span>
 
       {/* The clip keeps playing, so you can just listen before moving on. */}

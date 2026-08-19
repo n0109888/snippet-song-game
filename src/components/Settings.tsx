@@ -1,17 +1,26 @@
 "use client";
 
-import { TIERS, normalizeStages, type Rules } from "@/lib/round";
+import { TIERS, normalizeStages, type Hints, type Rules } from "@/lib/round";
 import type { StartMode } from "@/lib/types";
 
 interface SettingsProps {
   rules: Rules;
+  hints: Hints;
+  /** Hints and the round controls only mean anything while a round is up. */
+  inRound: boolean;
+  /** One artist's pack already answers the artist hint, so it is left out. */
+  showArtistHint: boolean;
   startMode: StartMode;
   volume: number;
   theme: "dark" | "light";
   onStartMode: (mode: StartMode) => void;
   onRules: (rules: Rules) => void;
+  onHints: (hints: Hints) => void;
   onVolume: (value: number) => void;
   onTheme: (theme: "dark" | "light") => void;
+  onHome: () => void;
+  onHistory: () => void;
+  onReset: () => void;
 }
 
 function seconds(value: number): string {
@@ -53,15 +62,45 @@ function Pill({
   );
 }
 
+/** The round's own controls, kept to icons so they stay out of the way. */
+function IconButton({
+  label,
+  onClick,
+  children,
+}: {
+  label: string;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      title={label}
+      aria-label={label}
+      className="pill grid h-9 flex-1 place-items-center rounded-full border border-line text-muted hover:border-line-strong hover:text-ink"
+    >
+      {children}
+    </button>
+  );
+}
+
 export default function Settings({
   rules,
+  hints,
+  inRound,
+  showArtistHint,
   startMode,
   volume,
   theme,
   onStartMode,
   onRules,
+  onHints,
   onVolume,
   onTheme,
+  onHome,
+  onHistory,
+  onReset,
 }: SettingsProps) {
   function toggleStage(value: number) {
     const on = rules.stages.includes(value);
@@ -75,6 +114,20 @@ export default function Settings({
 
   return (
     <div className="flex flex-col gap-7">
+      {inRound ? (
+        <div className="flex gap-1.5 border-b border-line pb-5">
+          <IconButton label="Back to packs" onClick={onHome}>
+            <span className="text-base leading-none">&#8962;</span>
+          </IconButton>
+          <IconButton label="This round" onClick={onHistory}>
+            <span className="font-mono text-[13px] leading-none">&#9776;</span>
+          </IconButton>
+          <IconButton label="Start over" onClick={onReset}>
+            <span className="text-base leading-none">&#8635;</span>
+          </IconButton>
+        </div>
+      ) : null}
+
       <Row label="Difficulty">
         <div className="flex flex-col gap-1.5">
           {TIERS.map((tier) => {
@@ -112,21 +165,21 @@ export default function Settings({
         </div>
       </Row>
 
-      <Row label="Hints">
-        <div className="flex flex-wrap gap-1.5">
-          <Pill on={rules.artHint} onClick={() => onRules({ ...rules, artHint: !rules.artHint })}>
-            Album art
-          </Pill>
-          <Pill
-            on={rules.artistAfter !== null}
-            onClick={() =>
-              onRules({ ...rules, artistAfter: rules.artistAfter === null ? 2 : null })
-            }
-          >
-            Artist
-          </Pill>
-        </div>
-      </Row>
+      {inRound ? (
+        <Row label="Hints">
+          <div className="flex flex-wrap gap-1.5">
+            <Pill on={hints.art} onClick={() => onHints({ ...hints, art: !hints.art })}>
+              Album art
+            </Pill>
+            {showArtistHint ? (
+              <Pill on={hints.artist} onClick={() => onHints({ ...hints, artist: !hints.artist })}>
+                Artist
+              </Pill>
+            ) : null}
+          </div>
+          <span className="text-xs text-faint">Off again on the next song.</span>
+        </Row>
+      ) : null}
 
       <Row label="Song start">
         <div className="flex gap-1.5">

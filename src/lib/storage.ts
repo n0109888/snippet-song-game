@@ -30,11 +30,8 @@ export const DEFAULT_PREFS: Prefs = {
 function readRules(v: unknown): Rules {
   if (typeof v !== "object" || v === null) return DEFAULT_RULES;
   const r = v as Partial<Rules>;
-  const stages = Array.isArray(r.stages) ? normalizeStages(r.stages) : DEFAULT_RULES.stages;
   return {
-    stages,
-    artHint: typeof r.artHint === "boolean" ? r.artHint : false,
-    artistAfter: typeof r.artistAfter === "number" ? r.artistAfter : null,
+    stages: Array.isArray(r.stages) ? normalizeStages(r.stages) : DEFAULT_RULES.stages,
   };
 }
 

@@ -33,16 +33,39 @@ export const DEFAULT_STAGES: number[] = [0.1, 0.5, 2, 8, 15];
 
 export interface Rules {
   stages: number[];
-  artHint: boolean;
-  /** Reveal the artist after this many misses. Null when the hint is off. */
-  artistAfter: number | null;
 }
 
 export const DEFAULT_RULES: Rules = {
   stages: DEFAULT_STAGES,
-  artHint: false,
-  artistAfter: null,
 };
+
+/**
+ * Hints are asked for one song at a time, so they live with the round rather
+ * than the saved preferences and reset whenever the next song comes up.
+ */
+export interface Hints {
+  art: boolean;
+  artist: boolean;
+}
+
+export const NO_HINTS: Hints = { art: false, artist: false };
+
+/**
+ * True when the pack is a mix of artists rather than one artist's catalogue.
+ * Features mean even a single artist pack has other names on it, so the test is
+ * whether one name carries most of the songs.
+ */
+export function isMixedArtist(tracks: readonly Track[]): boolean {
+  if (tracks.length === 0) return false;
+  const counts = new Map<string, number>();
+  let top = 0;
+  for (const t of tracks) {
+    const n = (counts.get(t.artist) ?? 0) + 1;
+    counts.set(t.artist, n);
+    if (n > top) top = n;
+  }
+  return top / tracks.length < 0.5;
+}
 
 export type SortKey = "plays" | "random" | "date";
 

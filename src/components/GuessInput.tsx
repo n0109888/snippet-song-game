@@ -6,6 +6,8 @@ import type { Track } from "@/lib/types";
 
 interface GuessInputProps {
   tracks: Track[];
+  /** Mixed-artist packs name the artist on every row, one title is not enough. */
+  showArtist: boolean;
   disabled: boolean;
   onGuess: (value: string) => void;
   onSkip: () => void;
@@ -22,6 +24,7 @@ export interface Suggestion {
 
 export default function GuessInput({
   tracks,
+  showArtist,
   disabled,
   onGuess,
   onSkip,
@@ -122,7 +125,7 @@ export default function GuessInput({
             disabled={disabled}
             autoComplete="off"
             spellCheck={false}
-            placeholder="Title"
+            placeholder={showArtist ? "Artist or title" : "Title"}
             aria-label="Guess"
             aria-autocomplete="list"
             aria-expanded={open && suggestions.length > 0}
@@ -159,8 +162,14 @@ export default function GuessInput({
                       i === active ? "bg-[rgba(255,255,255,0.06)]" : ""
                     }`}
                   >
+                    {/* A fixed column, so a list of many artists still reads down. */}
+                    {showArtist ? (
+                      <span className="w-[38%] shrink-0 truncate text-xs text-faint">
+                        {s.track.artist}
+                      </span>
+                    ) : null}
                     <span className="truncate">{s.track.title}</span>
-                    {s.ambiguous ? (
+                    {!showArtist && s.ambiguous ? (
                       <span className="shrink-0 text-xs text-faint">{s.track.artist}</span>
                     ) : null}
                   </button>

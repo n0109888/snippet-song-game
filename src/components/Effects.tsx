@@ -13,11 +13,19 @@ interface Particle {
   h: number;
   color: string;
   life: number;
-  /** Frames to wait before launching, so the cannon streams instead of clumping. */
+  /** Frames to wait before launching, so the burst streams instead of clumping. */
   delay: number;
 }
 
-const CONFETTI_COLORS = ["#e9a13b", "#6fbf73", "#4f9d6b", "#d9822b", "#c8d4dc", "#e2686f"];
+/** Correct means green, so the paper is green too, in a few shades for depth. */
+const CONFETTI_COLORS = [
+  "#3ddc6a",
+  "#22c55e",
+  "#16a34a",
+  "#7cf5a5",
+  "#b6ffcf",
+  "#0e9f4a",
+];
 
 function prefersReducedMotion(): boolean {
   return (
@@ -27,8 +35,9 @@ function prefersReducedMotion(): boolean {
 }
 
 /**
- * Confetti burst on a correct guess. Canvas rather than DOM nodes so a couple
- * of hundred pieces stay cheap, and the loop stops itself once they are gone.
+ * Confetti burst on a correct guess. Canvas rather than DOM nodes so a few
+ * hundred pieces stay cheap, and the loop stops itself once they are gone.
+ * Absolutely placed, so it fills whichever panel it is mounted in.
  */
 export function Confetti({ fireKey }: { fireKey: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -53,32 +62,29 @@ export function Confetti({ fireKey }: { fireKey: number }) {
 
     const particles: Particle[] = [];
 
-    // Two angled fountains from the lower corners, the shape party cannons make.
-    // A single centre explosion reads as a scatter rather than a celebration.
-    const cannons = [
-      { x: width * 0.16, y: height * 0.98, angle: -Math.PI / 2.55 },
-      { x: width * 0.84, y: height * 0.98, angle: -Math.PI / 1.72 },
-    ];
+    // One explosion from the middle of the card, so the paper covers the art
+    // and the player rather than climbing past them from the corners.
+    const originX = width * 0.5;
+    const originY = height * 0.42;
 
-    for (const cannon of cannons) {
-      for (let i = 0; i < 90; i += 1) {
-        const spread = (Math.random() - 0.5) * 0.62;
-        const angle = cannon.angle + spread;
-        const speed = 17 + Math.random() * 14;
-        particles.push({
-          x: cannon.x + (Math.random() - 0.5) * 14,
-          y: cannon.y,
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed,
-          rot: Math.random() * Math.PI,
-          vrot: (Math.random() - 0.5) * 0.3,
-          w: 6 + Math.random() * 5,
-          h: 9 + Math.random() * 7,
-          color: CONFETTI_COLORS[(Math.random() * CONFETTI_COLORS.length) | 0] ?? "#e9a13b",
-          life: 1,
-          delay: Math.random() * 14,
-        });
-      }
+    for (let i = 0; i < 380; i += 1) {
+      // A full circle, squashed upward: gravity brings the top half back down
+      // through the middle, which is what fills the card.
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 7 + Math.random() * 26;
+      particles.push({
+        x: originX + (Math.random() - 0.5) * 30,
+        y: originY + (Math.random() - 0.5) * 30,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed * 0.9 - 6,
+        rot: Math.random() * Math.PI,
+        vrot: (Math.random() - 0.5) * 0.34,
+        w: 6 + Math.random() * 6,
+        h: 9 + Math.random() * 8,
+        color: CONFETTI_COLORS[(Math.random() * CONFETTI_COLORS.length) | 0] ?? "#3ddc6a",
+        life: 1,
+        delay: Math.random() * 5,
+      });
     }
 
     let last = performance.now();
@@ -95,14 +101,14 @@ export function Confetti({ fireKey }: { fireKey: number }) {
           alive += 1;
           continue;
         }
-        p.vy += 0.42 * dt;
-        p.vx *= 0.985;
-        p.vy *= 0.992;
+        p.vy += 0.4 * dt;
+        p.vx *= 0.982;
+        p.vy *= 0.99;
         p.x += p.vx * dt;
         p.y += p.vy * dt;
         p.rot += p.vrot * dt;
         // Hold full colour while it flies, fade only near the end.
-        if (p.y > height * 0.55) p.life -= 0.012 * dt;
+        if (p.y > height * 0.6) p.life -= 0.011 * dt;
 
         if (p.life <= 0 || p.y > height + 60) continue;
         alive += 1;
@@ -138,22 +144,23 @@ export function Confetti({ fireKey }: { fireKey: number }) {
     <canvas
       ref={canvasRef}
       aria-hidden
-      className="pointer-events-none fixed inset-0 z-40 h-full w-full"
+      className="pointer-events-none absolute inset-0 z-20 h-full w-full"
     />
   );
 }
 
-/** Wrong answer: one red wash from the edges that fades out. */
-export function MissFlash({ fireKey }: { fireKey: number }) {
-  if (fireKey === 0) return null;
+/**
+ * Wrong answer: the whole card fades to red and stays there for the reveal, so
+ * the miss is the screen rather than a flicker over it.
+ */
+export function MissWash() {
   return (
     <div
-      key={fireKey}
       aria-hidden
-      className="flash-out pointer-events-none fixed inset-0 z-40"
+      className="wash-in pointer-events-none absolute inset-0 z-0"
       style={{
         background:
-          "radial-gradient(circle at 50% 45%, transparent 38%, color-mix(in srgb, var(--color-bad) 55%, transparent) 100%)",
+          "radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--color-bad) 8%, transparent) 0%, color-mix(in srgb, var(--color-bad) 20%, transparent) 45%, color-mix(in srgb, var(--color-bad) 46%, transparent) 100%)",
       }}
     />
   );

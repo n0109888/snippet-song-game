@@ -76,16 +76,32 @@ Edit `data/preset-playlist.json`. Nothing else needs to change.
 
 ## Difficulty
 
-| Difficulty | Stage lengths | Guesses | Hints |
-| --- | --- | --- | --- |
-| Easy | 2, 4, 7, 12, 20 | 5 | Album art sharpens each stage, artist after 3 misses |
-| Medium | 1, 2, 4, 8, 16 | 5 | Artist after 4 misses |
-| Hard | 0.5, 1, 2, 5, 10 | 4 | None |
-| Expert | 0.1, 0.3, 1, 3, 8 | 3 | None |
-| Impossible | 0.01, 0.05, 0.2, 1 | 2 | None, drop in forced |
+Difficulty picks **which songs** you get, not how long the snippet is. Tracks are
+ordered by how well known they are, and each difficulty draws from a band of that
+order. Easy gives you the hits, Impossible gives you the deep cuts.
 
-Advanced settings expose the ladder, guess count and hints on their own. Change
-any of them and the difficulty label reads Custom.
+| Difficulty | Draws from | Score weight |
+| --- | --- | --- |
+| Easy | Best known 20 percent | 1 |
+| Medium | 20 to 45 percent | 1.3 |
+| Hard | 45 to 70 percent | 1.7 |
+| Expert | 70 to 88 percent | 2.2 |
+| Impossible | Most obscure 12 percent | 3 |
+
+Bands are relative to the playlist you loaded, so an obscure playlist still has an
+Easy end and a mainstream one still has an Impossible end. Changing difficulty
+redraws the round. If a band cannot fill ten tracks it widens into its neighbours.
+
+Popularity comes from Deezer's `rank`. Spotify removed the `popularity` field in
+February 2026, so the rank is attached during preview lookup. A track with no
+known rank is only used to top up a short round.
+
+## Stages
+
+The stage ladder is a separate setting, because it is the skip progression, not
+the difficulty. The default ladder is `0.01 0.1 0.5 2 5 10`. You start on 0.01
+seconds, and every wrong guess or skip moves you to the next length. Pick a
+different ladder in the settings rail. Guess count and hints sit under Advanced.
 
 ## Keyboard
 

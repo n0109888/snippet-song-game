@@ -14,10 +14,15 @@ import {
   INHUMAN_SECONDS,
   NO_HINTS,
   SORTS,
+  bandsFor,
   isMixedArtist,
+  levelsFor,
+  shuffle,
   sortTracks,
   tierFor,
+  type Band,
   type Hints,
+  type Mode,
   type Rules,
   type SortKey,
 } from "@/lib/round";
@@ -41,37 +46,27 @@ interface RevealState {
   atLength: number | null;
 }
 
+/** One level of a guessable run: the song, and the piece of it you get. */
+interface Slot {
+  track: Track;
+  seconds: number;
+}
+
+/** The word the badge says, and a key that replays it when it is said again. */
+interface Dealt {
+  key: number;
+  label: string;
+}
+
 /** How many upcoming tracks to keep preview-resolved ahead of the player. */
 const LOOKAHEAD = 4;
 
+/** How deep into a level's band to dig before settling for a silent song. */
+const CANDIDATES_PER_LEVEL = 3;
+
 const COLLECTIONS = (presetData as { collections?: PresetCollection[] }).collections ?? [];
 
-/** A five pip die, which is the whole label on the reroll button. */
-function Dice() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="dice h-3.5 w-3.5">
-      <rect
-        x="3.5"
-        y="3.5"
-        width="17"
-        height="17"
-        rx="4.5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      />
-      <g fill="currentColor">
-        <circle cx="8.6" cy="8.6" r="1.45" />
-        <circle cx="15.4" cy="8.6" r="1.45" />
-        <circle cx="12" cy="12" r="1.45" />
-        <circle cx="8.6" cy="15.4" r="1.45" />
-        <circle cx="15.4" cy="15.4" r="1.45" />
-      </g>
-    </svg>
-  );
-}
-
-/** The turning arrow on the reordered badge. */
+/** The turning arrow on the redealt badge. */
 function Refresh() {
   return (
     <svg
@@ -94,6 +89,8 @@ export default function Game() {
   const engineRef = useRef<AudioEngine | null>(null);
   const revealTimer = useRef<number | null>(null);
   const queueRef = useRef<Track[]>([]);
+  /** The level plan, beside the queue, so a dropped song drops its level too. */
+  const planRef = useRef<number[]>([]);
   /** Round generation whose lookahead is in flight, or null when idle. */
   const resolvingRef = useRef<number | null>(null);
   /**
@@ -103,6 +100,8 @@ export default function Game() {
    */
   const foundRef = useRef(new Map<string, { preview: string | null; art: string | null }>());
   const roundRef = useRef(0);
+  /** Deal generation, bumped before a guessable ladder goes looking for audio. */
+  const dealRef = useRef(0);
 
   const [ready, setReady] = useState(false);
   const [prefs, setPrefs] = useState<Prefs>(DEFAULT_PREFS);
@@ -110,6 +109,8 @@ export default function Game() {
   const [phase, setPhase] = useState<Phase>("setup");
   const [playlist, setPlaylist] = useState<LoadedPlaylist | null>(null);
   const [queue, setQueue] = useState<Track[]>([]);
+  /** Guessable only: the snippet length each queued song is played at. */
+  const [levelPlan, setLevelPlan] = useState<number[]>([]);
   const [cursor, setCursor] = useState(0);
   const [misses, setMisses] = useState(0);
   const [results, setResults] = useState<RoundResult[]>([]);
@@ -133,16 +134,30 @@ export default function Game() {
    * new order is resolved even though the cursor is back where it already was.
    */
   const [roundId, setRoundId] = useState(0);
-  /** Non-zero while the reordered badge is on screen; the value replays it. */
-  const [dealtKey, setDealtKey] = useState(0);
+  /** Set while the redealt badge is on screen; the key replays it. */
+  const [dealt, setDealt] = useState<Dealt | null>(null);
 
   const rules = prefs.rules;
   const stages = rules.stages;
+  const guessable = prefs.mode === "guessable";
   const stageIndex = Math.min(misses, stages.length - 1);
   const track = queue[cursor];
-  // One guess per stage, so every selected length is reachable.
-  const maxMisses = stages.length;
+  /**
+   * The piece of the song on offer. A classic round climbs the ladder a step
+   * per miss; a guessable one gives each song the single length of its level.
+   */
+  const currentLength = guessable
+    ? (levelPlan[cursor] ?? levelPlan[levelPlan.length - 1] ?? stages[stages.length - 1] ?? 1)
+    : (stages[stageIndex] ?? 1);
+  // Classic gives a guess per stage, so every selected length is reachable.
+  // Guessable gives one, because the level has already fixed the length.
+  const maxMisses = guessable ? 1 : stages.length;
   const remaining = maxMisses - misses;
+
+  /** The badge, which is the only sign that dealing again did anything. */
+  const announce = useCallback((label: string) => {
+    setDealt((d) => ({ key: (d?.key ?? 0) + 1, label }));
+  }, []);
 
   function engine(): AudioEngine {
     if (!engineRef.current) engineRef.current = new AudioEngine();
@@ -211,10 +226,17 @@ export default function Game() {
       // Tracks the lookup could not match are dropped, but never one at or
       // before the cursor, because that would swap the song being played.
       const attempted = new Set(pending.map((t) => t.id));
-      queueRef.current = next.filter(
+      const keep = next.map(
         (t, i) => i <= from || t.preview !== null || !attempted.has(t.id),
       );
+      queueRef.current = next.filter((_, i) => keep[i]);
       setQueue(queueRef.current);
+      // A guessable run pairs each song with a level by position, so the plan
+      // loses exactly what the queue loses.
+      if (planRef.current.length > 0) {
+        planRef.current = planRef.current.filter((_, i) => keep[i] !== false);
+        setLevelPlan(planRef.current);
+      }
     } catch {
       // Leave the queue as it is, the player can skip past a bad track.
     } finally {
@@ -228,12 +250,12 @@ export default function Game() {
     void topUp(cursor);
   }, [phase, cursor, roundId, topUp]);
 
-  /** The reordered badge says its piece and goes. */
+  /** The redealt badge says its piece and goes. */
   useEffect(() => {
-    if (dealtKey === 0) return;
-    const timer = window.setTimeout(() => setDealtKey(0), 1400);
+    if (!dealt) return;
+    const timer = window.setTimeout(() => setDealt(null), 1400);
     return () => window.clearTimeout(timer);
-  }, [dealtKey]);
+  }, [dealt]);
 
   /** Load artwork up front, so a hint is on screen the moment the track is. */
   const warmArt = useCallback(async (url: string | null): Promise<void> => {
@@ -303,37 +325,127 @@ export default function Game() {
   );
 
   /**
-   * Deal the pack in the given order and start from the first song. The round
-   * generation moves with it, which is what tells the lookahead to resolve the
-   * new order: the cursor is back at zero, where it usually already was, so
-   * that alone would look like nothing had changed.
+   * Previews found earlier in the session carry over, so dealing a pack you
+   * have been playing lands on songs that are ready to hear.
    */
-  const startRound = useCallback(
-    (loaded: LoadedPlaylist, sort: SortKey) => {
-      if (revealTimer.current !== null) window.clearTimeout(revealTimer.current);
-      engineRef.current?.stop();
-      // Previews found earlier in the session carry over, so reordering a pack
-      // you have been playing deals songs that are ready to hear.
-      const drawn = sortTracks(loaded.tracks, sort).map((t) => {
-        const hit = foundRef.current.get(t.id);
-        return hit ? { ...t, preview: t.preview ?? hit.preview, art: t.art ?? hit.art } : t;
+  const remembered = useCallback((t: Track): Track => {
+    const hit = foundRef.current.get(t.id);
+    return hit ? { ...t, preview: t.preview ?? hit.preview, art: t.art ?? hit.art } : t;
+  }, []);
+
+  /**
+   * Deal a drawn queue and start from the first song. The round generation
+   * moves with it, which is what tells the lookahead to resolve the new order:
+   * the cursor is back at zero, where it usually already was, so that alone
+   * would look like nothing had changed.
+   */
+  const startRound = useCallback((drawn: Track[], plan: number[]) => {
+    if (revealTimer.current !== null) window.clearTimeout(revealTimer.current);
+    engineRef.current?.stop();
+    roundRef.current += 1;
+    setRoundId(roundRef.current);
+    queueRef.current = drawn;
+    setQueue(drawn);
+    planRef.current = plan;
+    setLevelPlan(plan);
+    setCursor(0);
+    setMisses(0);
+    setResults([]);
+    setReveal(null);
+    setHints(NO_HINTS);
+    // Zero means nothing to fire, so a fresh card does not replay the burst.
+    setConfettiKey(0);
+    setPlaying(false);
+    setError(null);
+    setPhase("playing");
+  }, []);
+
+  /**
+   * One song per level, drawn from that level's band of play counts. A guessable
+   * run is only a handful of songs, so their audio is found before the first one
+   * plays rather than a few ahead: a level whose song turned out to have no
+   * preview would otherwise vanish from a run that is one song per level, and
+   * that is the whole shape of the mode. A band that answers with nothing
+   * playable is dug through a few songs deep before the run settles for one.
+   */
+  const pickLadder = useCallback(
+    async (bands: Band[]): Promise<Slot[]> => {
+      const pools = bands.map((b) => shuffle(b.pool).map(remembered));
+      const picks: (Track | null)[] = bands.map(() => null);
+
+      for (let attempt = 0; attempt < CANDIDATES_PER_LEVEL; attempt += 1) {
+        if (picks.every(Boolean)) break;
+        const need: { at: number; track: Track }[] = [];
+        picks.forEach((got, at) => {
+          if (got) return;
+          const candidate = pools[at]?.[attempt];
+          if (!candidate) return;
+          if (candidate.preview) picks[at] = candidate;
+          else need.push({ at, track: candidate });
+        });
+        if (need.length === 0) continue;
+
+        const found = await resolvePreviews(need.map((n) => n.track)).catch(() => []);
+        const ready = new Map(found.map((t) => [t.id, t]));
+        for (const n of need) {
+          const hit = ready.get(n.track.id);
+          if (!hit) continue;
+          foundRef.current.set(hit.id, { preview: hit.preview, art: hit.art });
+          picks[n.at] = hit;
+        }
+      }
+
+      const slots: Slot[] = [];
+      bands.forEach((band, i) => {
+        // Nothing in the band answered, so the first draw goes in anyway and
+        // play falls back to resolving it, or skips past it, as it always has.
+        const track = picks[i] ?? pools[i]?.[0];
+        if (track) slots.push({ track, seconds: band.seconds });
       });
-      roundRef.current += 1;
-      setRoundId(roundRef.current);
-      queueRef.current = drawn;
-      setQueue(drawn);
-      setCursor(0);
-      setMisses(0);
-      setResults([]);
-      setReveal(null);
-      setHints(NO_HINTS);
-      // Zero means nothing to fire, so a fresh card does not replay the burst.
-      setConfettiKey(0);
-      setPlaying(false);
-      setError(null);
-      setPhase("playing");
+      return slots;
     },
-    [],
+    [remembered],
+  );
+
+  /**
+   * Deal the pack the way the chosen mode wants it. Classic is the whole pack
+   * in the chosen order and is ready at once; guessable has to go and find the
+   * audio for its ladder first, so it waits on the loading card.
+   */
+  const beginRound = useCallback(
+    (
+      loaded: LoadedPlaylist,
+      sort: SortKey,
+      mode: Mode,
+      stageList: readonly number[],
+      // Said by the badge once the deal lands, never before: a guessable ladder
+      // is off looking for audio while the header it appears in is not on
+      // screen, and a badge that spends its second there is never read.
+      label?: string,
+    ) => {
+      const deal = (dealRef.current += 1);
+      if (mode !== "guessable") {
+        startRound(sortTracks(loaded.tracks, sort).map(remembered), []);
+        if (label) announce(label);
+        return;
+      }
+      engineRef.current?.stop();
+      setPlaying(false);
+      setReveal(null);
+      setError(null);
+      setPhase("loading");
+      void (async () => {
+        const slots = await pickLadder(bandsFor(loaded.tracks, levelsFor(stageList)));
+        // Dealt again while this was out looking, so this ladder is stale.
+        if (dealRef.current !== deal) return;
+        startRound(
+          slots.map((slot) => slot.track),
+          slots.map((slot) => slot.seconds),
+        );
+        if (label) announce(label);
+      })();
+    },
+    [announce, pickLadder, remembered, startRound],
   );
 
   const loadTracks = useCallback(
@@ -378,10 +490,10 @@ export default function Game() {
         "preset",
         collection.id,
       );
-      if (loaded) startRound(loaded, prefs.sort);
+      if (loaded) beginRound(loaded, prefs.sort, prefs.mode, stages);
       setPresetBusy(null);
     },
-    [loadTracks, startRound, prefs.sort],
+    [loadTracks, beginRound, prefs.sort, prefs.mode, stages],
   );
 
   const advance = useCallback(() => {
@@ -410,15 +522,15 @@ export default function Game() {
       if (!current) return;
       engineRef.current?.stop();
       setPlaying(false);
-      setResults((r) => [...r, { track: current, solvedAt }]);
+      setResults((r) => [...r, { track: current, solvedAt, length: currentLength }]);
       setReveal({
         solved,
         track: current,
-        atLength: solvedAt === null ? null : (stages[solvedAt] ?? null),
+        atLength: solvedAt === null ? null : currentLength,
       });
       if (solved) setConfettiKey((k) => k + 1);
     },
-    [cursor, stages],
+    [cursor, currentLength],
   );
 
   const miss = useCallback(() => {
@@ -457,7 +569,7 @@ export default function Game() {
 
     // Create the context inside the gesture, before any await.
     audio.ensure();
-    const length = stages[stageIndex] ?? 1;
+    const length = currentLength;
     setLoadingAudio(true);
 
     void (async () => {
@@ -508,7 +620,7 @@ export default function Game() {
         setLoadingAudio(false);
       }
     })();
-  }, [track, reveal, playing, stages, stageIndex, prefs.startMode, advance, resolveNow]);
+  }, [track, reveal, playing, stages, currentLength, prefs.startMode, advance, resolveNow]);
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
@@ -563,7 +675,7 @@ export default function Game() {
   // Named on the shortest snippet on the ladder: the celebration goes gold.
   const maxWin = reveal !== null && reveal.solved && reveal.atLength === INHUMAN_SECONDS;
 
-  const tier = tierFor(stages[stageIndex] ?? 0);
+  const tier = tierFor(currentLength);
 
   // A pack of one artist answers its own artist hint, and its search needs no
   // artist beside every title.
@@ -576,7 +688,9 @@ export default function Game() {
     <Settings
       rules={rules}
       hints={hints}
+      mode={prefs.mode}
       inRound={phase === "playing"}
+      canReroll={phase === "playing" && !guessable && prefs.sort === "random"}
       showArtistHint={mixedArtist}
       playlistName={playlist?.name ?? null}
       trackCount={playlist?.tracks.length ?? 0}
@@ -584,7 +698,9 @@ export default function Game() {
       volume={prefs.volume}
       theme={prefs.theme}
       onStartMode={(next: StartMode) => update({ startMode: next })}
-      onRules={(next: Rules) => update({ rules: next })}
+      onMode={setMode}
+      onReroll={() => deal("random")}
+      onRules={setRules}
       onHints={setHints}
       onVolume={(v) => {
         update({ volume: v });
@@ -605,19 +721,50 @@ export default function Game() {
    */
   function deal(sort: SortKey) {
     if (!playlist) return;
-    startRound(playlist, sort);
-    setDealtKey((k) => k + 1);
+    beginRound(playlist, sort, prefs.mode, stages, "Reordered");
+  }
+
+  /**
+   * Change mode mid pack. Nothing is torn down and reloaded: the same loaded
+   * pack is simply dealt the other way, so the switch is one card away rather
+   * than a trip back through the pack list.
+   */
+  function setMode(next: Mode) {
+    if (next === prefs.mode) return;
+    update({ mode: next });
+    if (!playlist || phase === "setup") return;
+    beginRound(playlist, prefs.sort, next, stages, next === "guessable" ? "Guessable" : "Classic");
+  }
+
+  /**
+   * A guessable run is one song per stage, so switching a stage on or off is
+   * choosing a different set of songs and the ladder has to be drawn again.
+   * The classic ladder is the same songs either way, so it is left alone.
+   */
+  function setRules(next: Rules) {
+    update({ rules: next });
+    if (!guessable || !playlist || phase === "setup") return;
+    beginRound(playlist, prefs.sort, "guessable", next.stages, "Restaged");
   }
 
   const roundHeader = (
     <div className="flex min-w-0 items-center gap-2">
       <span className="truncate text-sm text-muted">{playlist?.name}</span>
-      {/* The label lives inside the chip, so the order reads as a
-          sentence without spending a second line on it. */}
-      <label className="flex h-7 shrink-0 items-center rounded-chip border border-line bg-panel pl-2 focus-within:border-line-strong">
-        <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-faint">
-          Sort by
+
+      {guessable ? (
+        // Guessable draws its own songs by play count, so there is no order to
+        // choose. What the chip carries instead is how far up the levels the
+        // run has got, in the colour of the level it is on.
+        <span
+          className="flex h-7 shrink-0 items-center rounded-chip border px-2 font-mono text-xs tabular-nums"
+          style={{
+            color: tier.color,
+            borderColor: `color-mix(in srgb, ${tier.color} 45%, transparent)`,
+          }}
+        >
+          {Math.min(cursor + 1, levelPlan.length)}/{levelPlan.length}
         </span>
+      ) : (
         <select
           aria-label="Sort by"
           value={prefs.sort}
@@ -626,7 +773,7 @@ export default function Game() {
             update({ sort: next });
             deal(next);
           }}
-          className="h-full rounded-chip bg-transparent px-1 text-xs text-muted"
+          className="h-7 shrink-0 rounded-chip border border-line bg-panel px-2 text-xs text-muted focus:border-line-strong"
         >
           {SORTS.map((o) => (
             <option key={o.key} value={o.key}>
@@ -634,37 +781,25 @@ export default function Game() {
             </option>
           ))}
         </select>
-      </label>
+      )}
 
-      {/* One shuffle is only one of the orders random can deal, so random is
-          the only sort with anything left to ask for. */}
-      {prefs.sort === "random" ? (
-        <button
-          type="button"
-          onClick={() => deal("random")}
-          title="Reroll"
-          aria-label="Reroll"
-          className="reroll flex h-7 w-7 shrink-0 items-center justify-center rounded-chip border border-line bg-panel text-muted"
-        >
-          <Dice />
-        </button>
-      ) : null}
-
-      {dealtKey > 0 ? (
+      {dealt ? (
         <span
-          key={dealtKey}
+          key={dealt.key}
           role="status"
           className="dealt flex shrink-0 items-center gap-1 font-mono text-[9px] uppercase tracking-[0.14em] text-accent"
         >
           <Refresh />
-          Reordered
+          {dealt.label}
         </span>
       ) : null}
     </div>
   );
 
   // The phone shaped card, which is also what the effects are drawn inside.
-  const onCard = phase === "playing" || phase === "done";
+  // Dealing a guessable ladder keeps it, so switching mode swaps what is on the
+  // card rather than collapsing the card and building it again.
+  const onCard = phase !== "setup";
 
   /** Back to the pack list, keeping every preference. */
   function goHome() {
@@ -674,6 +809,8 @@ export default function Game() {
     setReveal(null);
     setResults([]);
     setPlaylist(null);
+    planRef.current = [];
+    setLevelPlan([]);
     setReadyId(null);
     setError(null);
     setHints(NO_HINTS);
@@ -695,7 +832,7 @@ export default function Game() {
     // No badge here: on a fixed sort this deals the same order back, and the
     // sheet closing onto the first song is answer enough for a button you had
     // to confirm.
-    if (playlist) startRound(playlist, prefs.sort);
+    if (playlist) beginRound(playlist, prefs.sort, prefs.mode, stages);
     else window.location.reload();
   }
 
@@ -735,9 +872,10 @@ export default function Game() {
           {!ready ? null : phase === "done" ? (
             <Summary
               results={results}
-              stageCount={stages.length}
+              stageCount={guessable ? 1 : stages.length}
+              guessable={guessable}
               onAgain={() => {
-                if (playlist) startRound(playlist, prefs.sort);
+                if (playlist) beginRound(playlist, prefs.sort, prefs.mode, stages);
                 else setPhase("setup");
               }}
               onExit={() => setPhase("setup")}
@@ -784,8 +922,10 @@ export default function Game() {
                   ) : null}
 
                   <Stage
-                    stages={stages}
-                    unlocked={stageIndex}
+                    // Guessable hands the row its levels, easiest first, and
+                    // walks it a song at a time rather than a miss at a time.
+                    stages={guessable && levelPlan.length > 0 ? levelPlan : stages}
+                    unlocked={guessable ? cursor : stageIndex}
                     playing={playing}
                     disabled={false}
                     loading={loadingAudio}
@@ -820,7 +960,14 @@ export default function Game() {
               )}
             </div>
           ) : phase === "loading" ? (
-            <span className="font-mono text-xs text-faint">Loading</span>
+            // Guessable goes looking for one song per level before it starts,
+            // so the wait is the mode arriving rather than a stalled round.
+            <div className="flex flex-col items-center gap-4">
+              <span className="loader h-9 w-9 rounded-full border-2 border-line" />
+              <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-faint">
+                Dealing
+              </span>
+            </div>
           ) : (
             <PresetPicker collections={COLLECTIONS} busy={presetBusy} onStart={startPreset} />
           )}
@@ -935,7 +1082,11 @@ export default function Game() {
                 {results.filter((r) => r.solvedAt !== null).length}/{results.length}
               </span>
             </div>
-            <ResultsList results={results} stageCount={stages.length} />
+            <ResultsList
+              results={results}
+              stageCount={guessable ? 1 : stages.length}
+              guessable={guessable}
+            />
             <button
               type="button"
               onClick={() => setShowResults(false)}

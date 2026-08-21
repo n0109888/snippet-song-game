@@ -294,24 +294,31 @@ input[type="range"]::-moz-range-thumb {
 
 /*
  * Reroll. The die tumbles under the cursor and again on the way down, so the
- * button reads as a throw before it has been pressed.
+ * button reads as a throw before it has been pressed. It is filled in the
+ * accent rather than outlined like the toggles around it: the order it rerolls
+ * is on the card and the button is in the panel, and a quiet button that far
+ * from what it does never gets found.
  */
 .reroll {
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border: 0;
   transition:
     transform 160ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 160ms ease-out,
-    color 160ms ease-out;
+    filter 160ms ease-out,
+    box-shadow 160ms ease-out;
+  box-shadow: 0 0 0 0 transparent;
 }
 
 .reroll:hover,
 .reroll:focus-visible {
   transform: translateY(-1px);
-  border-color: var(--color-line-strong);
-  color: var(--color-ink);
+  filter: brightness(1.12);
+  box-shadow: 0 4px 18px -6px color-mix(in srgb, var(--color-accent) 75%, transparent);
 }
 
 .reroll:active {
-  transform: scale(0.94);
+  transform: scale(0.96);
   transition-duration: 80ms;
 }
 

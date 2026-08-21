@@ -1,13 +1,25 @@
 "use client";
 
-import { TIERS, formatSeconds, normalizeStages, type Hints, type Rules } from "@/lib/round";
+import {
+  MODES,
+  TIERS,
+  formatSeconds,
+  levelsFor,
+  normalizeStages,
+  type Hints,
+  type Mode,
+  type Rules,
+} from "@/lib/round";
 import type { StartMode } from "@/lib/types";
 
 interface SettingsProps {
   rules: Rules;
   hints: Hints;
+  mode: Mode;
   /** Hints and the round controls only mean anything while a round is up. */
   inRound: boolean;
+  /** Rerolling needs a round to reroll and a shuffle to reroll it into. */
+  canReroll: boolean;
   /** One artist's pack already answers the artist hint, so it is left out. */
   showArtistHint: boolean;
   /** Name and size of what is loaded, so an import can be checked at a glance. */
@@ -17,6 +29,8 @@ interface SettingsProps {
   volume: number;
   theme: "dark" | "light";
   onStartMode: (mode: StartMode) => void;
+  onMode: (mode: Mode) => void;
+  onReroll: () => void;
   onRules: (rules: Rules) => void;
   onHints: (hints: Hints) => void;
   onVolume: (value: number) => void;
@@ -59,6 +73,31 @@ function Pill({
     >
       {children}
     </button>
+  );
+}
+
+/** A five pip die, which is the whole label on the reroll button. */
+function Dice() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="dice h-4 w-4">
+      <rect
+        x="3.5"
+        y="3.5"
+        width="17"
+        height="17"
+        rx="4.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+      <g fill="currentColor">
+        <circle cx="8.6" cy="8.6" r="1.45" />
+        <circle cx="15.4" cy="8.6" r="1.45" />
+        <circle cx="12" cy="12" r="1.45" />
+        <circle cx="8.6" cy="15.4" r="1.45" />
+        <circle cx="15.4" cy="15.4" r="1.45" />
+      </g>
+    </svg>
   );
 }
 
@@ -121,7 +160,9 @@ function Icon({ children }: { children: React.ReactNode }) {
 export default function Settings({
   rules,
   hints,
+  mode,
   inRound,
+  canReroll,
   showArtistHint,
   playlistName,
   trackCount,
@@ -129,6 +170,8 @@ export default function Settings({
   volume,
   theme,
   onStartMode,
+  onMode,
+  onReroll,
   onRules,
   onHints,
   onVolume,
@@ -138,6 +181,10 @@ export default function Settings({
   onReset,
   onTracks,
 }: SettingsProps) {
+  const guessable = mode === "guessable";
+  const levels = guessable ? levelsFor(rules.stages) : [];
+  const note = MODES.find((m) => m.key === mode)?.note ?? "";
+
   function toggleStage(value: number) {
     const on = rules.stages.includes(value);
     // Never let the last one be switched off, there would be nothing to play.
@@ -189,10 +236,39 @@ export default function Settings({
         </Row>
       ) : null}
 
-      <Row label="Difficulty">
+      <Row label="Mode">
+        <div className="flex gap-1.5">
+          {MODES.map((m) => (
+            <Pill key={m.key} on={mode === m.key} onClick={() => onMode(m.key)}>
+              {m.label}
+            </Pill>
+          ))}
+        </div>
+        <span className="text-xs text-faint">{note}</span>
+      </Row>
+
+      {/* One shuffle is only one of the orders random can deal, so random is the
+          only order with anything left to ask for. It is filled rather than
+          outlined because it sits here and the order it rerolls sits on the
+          card, too far apart for a quiet button to be found. */}
+      {canReroll ? (
+        <Row label="Shuffle">
+          <button
+            type="button"
+            onClick={onReroll}
+            className="reroll flex h-10 items-center justify-center gap-2 rounded-full px-4 text-sm font-medium"
+          >
+            <Dice />
+            Reroll
+          </button>
+        </Row>
+      ) : null}
+
+      <Row label="Stages">
         <div className="flex flex-col gap-1.5">
           {TIERS.map((tier) => {
             const on = rules.stages.includes(tier.seconds);
+            const level = levels.indexOf(tier.seconds);
             return (
               <button
                 key={tier.seconds}
@@ -208,11 +284,23 @@ export default function Settings({
                   on ? "text-white" : "hover:brightness-125"
                 }`}
               >
-                <span
-                  className="text-sm font-semibold"
-                  style={on ? undefined : { color: tier.color }}
-                >
-                  {tier.name}
+                <span className="flex items-center gap-2">
+                  {/* Guessable plays each selected length once, so the button
+                      says which turn this one takes. */}
+                  {guessable && level >= 0 ? (
+                    <span
+                      className="font-mono text-[10px] tabular-nums"
+                      style={on ? { opacity: 0.8 } : { color: "var(--color-faint)" }}
+                    >
+                      {level + 1}
+                    </span>
+                  ) : null}
+                  <span
+                    className="text-sm font-semibold"
+                    style={on ? undefined : { color: tier.color }}
+                  >
+                    {tier.name}
+                  </span>
                 </span>
                 <span
                   className="font-mono text-xs"
@@ -224,6 +312,11 @@ export default function Settings({
             );
           })}
         </div>
+        <span className="text-xs text-faint">
+          {guessable
+            ? "One song per stage, drawn easiest to hardest."
+            : "You start on the shortest and work up."}
+        </span>
       </Row>
 
       {inRound ? (

@@ -1,6 +1,14 @@
 "use client";
 
-import { DEFAULT_RULES, SORTS, normalizeStages, type Rules, type SortKey } from "./round";
+import {
+  DEFAULT_RULES,
+  MODES,
+  SORTS,
+  normalizeStages,
+  type Mode,
+  type Rules,
+  type SortKey,
+} from "./round";
 import type { SourceKind, StartMode } from "./types";
 
 const KEY = "snippet.prefs.v3";
@@ -9,6 +17,7 @@ export type Theme = "dark" | "light";
 
 export interface Prefs {
   rules: Rules;
+  mode: Mode;
   sort: SortKey;
   startMode: StartMode;
   volume: number;
@@ -19,6 +28,7 @@ export interface Prefs {
 
 export const DEFAULT_PREFS: Prefs = {
   rules: DEFAULT_RULES,
+  mode: "classic",
   sort: "plays",
   startMode: "start",
   volume: 0.8,
@@ -47,6 +57,8 @@ export function readPrefs(): Prefs {
 
     return {
       rules: readRules(p.rules),
+      // Stored before the modes existed reads as classic, which is what it was.
+      mode: MODES.some((o) => o.key === p.mode) ? (p.mode as Mode) : DEFAULT_PREFS.mode,
       sort: SORTS.some((o) => o.key === p.sort) ? (p.sort as SortKey) : DEFAULT_PREFS.sort,
       startMode: p.startMode === "dropin" || p.startMode === "start" ? p.startMode : "start",
       volume:

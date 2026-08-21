@@ -51,14 +51,14 @@ export default function Stage({
 
   return (
     <div className="flex flex-col items-center gap-6">
-      {/* One bar per difficulty, each as wide as its snippet is long. */}
+      {/* One bar per stage, each as wide as its snippet is long. */}
       <div
         className="flex w-full items-center gap-1.5"
         role="progressbar"
         aria-valuemin={1}
         aria-valuemax={stages.length}
         aria-valuenow={index + 1}
-        aria-label="Difficulty"
+        aria-label="Stage"
       >
         {stages.map((length, i) => {
           const t = tierFor(length);

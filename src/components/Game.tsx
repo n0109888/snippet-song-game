@@ -601,52 +601,31 @@ export default function Game() {
             </div>
           ) : phase === "playing" && track ? (
             <div className="flex w-full max-w-lg flex-col gap-8">
-              <div className="flex items-end justify-between gap-4">
-                <div className="flex min-w-0 items-center gap-2">
-                  <span className="truncate text-sm text-muted">{playlist?.name}</span>
-                  {/* The label lives inside the chip, so the order reads as a
-                      sentence without spending a second line on it. */}
-                  <label className="flex h-7 shrink-0 items-center rounded-chip border border-line bg-panel pl-2 focus-within:border-line-strong">
-                    <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-faint">
-                      Sort by
-                    </span>
-                    <select
-                      aria-label="Sort by"
-                      value={prefs.sort}
-                      onChange={(e) => {
-                        const next = e.target.value as SortKey;
-                        update({ sort: next });
-                        if (playlist) startRound(playlist, next);
-                      }}
-                      className="h-full rounded-chip bg-transparent px-1 text-xs text-muted"
-                    >
-                      {SORTS.map((o) => (
-                        <option key={o.key} value={o.key}>
-                          {o.label}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                </div>
-
-                <div className="flex shrink-0 items-end gap-5">
-                  <div className="flex flex-col items-end">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-faint">
-                      Correct
-                    </span>
-                    <span className="font-mono text-lg leading-none tabular-nums">
-                      {results.filter((r) => r.solvedAt !== null).length}
-                    </span>
-                  </div>
-                  <div className="flex flex-col items-end">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-faint">
-                      Song
-                    </span>
-                    <span className="font-mono text-lg leading-none tabular-nums">
-                      {results.length + 1}
-                    </span>
-                  </div>
-                </div>
+              <div className="flex min-w-0 items-center gap-2">
+                <span className="truncate text-sm text-muted">{playlist?.name}</span>
+                {/* The label lives inside the chip, so the order reads as a
+                    sentence without spending a second line on it. */}
+                <label className="flex h-7 shrink-0 items-center rounded-chip border border-line bg-panel pl-2 focus-within:border-line-strong">
+                  <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-faint">
+                    Sort by
+                  </span>
+                  <select
+                    aria-label="Sort by"
+                    value={prefs.sort}
+                    onChange={(e) => {
+                      const next = e.target.value as SortKey;
+                      update({ sort: next });
+                      if (playlist) startRound(playlist, next);
+                    }}
+                    className="h-full rounded-chip bg-transparent px-1 text-xs text-muted"
+                  >
+                    {SORTS.map((o) => (
+                      <option key={o.key} value={o.key}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
               </div>
 
               {hints.art && track.art ? (

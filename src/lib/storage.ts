@@ -29,7 +29,7 @@ export interface Prefs {
 export const DEFAULT_PREFS: Prefs = {
   rules: DEFAULT_RULES,
   mode: "classic",
-  sort: "plays",
+  sort: "random",
   startMode: "start",
   volume: 0.8,
   theme: "dark",

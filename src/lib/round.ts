@@ -146,54 +146,53 @@ export function normalizeStages(stages: readonly number[]): number[] {
 /**
  * How the whole game is shaped.
  *
- * `classic` is the ladder: one song at a time, and every wrong guess or skip
- * buys you a longer piece of it.
+ * `classic` plays the pack in the chosen order, a song at a time, for as long
+ * as you like.
  *
- * `guessable` turns the ladder on its side. The lengths become levels played
- * once each, easiest first, and the pack is split by play count so the level
- * and the song agree: the Easy level draws a song everybody knows and gets 15
- * seconds of it, Impossible draws one nobody plays and gives you a tenth of a
- * second. One song per level, one guess each.
+ * `guessable` plays five songs, one per level, drawn from the pack by play
+ * count: Easy is a song everybody knows, Impossible is one nobody plays. The
+ * snippet ladder inside a level is the same as classic's, so every level opens
+ * on the shortest length selected and every miss buys a longer piece. Naming
+ * the song is what moves you up a level.
  */
 export type Mode = "classic" | "guessable";
 
-export const MODES: { key: Mode; label: string; note: string }[] = [
-  { key: "classic", label: "Classic", note: "One song, longer on every miss." },
-  { key: "guessable", label: "Guessable", note: "One song per level, one guess each." },
+export const MODES: { key: Mode; label: string }[] = [
+  { key: "classic", label: "Classic" },
+  { key: "guessable", label: "Guessable" },
 ];
 
-/**
- * The selected lengths as levels, easiest first. Ascending is the ladder's
- * order because it climbs; a level run starts on the longest piece instead.
- */
-export function levelsFor(stages: readonly number[]): number[] {
-  return [...normalizeStages(stages)].reverse();
-}
-
-export interface Band {
-  seconds: number;
-  /** Every song of that level's popularity, most played first. */
-  pool: Track[];
+export interface Level {
+  name: string;
+  color: string;
 }
 
 /**
- * Split a pack into one band of play counts per level. Most played sit in the
- * first band and get the longest piece, least played in the last and get the
- * shortest, so a level's name describes its song as much as its snippet.
+ * The levels, easiest song first. They take their colours from the stages of
+ * the same name, so the two readings of Easy and Impossible are one palette:
+ * on a stage it is how much of the song you get, on a level it is how well
+ * known the song is.
  */
-export function bandsFor(tracks: readonly Track[], levels: readonly number[]): Band[] {
+export const LEVELS: Level[] = ["Easy", "Medium", "Hard", "Extreme", "Impossible"].map(
+  (name) => ({
+    name,
+    color: TIERS.find((t) => t.name === name)?.color ?? "#e9a13b",
+  }),
+);
+
+/**
+ * The songs a level draws from: its own fifth of the pack by play count. The
+ * first level takes the most played fifth and the last the least, so the level
+ * describes the song as much as the snippet does.
+ */
+export function bandFor(tracks: readonly Track[], level: number): Track[] {
+  if (tracks.length === 0) return [];
   const ranked = [...tracks].sort(byPlays);
-  const bands: Band[] = [];
-  // A pack thinner than the ladder gives a level each to the songs it has,
-  // rather than dealing the same song into two levels.
-  const count = Math.min(levels.length, ranked.length);
-  for (let i = 0; i < count; i += 1) {
-    const seconds = levels[i];
-    if (seconds === undefined) continue;
-    const from = Math.floor((i * ranked.length) / count);
-    const to = Math.floor(((i + 1) * ranked.length) / count);
-    const pool = ranked.slice(from, to);
-    if (pool.length > 0) bands.push({ seconds, pool });
-  }
-  return bands;
+  const at = Math.max(0, Math.min(level, LEVELS.length - 1));
+  const from = Math.floor((at * ranked.length) / LEVELS.length);
+  const to = Math.floor(((at + 1) * ranked.length) / LEVELS.length);
+  // A pack thinner than the ladder can leave a band empty; it falls back to the
+  // whole pack rather than to no song at all.
+  const pool = ranked.slice(from, to);
+  return pool.length > 0 ? pool : ranked;
 }

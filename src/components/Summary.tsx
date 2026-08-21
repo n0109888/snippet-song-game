@@ -1,15 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { formatSeconds, tierFor } from "@/lib/round";
+import { LEVELS, formatSeconds } from "@/lib/round";
 import type { Track } from "@/lib/types";
 
 export interface RoundResult {
   track: Track;
   /** Stage the track was solved at, or null when it was missed. */
   solvedAt: number | null;
-  /** Snippet length the track was played at, which names its level. */
+  /** Snippet length the track was named at, or the longest one it survived. */
   length: number;
+  /** Guessable only: the level the song was drawn for. */
+  level: number | null;
 }
 
 interface SummaryProps {
@@ -25,8 +27,8 @@ function textReport(results: RoundResult[], stageCount: number, guessable: boole
   if (guessable) {
     const lines = results.map(
       (r) =>
-        `${tierFor(r.length).name.padEnd(10)} ${formatSeconds(r.length).padStart(6)}  ${
-          r.solvedAt === null ? "." : "#"
+        `${(LEVELS[r.level ?? 0]?.name ?? "").padEnd(10)} ${
+          r.solvedAt === null ? "-" : formatSeconds(r.length).padStart(6)
         }`,
     );
     return `Snippet\n${lines.join("\n")}`;
@@ -64,10 +66,13 @@ export function ResultsList({
             <span
               className="w-[72px] shrink-0 font-mono text-[10px] uppercase tracking-[0.1em]"
               style={{
-                color: r.solvedAt === null ? "var(--color-faint)" : tierFor(r.length).color,
+                color:
+                  r.solvedAt === null
+                    ? "var(--color-faint)"
+                    : (LEVELS[r.level ?? 0]?.color ?? "var(--color-good)"),
               }}
             >
-              {tierFor(r.length).name}
+              {LEVELS[r.level ?? 0]?.name ?? ""}
             </span>
           ) : (
             <div className="flex shrink-0 gap-[2px]">

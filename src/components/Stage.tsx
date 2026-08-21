@@ -11,6 +11,11 @@ interface StageProps {
   playing: boolean;
   disabled: boolean;
   loading?: boolean;
+  /**
+   * Guessable runs the whole ladder in its level's colour, and names the level
+   * on the picker above rather than here, so the stage's own name is left off.
+   */
+  tone?: string | null;
   engine: AudioEngine;
   onPlay: () => void;
 }
@@ -21,12 +26,14 @@ export default function Stage({
   playing,
   disabled,
   loading = false,
+  tone = null,
   engine,
   onPlay,
 }: StageProps) {
   const index = Math.min(unlocked, stages.length - 1);
   const current = stages[index] ?? 0;
   const tier = tierFor(current);
+  const shade = tone ?? tier.color;
   const longest = Math.max(...stages);
   const fillRef = useRef<HTMLDivElement | null>(null);
 
@@ -61,7 +68,7 @@ export default function Stage({
         aria-label="Stage"
       >
         {stages.map((length, i) => {
-          const t = tierFor(length);
+          const colour = tone ?? tierFor(length).color;
           const past = i < index;
           const active = i === index;
           return (
@@ -73,9 +80,9 @@ export default function Stage({
                 flex: `${lengthShare(length, longest)} 0 0%`,
                 minWidth: "6px",
                 backgroundColor: past
-                  ? `color-mix(in srgb, ${t.color} 34%, transparent)`
+                  ? `color-mix(in srgb, ${colour} 34%, transparent)`
                   : active
-                    ? `color-mix(in srgb, ${t.color} 20%, transparent)`
+                    ? `color-mix(in srgb, ${colour} 20%, transparent)`
                     : "var(--color-line)",
               }}
               className="h-2 overflow-hidden rounded-full"
@@ -84,7 +91,7 @@ export default function Stage({
                 <div
                   ref={fillRef}
                   className="h-full w-0 rounded-full"
-                  style={{ backgroundColor: t.color }}
+                  style={{ backgroundColor: colour }}
                 />
               ) : null}
             </div>
@@ -93,13 +100,18 @@ export default function Stage({
       </div>
 
       <div className="flex flex-col items-center gap-1">
+        {tone ? null : (
+          <span
+            className="text-[2rem] font-bold uppercase leading-none tracking-[0.03em]"
+            style={{ color: tier.color }}
+          >
+            {tier.name}
+          </span>
+        )}
         <span
-          className="text-[2rem] font-bold uppercase leading-none tracking-[0.03em]"
-          style={{ color: tier.color }}
+          className="font-mono text-5xl leading-tight tabular-nums"
+          style={tone ? { color: tone } : undefined}
         >
-          {tier.name}
-        </span>
-        <span className="font-mono text-5xl leading-tight tabular-nums">
           {formatSeconds(current)}
         </span>
       </div>
@@ -110,19 +122,19 @@ export default function Stage({
         disabled={disabled}
         aria-label={playing ? "Stop" : "Play"}
         className="grid h-32 w-32 shrink-0 place-items-center rounded-full border-[3px] bg-panel transition-transform duration-150 ease-out hover:scale-[1.05] active:scale-[0.96] disabled:opacity-40"
-        style={{ borderColor: tier.color }}
+        style={{ borderColor: shade }}
       >
         {loading ? (
           <span
             className="block h-8 w-8 animate-pulse rounded-full"
-            style={{ backgroundColor: tier.color }}
+            style={{ backgroundColor: shade }}
           />
         ) : playing ? (
-          <span className="block h-8 w-8 rounded-[4px]" style={{ backgroundColor: tier.color }} />
+          <span className="block h-8 w-8 rounded-[4px]" style={{ backgroundColor: shade }} />
         ) : (
           <span
             className="ml-2 block h-0 w-0 border-y-[23px] border-l-[36px] border-y-transparent"
-            style={{ borderLeftColor: tier.color }}
+            style={{ borderLeftColor: shade }}
           />
         )}
       </button>

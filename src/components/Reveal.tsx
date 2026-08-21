@@ -12,11 +12,24 @@ interface RevealProps {
   atLength: number | null;
   /** Solved on the shortest snippet there is, the best the game has to give. */
   max: boolean;
+  /** What moving on means here: the next song, or the level it leads to. */
+  nextLabel: string;
+  /** The colour of that level, so the button reads as the way to it. */
+  nextTone: string | null;
   engine: AudioEngine;
   onNext: () => void;
 }
 
-export default function Reveal({ track, solved, atLength, max, engine, onNext }: RevealProps) {
+export default function Reveal({
+  track,
+  solved,
+  atLength,
+  max,
+  nextLabel,
+  nextTone,
+  engine,
+  onNext,
+}: RevealProps) {
   // The win green is the confetti green, so the badge and the paper agree, and
   // gold takes over the same way when the shortest snippet is named.
   const tone = max ? "var(--color-gold)" : solved ? "var(--color-win)" : "var(--color-bad)";
@@ -93,9 +106,14 @@ export default function Reveal({ track, solved, atLength, max, engine, onNext }:
       <button
         type="button"
         onClick={onNext}
-        className="h-10 rounded-control border border-line-strong px-5 text-sm transition-colors duration-150 ease-out hover:bg-[color-mix(in_srgb,var(--color-ink)_7%,transparent)]"
+        style={
+          nextTone
+            ? { borderColor: nextTone, color: nextTone }
+            : undefined
+        }
+        className="h-10 rounded-control border border-line-strong px-5 text-sm font-medium transition-colors duration-150 ease-out hover:bg-[color-mix(in_srgb,var(--color-ink)_7%,transparent)]"
       >
-        Next song
+        {nextLabel}
       </button>
     </div>
   );

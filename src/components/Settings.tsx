@@ -4,7 +4,6 @@ import {
   MODES,
   TIERS,
   formatSeconds,
-  levelsFor,
   normalizeStages,
   type Hints,
   type Mode,
@@ -181,10 +180,6 @@ export default function Settings({
   onReset,
   onTracks,
 }: SettingsProps) {
-  const guessable = mode === "guessable";
-  const levels = guessable ? levelsFor(rules.stages) : [];
-  const note = MODES.find((m) => m.key === mode)?.note ?? "";
-
   function toggleStage(value: number) {
     const on = rules.stages.includes(value);
     // Never let the last one be switched off, there would be nothing to play.
@@ -232,7 +227,6 @@ export default function Settings({
               {trackCount}
             </span>
           </button>
-          <span className="text-xs text-faint">Tap to see every song.</span>
         </Row>
       ) : null}
 
@@ -244,7 +238,6 @@ export default function Settings({
             </Pill>
           ))}
         </div>
-        <span className="text-xs text-faint">{note}</span>
       </Row>
 
       {/* One shuffle is only one of the orders random can deal, so random is the
@@ -268,7 +261,6 @@ export default function Settings({
         <div className="flex flex-col gap-1.5">
           {TIERS.map((tier) => {
             const on = rules.stages.includes(tier.seconds);
-            const level = levels.indexOf(tier.seconds);
             return (
               <button
                 key={tier.seconds}
@@ -284,23 +276,11 @@ export default function Settings({
                   on ? "text-white" : "hover:brightness-125"
                 }`}
               >
-                <span className="flex items-center gap-2">
-                  {/* Guessable plays each selected length once, so the button
-                      says which turn this one takes. */}
-                  {guessable && level >= 0 ? (
-                    <span
-                      className="font-mono text-[10px] tabular-nums"
-                      style={on ? { opacity: 0.8 } : { color: "var(--color-faint)" }}
-                    >
-                      {level + 1}
-                    </span>
-                  ) : null}
-                  <span
-                    className="text-sm font-semibold"
-                    style={on ? undefined : { color: tier.color }}
-                  >
-                    {tier.name}
-                  </span>
+                <span
+                  className="text-sm font-semibold"
+                  style={on ? undefined : { color: tier.color }}
+                >
+                  {tier.name}
                 </span>
                 <span
                   className="font-mono text-xs"
@@ -312,11 +292,6 @@ export default function Settings({
             );
           })}
         </div>
-        <span className="text-xs text-faint">
-          {guessable
-            ? "One song per stage, drawn easiest to hardest."
-            : "You start on the shortest and work up."}
-        </span>
       </Row>
 
       {inRound ? (
@@ -331,7 +306,6 @@ export default function Settings({
               </Pill>
             ) : null}
           </div>
-          <span className="text-xs text-faint">Off again on the next song.</span>
         </Row>
       ) : null}
 

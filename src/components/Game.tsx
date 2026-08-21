@@ -46,11 +46,63 @@ const LOOKAHEAD = 4;
 
 const COLLECTIONS = (presetData as { collections?: PresetCollection[] }).collections ?? [];
 
+/** A five pip die, which is the whole label on the reroll button. */
+function Dice() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="dice h-3.5 w-3.5">
+      <rect
+        x="3.5"
+        y="3.5"
+        width="17"
+        height="17"
+        rx="4.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+      <g fill="currentColor">
+        <circle cx="8.6" cy="8.6" r="1.45" />
+        <circle cx="15.4" cy="8.6" r="1.45" />
+        <circle cx="12" cy="12" r="1.45" />
+        <circle cx="8.6" cy="15.4" r="1.45" />
+        <circle cx="15.4" cy="15.4" r="1.45" />
+      </g>
+    </svg>
+  );
+}
+
+/** The turning arrow on the reordered badge. */
+function Refresh() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className="dealt-turn h-3 w-3"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M20.4 12a8.4 8.4 0 1 1-2.5-6" />
+      <path d="M20.4 4.2v4.8h-4.8" />
+    </svg>
+  );
+}
+
 export default function Game() {
   const engineRef = useRef<AudioEngine | null>(null);
   const revealTimer = useRef<number | null>(null);
   const queueRef = useRef<Track[]>([]);
-  const resolvingRef = useRef(false);
+  /** Round generation whose lookahead is in flight, or null when idle. */
+  const resolvingRef = useRef<number | null>(null);
+  /**
+   * Every preview and cover this round has already looked up, held by track id.
+   * Dealing again reuses them, so a change of sort does not pay for the same
+   * lookups twice.
+   */
+  const foundRef = useRef(new Map<string, { preview: string | null; art: string | null }>());
+  const roundRef = useRef(0);
 
   const [ready, setReady] = useState(false);
   const [prefs, setPrefs] = useState<Prefs>(DEFAULT_PREFS);
@@ -76,6 +128,13 @@ export default function Game() {
   const [readyId, setReadyId] = useState<string | null>(null);
   const [confirmReset, setConfirmReset] = useState(false);
   const [showTracks, setShowTracks] = useState(false);
+  /**
+   * Bumped every time the pack is dealt again. The lookahead keys off it, so a
+   * new order is resolved even though the cursor is back where it already was.
+   */
+  const [roundId, setRoundId] = useState(0);
+  /** Non-zero while the reordered badge is on screen; the value replays it. */
+  const [dealtKey, setDealtKey] = useState(0);
 
   const rules = prefs.rules;
   const stages = rules.stages;
@@ -123,7 +182,8 @@ export default function Game() {
    * would be a long wait for audio the player may never reach.
    */
   const topUp = useCallback(async (from: number) => {
-    if (resolvingRef.current) return;
+    const round = roundRef.current;
+    if (resolvingRef.current === round) return;
     // Art as well as audio: the Spotify reader supplies previews but no cover,
     // so a track can be playable and still need the lookup for its hint.
     const pending = queueRef.current
@@ -131,9 +191,15 @@ export default function Game() {
       .filter((t) => t.preview === null || t.art === null);
     if (pending.length === 0) return;
 
-    resolvingRef.current = true;
+    resolvingRef.current = round;
     try {
       const resolved = await resolvePreviews(pending);
+      for (const t of resolved) {
+        foundRef.current.set(t.id, { preview: t.preview, art: t.art });
+      }
+      // Dealing again while this was in flight replaced the queue, so these
+      // belong to a round that is gone. The lookups are kept all the same.
+      if (roundRef.current !== round) return;
       const found = new Map(resolved.map((t) => [t.id, t]));
 
       const next = queueRef.current.map((t) => {
@@ -152,14 +218,22 @@ export default function Game() {
     } catch {
       // Leave the queue as it is, the player can skip past a bad track.
     } finally {
-      resolvingRef.current = false;
+      // Only if a later round has not already claimed the slot.
+      if (resolvingRef.current === round) resolvingRef.current = null;
     }
   }, []);
 
   useEffect(() => {
     if (phase !== "playing") return;
     void topUp(cursor);
-  }, [phase, cursor, topUp]);
+  }, [phase, cursor, roundId, topUp]);
+
+  /** The reordered badge says its piece and goes. */
+  useEffect(() => {
+    if (dealtKey === 0) return;
+    const timer = window.setTimeout(() => setDealtKey(0), 1400);
+    return () => window.clearTimeout(timer);
+  }, [dealtKey]);
 
   /** Load artwork up front, so a hint is on screen the moment the track is. */
   const warmArt = useCallback(async (url: string | null): Promise<void> => {
@@ -213,6 +287,7 @@ export default function Game() {
         const [hit] = await resolvePreviews([{ ...target, preview: null }], refresh);
         if (hit?.preview) {
           const preview = hit.preview;
+          foundRef.current.set(target.id, { preview, art: hit.art ?? target.art ?? null });
           queueRef.current = queueRef.current.map((t) =>
             t.id === target.id ? { ...t, preview } : t,
           );
@@ -227,11 +302,24 @@ export default function Game() {
     [],
   );
 
+  /**
+   * Deal the pack in the given order and start from the first song. The round
+   * generation moves with it, which is what tells the lookahead to resolve the
+   * new order: the cursor is back at zero, where it usually already was, so
+   * that alone would look like nothing had changed.
+   */
   const startRound = useCallback(
     (loaded: LoadedPlaylist, sort: SortKey) => {
       if (revealTimer.current !== null) window.clearTimeout(revealTimer.current);
       engineRef.current?.stop();
-      const drawn = sortTracks(loaded.tracks, sort);
+      // Previews found earlier in the session carry over, so reordering a pack
+      // you have been playing deals songs that are ready to hear.
+      const drawn = sortTracks(loaded.tracks, sort).map((t) => {
+        const hit = foundRef.current.get(t.id);
+        return hit ? { ...t, preview: t.preview ?? hit.preview, art: t.art ?? hit.art } : t;
+      });
+      roundRef.current += 1;
+      setRoundId(roundRef.current);
       queueRef.current = drawn;
       setQueue(drawn);
       setCursor(0);
@@ -267,6 +355,9 @@ export default function Game() {
         return null;
       }
 
+      // A different pack is a different set of songs, so nothing found for the
+      // last one is worth keeping.
+      foundRef.current.clear();
       const loaded: LoadedPlaylist = { name, source, sourceId, tracks };
       setPlaylist(loaded);
       update({ lastSource: source, lastSourceId: sourceId });
@@ -507,6 +598,71 @@ export default function Game() {
     />
   );
 
+  /**
+   * Deal the pack again in the order that is already selected. Reordering is
+   * the whole of what changed, so it says so: the round always restarts on song
+   * one, which on its own is indistinguishable from nothing having happened.
+   */
+  function deal(sort: SortKey) {
+    if (!playlist) return;
+    startRound(playlist, sort);
+    setDealtKey((k) => k + 1);
+  }
+
+  const roundHeader = (
+    <div className="flex min-w-0 items-center gap-2">
+      <span className="truncate text-sm text-muted">{playlist?.name}</span>
+      {/* The label lives inside the chip, so the order reads as a
+          sentence without spending a second line on it. */}
+      <label className="flex h-7 shrink-0 items-center rounded-chip border border-line bg-panel pl-2 focus-within:border-line-strong">
+        <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-faint">
+          Sort by
+        </span>
+        <select
+          aria-label="Sort by"
+          value={prefs.sort}
+          onChange={(e) => {
+            const next = e.target.value as SortKey;
+            update({ sort: next });
+            deal(next);
+          }}
+          className="h-full rounded-chip bg-transparent px-1 text-xs text-muted"
+        >
+          {SORTS.map((o) => (
+            <option key={o.key} value={o.key}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      {/* One shuffle is only one of the orders random can deal, so random is
+          the only sort with anything left to ask for. */}
+      {prefs.sort === "random" ? (
+        <button
+          type="button"
+          onClick={() => deal("random")}
+          title="Reroll"
+          aria-label="Reroll"
+          className="reroll flex h-7 w-7 shrink-0 items-center justify-center rounded-chip border border-line bg-panel text-muted"
+        >
+          <Dice />
+        </button>
+      ) : null}
+
+      {dealtKey > 0 ? (
+        <span
+          key={dealtKey}
+          role="status"
+          className="dealt flex shrink-0 items-center gap-1 font-mono text-[9px] uppercase tracking-[0.14em] text-accent"
+        >
+          <Refresh />
+          Reordered
+        </span>
+      ) : null}
+    </div>
+  );
+
   // The phone shaped card, which is also what the effects are drawn inside.
   const onCard = phase === "playing" || phase === "done";
 
@@ -536,6 +692,9 @@ export default function Game() {
   function startOver() {
     setConfirmReset(false);
     setSheetOpen(false);
+    // No badge here: on a fixed sort this deals the same order back, and the
+    // sheet closing onto the first song is answer enough for a button you had
+    // to confirm.
     if (playlist) startRound(playlist, prefs.sort);
     else window.location.reload();
   }
@@ -592,90 +751,73 @@ export default function Game() {
               engine={engine()}
               onNext={advance}
             />
-          ) : phase === "playing" && track && !audioReady ? (
-            <div className="flex flex-col items-center gap-4">
-              <span className="loader h-9 w-9 rounded-full border-2 border-line" />
-              <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-faint">
-                Loading
-              </span>
-            </div>
           ) : phase === "playing" && track ? (
+            // One tree whether the audio is ready or not. The order sits above
+            // the spinner rather than being replaced by it, so the control that
+            // started the wait is still there to use, and the badge beside it is
+            // not remounted, and restarted, the moment the wait ends.
             <div className="flex w-full max-w-lg flex-col gap-8">
-              <div className="flex min-w-0 items-center gap-2">
-                <span className="truncate text-sm text-muted">{playlist?.name}</span>
-                {/* The label lives inside the chip, so the order reads as a
-                    sentence without spending a second line on it. */}
-                <label className="flex h-7 shrink-0 items-center rounded-chip border border-line bg-panel pl-2 focus-within:border-line-strong">
-                  <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-faint">
-                    Sort by
+              {roundHeader}
+
+              {!audioReady ? (
+                <div className="flex flex-col items-center gap-4 py-10">
+                  <span className="loader h-9 w-9 rounded-full border-2 border-line" />
+                  <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-faint">
+                    Loading
                   </span>
-                  <select
-                    aria-label="Sort by"
-                    value={prefs.sort}
-                    onChange={(e) => {
-                      const next = e.target.value as SortKey;
-                      update({ sort: next });
-                      if (playlist) startRound(playlist, next);
-                    }}
-                    className="h-full rounded-chip bg-transparent px-1 text-xs text-muted"
-                  >
-                    {SORTS.map((o) => (
-                      <option key={o.key} value={o.key}>
-                        {o.label}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              </div>
-
-              {hints.art && track.art ? (
-                <div className="flex justify-center">
-                  <div className="glow-in h-28 w-28 overflow-hidden rounded-panel border border-line">
-                    <Image
-                      src={track.art}
-                      alt=""
-                      width={112}
-                      height={112}
-                      unoptimized
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
                 </div>
-              ) : null}
+              ) : (
+                <>
+                  {hints.art && track.art ? (
+                    <div className="flex justify-center">
+                      <div className="glow-in h-28 w-28 overflow-hidden rounded-panel border border-line">
+                        <Image
+                          src={track.art}
+                          alt=""
+                          width={112}
+                          height={112}
+                          unoptimized
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                    </div>
+                  ) : null}
 
-              <Stage
-                stages={stages}
-                unlocked={stageIndex}
-                playing={playing}
-                disabled={false}
-                loading={loadingAudio}
-                engine={engine()}
-                onPlay={play}
-              />
+                  <Stage
+                    stages={stages}
+                    unlocked={stageIndex}
+                    playing={playing}
+                    disabled={false}
+                    loading={loadingAudio}
+                    engine={engine()}
+                    onPlay={play}
+                  />
 
-              <GuessInput
-                tracks={playlist?.tracks ?? []}
-                showArtist={mixedArtist}
-                disabled={false}
-                onGuess={guess}
-                onSkip={miss}
-                remaining={remaining}
-              />
+                  <GuessInput
+                    tracks={playlist?.tracks ?? []}
+                    showArtist={mixedArtist}
+                    disabled={false}
+                    onGuess={guess}
+                    onSkip={miss}
+                    remaining={remaining}
+                  />
 
-              <div className="flex min-h-12 flex-col items-center gap-2">
-                {error ? (
-                  <span className="text-sm text-[var(--color-bad)]">{error}</span>
-                ) : hints.artist ? (
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-faint">
-                      Artist
-                    </span>
-                    <span className="text-xl font-semibold" style={{ color: tier.color }}>
-                      {track.artist}
-                    </span>
+                  <div className="flex min-h-12 flex-col items-center gap-2">
+                    {error ? (
+                      <span className="text-sm text-[var(--color-bad)]">{error}</span>
+                    ) : hints.artist ? (
+                      <div className="flex flex-col items-center gap-1">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-faint">
+                          Artist
+                        </span>
+                        <span className="text-xl font-semibold" style={{ color: tier.color }}>
+                          {track.artist}
+                        </span>
+                      </div>
+                    ) : null}
                   </div>
-                ) : null}
-              </div>
+                </>
+              )}
             </div>
           ) : phase === "loading" ? (
             <span className="font-mono text-xs text-faint">Loading</span>

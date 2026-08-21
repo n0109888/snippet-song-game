@@ -292,6 +292,81 @@ input[type="range"]::-moz-range-thumb {
   transition-duration: 80ms;
 }
 
+/*
+ * Reroll. The die tumbles under the cursor and again on the way down, so the
+ * button reads as a throw before it has been pressed.
+ */
+.reroll {
+  transition:
+    transform 160ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 160ms ease-out,
+    color 160ms ease-out;
+}
+
+.reroll:hover,
+.reroll:focus-visible {
+  transform: translateY(-1px);
+  border-color: var(--color-line-strong);
+  color: var(--color-ink);
+}
+
+.reroll:active {
+  transform: scale(0.94);
+  transition-duration: 80ms;
+}
+
+.dice {
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reroll:hover .dice,
+.reroll:focus-visible .dice {
+  transform: rotate(-24deg);
+}
+
+.reroll:active .dice {
+  transform: rotate(96deg);
+  transition-duration: 140ms;
+}
+
+/*
+ * Dealing again always lands on song one, which on its own looks like nothing
+ * happened. The badge is the receipt: it arrives, holds long enough to read,
+ * and fades, with the arrow turning once as it comes in.
+ */
+@keyframes dealt-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  12% {
+    opacity: 1;
+    transform: none;
+  }
+  74% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}
+
+@keyframes dealt-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.dealt {
+  animation: dealt-in 1400ms ease-out both;
+}
+
+.dealt-turn {
+  animation: dealt-turn 640ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 /* Home buttons: a small, quick lift so the top of the app feels responsive. */
 .home {
   transition:
@@ -435,5 +510,16 @@ input[type="range"]::-moz-range-thumb {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  /*
+   * The badge carries information, not decoration: collapsing its animation
+   * would run it straight to the faded end and it would never be seen. It is
+   * shown plainly instead and still leaves on its own timer.
+   */
+  .dealt,
+  .dealt-turn {
+    animation: none !important;
+    opacity: 1;
   }
 }

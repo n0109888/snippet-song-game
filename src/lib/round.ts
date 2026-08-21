@@ -165,6 +165,29 @@ export const MODES: { key: Mode; label: string }[] = [
 export interface Level {
   name: string;
   color: string;
+  /** What to write on the colour once it is a fill rather than an outline. */
+  ink: string;
+}
+
+/**
+ * Black or white, whichever the fill can carry. The stage palette runs from a
+ * mid green through yellow and orange to a deep crimson, so one fixed choice
+ * is unreadable at one end or the other: white disappears on the yellow and
+ * black disappears on the crimson.
+ */
+export function inkOn(color: string): string {
+  const hex = /^#([0-9a-f]{6})$/i.exec(color);
+  if (!hex?.[1]) return "#ffffff";
+  const n = Number.parseInt(hex[1], 16);
+  const channel = (v: number) => {
+    const c = v / 255;
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  };
+  const luminance =
+    0.2126 * channel((n >> 16) & 255) +
+    0.7152 * channel((n >> 8) & 255) +
+    0.0722 * channel(n & 255);
+  return luminance > 0.18 ? "#12100e" : "#ffffff";
 }
 
 /**
@@ -174,10 +197,10 @@ export interface Level {
  * known the song is.
  */
 export const LEVELS: Level[] = ["Easy", "Medium", "Hard", "Extreme", "Impossible"].map(
-  (name) => ({
-    name,
-    color: TIERS.find((t) => t.name === name)?.color ?? "#e9a13b",
-  }),
+  (name) => {
+    const color = TIERS.find((t) => t.name === name)?.color ?? "#e9a13b";
+    return { name, color, ink: inkOn(color) };
+  },
 );
 
 /**

@@ -4,6 +4,7 @@ import {
   MODES,
   TIERS,
   formatSeconds,
+  inkOn,
   normalizeStages,
   type Hints,
   type Mode,
@@ -269,11 +270,11 @@ export default function Settings({
                 onClick={() => toggleStage(tier.seconds)}
                 style={
                   on
-                    ? { backgroundColor: tier.color, borderColor: tier.color }
+                    ? { backgroundColor: tier.color, borderColor: tier.color, color: inkOn(tier.color) }
                     : { borderColor: `color-mix(in srgb, ${tier.color} 35%, transparent)` }
                 }
                 className={`pill flex h-10 items-center justify-between rounded-full border-2 px-4 ${
-                  on ? "text-white" : "hover:brightness-125"
+                  on ? "" : "hover:brightness-125"
                 }`}
               >
                 <span

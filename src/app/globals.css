@@ -374,6 +374,47 @@ input[type="range"]::-moz-range-thumb {
   animation: dealt-turn 640ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/*
+ * The five levels, across a card that is phone shaped. Its width follows the
+ * window's height, and below a tall window there is not room for five readable
+ * names in a row: Impossible is the longest and it is the one that would go
+ * first. So they sit three over two, centred, and only spread into a single row
+ * where the card is actually wide enough to hold one. Letting them wrap on
+ * their own gave four and a lonely fifth at the widths in between, which reads
+ * as a mistake rather than a layout.
+ */
+.levels {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.levels > * {
+  grid-column: span 2;
+}
+
+.levels > *:nth-child(4) {
+  grid-column: 2 / span 2;
+}
+
+@media (min-height: 1060px) {
+  .levels {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .levels > *,
+  .levels > *:nth-child(4) {
+    grid-column: auto;
+  }
+}
+
+/* Changing level changes the room, so the wash crosses rather than cuts. */
+.level-wash {
+  transition:
+    background 320ms ease-out,
+    border-color 320ms ease-out;
+}
+
 /* Home buttons: a small, quick lift so the top of the app feels responsive. */
 .home {
   transition:

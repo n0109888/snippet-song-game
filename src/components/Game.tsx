@@ -763,10 +763,7 @@ export default function Game() {
    * because missing a song is exactly when you want to pick where to go next.
    */
   const levelPicker = (
-    // Wrapping rather than scrolling: the card is phone shaped, so on a short
-    // window five of these are wider than it is, and a level cut off at the
-    // edge reads as broken where a second row reads as a second row.
-    <div className="flex shrink-0 flex-wrap gap-1.5" role="group" aria-label="Level">
+    <div className="levels shrink-0" role="group" aria-label="Level">
       {LEVELS.map((step, i) => {
         const on = i === level;
         return (
@@ -777,17 +774,21 @@ export default function Game() {
             onClick={() => {
               if (playlist) openLevel(playlist, i);
             }}
-            style={
-              on
-                ? { backgroundColor: step.color, borderColor: step.color }
-                : {
-                    color: step.color,
-                    borderColor: `color-mix(in srgb, ${step.color} 40%, transparent)`,
+            style={{
+              ...(on
+                ? {
+                    backgroundColor: step.color,
+                    color: step.ink,
+                    boxShadow: `0 0 24px -4px color-mix(in srgb, ${step.color} 85%, transparent)`,
                   }
-            }
-            className={`pill h-8 shrink-0 rounded-full border-2 px-3 text-[11px] font-semibold ${
-              on ? "text-white" : "hover:brightness-125"
-            }`}
+                : {
+                    // Its own colour held well back, so an unpicked level still
+                    // reads as that level rather than as an empty outline.
+                    backgroundColor: `color-mix(in srgb, ${step.color} 15%, transparent)`,
+                    color: step.color,
+                  }),
+            }}
+            className="pill h-10 rounded-full px-3 text-[13px] font-bold"
           >
             {step.name}
           </button>
@@ -855,8 +856,19 @@ export default function Game() {
             className={
               onCard
                 ? // Phone shaped, so a recording of the centre crops cleanly.
-                  "relative flex h-full w-auto max-w-full shrink-0 items-center justify-center no-bars overflow-y-auto rounded-panel border border-line px-5 py-6 aspect-[9/16]"
+                  "level-wash relative flex h-full w-auto max-w-full shrink-0 items-center justify-center no-bars overflow-y-auto rounded-panel border border-line px-5 py-6 aspect-[9/16]"
                 : "no-bars flex h-full w-full items-center justify-center overflow-y-auto"
+            }
+            // The card takes the level's colour, gathered behind the play
+            // button and thinning out to nothing at the edges. Held low: it is
+            // meant to be the room the level is played in, not a filter over it.
+            style={
+              levelTone
+                ? {
+                    background: `radial-gradient(112% 64% at 50% 72%, color-mix(in srgb, ${levelTone} 13%, transparent) 0%, transparent 72%), color-mix(in srgb, ${levelTone} 4%, transparent)`,
+                    borderColor: `color-mix(in srgb, ${levelTone} 22%, var(--color-line))`,
+                  }
+                : undefined
             }
           >
           {/* Both effects fill the card, so they only exist while it does. */}

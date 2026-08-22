@@ -33,10 +33,19 @@ export default function Stage({
   const longest = Math.max(...stages);
   const fillRef = useRef<HTMLDivElement | null>(null);
 
+  /** Where on the bar this stage begins, which is where the one below it ended. */
+  const opens = index === 0 ? 0 : (stages[index - 1] ?? 0);
+
   /**
    * The playhead for the stage being played. Written straight to the node on
    * each frame, because a 15s clip would otherwise be nine hundred renders, and
    * wound back to the start whenever playback stops, the way a player does.
+   *
+   * Every stage plays the clip from the beginning, so the first part of what
+   * sounds is the ground the stages below already cover and is already drawn
+   * filled. This rung only starts moving once the clip has played past where
+   * the one below it ended, which is what keeps the bar a single reading of how
+   * far into the song the snippet has reached.
    */
   useEffect(() => {
     const node = fillRef.current;
@@ -45,21 +54,24 @@ export default function Stage({
       node.style.width = "0%";
       return;
     }
+    const span = Math.max(current - opens, 0.0001);
     let frame = requestAnimationFrame(function tick() {
-      node.style.width = `${engine.snippetProgress() * 100}%`;
+      const heard = engine.snippetProgress() * current;
+      const share = Math.max(0, Math.min(1, (heard - opens) / span));
+      node.style.width = `${share * 100}%`;
       frame = requestAnimationFrame(tick);
     });
     return () => cancelAnimationFrame(frame);
-  }, [playing, engine, index]);
+  }, [playing, engine, index, current, opens]);
 
   return (
     <div className="flex flex-col items-center gap-10">
       {/*
        * One bar, cut into rungs rather than built out of five. A rung is as
-       * wide as its snippet is long, and the ones already heard stay filled,
-       * because the ladder plays the clip straight through: reaching 8s after
-       * 2s buys the six seconds between them, so the fill really is how much
-       * of the song has sounded.
+       * wide as its snippet is long, and the ones already reached stay filled:
+       * every stage opens the clip from the beginning, so a snippet that runs
+       * to 8s has sounded everything the rungs below it stand for. The fill is
+       * how far into the song the round has been, read left to right.
        */}
       <div
         className="flex w-full items-center gap-1"

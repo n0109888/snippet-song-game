@@ -19,7 +19,6 @@ import {
   isMixedArtist,
   shuffle,
   sortTracks,
-  stageWindow,
   stagesFor,
   tierFor,
   type Hints,
@@ -671,10 +670,10 @@ export default function Game() {
 
     // Create the context inside the gesture, before any await.
     audio.ensure();
-    // The rung, not everything below it: climbing from 2s to 8s buys the six
-    // seconds between them, so the clip comes out in the order it was written
-    // rather than restarting on the same opening every time.
-    const heard = stageWindow(stages, stageIndex);
+    // Every rung opens the clip again rather than carrying on from the one
+    // below it. What a longer snippet buys is more of the same beginning, so
+    // the thing being named is always the way the song starts.
+    const length = currentLength;
 
     void (async () => {
       try {
@@ -708,7 +707,7 @@ export default function Game() {
           prefs.startMode === "dropin"
             ? dropInOffset(track.id, audio.duration(track.id), longest)
             : audio.onset(track.id);
-        audio.play(track.id, base + heard.from, heard.length, () => setPlaying(false));
+        audio.play(track.id, base, length, () => setPlaying(false));
         setPlaying(true);
         setError(null);
       } catch (err) {
@@ -721,7 +720,7 @@ export default function Game() {
         }
       }
     })();
-  }, [track, reveal, playing, stages, stageIndex, prefs.startMode, advance, resolveNow]);
+  }, [track, reveal, playing, stages, currentLength, prefs.startMode, advance, resolveNow]);
 
   /**
    * Make good on a press that landed before the song did. It is tied to the

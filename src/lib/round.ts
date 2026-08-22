@@ -69,22 +69,6 @@ export function stagesFor(rules: Rules): number[] {
 }
 
 /**
- * What a stage actually plays. The ladder is one pass through the clip rather
- * than the same opening over and over: reaching 8s after 2s buys the six
- * seconds between them, not the eight from the top. So the bar under it reads
- * as one bar, and the song comes out of it in the order it was written.
- */
-export function stageWindow(
-  stages: readonly number[],
-  index: number,
-): { from: number; length: number } {
-  const at = Math.max(0, Math.min(index, stages.length - 1));
-  const from = at === 0 ? 0 : (stages[at - 1] ?? 0);
-  const to = stages[at] ?? from;
-  return { from, length: Math.max(0, to - from) };
-}
-
-/**
  * Hints are asked for one song at a time, so they live with the round rather
  * than the saved preferences and reset whenever the next song comes up.
  */

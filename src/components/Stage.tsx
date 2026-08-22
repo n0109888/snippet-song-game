@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { formatSeconds, inkOn, lengthShare, tierFor } from "@/lib/round";
 import type { AudioEngine } from "@/lib/audio";
 
@@ -74,7 +74,10 @@ export default function Stage({
        * how far into the song the round has been, read left to right.
        */}
       <div
-        className="flex w-full items-center gap-1"
+        // Rounded and clipped here rather than on the rungs, so the two outer
+        // ends are the only round ones and everything between them is one
+        // unbroken run.
+        className="flex w-full items-center overflow-hidden rounded-full"
         role="progressbar"
         aria-valuemin={1}
         aria-valuemax={stages.length}
@@ -86,29 +89,33 @@ export default function Stage({
           const past = i < index;
           const active = i === index;
           return (
-            <div
-              key={`${length}-${i}`}
-              // Grow in proportion, from a zero basis, so the row still fills
-              // the card whatever mix of lengths is selected.
-              style={{
-                flex: `${lengthShare(length, longest)} 0 0%`,
-                minWidth: "6px",
-                backgroundColor: past
-                  ? colour
-                  : active
-                    ? `color-mix(in srgb, ${colour} 22%, transparent)`
-                    : "var(--color-line)",
-              }}
-              className="h-2.5 overflow-hidden rounded-full"
-            >
-              {active ? (
-                <div
-                  ref={fillRef}
-                  className="h-full w-0 rounded-full"
-                  style={{ backgroundColor: colour }}
-                />
-              ) : null}
-            </div>
+            <Fragment key={`${length}-${i}`}>
+              {/* Where one rung ends, drawn as the card showing through rather
+                  than as a space between two bars. */}
+              {i > 0 ? <div className="h-3 w-[2px] shrink-0 bg-bg" /> : null}
+              <div
+                // Grow in proportion, from a zero basis, so the row still fills
+                // the card whatever mix of lengths is selected.
+                style={{
+                  flex: `${lengthShare(length, longest)} 0 0%`,
+                  minWidth: "6px",
+                  backgroundColor: past
+                    ? colour
+                    : active
+                      ? `color-mix(in srgb, ${colour} 22%, transparent)`
+                      : "var(--color-line-strong)",
+                }}
+                className="h-3"
+              >
+                {active ? (
+                  <div
+                    ref={fillRef}
+                    className="h-full w-0"
+                    style={{ backgroundColor: colour }}
+                  />
+                ) : null}
+              </div>
+            </Fragment>
           );
         })}
       </div>

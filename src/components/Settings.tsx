@@ -253,9 +253,9 @@ export default function Settings({
 
       {/* The one rung that is optional, and the only rule left to set. It goes
           without a heading over it: the button says Inhuman and 0.05s, which is
-          the whole of what a heading could have added. Half the height it was
-          and only as wide as those two words, because one switch left on its own
-          in the panel does not need the weight of the six it replaced. */}
+          the whole of what a heading could have added. It runs half the width of
+          the panel rather than all of it, because one switch left on its own does
+          not need the breadth of the six it replaced. */}
       <button
         type="button"
         aria-pressed={rules.inhuman}
@@ -269,18 +269,18 @@ export default function Settings({
               }
             : { borderColor: `color-mix(in srgb, ${INHUMAN.color} 35%, transparent)` }
         }
-        className={`pill flex h-5 items-center gap-2 self-start rounded-full border px-2 ${
+        className={`pill flex h-10 w-1/2 items-center justify-between gap-2 rounded-full border-2 px-3 ${
           rules.inhuman ? "" : "hover:brightness-125"
         }`}
       >
         <span
-          className="text-[11px] font-semibold leading-none"
+          className="text-sm font-semibold"
           style={rules.inhuman ? undefined : { color: INHUMAN.color }}
         >
           {INHUMAN.name}
         </span>
         <span
-          className="font-mono text-[10px] leading-none"
+          className="font-mono text-xs"
           style={rules.inhuman ? { opacity: 0.85 } : { color: "var(--color-faint)" }}
         >
           {formatSeconds(INHUMAN.seconds)}

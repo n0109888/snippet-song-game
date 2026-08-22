@@ -1,11 +1,11 @@
 "use client";
 
 import {
+  INHUMAN_SECONDS,
   MODES,
-  TIERS,
   formatSeconds,
   inkOn,
-  normalizeStages,
+  tierFor,
   type Hints,
   type Mode,
   type Rules,
@@ -40,6 +40,9 @@ interface SettingsProps {
   onReset: () => void;
   onTracks: () => void;
 }
+
+/** The optional rung, named and coloured wherever the button draws it. */
+const INHUMAN = tierFor(INHUMAN_SECONDS);
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -181,16 +184,6 @@ export default function Settings({
   onReset,
   onTracks,
 }: SettingsProps) {
-  function toggleStage(value: number) {
-    const on = rules.stages.includes(value);
-    // Never let the last one be switched off, there would be nothing to play.
-    if (on && rules.stages.length === 1) return;
-    const next = normalizeStages(
-      on ? rules.stages.filter((s) => s !== value) : [...rules.stages, value],
-    );
-    onRules({ ...rules, stages: next });
-  }
-
   return (
     <div className="flex flex-col gap-7">
       {inRound ? (
@@ -258,42 +251,41 @@ export default function Settings({
         </Row>
       ) : null}
 
-      <Row label="Stages">
-        <div className="flex flex-col gap-1.5">
-          {TIERS.map((tier) => {
-            const on = rules.stages.includes(tier.seconds);
-            return (
-              <button
-                key={tier.seconds}
-                type="button"
-                aria-pressed={on}
-                onClick={() => toggleStage(tier.seconds)}
-                style={
-                  on
-                    ? { backgroundColor: tier.color, borderColor: tier.color, color: inkOn(tier.color) }
-                    : { borderColor: `color-mix(in srgb, ${tier.color} 35%, transparent)` }
-                }
-                className={`pill flex h-10 items-center justify-between rounded-full border-2 px-4 ${
-                  on ? "" : "hover:brightness-125"
-                }`}
-              >
-                <span
-                  className="text-sm font-semibold"
-                  style={on ? undefined : { color: tier.color }}
-                >
-                  {tier.name}
-                </span>
-                <span
-                  className="font-mono text-xs"
-                  style={on ? { opacity: 0.85 } : { color: "var(--color-faint)" }}
-                >
-                  {formatSeconds(tier.seconds)}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-      </Row>
+      {/* The one rung that is optional, and the only rule left to set. It goes
+          without a heading over it: the button says Inhuman and 0.05s, which is
+          the whole of what a heading could have added. Half the height it was
+          and only as wide as those two words, because one switch left on its own
+          in the panel does not need the weight of the six it replaced. */}
+      <button
+        type="button"
+        aria-pressed={rules.inhuman}
+        onClick={() => onRules({ ...rules, inhuman: !rules.inhuman })}
+        style={
+          rules.inhuman
+            ? {
+                backgroundColor: INHUMAN.color,
+                borderColor: INHUMAN.color,
+                color: inkOn(INHUMAN.color),
+              }
+            : { borderColor: `color-mix(in srgb, ${INHUMAN.color} 35%, transparent)` }
+        }
+        className={`pill flex h-5 items-center gap-2 self-start rounded-full border px-2 ${
+          rules.inhuman ? "" : "hover:brightness-125"
+        }`}
+      >
+        <span
+          className="text-[11px] font-semibold leading-none"
+          style={rules.inhuman ? undefined : { color: INHUMAN.color }}
+        >
+          {INHUMAN.name}
+        </span>
+        <span
+          className="font-mono text-[10px] leading-none"
+          style={rules.inhuman ? { opacity: 0.85 } : { color: "var(--color-faint)" }}
+        >
+          {formatSeconds(INHUMAN.seconds)}
+        </span>
+      </button>
 
       {inRound ? (
         <Row label="Hints">

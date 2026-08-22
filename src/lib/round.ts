@@ -1,8 +1,8 @@
 import type { Track } from "./types";
 
 /**
- * Snippet length is the difficulty. The ladder is whatever is selected,
- * ascending, so a round runs from the hardest length you picked to the easiest.
+ * Snippet length is the difficulty. The ladder is ascending, so a round runs
+ * from the hardest length to the easiest.
  */
 export interface Tier {
   seconds: number;
@@ -24,8 +24,6 @@ export const TIERS: Tier[] = [
   { seconds: 8, name: "Medium", color: "#c9b02b" },
   { seconds: 15, name: "Easy", color: "#4fa860" },
 ];
-
-export const STAGE_OPTIONS = TIERS.map((t) => t.seconds);
 
 /** Snippet lengths run straight into the unit, everywhere they appear. */
 export function formatSeconds(value: number): string {
@@ -49,16 +47,34 @@ export function tierFor(seconds: number): Tier {
   );
 }
 
-/** 0.05s is opt in, it is a twentieth of a second and most people want it off. */
-export const DEFAULT_STAGES: number[] = [0.1, 0.5, 2, 8, 15];
+/**
+ * The ladder every round runs, shortest snippet first: it opens on Impossible
+ * and every miss buys a longer piece. Which lengths are on it is not a choice
+ * any more, because a ladder with rungs missing is a different game rather than
+ * a harder one, and the panel asking song by song which of six to keep was more
+ * of the screen than the answer was ever worth.
+ */
+const LADDER: number[] = [0.1, 0.5, 2, 8, 15];
+
+/** The same ladder with 0.05s under it, held here so its identity is stable. */
+const LADDER_WITH_INHUMAN: number[] = [INHUMAN_SECONDS, ...LADDER];
 
 export interface Rules {
-  stages: number[];
+  /**
+   * 0.05s under the ladder. Opt in, because it is a twentieth of a second and
+   * most people want it off; it is the whole of what is left to set.
+   */
+  inhuman: boolean;
 }
 
 export const DEFAULT_RULES: Rules = {
-  stages: DEFAULT_STAGES,
+  inhuman: false,
 };
+
+/** The ladder these rules play. */
+export function stagesFor(rules: Rules): number[] {
+  return rules.inhuman ? LADDER_WITH_INHUMAN : LADDER;
+}
 
 /**
  * Hints are asked for one song at a time, so they live with the round rather
@@ -135,12 +151,6 @@ export function sortTracks(tracks: readonly Track[], sort: SortKey): Track[] {
     });
   }
   return copy.sort(byPlays);
-}
-
-/** Selected stages, ascending, never empty. */
-export function normalizeStages(stages: readonly number[]): number[] {
-  const kept = STAGE_OPTIONS.filter((s) => stages.includes(s));
-  return kept.length > 0 ? kept : [...DEFAULT_STAGES];
 }
 
 /**

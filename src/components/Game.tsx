@@ -19,6 +19,7 @@ import {
   isMixedArtist,
   shuffle,
   sortTracks,
+  stagesFor,
   tierFor,
   type Hints,
   type Mode,
@@ -134,7 +135,7 @@ export default function Game() {
   const [dealt, setDealt] = useState<Dealt | null>(null);
 
   const rules = prefs.rules;
-  const stages = rules.stages;
+  const stages = stagesFor(rules);
   const guessable = prefs.mode === "guessable";
   const stageIndex = Math.min(misses, stages.length - 1);
   const track = queue[cursor];

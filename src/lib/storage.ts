@@ -2,9 +2,9 @@
 
 import {
   DEFAULT_RULES,
+  INHUMAN_SECONDS,
   MODES,
   SORTS,
-  normalizeStages,
   type Mode,
   type Rules,
   type SortKey,
@@ -39,10 +39,12 @@ export const DEFAULT_PREFS: Prefs = {
 
 function readRules(v: unknown): Rules {
   if (typeof v !== "object" || v === null) return DEFAULT_RULES;
-  const r = v as Partial<Rules>;
-  return {
-    stages: Array.isArray(r.stages) ? normalizeStages(r.stages) : DEFAULT_RULES.stages,
-  };
+  const r = v as { inhuman?: unknown; stages?: unknown };
+  // Stored while the ladder was still picked rung by rung. The only part of
+  // that choice still on offer is whether 0.05s was on it, so that is the part
+  // the stored round is read for.
+  if (Array.isArray(r.stages)) return { inhuman: r.stages.includes(INHUMAN_SECONDS) };
+  return { inhuman: r.inhuman === true };
 }
 
 /** Read synchronously so the first render already has the stored values. */

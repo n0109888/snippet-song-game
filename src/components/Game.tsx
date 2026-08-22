@@ -771,41 +771,46 @@ export default function Game() {
     beginRound(playlist, prefs.sort, next, next === "guessable" ? "Guessable" : "Classic");
   }
 
-  const roundHeader = (
-    <div className="flex min-w-0 items-center gap-2">
-      <span className="truncate text-sm text-muted">{playlist?.name}</span>
+  /**
+   * The order, and what a change of it says. The pack's name is not here: the
+   * panel beside the card already carries it, and naming it twice on one screen
+   * is not what the row is for. Guessable has no order to choose, so the row is
+   * only ever the badge there, and it stands down rather than leave a gap.
+   */
+  const roundHeader =
+    guessable && !dealt ? null : (
+      <div className="flex items-center gap-2">
+        {guessable ? null : (
+          <select
+            aria-label="Sort by"
+            value={prefs.sort}
+            onChange={(e) => {
+              const next = e.target.value as SortKey;
+              update({ sort: next });
+              deal(next);
+            }}
+            className="h-7 shrink-0 rounded-chip border border-line bg-panel px-2 text-xs text-muted focus:border-line-strong"
+          >
+            {SORTS.map((o) => (
+              <option key={o.key} value={o.key}>
+                {o.label}
+              </option>
+            ))}
+          </select>
+        )}
 
-      {guessable ? null : (
-        <select
-          aria-label="Sort by"
-          value={prefs.sort}
-          onChange={(e) => {
-            const next = e.target.value as SortKey;
-            update({ sort: next });
-            deal(next);
-          }}
-          className="h-7 shrink-0 rounded-chip border border-line bg-panel px-2 text-xs text-muted focus:border-line-strong"
-        >
-          {SORTS.map((o) => (
-            <option key={o.key} value={o.key}>
-              {o.label}
-            </option>
-          ))}
-        </select>
-      )}
-
-      {dealt ? (
-        <span
-          key={dealt.key}
-          role="status"
-          className="dealt flex shrink-0 items-center gap-1 font-mono text-[9px] uppercase tracking-[0.14em] text-accent"
-        >
-          <Refresh />
-          {dealt.label}
-        </span>
-      ) : null}
-    </div>
-  );
+        {dealt ? (
+          <span
+            key={dealt.key}
+            role="status"
+            className="dealt flex shrink-0 items-center gap-1 font-mono text-[9px] uppercase tracking-[0.14em] text-accent"
+          >
+            <Refresh />
+            {dealt.label}
+          </span>
+        ) : null}
+      </div>
+    );
 
   /**
    * The levels, and the way between them. Every press redraws, so going back to

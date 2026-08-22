@@ -6,15 +6,34 @@ import { formatSeconds } from "@/lib/round";
 import type { AudioEngine } from "@/lib/audio";
 import type { Track } from "@/lib/types";
 
+/** Points the way out of the reveal, which is the only way the round goes. */
+function Arrow() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className="h-3.5 w-3.5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M5 12h13" />
+      <path d="M12.5 6.2 18.8 12l-6.3 5.8" />
+    </svg>
+  );
+}
+
 interface RevealProps {
   track: Track;
   solved: boolean;
   atLength: number | null;
   /** Solved on the shortest snippet there is, the best the game has to give. */
   max: boolean;
-  /** What moving on means here: the next song, or the level it leads to. */
+  /** What moving on means here: the next song, or the next level. */
   nextLabel: string;
-  /** The colour of that level, so the button reads as the way to it. */
+  /** The colour of the level it leads to, so the button reads as the way there. */
   nextTone: string | null;
   engine: AudioEngine;
   onNext: () => void;
@@ -111,9 +130,10 @@ export default function Reveal({
             ? { borderColor: nextTone, color: nextTone }
             : undefined
         }
-        className="h-10 rounded-control border border-line-strong px-5 text-sm font-medium transition-colors duration-150 ease-out hover:bg-[color-mix(in_srgb,var(--color-ink)_7%,transparent)]"
+        className="flex h-10 items-center gap-2 rounded-control border border-line-strong px-5 text-sm font-medium transition-colors duration-150 ease-out hover:bg-[color-mix(in_srgb,var(--color-ink)_7%,transparent)]"
       >
         {nextLabel}
+        <Arrow />
       </button>
     </div>
   );

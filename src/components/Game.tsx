@@ -93,6 +93,11 @@ export default function Game() {
   const roundRef = useRef(0);
   /** Deal generation, bumped before a guessable ladder goes looking for audio. */
   const dealRef = useRef(0);
+  /**
+   * Guessable only: the song for the level after this one, drawn and warmed
+   * while the current one is still being played, so moving up is instant.
+   */
+  const aheadRef = useRef<{ level: number; track: Track } | null>(null);
 
   const [ready, setReady] = useState(false);
   const [prefs, setPrefs] = useState<Prefs>(DEFAULT_PREFS);
@@ -375,6 +380,21 @@ export default function Game() {
       setReveal(null);
       setError(null);
       setLevel(index);
+
+      // Already drawn, and its audio already fetched, while the level before it
+      // was being played: arriving is a change of state and nothing else, with
+      // no lookup to wait on and so no spinner to sit through.
+      const ahead = aheadRef.current;
+      if (ahead && ahead.level === index) {
+        aheadRef.current = null;
+        showQueue([ahead.track]);
+        // Decoded audio means the card has nothing left to wait for, and saying
+        // so here rather than an effect later is what keeps the stage from
+        // blinking through Loading on its way in.
+        if (engine().has(ahead.track.id)) setReadyId(ahead.track.id);
+        return;
+      }
+
       setPhase("loading");
       void (async () => {
         const picked = await draw(bandFor(loaded.tracks, index));
@@ -390,6 +410,37 @@ export default function Game() {
     },
     [draw, showQueue],
   );
+
+  /**
+   * Draw the next level's song while this one is still being played, and fetch
+   * its audio too. The wait is the lookup and the download, and both of them
+   * happen here, in the seconds spent guessing, rather than after the press
+   * that asks for the level.
+   */
+  useEffect(() => {
+    if (!guessable || phase !== "playing" || !playlist) return;
+    const target = (level + 1) % LEVELS.length;
+    if (aheadRef.current?.level === target) return;
+    let cancelled = false;
+
+    void (async () => {
+      const picked = await draw(bandFor(playlist.tracks, target));
+      // The level moved on while this was out looking, so this song is for a
+      // step of the ladder that is no longer next.
+      if (cancelled || !picked) return;
+      aheadRef.current = { level: target, track: picked };
+      if (picked.preview) {
+        void engine()
+          .warm(picked.id, picked.preview)
+          .catch(() => undefined);
+        void warmArt(picked.art);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [guessable, phase, playlist, level, draw, warmArt]);
 
   /**
    * Deal the pack the way the chosen mode wants it, from the top. Classic is
@@ -441,6 +492,7 @@ export default function Game() {
       // A different pack is a different set of songs, so nothing found for the
       // last one is worth keeping.
       foundRef.current.clear();
+      aheadRef.current = null;
       const loaded: LoadedPlaylist = { name, source, sourceId, tracks };
       setPlaylist(loaded);
       update({ lastSource: source, lastSourceId: sourceId });
@@ -479,11 +531,10 @@ export default function Game() {
     setMisses(0);
 
     // Guessable holds one song at a time, so moving on is moving up a level,
-    // and the run ends where the levels do.
+    // and the ladder is a loop: past the last level it comes round to the first,
+    // so a run carries on rather than stopping on a screen about itself.
     if (guessable) {
-      const next = level + 1;
-      if (playlist && next < LEVELS.length) openLevel(playlist, next);
-      else setPhase("done");
+      if (playlist) openLevel(playlist, (level + 1) % LEVELS.length);
       return;
     }
 
@@ -788,7 +839,7 @@ export default function Game() {
                     color: step.color,
                   }),
             }}
-            className="pill h-10 rounded-full px-3 text-[13px] font-bold"
+            className="pill h-10 rounded-full px-2.5 text-[15px] font-extrabold"
           >
             {step.name}
           </button>
@@ -899,8 +950,8 @@ export default function Game() {
                 solved={reveal.solved}
                 atLength={reveal.atLength}
                 max={maxWin}
-                nextLabel={guessable ? (LEVELS[level + 1]?.name ?? "Finish") : "Next song"}
-                nextTone={guessable ? (LEVELS[level + 1]?.color ?? null) : null}
+                nextLabel={guessable ? "Go next" : "Next song"}
+                nextTone={guessable ? (LEVELS[(level + 1) % LEVELS.length]?.color ?? null) : null}
                 engine={engine()}
                 onNext={advance}
               />

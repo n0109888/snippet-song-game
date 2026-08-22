@@ -31,38 +31,49 @@ export default function Stage({
   const tier = tierFor(current);
   const shade = tone ?? tier.color;
   const longest = Math.max(...stages);
-  const fillRef = useRef<HTMLDivElement | null>(null);
-
-  /** Where on the bar this stage begins, which is where the one below it ended. */
-  const opens = index === 0 ? 0 : (stages[index - 1] ?? 0);
+  const fillsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   /**
-   * The playhead for the stage being played. Written straight to the node on
-   * each frame, because a 15s clip would otherwise be nine hundred renders, and
-   * wound back to the start whenever playback stops, the way a player does.
+   * The playhead, across the whole bar rather than inside one rung. Every stage
+   * plays the clip from the beginning, so the bar fills from the beginning:
+   * it winds back to the left edge and sweeps across the rungs already reached
+   * on its way to the one being played, the way a player scrubs to zero before
+   * it starts. Stopping leaves the rungs already reached filled and the current
+   * one empty, which is the ground the round stands on rather than a position
+   * in it.
    *
-   * Every stage plays the clip from the beginning, so the first part of what
-   * sounds is the ground the stages below already cover and is already drawn
-   * filled. This rung only starts moving once the clip has played past where
-   * the one below it ended, which is what keeps the bar a single reading of how
-   * far into the song the snippet has reached.
+   * Written straight to the nodes on each frame, because a 15s clip would
+   * otherwise be nine hundred renders.
    */
   useEffect(() => {
-    const node = fillRef.current;
-    if (!node) return;
+    const paint = (heard: number | null) => {
+      let opens = 0;
+      stages.forEach((length, i) => {
+        const node = fillsRef.current[i];
+        const span = Math.max(length - opens, 0.0001);
+        if (node) {
+          const share =
+            heard === null
+              ? i < index
+                ? 1
+                : 0
+              : Math.max(0, Math.min(1, (heard - opens) / span));
+          node.style.width = `${share * 100}%`;
+        }
+        opens = length;
+      });
+    };
+
     if (!playing) {
-      node.style.width = "0%";
+      paint(null);
       return;
     }
-    const span = Math.max(current - opens, 0.0001);
     let frame = requestAnimationFrame(function tick() {
-      const heard = engine.snippetProgress() * current;
-      const share = Math.max(0, Math.min(1, (heard - opens) / span));
-      node.style.width = `${share * 100}%`;
+      paint(engine.snippetProgress() * current);
       frame = requestAnimationFrame(tick);
     });
     return () => cancelAnimationFrame(frame);
-  }, [playing, engine, index, current, opens]);
+  }, [playing, engine, stages, index, current]);
 
   return (
     <div className="flex flex-col items-center gap-10">
@@ -71,7 +82,8 @@ export default function Stage({
        * wide as its snippet is long, and the ones already reached stay filled:
        * every stage opens the clip from the beginning, so a snippet that runs
        * to 8s has sounded everything the rungs below it stand for. The fill is
-       * how far into the song the round has been, read left to right.
+       * how far into the song the round has reached, read left to right, and
+       * that is where the playhead runs when the snippet is playing.
        */}
       <div
         // Rounded and clipped here rather than on the rungs, so the two outer
@@ -86,8 +98,7 @@ export default function Stage({
       >
         {stages.map((length, i) => {
           const colour = tone ?? tierFor(length).color;
-          const past = i < index;
-          const active = i === index;
+          const reached = i <= index;
           return (
             <Fragment key={`${length}-${i}`}>
               {/* Where one rung ends, drawn as the card showing through rather
@@ -99,21 +110,23 @@ export default function Stage({
                 style={{
                   flex: `${lengthShare(length, longest)} 0 0%`,
                   minWidth: "6px",
-                  backgroundColor: past
-                    ? colour
-                    : active
-                      ? `color-mix(in srgb, ${colour} 22%, transparent)`
-                      : "var(--color-line-strong)",
+                  // What is behind the playhead: ground the round has reached,
+                  // or track it has not.
+                  backgroundColor: reached
+                    ? `color-mix(in srgb, ${colour} 22%, transparent)`
+                    : "var(--color-line-strong)",
                 }}
                 className="h-3"
               >
-                {active ? (
-                  <div
-                    ref={fillRef}
-                    className="h-full w-0"
-                    style={{ backgroundColor: colour }}
-                  />
-                ) : null}
+                {/* Every rung carries one, because the playhead crosses them
+                    all on its way out from the left. */}
+                <div
+                  ref={(node) => {
+                    fillsRef.current[i] = node;
+                  }}
+                  className="h-full w-0"
+                  style={{ backgroundColor: colour }}
+                />
               </div>
             </Fragment>
           );

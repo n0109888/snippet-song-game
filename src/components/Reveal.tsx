@@ -33,8 +33,6 @@ interface RevealProps {
   max: boolean;
   /** What moving on means here: the next song, or the next level. */
   nextLabel: string;
-  /** The colour of the level it leads to, so the button reads as the way there. */
-  nextTone: string | null;
   engine: AudioEngine;
   onNext: () => void;
 }
@@ -45,7 +43,6 @@ export default function Reveal({
   atLength,
   max,
   nextLabel,
-  nextTone,
   engine,
   onNext,
 }: RevealProps) {
@@ -122,15 +119,13 @@ export default function Reveal({
       {/* The clip keeps playing, so you can just listen before moving on. */}
       <Player engine={engine} trackId={track.id} previewUrl={track.preview} autoPlay />
 
+      {/* The one way out, in the app's own colour. It used to take the colour
+          of the level it led to, which made the way out of a lost round read as
+          part of the verdict it was standing next to. */}
       <button
         type="button"
         onClick={onNext}
-        style={
-          nextTone
-            ? { borderColor: nextTone, color: nextTone }
-            : undefined
-        }
-        className="flex h-10 items-center gap-2 rounded-control border border-line-strong px-5 text-sm font-medium transition-colors duration-150 ease-out hover:bg-[color-mix(in_srgb,var(--color-ink)_7%,transparent)]"
+        className="pill flex h-10 items-center gap-2 rounded-full bg-accent px-5 text-sm font-semibold text-bg"
       >
         {nextLabel}
         <Arrow />

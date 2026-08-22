@@ -27,8 +27,12 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-/** Applies the stored theme before first paint so it never flashes. */
-const THEME_SCRIPT = `try{var p=JSON.parse(localStorage.getItem('snippet.prefs.v3')||'{}');document.documentElement.dataset.theme=p.theme==='light'?'light':'dark';}catch(e){document.documentElement.dataset.theme='dark';}`;
+/**
+ * Applies the stored theme before first paint so it never flashes. Only classic
+ * gets a say in it: guessable is painted dark whatever is stored, and a mode
+ * that was never written is one that predates them, which opens on guessable.
+ */
+const THEME_SCRIPT = `try{var p=JSON.parse(localStorage.getItem('snippet.prefs.v3')||'{}');document.documentElement.dataset.theme=(p.theme==='light'&&p.mode==='classic')?'light':'dark';}catch(e){document.documentElement.dataset.theme='dark';}`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

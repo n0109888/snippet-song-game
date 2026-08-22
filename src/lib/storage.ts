@@ -1,8 +1,8 @@
 "use client";
 
 import {
+  ALL_STAGES,
   DEFAULT_RULES,
-  INHUMAN_SECONDS,
   MODES,
   SORTS,
   type Mode,
@@ -28,7 +28,7 @@ export interface Prefs {
 
 export const DEFAULT_PREFS: Prefs = {
   rules: DEFAULT_RULES,
-  mode: "classic",
+  mode: "guessable",
   sort: "random",
   startMode: "start",
   volume: 0.8,
@@ -40,11 +40,16 @@ export const DEFAULT_PREFS: Prefs = {
 function readRules(v: unknown): Rules {
   if (typeof v !== "object" || v === null) return DEFAULT_RULES;
   const r = v as { inhuman?: unknown; stages?: unknown };
-  // Stored while the ladder was still picked rung by rung. The only part of
-  // that choice still on offer is whether 0.05s was on it, so that is the part
-  // the stored round is read for.
-  if (Array.isArray(r.stages)) return { inhuman: r.stages.includes(INHUMAN_SECONDS) };
-  return { inhuman: r.inhuman === true };
+  if (Array.isArray(r.stages)) {
+    // Rungs that no longer exist are dropped rather than played, and a pick
+    // that ends up empty is no game at all, so it falls back to the default.
+    const stored = r.stages as unknown[];
+    const picked = ALL_STAGES.filter((s) => stored.includes(s));
+    return picked.length > 0 ? { stages: picked } : DEFAULT_RULES;
+  }
+  // Stored while the shortest rung was the only thing left to ask about.
+  if (r.inhuman === true) return { stages: ALL_STAGES };
+  return DEFAULT_RULES;
 }
 
 /** Read synchronously so the first render already has the stored values. */
@@ -59,7 +64,8 @@ export function readPrefs(): Prefs {
 
     return {
       rules: readRules(p.rules),
-      // Stored before the modes existed reads as classic, which is what it was.
+      // Stored before the modes existed has no mode to read, so it opens on
+      // the one a fresh install opens on.
       mode: MODES.some((o) => o.key === p.mode) ? (p.mode as Mode) : DEFAULT_PREFS.mode,
       sort: SORTS.some((o) => o.key === p.sort) ? (p.sort as SortKey) : DEFAULT_PREFS.sort,
       startMode: p.startMode === "dropin" || p.startMode === "start" ? p.startMode : "start",

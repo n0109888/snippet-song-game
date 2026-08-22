@@ -1,11 +1,9 @@
 "use client";
 
 import {
-  INHUMAN_SECONDS,
+  ALL_STAGES,
   MODES,
   formatSeconds,
-  inkOn,
-  tierFor,
   type Hints,
   type Mode,
   type Rules,
@@ -28,6 +26,12 @@ interface SettingsProps {
   startMode: StartMode;
   volume: number;
   theme: "dark" | "light";
+  /**
+   * Guessable is a five song run and its panel is the run's controls; which
+   * way round the page is painted is not one of them, so it is asked about on
+   * the mode that has room to ask.
+   */
+  showTheme: boolean;
   onStartMode: (mode: StartMode) => void;
   onMode: (mode: Mode) => void;
   onReroll: () => void;
@@ -41,17 +45,74 @@ interface SettingsProps {
   onTracks: () => void;
 }
 
-/** The optional rung, named and coloured wherever the button draws it. */
-const INHUMAN = tierFor(INHUMAN_SECONDS);
-
-function Row({ label, children }: { label: string; children: React.ReactNode }) {
+/**
+ * A heading, its glyph, and what it sets. Centred, because the rail is narrow
+ * and a left edge that nothing else in it shares reads as a stray indent.
+ */
+function Row({
+  label,
+  glyph,
+  children,
+}: {
+  label: string;
+  glyph?: React.ReactNode;
+  children: React.ReactNode;
+}) {
   return (
-    <div className="flex flex-col gap-2">
-      <span className="text-xs uppercase tracking-[0.1em] text-faint">{label}</span>
+    <div className="flex flex-col items-center gap-2.5">
+      <span className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-faint">
+        {glyph}
+        {label}
+      </span>
       {children}
     </div>
   );
 }
+
+/** The headings' glyphs, all drawn at one weight so the rail reads down. */
+function Glyph({ children }: { children: React.ReactNode }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+      className="h-3.5 w-3.5"
+    >
+      {children}
+    </svg>
+  );
+}
+
+const WAVE = (
+  <Glyph>
+    <path d="M4 10v4M8 6.5v11M12 3.5v17M16 7.5v9M20 10.5v3" />
+  </Glyph>
+);
+
+const CLOCK = (
+  <Glyph>
+    <circle cx="12" cy="13.5" r="7.5" />
+    <path d="M12 9.5v4h2.8M9.5 2.5h5" />
+  </Glyph>
+);
+
+const BULB = (
+  <Glyph>
+    <path d="M9 18h6M10 21h4" />
+    <path d="M12 3a6 6 0 0 1 3.6 10.8c-.6.5-.9 1.1-.9 1.8v.4h-5.4v-.4c0-.7-.3-1.3-.9-1.8A6 6 0 0 1 12 3z" />
+  </Glyph>
+);
+
+const SPEAKER = (
+  <Glyph>
+    <path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z" />
+    <path d="M16 9.6a4 4 0 0 1 0 4.8" />
+  </Glyph>
+);
 
 /** One look for every toggle here, so hints match the difficulty buttons. */
 function Pill({
@@ -68,10 +129,10 @@ function Pill({
       type="button"
       aria-pressed={on}
       onClick={onClick}
-      className={`pill h-9 rounded-full border px-4 text-xs ${
+      className={`pill h-8 rounded-full px-3.5 text-xs ${
         on
-          ? "border-transparent bg-accent font-medium text-bg"
-          : "border-line text-faint hover:border-line-strong hover:text-muted"
+          ? "bg-accent font-semibold text-bg"
+          : "bg-raised text-muted hover:text-ink"
       }`}
     >
       {children}
@@ -79,8 +140,32 @@ function Pill({
   );
 }
 
-/** A five pip die, which is the whole label on the reroll button. */
-function Dice() {
+/** The wider version, for a choice that is a sentence rather than a word. */
+function Choice({
+  on,
+  onClick,
+  children,
+}: {
+  on: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      aria-pressed={on}
+      onClick={onClick}
+      className={`pill h-10 w-full rounded-full px-4 text-sm ${
+        on ? "bg-accent font-semibold text-bg" : "bg-raised text-muted hover:text-ink"
+      }`}
+    >
+      {children}
+    </button>
+  );
+}
+
+/** A five pip die, which is the whole label on the reroll buttons. */
+export function Dice() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className="dice h-4 w-4">
       <rect
@@ -107,7 +192,7 @@ function Dice() {
 /** A keyboard shortcut, spelled out so the round can be played without the mouse. */
 function Shortcut({ keys, action }: { keys: string; action: string }) {
   return (
-    <div className="flex items-center justify-between gap-3">
+    <div className="flex w-full items-center justify-between gap-3">
       <span className="text-sm text-muted">{action}</span>
       <kbd className="rounded-control border border-line px-2 py-1 font-mono text-[11px] leading-none text-faint">
         {keys}
@@ -132,7 +217,7 @@ function IconButton({
       onClick={onClick}
       title={label}
       aria-label={label}
-      className="pill grid h-12 flex-1 place-items-center rounded-full border border-line-strong text-ink hover:border-accent hover:text-accent"
+      className="pill grid h-11 flex-1 place-items-center rounded-full bg-raised text-muted hover:text-accent"
     >
       {children}
     </button>
@@ -153,7 +238,7 @@ function Icon({ children }: { children: React.ReactNode }) {
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden
-      className="h-[22px] w-[22px]"
+      className="h-[21px] w-[21px]"
     >
       {children}
     </svg>
@@ -172,6 +257,7 @@ export default function Settings({
   startMode,
   volume,
   theme,
+  showTheme,
   onStartMode,
   onMode,
   onReroll,
@@ -184,10 +270,22 @@ export default function Settings({
   onReset,
   onTracks,
 }: SettingsProps) {
+  /**
+   * Rungs go on and off one at a time, and the order they end up in is the
+   * ladder's, not the order they were pressed. The last one standing cannot be
+   * taken off, because a ladder with no rungs is not a shorter game.
+   */
+  function toggleStage(seconds: number) {
+    const on = rules.stages.includes(seconds);
+    if (on && rules.stages.length <= 1) return;
+    const next = ALL_STAGES.filter((s) => (s === seconds ? !on : rules.stages.includes(s)));
+    onRules({ ...rules, stages: next });
+  }
+
   return (
     <div className="flex flex-col gap-7">
       {inRound ? (
-        <div className="flex gap-1.5 border-b border-line pb-5">
+        <div className="flex gap-1.5">
           <IconButton label="Back to packs" onClick={onHome}>
             <Icon>
               <path d="M3.5 10.5 12 3.5l8.5 7" />
@@ -210,29 +308,15 @@ export default function Settings({
       ) : null}
 
       {inRound && playlistName ? (
-        <Row label="Playlist">
-          <button
-            type="button"
-            onClick={onTracks}
-            className="pill flex h-11 items-center justify-between gap-2 rounded-control border border-line px-3 text-left hover:border-line-strong"
-          >
-            <span className="min-w-0 flex-1 truncate text-sm">{playlistName}</span>
-            <span className="shrink-0 font-mono text-xs tabular-nums text-faint">
-              {trackCount}
-            </span>
-          </button>
-        </Row>
+        <button
+          type="button"
+          onClick={onTracks}
+          className="pill flex h-11 items-center justify-between gap-2 rounded-full bg-raised px-4 text-left text-muted hover:text-ink"
+        >
+          <span className="min-w-0 flex-1 truncate text-sm">{playlistName}</span>
+          <span className="shrink-0 font-mono text-xs tabular-nums text-faint">{trackCount}</span>
+        </button>
       ) : null}
-
-      <Row label="Mode">
-        <div className="flex gap-1.5">
-          {MODES.map((m) => (
-            <Pill key={m.key} on={mode === m.key} onClick={() => onMode(m.key)}>
-              {m.label}
-            </Pill>
-          ))}
-        </div>
-      </Row>
 
       {/* One shuffle is only one of the orders random can deal, so random is the
           only order with anything left to ask for. It is filled rather than
@@ -243,7 +327,7 @@ export default function Settings({
           <button
             type="button"
             onClick={onReroll}
-            className="reroll flex h-10 items-center justify-center gap-2 rounded-full px-4 text-sm font-medium"
+            className="reroll flex h-10 w-full items-center justify-center gap-2 rounded-full px-4 text-sm font-semibold"
           >
             <Dice />
             Reroll
@@ -251,43 +335,9 @@ export default function Settings({
         </Row>
       ) : null}
 
-      {/* The one rung that is optional, and the only rule left to set. It goes
-          without a heading over it: the button says Inhuman and 0.05s, which is
-          the whole of what a heading could have added. */}
-      <button
-        type="button"
-        aria-pressed={rules.inhuman}
-        onClick={() => onRules({ ...rules, inhuman: !rules.inhuman })}
-        style={
-          rules.inhuman
-            ? {
-                backgroundColor: INHUMAN.color,
-                borderColor: INHUMAN.color,
-                color: inkOn(INHUMAN.color),
-              }
-            : { borderColor: `color-mix(in srgb, ${INHUMAN.color} 35%, transparent)` }
-        }
-        className={`pill flex h-10 items-center justify-between rounded-full border-2 px-4 ${
-          rules.inhuman ? "" : "hover:brightness-125"
-        }`}
-      >
-        <span
-          className="text-sm font-semibold"
-          style={rules.inhuman ? undefined : { color: INHUMAN.color }}
-        >
-          {INHUMAN.name}
-        </span>
-        <span
-          className="font-mono text-xs"
-          style={rules.inhuman ? { opacity: 0.85 } : { color: "var(--color-faint)" }}
-        >
-          {formatSeconds(INHUMAN.seconds)}
-        </span>
-      </button>
-
       {inRound ? (
-        <Row label="Hints">
-          <div className="flex flex-wrap gap-1.5">
+        <Row label="Hints" glyph={BULB}>
+          <div className="flex flex-wrap justify-center gap-1.5">
             <Pill on={hints.art} onClick={() => onHints({ ...hints, art: !hints.art })}>
               Album art
             </Pill>
@@ -300,17 +350,42 @@ export default function Settings({
         </Row>
       ) : null}
 
-      <Row label="Song start">
-        <div className="flex gap-1.5">
-          {(["start", "dropin"] as const).map((mode) => (
-            <Pill key={mode} on={startMode === mode} onClick={() => onStartMode(mode)}>
-              {mode === "start" ? "Clip start" : "Random"}
-            </Pill>
+      {/* Where the snippet is cut from: the preview's own body, which is the
+          part of the song a preview is chosen to be, or its very first moment. */}
+      <Row label="Song start" glyph={WAVE}>
+        <div className="flex w-full flex-col gap-1.5">
+          <Choice on={startMode === "dropin"} onClick={() => onStartMode("dropin")}>
+            Spotify preview
+          </Choice>
+          <Choice on={startMode === "start"} onClick={() => onStartMode("start")}>
+            From the start
+          </Choice>
+        </div>
+      </Row>
+
+      {/* The rungs. They are cumulative, so this is not six lengths but six
+          places the clip is allowed to stop. */}
+      <Row label="Stages" glyph={CLOCK}>
+        <div className="flex flex-wrap justify-center gap-1.5">
+          {ALL_STAGES.map((seconds) => (
+            <button
+              key={seconds}
+              type="button"
+              aria-pressed={rules.stages.includes(seconds)}
+              onClick={() => toggleStage(seconds)}
+              className={`pill h-8 rounded-full px-3 font-mono text-xs tabular-nums ${
+                rules.stages.includes(seconds)
+                  ? "bg-accent font-medium text-bg"
+                  : "bg-raised text-faint hover:text-muted"
+              }`}
+            >
+              {formatSeconds(seconds)}
+            </button>
           ))}
         </div>
       </Row>
 
-      <Row label="Volume">
+      <Row label="Volume" glyph={SPEAKER}>
         <input
           type="range"
           min={0}
@@ -319,22 +394,37 @@ export default function Settings({
           value={volume}
           aria-label="Volume"
           onChange={(e) => onVolume(Number(e.target.value))}
-          className="w-full"
+          // The track is filled to the thumb, so the level reads without
+          // having to find where the dot sits on an unbroken line.
+          style={{ "--fill": `${volume * 100}%` } as React.CSSProperties}
+          className="level w-full"
         />
       </Row>
 
-      <Row label="Theme">
+      <Row label="Mode">
         <div className="flex gap-1.5">
-          {(["dark", "light"] as const).map((t) => (
-            <Pill key={t} on={theme === t} onClick={() => onTheme(t)}>
-              <span className="capitalize">{t}</span>
+          {MODES.map((m) => (
+            <Pill key={m.key} on={mode === m.key} onClick={() => onMode(m.key)}>
+              {m.label}
             </Pill>
           ))}
         </div>
       </Row>
 
+      {showTheme ? (
+        <Row label="Theme">
+          <div className="flex gap-1.5">
+            {(["dark", "light"] as const).map((t) => (
+              <Pill key={t} on={theme === t} onClick={() => onTheme(t)}>
+                <span className="capitalize">{t}</span>
+              </Pill>
+            ))}
+          </div>
+        </Row>
+      ) : null}
+
       <Row label="Controls">
-        <div className="flex flex-col gap-2">
+        <div className="flex w-full flex-col gap-2">
           <Shortcut keys="Space" action="Pause / play" />
           <Shortcut keys="→" action="Skip" />
         </div>

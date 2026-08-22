@@ -6,7 +6,7 @@ import { Confetti, GoldRain, GoldWash, MissWash } from "./Effects";
 import GuessInput from "./GuessInput";
 import PresetPicker from "./PresetPicker";
 import Reveal from "./Reveal";
-import Settings from "./Settings";
+import Settings, { Dice } from "./Settings";
 import Stage from "./Stage";
 import Summary, { ResultsList, type RoundResult } from "./Summary";
 import { AudioEngine, DecodeError, dropInOffset } from "@/lib/audio";
@@ -19,6 +19,7 @@ import {
   isMixedArtist,
   shuffle,
   sortTracks,
+  stageWindow,
   stagesFor,
   tierFor,
   type Hints,
@@ -95,10 +96,12 @@ export default function Game() {
   /** Deal generation, bumped before a guessable ladder goes looking for audio. */
   const dealRef = useRef(0);
   /**
-   * Guessable only: the song for the level after this one, drawn and warmed
-   * while the current one is still being played, so moving up is instant.
+   * Guessable only: a song for every level, drawn and warmed while one of them
+   * is being played. It used to hold the next level alone, which made climbing
+   * the ladder instant and every other move a wait, when jumping from Easy
+   * straight to Impossible is exactly what the picker is for.
    */
-  const aheadRef = useRef<{ level: number; track: Track } | null>(null);
+  const benchRef = useRef(new Map<number, Track>());
 
   const [ready, setReady] = useState(false);
   const [prefs, setPrefs] = useState<Prefs>(DEFAULT_PREFS);
@@ -133,6 +136,8 @@ export default function Game() {
   const [roundId, setRoundId] = useState(0);
   /** Set while the redealt badge is on screen; the key replays it. */
   const [dealt, setDealt] = useState<Dealt | null>(null);
+  /** Bumped whenever the bench is drawn from, so it is filled up again. */
+  const [benchTick, setBenchTick] = useState(0);
 
   const rules = prefs.rules;
   const stages = stagesFor(rules);
@@ -144,7 +149,13 @@ export default function Game() {
   // the same inside a guessable level: what the level changes is the song.
   const maxMisses = stages.length;
   const remaining = maxMisses - misses;
-  const levelTone = guessable ? (LEVELS[level]?.color ?? null) : null;
+  // The colour a guessable round is played in. It is the room the level is
+  // played in and nothing more, so it stops at the card: the pack list is not
+  // at any level yet and has no business being washed in one. It stops at the
+  // reveal too, because a verdict has a colour of its own and red over a level
+  // washed yellow comes out neither red nor yellow.
+  const levelTone =
+    guessable && phase !== "setup" && !reveal ? (LEVELS[level]?.color ?? null) : null;
 
   /** The badge, which is the only sign that dealing again did anything. */
   const announce = useCallback((label: string) => {
@@ -167,9 +178,19 @@ export default function Game() {
   useEffect(() => {
     const stored = readPrefs();
     setPrefs(stored);
-    document.documentElement.dataset.theme = stored.theme;
     setReady(true);
   }, []);
+
+  /**
+   * Guessable is painted dark whatever the stored theme says: the card is a
+   * wash of the level's colour under a glowing button, and neither of those is
+   * anything at all on paper white. The stored choice is left alone rather than
+   * overwritten, so classic hands it straight back.
+   */
+  useEffect(() => {
+    if (!ready) return;
+    document.documentElement.dataset.theme = guessable ? "dark" : prefs.theme;
+  }, [ready, guessable, prefs.theme]);
 
   useEffect(() => {
     if (ready) engine().setVolume(prefs.volume);
@@ -193,35 +214,44 @@ export default function Game() {
     if (resolvingRef.current === round) return;
     // Art as well as audio: the Spotify reader supplies previews but no cover,
     // so a track can be playable and still need the lookup for its hint.
-    const pending = queueRef.current
-      .slice(from, from + LOOKAHEAD)
-      .filter((t) => t.preview === null || t.art === null);
-    if (pending.length === 0) return;
+    const needs = (t: Track) => t.preview === null || t.art === null;
+    const ahead = queueRef.current.slice(from, from + LOOKAHEAD);
+    const head = ahead[0];
+    // The song on the card goes on its own, in front of the ones behind it. A
+    // batch is only done when its slowest member is, so putting the song being
+    // played in with three nobody has reached yet made the wait before the
+    // first note the wait for the fourth song's lookup.
+    const batches = [head && needs(head) ? [head] : [], ahead.slice(1).filter(needs)].filter(
+      (batch) => batch.length > 0,
+    );
+    if (batches.length === 0) return;
 
     resolvingRef.current = round;
     try {
-      const resolved = await resolvePreviews(pending);
-      for (const t of resolved) {
-        foundRef.current.set(t.id, { preview: t.preview, art: t.art });
-      }
-      // Dealing again while this was in flight replaced the queue, so these
-      // belong to a round that is gone. The lookups are kept all the same.
-      if (roundRef.current !== round) return;
-      const found = new Map(resolved.map((t) => [t.id, t]));
+      for (const batch of batches) {
+        const resolved = await resolvePreviews(batch);
+        for (const t of resolved) {
+          foundRef.current.set(t.id, { preview: t.preview, art: t.art });
+        }
+        // Dealing again while this was in flight replaced the queue, so these
+        // belong to a round that is gone. The lookups are kept all the same.
+        if (roundRef.current !== round) return;
+        const found = new Map(resolved.map((t) => [t.id, t]));
 
-      const next = queueRef.current.map((t) => {
-        const hit = found.get(t.id);
-        // Keep whatever the source already gave us, it is an exact match where
-        // the lookup is only ever a search for the closest title.
-        return hit ? { ...t, preview: t.preview ?? hit.preview, art: t.art ?? hit.art } : t;
-      });
-      // Tracks the lookup could not match are dropped, but never one at or
-      // before the cursor, because that would swap the song being played.
-      const attempted = new Set(pending.map((t) => t.id));
-      queueRef.current = next.filter(
-        (t, i) => i <= from || t.preview !== null || !attempted.has(t.id),
-      );
-      setQueue(queueRef.current);
+        const next = queueRef.current.map((t) => {
+          const hit = found.get(t.id);
+          // Keep whatever the source already gave us, it is an exact match where
+          // the lookup is only ever a search for the closest title.
+          return hit ? { ...t, preview: t.preview ?? hit.preview, art: t.art ?? hit.art } : t;
+        });
+        // Tracks the lookup could not match are dropped, but never one at or
+        // before the cursor, because that would swap the song being played.
+        const attempted = new Set(batch.map((t) => t.id));
+        queueRef.current = next.filter(
+          (t, i) => i <= from || t.preview !== null || !attempted.has(t.id),
+        );
+        setQueue(queueRef.current);
+      }
     } catch {
       // Leave the queue as it is, the player can skip past a bad track.
     } finally {
@@ -287,6 +317,25 @@ export default function Game() {
     };
   }, [phase, queue, cursor, warmArt]);
 
+  /**
+   * Everything a drawn song needs before it can be heard, started but never
+   * waited on. It runs the moment a song is picked rather than after the card
+   * carrying it has rendered, so the download is already in flight while React
+   * is still painting.
+   */
+  const prime = useCallback(
+    (picked: Track | null): Track | null => {
+      if (picked?.preview) {
+        void engine()
+          .warm(picked.id, picked.preview)
+          .catch(() => undefined);
+        void warmArt(picked.art);
+      }
+      return picked;
+    },
+    [warmArt],
+  );
+
   /** Resolve one track right now, so pressing play never waits on the lookahead. */
   const resolveNow = useCallback(
     async (target: Track, refresh = false): Promise<string | null> => {
@@ -346,26 +395,39 @@ export default function Game() {
   /**
    * Draw a song out of a level's band, and make sure it has audio. The draw is
    * random every time, so coming back to a level you already played is a
-   * different song rather than the same one again. A band that answers with
-   * nothing playable is dug through a few songs deep before the level settles
-   * for one and lets play deal with it.
+   * different song rather than the same one again.
+   *
+   * Every candidate is searched for at once and the level takes the first one
+   * that answers with audio. Two things used to be waited on that never had to
+   * be: the candidates were tried one after another, so a band whose first
+   * three songs were missing cost three round trips end to end, and then the
+   * batch that replaced it still waited for the slowest of the four before
+   * handing back the one it was going to use. The pick is random either way,
+   * because the order it races in was shuffled.
    */
   const draw = useCallback(
     async (pool: readonly Track[]): Promise<Track | null> => {
-      const order = shuffle(pool).map(remembered);
-      for (let i = 0; i < CANDIDATES_PER_LEVEL; i += 1) {
-        const candidate = order[i];
-        if (!candidate) break;
-        if (candidate.preview) return candidate;
-        const [hit] = await resolvePreviews([candidate]).catch(() => []);
-        if (hit) {
+      const order = shuffle(pool).map(remembered).slice(0, CANDIDATES_PER_LEVEL);
+      const ready = order.find((t) => t.preview);
+      if (ready) return prime(ready);
+      if (order.length === 0) return null;
+
+      const won = await Promise.any(
+        order.map(async (candidate) => {
+          const [hit] = await resolvePreviews([candidate]);
+          // A candidate with no audio is not a result, it is one runner out of
+          // the race, so it rejects and lets the others carry on.
+          if (!hit) throw new Error("no audio");
           foundRef.current.set(hit.id, { preview: hit.preview, art: hit.art });
           return hit;
-        }
-      }
-      return order[0] ?? null;
+        }),
+      ).catch(() => null);
+
+      // Nothing in the band could be found. The first candidate goes up anyway
+      // and play says so, which is better than a level that will not open.
+      return prime(won ?? order[0] ?? null);
     },
-    [remembered],
+    [remembered, prime],
   );
 
   /**
@@ -382,17 +444,18 @@ export default function Game() {
       setError(null);
       setLevel(index);
 
-      // Already drawn, and its audio already fetched, while the level before it
-      // was being played: arriving is a change of state and nothing else, with
-      // no lookup to wait on and so no spinner to sit through.
-      const ahead = aheadRef.current;
-      if (ahead && ahead.level === index) {
-        aheadRef.current = null;
-        showQueue([ahead.track]);
+      // Already drawn, and its audio already fetched, while another level was
+      // being played: arriving is a change of state and nothing else, with no
+      // lookup to wait on and so no spinner to sit through.
+      const benched = benchRef.current.get(index);
+      if (benched) {
+        benchRef.current.delete(index);
+        setBenchTick((t) => t + 1);
+        showQueue([benched]);
         // Decoded audio means the card has nothing left to wait for, and saying
         // so here rather than an effect later is what keeps the stage from
         // blinking through Loading on its way in.
-        if (engine().has(ahead.track.id)) setReadyId(ahead.track.id);
+        if (engine().has(benched.id)) setReadyId(benched.id);
         return;
       }
 
@@ -407,41 +470,46 @@ export default function Game() {
           return;
         }
         showQueue([picked]);
+        setBenchTick((t) => t + 1);
       })();
     },
     [draw, showQueue],
   );
 
   /**
-   * Draw the next level's song while this one is still being played, and fetch
-   * its audio too. The wait is the lookup and the download, and both of them
-   * happen here, in the seconds spent guessing, rather than after the press
-   * that asks for the level.
+   * Keep a song waiting on every level the player is not on, and fetch its
+   * audio and its cover too, which the draw itself starts. The wait for a
+   * level is a lookup and a download, and both of them happen here, in the
+   * seconds spent guessing, rather than after the press that asks for it. All the missing levels go at once: they
+   * are separate searches and doing them in turn would leave whichever level
+   * came last still loading when it was pressed.
    */
   useEffect(() => {
-    if (!guessable || phase !== "playing" || !playlist) return;
-    const target = (level + 1) % LEVELS.length;
-    if (aheadRef.current?.level === target) return;
+    // Only once the level that was asked for is up. The searches all go to the
+    // same host, and a browser will only hold a handful of connections to one:
+    // filling four levels while a fifth is still being drawn put sixteen
+    // lookups in front of the one the player is waiting on.
+    if (!guessable || !playlist || phase !== "playing") return;
+    const missing = LEVELS.map((_, i) => i).filter(
+      (i) => i !== level && !benchRef.current.has(i),
+    );
+    if (missing.length === 0) return;
     let cancelled = false;
 
-    void (async () => {
-      const picked = await draw(bandFor(playlist.tracks, target));
-      // The level moved on while this was out looking, so this song is for a
-      // step of the ladder that is no longer next.
-      if (cancelled || !picked) return;
-      aheadRef.current = { level: target, track: picked };
-      if (picked.preview) {
-        void engine()
-          .warm(picked.id, picked.preview)
-          .catch(() => undefined);
-        void warmArt(picked.art);
-      }
-    })();
+    void Promise.all(
+      missing.map(async (target) => {
+        const picked = await draw(bandFor(playlist.tracks, target));
+        // The pack changed while this was out looking, so the song is for a
+        // ladder that is no longer up.
+        if (cancelled || !picked) return;
+        benchRef.current.set(target, picked);
+      }),
+    );
 
     return () => {
       cancelled = true;
     };
-  }, [guessable, phase, playlist, level, draw, warmArt]);
+  }, [guessable, phase, playlist, level, benchTick, draw]);
 
   /**
    * Deal the pack the way the chosen mode wants it, from the top. Classic is
@@ -493,7 +561,7 @@ export default function Game() {
       // A different pack is a different set of songs, so nothing found for the
       // last one is worth keeping.
       foundRef.current.clear();
-      aheadRef.current = null;
+      benchRef.current.clear();
       const loaded: LoadedPlaylist = { name, source, sourceId, tracks };
       setPlaylist(loaded);
       update({ lastSource: source, lastSourceId: sourceId });
@@ -605,7 +673,10 @@ export default function Game() {
 
     // Create the context inside the gesture, before any await.
     audio.ensure();
-    const length = currentLength;
+    // The rung, not everything below it: climbing from 2s to 8s buys the six
+    // seconds between them, so the clip comes out in the order it was written
+    // rather than restarting on the same opening every time.
+    const heard = stageWindow(stages, stageIndex);
     setLoadingAudio(true);
 
     void (async () => {
@@ -637,11 +708,11 @@ export default function Game() {
         }
 
         const longest = Math.max(...stages);
-        const offset =
+        const base =
           prefs.startMode === "dropin"
             ? dropInOffset(track.id, audio.duration(track.id), longest)
             : audio.onset(track.id);
-        audio.play(track.id, offset, length, () => setPlaying(false));
+        audio.play(track.id, base + heard.from, heard.length, () => setPlaying(false));
         setPlaying(true);
         setError(null);
       } catch (err) {
@@ -656,7 +727,7 @@ export default function Game() {
         setLoadingAudio(false);
       }
     })();
-  }, [track, reveal, playing, stages, currentLength, prefs.startMode, advance, resolveNow]);
+  }, [track, reveal, playing, stages, stageIndex, prefs.startMode, advance, resolveNow]);
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
@@ -700,11 +771,6 @@ export default function Game() {
     return () => window.removeEventListener("offline", offline);
   }, []);
 
-  function setTheme(next: "dark" | "light") {
-    document.documentElement.dataset.theme = next;
-    update({ theme: next });
-  }
-
   // Everything for this track is decoded, so play fires with no wait.
   const audioReady = track ? readyId === track.id : false;
 
@@ -733,6 +799,7 @@ export default function Game() {
       startMode={prefs.startMode}
       volume={prefs.volume}
       theme={prefs.theme}
+      showTheme={!guessable}
       onStartMode={(next: StartMode) => update({ startMode: next })}
       onMode={setMode}
       onReroll={() => deal("random")}
@@ -742,7 +809,7 @@ export default function Game() {
         update({ volume: v });
         engine().setVolume(v);
       }}
-      onTheme={setTheme}
+      onTheme={(next) => update({ theme: next })}
       onHome={goHome}
       onHistory={() => setShowResults(true)}
       onReset={() => setConfirmReset(true)}
@@ -758,6 +825,18 @@ export default function Game() {
   function deal(sort: SortKey) {
     if (!playlist) return;
     beginRound(playlist, sort, prefs.mode, "Reordered");
+  }
+
+  /**
+   * New songs for the whole ladder. A level draws afresh every time it is
+   * opened, so throwing away the one already drawn for the next level is enough
+   * to make every rung new. It deals from Easy, because a run whose songs have
+   * all been replaced is a new run and not the one that was part way up.
+   */
+  function rerollLevels() {
+    if (!playlist) return;
+    benchRef.current.clear();
+    beginRound(playlist, prefs.sort, prefs.mode, "Rerolled");
   }
 
   /**
@@ -841,16 +920,64 @@ export default function Game() {
                 : {
                     // Its own colour held well back, so an unpicked level still
                     // reads as that level rather than as an empty outline.
-                    backgroundColor: `color-mix(in srgb, ${step.color} 15%, transparent)`,
+                    backgroundColor: `color-mix(in srgb, ${step.color} 17%, transparent)`,
                     color: step.color,
                   }),
             }}
-            className="pill h-10 rounded-full px-2.5 text-[15px] font-extrabold"
+            className="pill h-10 rounded-full px-2.5 text-[13px] font-extrabold"
           >
             {step.name}
           </button>
         );
       })}
+    </div>
+  );
+
+  /**
+   * The same five levels down the side of the card, and the button that deals
+   * the lot again. The row on the card is what a phone gets and what a
+   * recording crops to; this is where the pointer already is on a wide window,
+   * with room for the names at full size and for a control the row has no
+   * width to spare for.
+   */
+  const levelRail = (
+    <div className="flex flex-col gap-3.5" role="group" aria-label="Level">
+      {LEVELS.map((step, i) => {
+        const on = i === level;
+        return (
+          <button
+            key={step.name}
+            type="button"
+            aria-pressed={on}
+            onClick={() => {
+              if (playlist) openLevel(playlist, i);
+            }}
+            style={
+              on
+                ? {
+                    backgroundColor: step.color,
+                    color: step.ink,
+                    boxShadow: `0 0 26px -4px color-mix(in srgb, ${step.color} 80%, transparent)`,
+                  }
+                : undefined
+            }
+            className={`pill h-11 rounded-full px-3 text-[15px] font-bold ${
+              on ? "" : "bg-raised text-muted hover:text-ink"
+            }`}
+          >
+            {step.name}
+          </button>
+        );
+      })}
+
+      <button
+        type="button"
+        onClick={rerollLevels}
+        className="pill mt-3 flex h-11 items-center justify-center gap-2 rounded-full bg-raised px-3 text-[15px] font-bold text-muted hover:text-ink"
+      >
+        <Dice />
+        Reroll all
+      </button>
     </div>
   );
 
@@ -909,6 +1036,15 @@ export default function Game() {
 
       <div className="flex min-h-0 flex-1 flex-col lg:flex-row">
         <main className="flex min-h-0 flex-1 items-center justify-center overflow-hidden p-4">
+          {/* The rail rides with the card rather than sitting out at the edge
+              of the window: it is the card's own controls, and a column of
+              them across a gap the width of the card is a column of them
+              belonging to nothing. Only ever the levels, so it is only ever
+              there when there are levels. */}
+          {ready && guessable && onCard ? (
+            <div className="mr-5 hidden w-32 shrink-0 lg:block">{levelRail}</div>
+          ) : null}
+
           <div
             className={
               onCard
@@ -957,93 +1093,73 @@ export default function Game() {
                 atLength={reveal.atLength}
                 max={maxWin}
                 nextLabel={guessable ? "Go next" : "Next song"}
-                nextTone={guessable ? (LEVELS[(level + 1) % LEVELS.length]?.color ?? null) : null}
                 engine={engine()}
                 onNext={advance}
               />
             </div>
-          ) : phase === "playing" && track ? (
-            // One tree whether the audio is ready or not. The order sits above
-            // the spinner rather than being replaced by it, so the control that
-            // started the wait is still there to use, and the badge beside it is
-            // not remounted, and restarted, the moment the wait ends.
+          ) : (phase === "playing" && track) || phase === "loading" ? (
+            // One tree from the moment a level is asked for to the moment its
+            // song can be heard. Nothing on this card except the two hints is
+            // about the song, so none of it has any reason to wait for one:
+            // the ladder, the bar, the button and the search box are up while
+            // the draw is still out, and the button carries the wait on its own
+            // rather than a spinner standing where the whole card should be.
+            // It also means the order above it is never remounted, and so the
+            // badge beside it is never restarted, the moment a wait ends.
             <div className="flex w-full max-w-lg flex-col gap-8">
               {roundHeader}
               {guessable ? levelPicker : null}
 
-              {!audioReady ? (
-                <div className="flex flex-col items-center gap-4 py-10">
-                  <span className="loader h-9 w-9 rounded-full border-2 border-line" />
-                  <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-faint">
-                    Loading
-                  </span>
-                </div>
-              ) : (
-                <>
-                  {hints.art && track.art ? (
-                    <div className="flex justify-center">
-                      <div className="glow-in h-28 w-28 overflow-hidden rounded-panel border border-line">
-                        <Image
-                          src={track.art}
-                          alt=""
-                          width={112}
-                          height={112}
-                          unoptimized
-                          className="h-full w-full object-cover"
-                        />
-                      </div>
-                    </div>
-                  ) : null}
-
-                  <Stage
-                    stages={stages}
-                    unlocked={stageIndex}
-                    tone={levelTone}
-                    playing={playing}
-                    disabled={false}
-                    loading={loadingAudio}
-                    engine={engine()}
-                    onPlay={play}
-                  />
-
-                  <GuessInput
-                    tracks={playlist?.tracks ?? []}
-                    showArtist={mixedArtist}
-                    disabled={false}
-                    onGuess={guess}
-                    onSkip={miss}
-                    remaining={remaining}
-                  />
-
-                  <div className="flex min-h-12 flex-col items-center gap-2">
-                    {error ? (
-                      <span className="text-sm text-[var(--color-bad)]">{error}</span>
-                    ) : hints.artist ? (
-                      <div className="flex flex-col items-center gap-1">
-                        <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-faint">
-                          Artist
-                        </span>
-                        <span className="text-xl font-semibold" style={{ color: tier.color }}>
-                          {track.artist}
-                        </span>
-                      </div>
-                    ) : null}
+              {hints.art && track?.art ? (
+                <div className="flex justify-center">
+                  <div className="glow-in h-28 w-28 overflow-hidden rounded-panel border border-line">
+                    <Image
+                      src={track.art}
+                      alt=""
+                      width={112}
+                      height={112}
+                      unoptimized
+                      className="h-full w-full object-cover"
+                    />
                   </div>
-                </>
-              )}
-            </div>
-          ) : phase === "loading" ? (
-            // Guessable draws a level's song before showing it, and keeps the
-            // picker up while it does, so the wait is still somewhere you can
-            // change your mind rather than a stalled round.
-            <div className="flex w-full max-w-lg flex-col gap-8">
-              {guessable ? roundHeader : null}
-              {guessable ? levelPicker : null}
-              <div className="flex flex-col items-center gap-4 py-10">
-                <span className="loader h-9 w-9 rounded-full border-2 border-line" />
-                <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-faint">
-                  Dealing
-                </span>
+                </div>
+              ) : null}
+
+              <Stage
+                stages={stages}
+                unlocked={stageIndex}
+                tone={levelTone}
+                playing={playing}
+                disabled={!audioReady}
+                loading={!audioReady || loadingAudio}
+                engine={engine()}
+                onPlay={play}
+              />
+
+              <GuessInput
+                tracks={playlist?.tracks ?? []}
+                showArtist={mixedArtist}
+                // Typing can start as soon as there is a song to name, even
+                // while its audio is still coming down.
+                disabled={phase !== "playing"}
+                onGuess={guess}
+                onSkip={miss}
+                remaining={remaining}
+              />
+
+              <div className="flex min-h-12 flex-col items-center gap-2">
+                {error ? (
+                  <span className="text-sm text-[var(--color-bad)]">{error}</span>
+                ) : hints.artist && track ? (
+                  <div className="flex flex-col items-center gap-1">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-faint">
+                      Artist
+                    </span>
+                    <span className="text-xl font-semibold" style={{ color: tier.color }}>
+                      {track.artist}
+                    </span>
+                  </div>
+                ) : null}
               </div>
             </div>
           ) : (

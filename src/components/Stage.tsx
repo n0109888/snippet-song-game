@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { formatSeconds, lengthShare, tierFor } from "@/lib/round";
+import { formatSeconds, inkOn, lengthShare, tierFor } from "@/lib/round";
 import type { AudioEngine } from "@/lib/audio";
 
 interface StageProps {
@@ -57,10 +57,16 @@ export default function Stage({
   }, [playing, engine, index]);
 
   return (
-    <div className="flex flex-col items-center gap-6">
-      {/* One bar per stage, each as wide as its snippet is long. */}
+    <div className="flex flex-col items-center gap-10">
+      {/*
+       * One bar, cut into rungs rather than built out of five. A rung is as
+       * wide as its snippet is long, and the ones already heard stay filled,
+       * because the ladder plays the clip straight through: reaching 8s after
+       * 2s buys the six seconds between them, so the fill really is how much
+       * of the song has sounded.
+       */}
       <div
-        className="flex w-full items-center gap-1.5"
+        className="flex w-full items-center gap-1"
         role="progressbar"
         aria-valuemin={1}
         aria-valuemax={stages.length}
@@ -80,12 +86,12 @@ export default function Stage({
                 flex: `${lengthShare(length, longest)} 0 0%`,
                 minWidth: "6px",
                 backgroundColor: past
-                  ? `color-mix(in srgb, ${colour} 34%, transparent)`
+                  ? colour
                   : active
-                    ? `color-mix(in srgb, ${colour} 20%, transparent)`
+                    ? `color-mix(in srgb, ${colour} 22%, transparent)`
                     : "var(--color-line)",
               }}
-              className="h-2 overflow-hidden rounded-full"
+              className="h-2.5 overflow-hidden rounded-full"
             >
               {active ? (
                 <div
@@ -99,45 +105,60 @@ export default function Stage({
         })}
       </div>
 
-      <div className="flex flex-col items-center gap-1">
+      {/*
+       * The button is the middle of the card and stays there, so the length
+       * beside it is placed off the centre line rather than laid out next to
+       * it: a run from 0.01s to 15s changes that label's width, and a centred
+       * row would walk the button left and right as the ladder climbed. The
+       * offset is measured from the centre for the same reason, so the gap to
+       * the button is the same whether the length is two characters or five.
+       */}
+      <div className="relative flex w-full items-center justify-center">
         {tone ? null : (
           <span
-            className="text-[2rem] font-bold uppercase leading-none tracking-[0.03em]"
+            className="absolute right-1/2 mr-28 text-right text-lg font-bold uppercase leading-none tracking-[0.03em]"
             style={{ color: tier.color }}
           >
             {tier.name}
           </span>
         )}
+
+        <button
+          type="button"
+          onClick={onPlay}
+          disabled={disabled}
+          aria-label={playing ? "Stop" : "Play"}
+          // Dimmed rather than greyed while the audio is still coming: it is
+          // the same button a moment early, not a broken one.
+          className="orb grid h-32 w-32 shrink-0 place-items-center rounded-full disabled:opacity-60"
+          style={{
+            backgroundColor: shade,
+            color: inkOn(shade),
+            boxShadow: `0 0 46px -4px color-mix(in srgb, ${shade} 70%, transparent)`,
+          }}
+        >
+          {loading ? (
+            <span className="block h-9 w-9 animate-pulse rounded-full bg-current" />
+          ) : playing ? (
+            <span className="flex items-center gap-[7px]">
+              <span className="block h-9 w-[11px] rounded-[2px] bg-current" />
+              <span className="block h-9 w-[11px] rounded-[2px] bg-current" />
+            </span>
+          ) : (
+            <span
+              className="ml-2 block h-0 w-0 border-y-[21px] border-l-[33px] border-y-transparent"
+              style={{ borderLeftColor: "currentColor" }}
+            />
+          )}
+        </button>
+
         <span
-          className="font-mono text-5xl leading-tight tabular-nums"
-          style={tone ? { color: tone } : undefined}
+          className="absolute left-1/2 ml-28 font-mono text-3xl leading-none tabular-nums"
+          style={{ color: shade }}
         >
           {formatSeconds(current)}
         </span>
       </div>
-
-      <button
-        type="button"
-        onClick={onPlay}
-        disabled={disabled}
-        aria-label={playing ? "Stop" : "Play"}
-        className="grid h-32 w-32 shrink-0 place-items-center rounded-full border-[3px] bg-panel transition-transform duration-150 ease-out hover:scale-[1.05] active:scale-[0.96] disabled:opacity-40"
-        style={{ borderColor: shade }}
-      >
-        {loading ? (
-          <span
-            className="block h-8 w-8 animate-pulse rounded-full"
-            style={{ backgroundColor: shade }}
-          />
-        ) : playing ? (
-          <span className="block h-8 w-8 rounded-[4px]" style={{ backgroundColor: shade }} />
-        ) : (
-          <span
-            className="ml-2 block h-0 w-0 border-y-[23px] border-l-[36px] border-y-transparent"
-            style={{ borderLeftColor: shade }}
-          />
-        )}
-      </button>
     </div>
   );
 }

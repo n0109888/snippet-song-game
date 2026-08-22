@@ -10,7 +10,7 @@
   --color-ink: #ededed;
   --color-muted: #8a8a8a;
   --color-faint: #5c5c5c;
-  --color-accent: #e9a13b;
+  --color-accent: #1ed760;
   --color-good: #6fbf73;
   --color-bad: #d1504a;
   /* The reveal's green, matched to the confetti so a win reads as one colour. */
@@ -36,7 +36,7 @@
   --color-ink: #171619;
   --color-muted: #5e5c64;
   --color-faint: #8b8892;
-  --color-accent: #b8730f;
+  --color-accent: #0e8f45;
   --color-good: #2f7d40;
   --color-bad: #b3332c;
   --color-win: #17a349;
@@ -76,28 +76,46 @@ input[type="range"] {
   background: transparent;
   height: 20px;
 }
+
+/*
+ * Filled up to the thumb rather than an unbroken line with a dot on it: the
+ * level is then legible from across the room, which is the point of a slider
+ * that lives in a panel beside a game. Webkit has no progress pseudo element,
+ * so the fill is a hard stop gradient at the value the element carries.
+ */
 input[type="range"]::-webkit-slider-runnable-track {
-  height: 2px;
-  background: var(--color-line-strong);
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--color-accent) var(--fill, 0%),
+    var(--color-line-strong) var(--fill, 0%)
+  );
 }
 input[type="range"]::-webkit-slider-thumb {
   appearance: none;
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: var(--color-ink);
-  margin-top: -5px;
+  background: var(--color-accent);
+  margin-top: -4px;
 }
 input[type="range"]::-moz-range-track {
-  height: 2px;
+  height: 4px;
+  border-radius: 999px;
   background: var(--color-line-strong);
+}
+input[type="range"]::-moz-range-progress {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--color-accent);
 }
 input[type="range"]::-moz-range-thumb {
   width: 12px;
   height: 12px;
   border: 0;
   border-radius: 50%;
-  background: var(--color-ink);
+  background: var(--color-accent);
 }
 
 @keyframes reveal-in {
@@ -397,7 +415,7 @@ input[type="range"]::-moz-range-thumb {
   grid-column: 2 / span 2;
 }
 
-@media (min-height: 1060px) {
+@media (min-height: 940px) {
   .levels {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
@@ -406,6 +424,29 @@ input[type="range"]::-moz-range-thumb {
   .levels > *:nth-child(4) {
     grid-column: auto;
   }
+}
+
+/*
+ * The play button. It is filled in whatever colour the round is running in and
+ * carries its own glow, so on a card washed in that same colour it is still the
+ * thing the eye lands on. The fill crosses when the level does, at the wash's
+ * pace, while the press keeps the quick curve every other control here uses.
+ */
+.orb {
+  transition:
+    transform 160ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 320ms ease-out,
+    box-shadow 320ms ease-out;
+}
+
+.orb:hover,
+.orb:focus-visible {
+  transform: scale(1.05);
+}
+
+.orb:active {
+  transform: scale(0.96);
+  transition-duration: 80ms;
 }
 
 /* Changing level changes the room, so the wash crosses rather than cuts. */

@@ -158,18 +158,25 @@ async function deezerQuery(query: string, track: RawTrack): Promise<Resolved | n
   return null;
 }
 
-async function fromDeezer(track: RawTrack): Promise<Resolved | null> {
-  const strict = await deezerQuery(
+/** The field scoped search, which is the one that answers for most songs. */
+function deezerStrict(track: RawTrack): Promise<Resolved | null> {
+  return deezerQuery(
     `artist:"${track.artist.replace(/"/g, "")}" track:"${track.title.replace(/"/g, "")}"`,
     track,
   );
-  if (strict) return strict;
+}
+
+/** The same search with the quotes off, for titles the fields do not match. */
+function deezerLoose(track: RawTrack): Promise<Resolved | null> {
   return deezerQuery(`${track.artist} ${track.title}`, track);
 }
 
 /**
- * Find a 30 second preview. Deezer runs first because one call returns the
- * preview and the popularity rank together, with iTunes covering the rest.
+ * Find a 30 second preview. Deezer's strict query runs alone first, because it
+ * answers for most songs and one call brings back the rank as well. Only when
+ * it misses do the other two run, and then they run together: they are
+ * independent searches, and asking them one after the other put the slowest
+ * case at three round trips before a level could even start loading its audio.
  */
 async function resolveOne(track: RawTrack, refresh: boolean): Promise<Resolved> {
   if (track.preview && !refresh) {
@@ -182,8 +189,15 @@ async function resolveOne(track: RawTrack, refresh: boolean): Promise<Resolved> 
 
   let found: Resolved | null = null;
   try {
-    found = await fromDeezer(track);
-    if (!found) found = await fromItunes(track);
+    found = await deezerStrict(track);
+    if (!found) {
+      const [loose, itunes] = await Promise.all([
+        deezerLoose(track).catch(() => null),
+        fromItunes(track).catch(() => null),
+      ]);
+      // Deezer first of the two, for the rank it carries.
+      found = loose ?? itunes;
+    }
   } catch {
     found = null;
   }

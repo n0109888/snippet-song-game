@@ -116,8 +116,22 @@ export default function GuessInput({
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex items-stretch gap-2">
+      <div className="flex items-stretch gap-2.5">
         <div className="relative flex-1">
+          {/* Inside the field rather than beside it, so the round row reads as
+              one search box the way the rest of the card reads as one bar. */}
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            className="pointer-events-none absolute left-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-faint"
+          >
+            <circle cx="11" cy="11" r="6.4" />
+            <path d="m16 16 4 4" />
+          </svg>
           <input
             ref={inputRef}
             type="text"
@@ -125,7 +139,7 @@ export default function GuessInput({
             disabled={disabled}
             autoComplete="off"
             spellCheck={false}
-            placeholder={showArtist ? "Artist or title" : "Title"}
+            placeholder={showArtist ? "Search songs or artists…" : "Search songs…"}
             aria-label="Guess"
             aria-autocomplete="list"
             aria-expanded={open && suggestions.length > 0}
@@ -137,14 +151,14 @@ export default function GuessInput({
             }}
             onKeyDown={onKeyDown}
             onBlur={() => window.setTimeout(() => setOpen(false), 120)}
-            className="h-11 w-full rounded-control border border-line bg-panel px-3 text-[15px] text-ink placeholder:text-faint focus:border-line-strong disabled:opacity-40"
+            className="h-12 w-full rounded-full border border-line bg-panel pl-11 pr-4 text-[15px] text-ink placeholder:text-faint focus:border-line-strong disabled:opacity-40"
           />
 
           {open && suggestions.length > 0 ? (
             <ul
               id={listId}
               role="listbox"
-              className="absolute bottom-[calc(100%+4px)] left-0 z-20 w-full overflow-hidden rounded-control border border-line bg-panel"
+              className="absolute bottom-[calc(100%+6px)] left-0 z-20 w-full overflow-hidden rounded-panel border border-line bg-panel"
             >
               {suggestions.map((s, i) => (
                 <li key={s.track.id} role="none">
@@ -183,18 +197,26 @@ export default function GuessInput({
           type="button"
           onClick={onSkip}
           disabled={disabled}
-          className="flex h-11 shrink-0 items-center gap-2 rounded-control border border-line px-4 text-sm text-muted transition-colors duration-150 ease-out hover:border-line-strong hover:text-ink disabled:opacity-40"
+          className="pill flex h-12 shrink-0 items-center gap-2.5 rounded-full border border-line bg-panel px-6 text-[15px] font-bold text-ink hover:border-line-strong disabled:opacity-40"
         >
           {/* The media skip glyph: jump to the next one. */}
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className="h-4 w-4">
-            <path d="M5 4.6a1 1 0 0 1 1.54-.84l10.1 6.56a1 1 0 0 1 0 1.68L6.54 18.56A1 1 0 0 1 5 17.72z" />
-            <rect x="17.6" y="4" width="2.4" height="16" rx="1.2" />
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinejoin="round"
+            aria-hidden
+            className="h-[18px] w-[18px]"
+          >
+            <path d="M6 5.4 16.4 12 6 18.6z" />
+            <path d="M19 5v14" strokeLinecap="round" />
           </svg>
           Skip
         </button>
       </div>
 
-      <span className="font-mono text-xs text-faint">
+      <span className="px-1 font-mono text-xs text-faint">
         {remaining <= 1 ? "Last guess" : `${remaining} guesses left`}
       </span>
     </div>

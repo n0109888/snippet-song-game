@@ -14,12 +14,12 @@ export interface Tier {
  * The shortest snippet on the ladder. Naming one from it is the best result the
  * game has, so a win here gets its own celebration rather than the usual green.
  */
-export const INHUMAN_SECONDS = 0.05;
+export const INHUMAN_SECONDS = 0.01;
 
 export const TIERS: Tier[] = [
   { seconds: INHUMAN_SECONDS, name: "Inhuman", color: "#8e1533" },
   { seconds: 0.1, name: "Impossible", color: "#c22947" },
-  { seconds: 0.5, name: "Extreme", color: "#dd5b2e" },
+  { seconds: 0.5, name: "Expert", color: "#dd5b2e" },
   { seconds: 2, name: "Hard", color: "#e08c1f" },
   { seconds: 8, name: "Medium", color: "#c9b02b" },
   { seconds: 15, name: "Easy", color: "#4fa860" },
@@ -31,9 +31,9 @@ export function formatSeconds(value: number): string {
 }
 
 /**
- * A length's share of the widest bar, 0 to 1. Lengths run from 0.05s to 15s, so
+ * A length's share of the widest bar, 0 to 1. Lengths run from 0.01s to 15s, so
  * a straight ratio would leave the short ones too thin to see; the power curve
- * keeps the order and the sense of scale while 0.05s still draws a bar.
+ * keeps the order and the sense of scale while 0.01s still draws a bar.
  */
 export function lengthShare(seconds: number, longest: number): number {
   if (longest <= 0) return 1;
@@ -47,33 +47,41 @@ export function tierFor(seconds: number): Tier {
   );
 }
 
-/**
- * The ladder every round runs, shortest snippet first: it opens on Impossible
- * and every miss buys a longer piece. Which lengths are on it is not a choice
- * any more, because a ladder with rungs missing is a different game rather than
- * a harder one, and the panel asking song by song which of six to keep was more
- * of the screen than the answer was ever worth.
- */
-const LADDER: number[] = [0.1, 0.5, 2, 8, 15];
+/** Every rung there is, shortest first. The panel offers exactly these. */
+export const ALL_STAGES: number[] = [INHUMAN_SECONDS, 0.1, 0.5, 2, 8, 15];
 
-/** The same ladder with 0.05s under it, held here so its identity is stable. */
-const LADDER_WITH_INHUMAN: number[] = [INHUMAN_SECONDS, ...LADDER];
+/** The ladder a fresh player gets: everything but the hundredth of a second. */
+const DEFAULT_STAGES: number[] = ALL_STAGES.filter((s) => s !== INHUMAN_SECONDS);
 
 export interface Rules {
-  /**
-   * 0.05s under the ladder. Opt in, because it is a twentieth of a second and
-   * most people want it off; it is the whole of what is left to set.
-   */
-  inhuman: boolean;
+  /** The rungs this round climbs, ascending. Never empty. */
+  stages: number[];
 }
 
 export const DEFAULT_RULES: Rules = {
-  inhuman: false,
+  stages: DEFAULT_STAGES,
 };
 
-/** The ladder these rules play. */
+/** The ladder these rules play. An empty pick would be no game, so it falls back. */
 export function stagesFor(rules: Rules): number[] {
-  return rules.inhuman ? LADDER_WITH_INHUMAN : LADDER;
+  const picked = ALL_STAGES.filter((s) => rules.stages.includes(s));
+  return picked.length > 0 ? picked : DEFAULT_STAGES;
+}
+
+/**
+ * What a stage actually plays. The ladder is one pass through the clip rather
+ * than the same opening over and over: reaching 8s after 2s buys the six
+ * seconds between them, not the eight from the top. So the bar under it reads
+ * as one bar, and the song comes out of it in the order it was written.
+ */
+export function stageWindow(
+  stages: readonly number[],
+  index: number,
+): { from: number; length: number } {
+  const at = Math.max(0, Math.min(index, stages.length - 1));
+  const from = at === 0 ? 0 : (stages[at - 1] ?? 0);
+  const to = stages[at] ?? from;
+  return { from, length: Math.max(0, to - from) };
 }
 
 /**
@@ -201,17 +209,24 @@ export function inkOn(color: string): string {
 }
 
 /**
- * The levels, easiest song first. They take their colours from the stages of
- * the same name, so the two readings of Easy and Impossible are one palette:
- * on a stage it is how much of the song you get, on a level it is how well
- * known the song is.
+ * The levels, easiest song first. Their palette is their own rather than the
+ * stages': a stage is how much of the song you get and runs green to crimson,
+ * where a level is how buried the song is and has to keep going past crimson,
+ * so the last one leaves the warm end altogether and lands on violet.
  */
-export const LEVELS: Level[] = ["Easy", "Medium", "Hard", "Extreme", "Impossible"].map(
-  (name) => {
-    const color = TIERS.find((t) => t.name === name)?.color ?? "#e9a13b";
-    return { name, color, ink: inkOn(color) };
-  },
-);
+const LEVEL_COLORS: readonly (readonly [string, string])[] = [
+  ["Easy", "#1ed760"],
+  ["Medium", "#d8b431"],
+  ["Hard", "#e0791f"],
+  ["Expert", "#e2444f"],
+  ["Impossible", "#9d6bf0"],
+];
+
+export const LEVELS: Level[] = LEVEL_COLORS.map(([name, color]) => ({
+  name,
+  color,
+  ink: inkOn(color),
+}));
 
 /**
  * The songs a level draws from: its own fifth of the pack by play count. The

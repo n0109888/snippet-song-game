@@ -9,8 +9,6 @@ interface StageProps {
   /** Highest stage the player has unlocked. */
   unlocked: number;
   playing: boolean;
-  disabled: boolean;
-  loading?: boolean;
   /**
    * Guessable runs the whole ladder in its level's colour, and names the level
    * on the picker above rather than here, so the stage's own name is left off.
@@ -24,8 +22,6 @@ export default function Stage({
   stages,
   unlocked,
   playing,
-  disabled,
-  loading = false,
   tone = null,
   engine,
   onPlay,
@@ -123,23 +119,24 @@ export default function Stage({
           </span>
         )}
 
+        {/*
+         * Never busy and never dimmed. Whether the clip has finished coming
+         * down is the round's business and not something to make the player
+         * watch: the button is the same button from the moment the card is,
+         * and a press that lands early is held until there is audio for it.
+         */}
         <button
           type="button"
           onClick={onPlay}
-          disabled={disabled}
           aria-label={playing ? "Stop" : "Play"}
-          // Dimmed rather than greyed while the audio is still coming: it is
-          // the same button a moment early, not a broken one.
-          className="orb grid h-32 w-32 shrink-0 place-items-center rounded-full disabled:opacity-60"
+          className="orb grid h-32 w-32 shrink-0 place-items-center rounded-full"
           style={{
             backgroundColor: shade,
             color: inkOn(shade),
             boxShadow: `0 0 46px -4px color-mix(in srgb, ${shade} 70%, transparent)`,
           }}
         >
-          {loading ? (
-            <span className="block h-9 w-9 animate-pulse rounded-full bg-current" />
-          ) : playing ? (
+          {playing ? (
             <span className="flex items-center gap-[7px]">
               <span className="block h-9 w-[11px] rounded-[2px] bg-current" />
               <span className="block h-9 w-[11px] rounded-[2px] bg-current" />

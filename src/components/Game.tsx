@@ -95,6 +95,8 @@ export default function Game() {
   const roundRef = useRef(0);
   /** Deal generation, bumped before a guessable ladder goes looking for audio. */
   const dealRef = useRef(0);
+  /** The deal a press of play was made on, while its song was still being drawn. */
+  const wantPlayRef = useRef<number | null>(null);
   /**
    * Guessable only: a song for every level, drawn and warmed while one of them
    * is being played. It used to hold the next level alone, which made climbing
@@ -124,9 +126,6 @@ export default function Game() {
   /** Asked for one song at a time, so they clear whenever the song does. */
   const [hints, setHints] = useState<Hints>(NO_HINTS);
   const [showResults, setShowResults] = useState(false);
-  const [loadingAudio, setLoadingAudio] = useState(false);
-  /** Track whose audio, and artwork when hinted, are decoded and ready. */
-  const [readyId, setReadyId] = useState<string | null>(null);
   const [confirmReset, setConfirmReset] = useState(false);
   const [showTracks, setShowTracks] = useState(false);
   /**
@@ -284,26 +283,22 @@ export default function Game() {
   }, []);
 
   /**
-   * Decode the current track's audio, and its artwork when hinted, before the
-   * track is shown. The next one is warmed in the background. Decoding is the
-   * slow part, so doing it here is what makes pressing play immediate.
+   * Decode the current track's audio, and its artwork when hinted. The next one
+   * is warmed in the background. Decoding is the slow part, so doing it here,
+   * rather than under the press, is what makes pressing play immediate.
    */
   useEffect(() => {
     if (phase !== "playing") return;
     const current = queue[cursor];
     const next = queue[cursor + 1];
-    let cancelled = false;
 
     const preview = current?.preview;
     if (current && preview) {
-      void (async () => {
-        try {
-          await Promise.all([engine().warm(current.id, preview), warmArt(current.art)]);
-        } catch {
+      void Promise.all([engine().warm(current.id, preview), warmArt(current.art)]).catch(
+        () => {
           // Play surfaces the failure and refreshes the link.
-        }
-        if (!cancelled) setReadyId(current.id);
-      })();
+        },
+      );
     }
 
     const nextPreview = next?.preview;
@@ -311,10 +306,6 @@ export default function Game() {
       void engine().warm(next.id, nextPreview).catch(() => undefined);
       void warmArt(next.art);
     }
-
-    return () => {
-      cancelled = true;
-    };
   }, [phase, queue, cursor, warmArt]);
 
   /**
@@ -455,7 +446,6 @@ export default function Game() {
         // Decoded audio means the card has nothing left to wait for, and saying
         // so here rather than an effect later is what keeps the stage from
         // blinking through Loading on its way in.
-        if (engine().has(benched.id)) setReadyId(benched.id);
         return;
       }
 
@@ -662,7 +652,15 @@ export default function Game() {
   );
 
   const play = useCallback(() => {
-    if (!track || reveal) return;
+    if (reveal) return;
+    if (!track) {
+      // Pressed while the song was still being drawn. The press is kept rather
+      // than dropped, so the round opens the moment it has something to open:
+      // the button is live from the first frame of the card and has to mean it.
+      wantPlayRef.current = dealRef.current;
+      void engine().resume();
+      return;
+    }
 
     const audio = engine();
     if (playing) {
@@ -677,7 +675,6 @@ export default function Game() {
     // seconds between them, so the clip comes out in the order it was written
     // rather than restarting on the same opening every time.
     const heard = stageWindow(stages, stageIndex);
-    setLoadingAudio(true);
 
     void (async () => {
       try {
@@ -688,7 +685,6 @@ export default function Game() {
         const preview = track.preview ?? (await resolveNow(track));
         if (!preview) {
           setError("No audio for this one.");
-          setLoadingAudio(false);
           advance();
           return;
         }
@@ -723,11 +719,21 @@ export default function Game() {
         } else {
           setError("Playback failed.");
         }
-      } finally {
-        setLoadingAudio(false);
       }
     })();
   }, [track, reveal, playing, stages, stageIndex, prefs.startMode, advance, resolveNow]);
+
+  /**
+   * Make good on a press that landed before the song did. It is tied to the
+   * deal it was made on, so asking for another level in the meantime cancels
+   * it rather than starting a song nobody pressed for.
+   */
+  useEffect(() => {
+    if (wantPlayRef.current !== dealRef.current) return;
+    if (phase !== "playing" || !track || reveal || playing) return;
+    wantPlayRef.current = null;
+    play();
+  }, [phase, track, reveal, playing, play]);
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
@@ -770,9 +776,6 @@ export default function Game() {
     window.addEventListener("offline", offline);
     return () => window.removeEventListener("offline", offline);
   }, []);
-
-  // Everything for this track is decoded, so play fires with no wait.
-  const audioReady = track ? readyId === track.id : false;
 
   // Named on the shortest snippet on the ladder: the celebration goes gold.
   const maxWin = reveal !== null && reveal.solved && reveal.atLength === INHUMAN_SECONDS;
@@ -995,7 +998,6 @@ export default function Game() {
     setResults([]);
     setPlaylist(null);
     setLevel(0);
-    setReadyId(null);
     setError(null);
     setHints(NO_HINTS);
     setConfettiKey(0);
@@ -1130,8 +1132,6 @@ export default function Game() {
                 unlocked={stageIndex}
                 tone={levelTone}
                 playing={playing}
-                disabled={!audioReady}
-                loading={!audioReady || loadingAudio}
                 engine={engine()}
                 onPlay={play}
               />
